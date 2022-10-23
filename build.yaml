@@ -1,0 +1,22 @@
+targets:
+  $default:
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - schema: lib/modules/graphql/schema.graphql
+              queries_glob: lib/modules/graphql/queries/*.graphql
+              output: lib/modules/graphql/models/graphql_api.dart
+              naming_scheme: pathedWithFields
+          scalar_mapping:
+            - graphql_type: DateTime
+              custom_parser_import: "package:flutter_advanced_boilerplate/modules/graphql/scalars/datetime_scalar.dart"
+              dart_type: DateTime
+              use_custom_parser: true
+            - graphql_type: Upload
+              custom_parser_import: "package:flutter_advanced_boilerplate/modules/graphql/scalars/upload_scalar.dart"
+              dart_type:
+                name: MultipartFile
+                imports:
+                  - "package:http/http.dart"
+              use_custom_parser: true

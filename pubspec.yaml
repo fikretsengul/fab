@@ -1,0 +1,140 @@
+name: flutter_advanced_boilerplate
+description: A new advanced flutter boilerplate project uses BLoC.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  auto_route: ^5.0.1
+  injectable: ^1.5.3
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.7.0
+  get_it: ^7.2.0
+  flutter_bloc: ^8.1.1
+  hydrated_bloc: ^8.1.0
+  hive_flutter: ^1.1.0
+  path_provider: ^2.0.11
+  dio: ^4.0.6
+  fresh_dio: ^0.3.2
+  sentry_dio: ^6.13.1
+  data_channel: ^2.0.0+1
+  sentry_flutter: ^6.13.1
+  sentry_dart_plugin: ^1.0.0-beta.4
+  flutter_secure_storage: ^6.0.0
+  flutter_native_splash: ^2.2.11
+  flutter_i18n: ^0.32.4
+  adaptive_theme: ^3.1.1
+  statsfl: ^2.3.0
+  pretty_dio_logger: ^1.2.0-beta-1
+  internet_connection_checker: ^1.0.0+1
+  logger: ^1.1.0
+  dynamic_color: ^1.5.4
+  flutter_localizations:
+    sdk: flutter
+  animations: ^2.0.7
+  fresh_graphql: ^0.5.2
+  graphql_flutter: ^5.1.0
+  web_socket_channel: ^2.2.0
+  intl: ^0.17.0
+  http: ^0.13.5
+  infinite_scroll_pagination: ^3.2.0
+  flutter_displaymode: ^0.4.0
+  ionicons: ^0.2.1
+  easy_localization: ^3.0.1
+  flutter_staggered_grid_view: ^0.6.2
+  custom_sliding_segmented_control: ^1.7.3
+  url_launcher: ^6.1.6
+  spring_button: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "very_good_analysis & dart_code_metrics" package below contains a set of
+  # recommended encourage good coding practices. The lint set provided by the package is
+  # lints to activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  very_good_analysis: ^3.1.0
+  auto_route_generator: ^5.0.2
+  injectable_generator: ^1.5.4
+  build_runner: ^2.3.2
+  freezed: ^2.2.0
+  json_serializable: ^6.5.3
+  artemis: ^7.9.0-beta
+  dart_code_metrics: ^4.19.2
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  assets:
+    - assets/animations/
+    - assets/images/
+    - assets/translations/
+    - assets/configs/
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font.
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Nunito-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Nunito-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Nunito-Light.ttf
+          weight: 300
+
+# Native splash screen settings.
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/splash/splash_logo_light.png
+  color_dark: "#000000"
+  image_dark: assets/images/splash/splash_logo_dark.png
+  android_12:
+    image: assets/images/splash/splash_logo_light.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/splash/splash_logo_dark.png
+    icon_background_color_dark: "#000000"
+  fullscreen: true
