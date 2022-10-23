@@ -43,33 +43,33 @@ There are several reasons why this boilerplate exists, these are in short create
 
 ## :fire: Key Features
 
-* **API System & Authentication**<br>
+* `API System & Authentication`<br>
 Rest and graphql api support with token renewal and socket support using Dio, GraphQL and Fresh.
-* **State Management & Architecture**<br>
+* `State Management & Architecture`<br>
 BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
-* **Advanced Linting**<br>
+* `Advanced Linting`<br>
 Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
-* **Dependency Injection & Service Locator**<br>
+* `Dependency Injection & Service Locator`<br>
 Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
-* **Code Generation**<br>
+* `Code Generation`<br>
 Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner.
-* **Easy & Clean Routing**<br>
+* `Easy & Clean Routing`<br>
 AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate.
-* **Desing Pattern**<br>
+* `Desing Pattern`<br>
 Repository design pattern reduces the complexity of data layer, isolate unstructured data from the rest of the app and organizes project structure.
-* **Exception Handling**<br>
+* `Exception Handling`<br>
 It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
-* **Encrypted Storage**<br>
+* `Encrypted Storage`<br>
 Blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.
-* **Dynamic Theme**<br>
+* `Dynamic Theme`<br>
 With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
-* **Localization**<br>
+* `Localization`<br>
 Easily localize the app into other languages with the support of variable keys by simply creating jsons to auto generate language files without requiring context.
-* **Logging & Tracking**<br>
+* `Logging & Tracking`<br>
 A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry.
-* **Native Splash**<br>
+* `Native Splash`<br>
 Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
-* **Refresh Rate**<br>
+* `Refresh Rate`<br>
 Support for high refresh rate displays with the flutter displaymode package.
 
 ## :camera: Screenshots
@@ -126,12 +126,12 @@ In Android Studio, navigate to `'Android Studio'` -> `'Preferences'` -> `'Editor
 .
 └── assets
 	├── animations							-> put your animated files here eg. lottie
-	├── configs								-> put your env files here
+	├── configs							-> put your env files here
 	│ ├── dev.json								-> env that is used for dev
 	│ ├── prod.json								-> env that is used for prod
 	│ └── test.json								-> env that is used for tes
-	├── fonts								-> put your custom font files here
-	├── images								-> put your image files here
+	├── fonts							-> put your custom font files here
+	├── images							-> put your image files here
 	└── translations						-> put your translation files here
 		├── en.json
 		└── tr.json
@@ -144,15 +144,15 @@ The `features` folder, which is the backbone of the application, was designed us
 └── lib
 	└── features							-> stands for FEATURE FIRST STRUCTURE
 		└── feature_x							-> seperate and put your features here
-			├── blocs						-> stands for APPLICATION LAYER
+			├── blocs					-> stands for APPLICATION LAYER
 			│ ├── x_cubit.dart					-> seperate and put your logics here
 			│ └── x_state.dart
-			└── models						-> stands for DOMAIN LAYER
+			└── models					-> stands for DOMAIN LAYER
 				├── x_model.dart				-> seperate and put your models here
 			└── networking					-> stands for DATA LAYER
-				├── x_repository.dart			-> seperate and put your repos here
+				├── x_repository.dart				-> seperate and put your repos here
 			│ └── widgets					-> stands for PRESENTATION LAYER
-				├── x_header_widget.dart		-> seperate and put your widgets here
+				├── x_header_widget.dart			-> seperate and put your widgets here
 			└── x_screen.dart
 ```
 
@@ -162,9 +162,9 @@ In the `modules` folder, there are dependency injection registration and initial
 .
 └── lib
 	└── modules
-		├── dependency_injection			-> add your modules injection here
+		├── dependency_injection				-> add your modules injection here
 		│ ├── di.dart							-> must initialize di first
-		│ └── x_module_di.dart					-> example module injection
+		│ └── x_module_di.dart						-> example module injection
 		└── x_module						-> create folder for your modules
 			└── init_x.dart						-> create initialization files here
 ```
@@ -176,7 +176,7 @@ The `theme` folder contains the necessary theme configuration and settings.
 	└── theme
 		├── text
 		│ └── typography.dart
-		└── app_theme_creator.dart			-> theme creation configuration here
+		└── app_theme_creator.dart				-> theme creation configuration here
 ```
 ### Utils Folder
 Apart from the above, constants, helper classes and methods, shortcuts and many more used throughout the application are located in `utils` folder.
@@ -184,9 +184,9 @@ Apart from the above, constants, helper classes and methods, shortcuts and many 
 .
 └── lib
 	└── utils
-		├── helpers							-> put your helpers here
-		│ └── bar_helper.dart					-> example bar helper to show alert
-		├── methods							-> put your methods here
+		├── helpers						-> put your helpers here
+		│ └── bar_helper.dart						-> example bar helper to show alert
+		├── methods						-> put your methods here
 		│ └── aliases.dart						-> create alias variables here
 		│ └── shorcuts.dart						-> add shortcut methods here
 		├── constants.dart					-> configure app constants here
