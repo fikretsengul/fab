@@ -76,11 +76,11 @@ Support for high refresh rate displays with the flutter displaymode package.
 #### Light Dynamic Theme
 | Features Light | Informations Light |
 | ------ | ------ |
-| <img src="./assets/images/github/features_light.png" width="600"> | <img src="./assets/images/github/informations_light.png" width="600"> |
+| <img src="./assets/images/github/features_light.png" width="400"> | <img src="./assets/images/github/informations_light.png" width="400"> |
 #### Dark Dynamic Theme
 | Features Dark | Informations Dark |
 | ------ | ------ |
-| <img src="./assets/images/github/features_dark.png" width="600"> | <img src="./assets/images/github/informations_dark.png" width="600"> |
+| <img src="./assets/images/github/features_dark.png" width="400"> | <img src="./assets/images/github/informations_dark.png" width="400"> |
 
 ## :books: How To Use
 
