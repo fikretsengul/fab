@@ -36,7 +36,7 @@
 ## :memo: The Motivation
 There are several reasons why this boilerplate exists, these are in short to create `clear`, `readable`, `reusable`, `scalable`, `testable`, `performant` and `maintainable` projects but in long:
  1. to allow people to deploy `production-grade MVP products`,
- 2. to make sure that I `keep everything stupid simple` (*controversial in its current form*),
+ 2. to make sure that I `keep everything stupid simple` (*controversial but I tried my best*),
  3. to ensure that project can `easily scale horizontally` as application grows,
  4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
  5. to `maintain code quality and platform standards` in team projects with strictly linting rules.
