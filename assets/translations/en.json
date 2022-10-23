@@ -30,7 +30,7 @@
             },
             "linting": {
                 "title": "Linting",
-                "explanation": "Stricting linting rules with detailed settings to keep the health of the code good and up to the dart standards."
+                "explanation": "Linting rules with detailed settings to keep the health of the code good and up to the dart standards."
             },
             "di_locator": {
                 "title": "DI & Locator",
@@ -85,7 +85,7 @@
             "github_repository_title": "GitHub Repository",
             "author_divider_title": "Author",
             "packages_divider_title": "Packages",
-            "donate_card_title": "Donate",
+            "donate_card_title": "Buy Me A Coffee",
             "website_card_title": "Website"
         }
     }

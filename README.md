@@ -1,4 +1,5 @@
 
+
 <h1 align="center">
   Flutter Advanced Boilerplate
 </h1>
@@ -10,7 +11,7 @@
     <img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
   </a>
 <a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://img.shields.io/badge/version-1.0.0%2B1-brightgreen.svg">
+    <img src="https://img.shields.io/badge/version-1.0.0%2B1-1EAEDB.svg">
   </a>
   <a href="https://badge.fury.io/js/electron-markdownify">
     <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
@@ -18,72 +19,68 @@
   <a href="https://badge.fury.io/js/electron-markdownify">
     <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
   </a>
-  <a href="https://saythanks.io/to/bullredeyes@gmail.com">
-      <img src="https://img.shields.io/badge/license-MIT-1EAEDB.svg">
-  </a>
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
+<img src="https://img.shields.io/badge/last%20updated-23--10--2022-ff69b4">
+<img src="https://img.shields.io/badge/completion-%2585-orange">
 </p>
 
 <p align="center">
-  <a href="#key-features">The Motivation</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#folder-structure">Folder Structure</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#memo-the-motivation">The Motivation</a> •
+  <a href="#fire-key-features">Key Features</a> •
+  <a href="#camera-screenshots">Screenshots</a> •
+  <a href="#books-how-to-use">How To Use</a> •
+  <a href="#file_folder-folder-structure">Folder Structure</a> •
+  <a href="#star2-good-to-know">Good To Know</a> •
+  <a href="#package-packages">Packages</a>
 </p>
 
 ## :memo: The Motivation
-There are several reasons why this boilerplate exists, these are in short create **clear, readable, reusable, scalable, testable, performant and maintainable** projects but in long:
- 1. to allow people to deploy **production-grade MVP products**,
- 2. to make sure that I **keep everything stupid simple** (*controversial in its current form*),
- 3. to ensure that project can **easily scale horizontally** as application grows,
- 4. to **save developers time** by **reducing boilerplate code** by writing less and generating more,
- 5. to **maintain code quality and platform standards** in team projects by stricting linting rules.
+There are several reasons why this boilerplate exists, these are in short create `clear`, `readable`, `reusable`, `scalable`, `testable`, `performant` and `maintainable` projects but in long:
+ 1. to allow people to deploy `production-grade MVP products`,
+ 2. to make sure that I `keep everything stupid simple` (*controversial in its current form*),
+ 3. to ensure that project can `easily scale horizontally` as application grows,
+ 4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
+ 5. to `maintain code quality and platform standards` in team projects with strictly linting rules.
 
 ## :fire: Key Features
 
-* **API System & Authentication**
-*Rest and graphql api support with token renewal and socket support using Dio, GraphQL and Fresh.*
-* **State Management & Architecture**
-*BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.*
-* **Advanced Linting**
-*Stricting linting rules with detailed settings to keep the health of the code good and up to the dart standards.*
-* **Dependency Injection & Service Locator**
-*Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.*
-* **Code Generation**
-*Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner.*
-* **Easy & Clean Routing**
-*AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate.*
-* **Desing Pattern**
-*Repository design pattern reduces the complexity of data layer, isolate unstructured data from the rest of the app and organizes project structure.*
-* **Exception Handling**
-*It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.*
-* **Encrypted Storage**
-*Blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.*
-* **Dynamic Theme**
-*With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.*
-* **Localization**
-*Easily localize the app into other languages with the support of variable keys by simply creating jsons to auto generate language files without requiring context.*
-* **Logging & Tracking**
-*A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry.*
-* **Native Splash**
-*Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.*
-* **Refresh Rate**
-*Support for high refresh rate displays with the flutter displaymode package.*
+* **API System & Authentication**<br>
+Rest and graphql api support with token renewal and socket support using Dio, GraphQL and Fresh.
+* **State Management & Architecture**<br>
+BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
+* **Advanced Linting**<br>
+Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
+* **Dependency Injection & Service Locator**<br>
+Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
+* **Code Generation**<br>
+Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner.
+* **Easy & Clean Routing**<br>
+AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate.
+* **Desing Pattern**<br>
+Repository design pattern reduces the complexity of data layer, isolate unstructured data from the rest of the app and organizes project structure.
+* **Exception Handling**<br>
+It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
+* **Encrypted Storage**<br>
+Blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.
+* **Dynamic Theme**<br>
+With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
+* **Localization**<br>
+Easily localize the app into other languages with the support of variable keys by simply creating jsons to auto generate language files without requiring context.
+* **Logging & Tracking**<br>
+A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry.
+* **Native Splash**<br>
+Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
+* **Refresh Rate**<br>
+Support for high refresh rate displays with the flutter displaymode package.
 
 ## :camera: Screenshots
 #### Light Dynamic Theme
 | Features Light | Informations Light |
 | ------ | ------ |
-| ![Features Light](./assets/images/github/features_light.png "The features screen with a light theme.") | ![Informations Light](./assets/images/github/informations_light.png "The informations screen with a light theme.") |
+| <img src="./assets/images/github/features_light.png" height="750"> | <img src="./assets/images/github/informations_light.png" height="750"> |
 #### Dark Dynamic Theme
 | Features Dark | Informations Dark |
 | ------ | ------ |
-| ![Features Dark](./assets/images/github/features_dark.png "The features screen with a dark theme.") | ![Informations Dark](./assets/images/github/informations_dark.png "The informations screen with a dark theme.") |
+| <img src="./assets/images/github/features_dark.png" height="750"> | <img src="./assets/images/github/informations_dark.png" height="750"> |
 
 ## :books: How To Use
 
@@ -197,6 +194,36 @@ Apart from the above, constants, helper classes and methods, shortcuts and many 
 		├── palette.dart					-> define colors here
 		└── router.dart						-> add new screens here
 ```
+## :star2: Good To Know
+### Resources I Highly Recommend you to Read & Watch
+ 1. Code with Andrea Tutorials • [Blog](https://codewithandrea.com/tutorials/) • [YouTube](https://www.youtube.com/c/CodeWithAndrea/videos)
+ 2. Reso Coder Tutorials • [Blog](https://resocoder.com/blog/) • [YouTube](https://www.youtube.com/c/ResoCoder/videos)
+ 3. Flutter • [YouTube](https://www.youtube.com/c/flutterdev/videos)
+ 4. Marcus Ng • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
+ 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
+
+### VSCode Extensions
+| Extension | Usage |
+| ------ | ------ |
+| Awesome Flutter Snippets | Awesome Flutter Snippets is a collection of commonly used Flutter classes and methods. It increases your speed of development by eliminating most of the boilerplate code associated with creating a widget.
+| Better Comments | The Better Comments extension will help you create more human-friendly comments in your code.
+| bloc | VSCode support for the Bloc Library and provides tools for effectively creating Blocs and Cubits for both Flutter and AngularDart apps.
+| Build Runner | Run build_runner commands conveniently using VSCode.
+| Dart | Dart Code extends VSCode with support for the Dart programming language, and provides tools for effectively editing, refactoring, running, and reloading Flutter mobile apps.
+| Error Lens | ErrorLens turbo-charges language diagnostic features by making diagnostics stand out more prominently, highlighting the entire line wherever a diagnostic is generated by the language and also prints the message inline.
+| Fluent Icons | Product icons themes allow theme authors to customize the icons used in VS Code's built-in views: all icons except file icons (covered by file icon themes) and icons contributed by extensions.
+| Flutter | This VS Code extension adds support for effectively editing, refactoring, running, and reloading Flutter mobile apps. It depends on (and will automatically install) the Dart extension for support for the Dart programming language.
+| flutter-stylizer | Flutter Stylizer is a VSCode extension that organizes your Flutter classes in an opinionated and consistent manner.
+| GitLens — Git supercharged | GitLens supercharges Git inside VS Code and unlocks untapped knowledge within each repository. It helps you to visualize code authorship at a glance via Git blame annotations and CodeLens, seamlessly navigate and explore Git repositories, gain valuable insights via rich visualizations and powerful comparison commands, and so much more.
+| Min Theme | A minimal theme for VS Code that comes in dark and light.
+| Output Colorizer | Language extension for VSCode/Bluemix Code that adds syntax colorization for both the output/debug/extensions panel and *.log files.
+| Pubspec Assist | Pubspec Assist is a Visual Studio Code extension that allows you to easily add dependencies to your Dart and Flutter project's pubspec.yaml, all without leaving your editor.
+| Rainbow Brackets | Provide rainbow colors for the round brackets, the square brackets and the squiggly brackets. This is particularly useful for Lisp or Clojure programmers, and of course, JavaScript, and other programmers.
+| Settings Sync | Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions Across Multiple Machines Using GitHub Gist.
+| Sort lines | Sort lines of text in Visual Studio Code.
+| Terminal | Run terminal command directly in Text Editor
+| Thunder Client | Thunder Client is a lightweight Rest API Client Extension for Visual Studio Code, hand-crafted by Ranga Vadhineni with simple and clean design.
+| Version Lens | This extension shows version information when opening a package or project.
 
 ## :package: Packages
 This repository makes use of the following pub packages:

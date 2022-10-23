@@ -19,7 +19,7 @@ class InformationsScreen extends StatelessWidget {
             title: 'screens.informations.github_repository_title',
             icon: Ionicons.logo_github,
             url: Uri.parse(
-              'https://github.com/',
+              'https://github.com/fikretsengul/flutter_advanced_boilerplate',
             ),
           ),
           const TextDivider(text: 'screens.informations.author_divider_title'),
@@ -36,7 +36,7 @@ class InformationsScreen extends StatelessWidget {
                 title: 'screens.informations.donate_card_title',
                 icon: Ionicons.heart_outline,
                 url: Uri.parse(
-                  'https://www.paypal.com/',
+                  'https://www.buymeacoffee.com/iamfikretB',
                 ),
               ),
               GridItem(
