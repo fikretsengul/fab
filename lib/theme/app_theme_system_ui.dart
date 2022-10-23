@@ -6,6 +6,11 @@ part 'app_theme_system_ui.freezed.dart';
 
 enum AppThemeSystemUiType { surface, background, primary }
 
+enum AppThemeType {
+  system,
+  user,
+}
+
 @freezed
 class AppThemeSystemUi with _$AppThemeSystemUi {
   const factory AppThemeSystemUi(

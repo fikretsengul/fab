@@ -84,7 +84,7 @@ class InformationsScreen extends StatelessWidget {
                 url: Uri.parse(
                   'https://pub.dev/packages/internet_connection_checker/versions/1.0.0+1',
                 ),
-                category: 'API',
+                category: 'Network',
               ),
               GridItem(
                 title: 'fresh_dio',
