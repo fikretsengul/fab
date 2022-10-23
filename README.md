@@ -268,7 +268,7 @@ This repository makes use of the following pub packages:
 ## :cherry_blossom: Community
 ### :fire: Contribution
 If you want to say **thank you** you can;
--   add a  [GitHub Star](https://github.com/create-go-app/cli)  to the project,
+-   add a  [GitHub Star]([https://github.com/create-go-app/cli](https://github.com/fikretsengul/flutter_advanced_boilerplate))  to the project,
 -   tweet about project  [on your Twitter](https://twitter.com/),
 -   [buy me a coffee](https://www.buymeacoffee.com/iamfikretB)
 
