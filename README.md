@@ -7,18 +7,10 @@
 <h4 align="center">A new (almost) fully featured flutter boilerplate project by using <a href="https://pub.dev/packages/flutter_bloc" target="_blank">BLoC</a>.</h4>
 
 <p align="center">
-<a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
-  </a>
-<a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://img.shields.io/badge/version-1.0.0%2B1-1EAEDB.svg">
-  </a>
-  <a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
-  </a>
-  <a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
-  </a>
+<img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
+<img src="https://img.shields.io/badge/version-1.0.0%2B1-1EAEDB.svg">
+<img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
+<img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
 <img src="https://img.shields.io/badge/last%20updated-23--10--2022-ff69b4">
 <img src="https://img.shields.io/badge/completion-%2585-orange">
 </p>
