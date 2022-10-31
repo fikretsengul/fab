@@ -109,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       keyboardType: TextInputType.text,
                       labelText: context.t.core.form.username.label,
                       hintText: context.t.core.form.username.hint,
+                      minLength: 5,
                       isRequired: true,
                     ),
                     CustomTextField(
@@ -117,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       labelText: context.t.core.form.password.label,
                       hintText: context.t.core.form.password.hint,
+                      minLength: 5,
                       isRequired: true,
                     ),
                     const SizedBox(height: Constants.paddingM),

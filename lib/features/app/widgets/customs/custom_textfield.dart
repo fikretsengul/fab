@@ -193,7 +193,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 child: Column(
                   children: [
                     ReactiveTextField(
-                      onChanged: (control) => control.setErrors({}),
                       showErrors: widget.showErrors ? null : (_) => false,
                       controller:
                           widget.staticValue.isNotEmpty ? TextEditingController(text: widget.staticValue) : null,
@@ -207,8 +206,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             .errors
                             .form
                             .minLength(field: widget.labelText, count: widget.minLength.toString()),
+                        ValidationMessage.maxLength: (_) => Translations.of(context)
+                            .core
+                            .errors
+                            .form
+                            .maxLength(field: widget.labelText, count: widget.maxLength.toString()),
                         ValidationMessage.required: (_) => context.t.core.errors.form.required(field: widget.labelText),
-                        ValidationMessage.email: (_) => context.t.core.errors.form.email(field: widget.labelText),
+                        ValidationMessage.email: (_) => context.t.core.errors.form.email,
                       },
                       maxLength: widget.maxLength,
                       maxLines: widget.maxLines,
@@ -253,7 +257,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               if (widget.isRequired) ...{
                 Positioned(
                   right: Constants.paddingM,
-                  top: Constants.paddingXL + 2,
+                  top: Constants.paddingXL,
                   child: Icon(
                     getIcon(form),
                     size: 14,

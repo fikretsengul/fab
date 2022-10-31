@@ -17,9 +17,10 @@
     },
     "errors": {
         "form": {
+            "maxLength": "$field cannot be more than $count characters.",
             "minLength": "$field cannot be less than $count characters.",
             "required": "$field is required.",
-            "email": "$field should be a valid email address."
+            "email": "You entered an invalid email address."
         },
         "others": {
             "no_item_found": "There is no data to show.",

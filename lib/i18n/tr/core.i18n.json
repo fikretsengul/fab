@@ -17,9 +17,10 @@
     },
     "errors": {
         "form": {
-            "minLength": "$field alanı $count karakterden kısa olamaz.",
+            "maxLength": "$field, $count karakterden uzun olamaz.",
+            "minLength": "$field, $count karakterden kısa olamaz.",
             "required": "$field zorunludur.",
-            "email": "$field geçerli bir e-posta adresi olmalıdır."
+            "email": "Geçersiz bir eposta adresi girdiniz."
         },
         "others": {
             "no_item_found": "Gösterilecek bir veri yok.",

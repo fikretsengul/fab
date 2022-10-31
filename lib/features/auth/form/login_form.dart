@@ -5,14 +5,14 @@ FormGroup get loginForm => FormGroup({
         value: '',
         validators: [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(4),
         ],
       ),
       'password': FormControl<String>(
         value: '',
         validators: [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(4),
         ],
       ),
     });
