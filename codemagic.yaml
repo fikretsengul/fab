@@ -12,11 +12,21 @@ workflows:
     cache:
       cache_paths: []
     scripts:
-      - flutter pub get
-      - flutter pub run slang
-      - flutter pub run build_runner build -d
-      - flutter test
-      - cp -r test/**/**/goldens $CM_EXPORT_DIR
+      - name: Get packages
+        script: |
+          flutter pub get
+      - name: Generate language files
+        script: |
+          flutter pub run slang
+      - name: Generate other files
+        script: |
+          flutter pub run build_runner build -d
+      - name: Generate and run golden tests
+        script: |
+          flutter test --update-goldens --tags=golden
+      - name: Copy them to export directory
+        script: |
+          cp -r test/**/**/goldens $CM_EXPORT_DIR
     artifacts:
       - '*.snap'
       - build/windows/**/*.msix
