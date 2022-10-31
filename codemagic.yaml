@@ -24,9 +24,6 @@ workflows:
       - name: Generate and run golden tests
         script: |
           flutter test --update-goldens --tags=golden
-      - name: Copy them to export directory
-        script: |
-          cp -r test/**/**/goldens $CM_EXPORT_DIR
     artifacts:
       - '*.snap'
       - build/windows/**/*.msix
