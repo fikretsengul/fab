@@ -1,0 +1,7 @@
+namespaces: true
+input_directory: lib/i18n
+output_directory: lib/i18n
+output_format: multiple_files
+base_locale: en
+fallback_strategy: base_locale
+string_interpolation: dart

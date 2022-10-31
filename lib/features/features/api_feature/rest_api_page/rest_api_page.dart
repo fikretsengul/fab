@@ -1,7 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/rest_api_page/blocs/get_posts_rest_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/rest_api_page/models/post_rest_model.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -48,12 +48,12 @@ class _RestApiPageState extends State<RestApiPage> {
         builderDelegate: PagedChildBuilderDelegate<PostRestModel>(
           firstPageErrorIndicatorBuilder: (context) => Center(
             child: Text(
-              tr('core.errors.something_went_wrong'),
+              context.t.core.errors.others.something_went_wrong,
             ),
           ),
           noItemsFoundIndicatorBuilder: (_) => Center(
             child: Text(
-              tr('core.errors.no_item_found'),
+              context.t.core.errors.others.no_item_found,
             ),
           ),
           firstPageProgressIndicatorBuilder: (_) => const Center(

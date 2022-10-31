@@ -1,16 +1,16 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/theme_model.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
-import 'package:flutter_advanced_boilerplate/utils/router.gr.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:statsfl/statsfl.dart';
 
 class App extends StatelessWidget {
-  App({
+  const App({
     super.key,
     required this.savedThemeMode,
     required this.lightTheme,
@@ -20,9 +20,6 @@ class App extends StatelessWidget {
   final AdaptiveThemeMode savedThemeMode;
   final ThemeModel lightTheme;
   final ThemeModel darkTheme;
-
-  // Intializes router instance.
-  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +43,22 @@ class App extends StatelessWidget {
 
             /// AutoRouter configuration.
             routerDelegate: AutoRouterDelegate(
-              _appRouter,
+              appRouter,
               // Sentrie's tracking navigation events with the usage of autorouter.
               navigatorObservers: () => [
                 SentryNavigatorObserver(),
               ],
             ),
-            routeInformationParser: _appRouter.defaultRouteParser(),
+            routeInformationParser: appRouter.defaultRouteParser(),
 
             /// EasyLocalization configuration.
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
+            locale: TranslationProvider.of(context).flutterLocale,
+            supportedLocales: LocaleSettings.supportedLocales,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
           );
         },
       ),

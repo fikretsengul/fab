@@ -29,7 +29,7 @@ class AppTypography with _$AppTypography {
         displayLarge: TextStyle(
           debugLabel: 'appTextTheme displayLarge',
           color: color,
-          fontSize: 40,
+          fontSize: 112,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -38,7 +38,7 @@ class AppTypography with _$AppTypography {
         displayMedium: TextStyle(
           debugLabel: 'appTextTheme displayMedium',
           color: color,
-          fontSize: 35,
+          fontSize: 56,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -47,7 +47,7 @@ class AppTypography with _$AppTypography {
         displaySmall: TextStyle(
           debugLabel: 'appTextTheme displaySmall',
           color: color,
-          fontSize: 30,
+          fontSize: 45,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -56,8 +56,8 @@ class AppTypography with _$AppTypography {
         headlineLarge: TextStyle(
           debugLabel: 'appTextTheme headlineLarge',
           color: color,
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
+          fontSize: 40,
+          fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
           letterSpacing: -0.5,
@@ -65,7 +65,7 @@ class AppTypography with _$AppTypography {
         headlineMedium: TextStyle(
           debugLabel: 'appTextTheme headlineMedium',
           color: color,
-          fontSize: 23,
+          fontSize: 34,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -74,7 +74,7 @@ class AppTypography with _$AppTypography {
         headlineSmall: TextStyle(
           debugLabel: 'appTextTheme headlineSmall',
           color: color,
-          fontSize: 22,
+          fontSize: 24,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -83,7 +83,7 @@ class AppTypography with _$AppTypography {
         titleLarge: TextStyle(
           debugLabel: 'appTextTheme titleLarge',
           color: color,
-          fontSize: 22,
+          fontSize: 21,
           fontWeight: FontWeight.w700,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
@@ -92,20 +92,20 @@ class AppTypography with _$AppTypography {
         titleMedium: TextStyle(
           debugLabel: 'appTextTheme titleMedium',
           color: color,
-          fontSize: 20,
+          fontSize: 17,
           fontWeight: FontWeight.w400,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
-          letterSpacing: 0,
+          letterSpacing: 0.15,
         ),
         titleSmall: TextStyle(
           debugLabel: 'appTextTheme titleSmall',
           color: color,
-          fontSize: 18,
+          fontSize: 15,
           fontWeight: FontWeight.w500,
           fontFamily: fontFamily,
           textBaseline: TextBaseline.alphabetic,
-          letterSpacing: 0,
+          letterSpacing: 0.5,
         ),
         bodyLarge: TextStyle(
           debugLabel: 'appTextTheme bodyLarge',

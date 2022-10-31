@@ -1,0 +1,37 @@
+{
+    "navigation": {
+        "bottom": {
+            "features": "Özellikler",
+            "informations": "Bilgiler"
+        }
+    },
+    "form": {
+        "username": {
+            "label": "Kullanıcı adı",
+            "hint": "Kullanıcı adınızı girin"
+        },
+        "password": {
+            "label": "Şifre",
+            "hint": "Şifrenizi girin"
+        }
+    },
+    "errors": {
+        "form": {
+            "minLength": "$field alanı $count karakterden kısa olamaz.",
+            "required": "$field zorunludur.",
+            "email": "$field geçerli bir e-posta adresi olmalıdır."
+        },
+        "others": {
+            "no_item_found": "Gösterilecek bir veri yok.",
+            "something_went_wrong": "Bir şeyler ters gitti ve veriler yüklenemedi.",
+            "an_unknown_error": "Bilinmeyen bir hata oluştu.",
+            "no_internet_connection": "İnternet bağlantısı bulunmuyor.",
+            "server_failure": "Sunucularımızda bir sorunla karşılaştık.",
+            "communication_error": "Sunucularla iletişimimizde bir hata oluştu."
+        }
+    },
+    "test": {
+        "succeded": "Test başarılı.",
+        "failed": "Test başarısız."
+    }
+}

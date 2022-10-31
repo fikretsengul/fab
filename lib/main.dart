@@ -2,16 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_boilerplate/features/app/app.dart';
-import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/bloc_observer/observer.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/modules/sentry/sentry_module.dart';
 import 'package:flutter_advanced_boilerplate/theme/app_theme_creator.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -24,8 +22,8 @@ Future<void> main() async {
       // Preserve splash screen until initialization complete.
       WidgetsFlutterBinding.ensureInitialized();
 
-      // Inits localization.
-      await EasyLocalization.ensureInitialized();
+      // Use device locale.
+      LocaleSettings.useDeviceLocale();
 
       // Inits hive storage.
       await Hive.initFlutter();
@@ -73,24 +71,11 @@ Future<void> main() async {
             // Sentrie's performance tracing for AssetBundles.
             DefaultAssetBundle(
               bundle: SentryAssetBundle(),
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(create: (context) => getIt<AppCubit>()),
-                ],
-                child: EasyLocalization(
-                  path: 'assets/translations',
-                  supportedLocales: const [
-                    Locale('en'),
-                    Locale('tr'),
-                  ],
-                  startLocale: const Locale('en'),
-                  fallbackLocale: const Locale('en'),
-                  useFallbackTranslations: true,
-                  child: App(
-                    savedThemeMode: savedThemeMode,
-                    lightTheme: lightTheme,
-                    darkTheme: darkTheme,
-                  ),
+              child: TranslationProvider(
+                child: App(
+                  savedThemeMode: savedThemeMode,
+                  lightTheme: lightTheme,
+                  darkTheme: darkTheme,
                 ),
               ),
             ),

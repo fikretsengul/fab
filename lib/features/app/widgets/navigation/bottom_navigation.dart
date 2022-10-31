@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
+import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
@@ -16,8 +17,8 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(32),
-        topRight: Radius.circular(32),
+        topLeft: Radius.circular(Constants.defaultBorderRadius),
+        topRight: Radius.circular(Constants.defaultBorderRadius),
       ),
       child: NavigationBar(
         height: 80,

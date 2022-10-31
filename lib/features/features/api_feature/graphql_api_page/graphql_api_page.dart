@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/graphql_api_page/blocs/get_posts_graphql_bloc.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/graphql_api_page/widgets/graphql_api_results_widget.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/modules/graphql/blocs/query/query_bloc.dart';
 import 'package:flutter_advanced_boilerplate/modules/graphql/models/graphql_api.dart';
@@ -47,7 +47,7 @@ class _GraphQLApiPageState extends State<GraphQLApiPage> {
               initial: Container.new,
               error: (_, __) => Center(
                 child: Text(
-                  tr('core.errors.something_went_wrong'),
+                  context.t.core.errors.others.something_went_wrong,
                 ),
               ),
               loading: (_) => const Center(

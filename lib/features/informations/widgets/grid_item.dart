@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,13 +8,13 @@ class GridItem extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.url,
-    this.category,
+    this.category = '',
   });
 
   final String title;
   final IconData icon;
   final Uri url;
-  final String? category;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +32,18 @@ class GridItem extends StatelessWidget {
         title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(icon, color: Theme.of(context).colorScheme.primary),
+            Icon(icon),
             Text(
-              tr(title),
+              title,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: getTextTheme(context).titleSmall!.apply(fontWeightDelta: 2, fontSizeDelta: -2),
             ),
-            if (category != null) ...{
+            if (category.isNotEmpty) ...{
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  category!,
+                  category,
                   style: getTextTheme(context).bodySmall!.apply(fontSizeDelta: -1),
                 ),
               ),

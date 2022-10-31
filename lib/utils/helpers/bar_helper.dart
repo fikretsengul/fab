@@ -1,8 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/bar/bar.dart';
-import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 @immutable
 abstract class BarHelper {
@@ -11,30 +11,40 @@ abstract class BarHelper {
   static void showAlert(
     BuildContext context, {
     required AlertModel alert,
+    bool isTest = false,
   }) {
-    final message = alert.translatable ? tr(alert.message) : alert.message;
+    Bar<void> bar;
+    final message = alert.translatable ? (context.t[alert.message] as String) : alert.message;
 
     if (alert.type == AlertType.constructive) {
-      _createAlertModal(
+      bar = _createAlertModal(
         message: message,
-        iconWidget: const SizedBox(),
-        backgroundGradient: colorsToGradient([Colors.green, Colors.green]),
-      ).show(context);
+        iconWidget: const Icon(
+          MdiIcons.checkCircle,
+          color: Colors.white,
+        ),
+        color: const Color(0xFF40DBA3),
+        isTest: isTest,
+      );
     } else if (alert.type == AlertType.destructive) {
-      _createAlertModal(
+      bar = _createAlertModal(
         message: message,
-        iconWidget: const SizedBox(),
-        backgroundGradient: colorsToGradient([Colors.red, Colors.red]),
-      ).show(context);
+        iconWidget: const Icon(
+          MdiIcons.alertCircle,
+          color: Colors.white,
+        ),
+        color: const Color(0xFFE4756D),
+      );
     } else if (alert.type == AlertType.error) {
-      _createAlertModal(
+      bar = _createAlertModal(
         message: message,
         iconWidget: const SizedBox(),
-        backgroundGradient: colorsToGradient([Colors.red, Colors.red]),
-      ).show(context);
+        color: Colors.red,
+      );
     } else if (alert.type == AlertType.notification) {
-      _createAlertModal(
+      bar = _createAlertModal(
         message: message,
+        color: Colors.grey,
         iconWidget: Container(
           height: 24,
           width: 24,
@@ -45,23 +55,35 @@ abstract class BarHelper {
           ),
           margin: const EdgeInsets.all(4),
         ),
-      ).show(context);
+      );
     } else if (alert.type == AlertType.quiet) {
       return;
     } else {
-      _createAlertModal(
+      bar = _createAlertModal(
         message: message,
         iconWidget: const SizedBox(),
-        backgroundGradient: colorsToGradient([Colors.red, Colors.red]),
-      ).show(context);
+        color: Colors.red,
+      );
+    }
+
+    if (isTest) {
+      showDialog<void>(
+        context: context,
+        builder: (_) {
+          return bar;
+        },
+      );
+    } else {
+      bar.show(context);
     }
   }
 
   static Bar<void> _createAlertModal({
     required String message,
     required Widget iconWidget,
-    Gradient? backgroundGradient,
+    required Color color,
     String? title,
+    bool isTest = false,
     Duration duration = const Duration(seconds: 3),
   }) {
     return Bar<void>(
@@ -73,13 +95,14 @@ abstract class BarHelper {
         child: iconWidget,
       ),
       maxHeight: 60,
-      backgroundColor: Colors.grey,
-      backgroundGradient: backgroundGradient,
-      messageSize: 16,
+      backgroundColor: color,
+      messageSize: 18,
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       margin: const EdgeInsets.all(8),
       shouldIconPulse: false,
-      duration: duration,
+      isDismissible: false,
+      duration: isTest ? const Duration(seconds: 1) : duration,
+      animationDuration: isTest ? const Duration(milliseconds: 250) : const Duration(seconds: 1),
     );
   }
 }

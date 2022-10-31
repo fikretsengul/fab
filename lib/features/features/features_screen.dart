@@ -1,10 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/api_feature_screen.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/color_picker.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/info_card.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/theme_card.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/theme/app_theme_creator.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -20,119 +20,109 @@ class FeaturesScreen extends StatefulWidget {
 class _FeaturesScreenState extends State<FeaturesScreen> {
   @override
   Widget build(BuildContext context) {
-    const feateures = [
+    final features = [
       InfoCard(
-        title: 'screens.features.api.title',
-        content: 'screens.features.api.explanation',
+        title: context.t.features.api.title,
+        content: context.t.features.api.explanation,
         icon: Ionicons.swap_vertical_outline,
-        widget: ApiFeatureScreen(),
+        widget: const ApiFeatureScreen(),
       ),
       InfoCard(
-        title: 'screens.features.state.title',
-        content: 'screens.features.state.explanation',
+        title: context.t.features.state.title,
+        content: context.t.features.state.explanation,
         icon: Ionicons.leaf_outline,
       ),
       InfoCard(
-        title: 'screens.features.linting.title',
-        content: 'screens.features.linting.explanation',
+        title: context.t.features.linting.title,
+        content: context.t.features.linting.explanation,
         icon: Ionicons.code_slash_outline,
       ),
       InfoCard(
-        title: 'screens.features.di_locator.title',
-        content: 'screens.features.di_locator.explanation',
+        title: context.t.features.di_locator.title,
+        content: context.t.features.di_locator.explanation,
         icon: Ionicons.locate_outline,
       ),
       InfoCard(
-        title: 'screens.features.code_generation.title',
-        content: 'screens.features.code_generation.explanation',
+        title: context.t.features.code_generation.title,
+        content: context.t.features.code_generation.explanation,
         icon: Ionicons.speedometer_outline,
       ),
       InfoCard(
-        title: 'screens.features.routing.title',
-        content: 'screens.features.routing.explanation',
+        title: context.t.features.routing.title,
+        content: context.t.features.routing.explanation,
         icon: Ionicons.chevron_back_outline,
       ),
       InfoCard(
-        title: 'screens.features.pattern.title',
-        content: 'screens.features.pattern.explanation',
+        title: context.t.features.pattern.title,
+        content: context.t.features.pattern.explanation,
         icon: Ionicons.apps_outline,
       ),
       InfoCard(
-        title: 'screens.features.exceptions.title',
-        content: 'screens.features.exceptions.explanation',
+        title: context.t.features.exceptions.title,
+        content: context.t.features.exceptions.explanation,
         icon: Ionicons.alert_circle_outline,
       ),
       InfoCard(
-        title: 'screens.features.storage.title',
-        content: 'screens.features.storage.explanation',
+        title: context.t.features.storage.title,
+        content: context.t.features.storage.explanation,
         icon: Ionicons.folder_open_outline,
       ),
       InfoCard(
-        title: 'screens.features.dynamic_theme.title',
-        content: 'screens.features.dynamic_theme.explanation',
+        title: context.t.features.dynamic_theme.title,
+        content: context.t.features.dynamic_theme.explanation,
         icon: Ionicons.color_palette_outline,
       ),
       InfoCard(
-        title: 'screens.features.localization.title',
-        content: 'screens.features.localization.explanation',
+        title: context.t.features.localization.title,
+        content: context.t.features.localization.explanation,
         icon: Ionicons.earth_outline,
       ),
       InfoCard(
-        title: 'screens.features.logging.title',
-        content: 'screens.features.logging.explanation',
+        title: context.t.features.logging.title,
+        content: context.t.features.logging.explanation,
         icon: Ionicons.terminal_outline,
       ),
       InfoCard(
-        title: 'screens.features.native_splash.title',
-        content: 'screens.features.native_splash.explanation',
+        title: context.t.features.native_splash.title,
+        content: context.t.features.native_splash.explanation,
         icon: Ionicons.star_outline,
       ),
       InfoCard(
-        title: 'screens.features.env_variables.title',
-        content: 'screens.features.env_variables.explanation',
+        title: context.t.features.env_variables.title,
+        content: context.t.features.env_variables.explanation,
         icon: Ionicons.medical_outline,
       ),
       InfoCard(
-        title: 'screens.features.refresh_rate.title',
-        content: 'screens.features.refresh_rate.explanation',
+        title: context.t.features.refresh_rate.title,
+        content: context.t.features.refresh_rate.explanation,
         icon: Ionicons.pulse_outline,
       ),
     ];
 
     return Material(
-      color: Theme.of(context).colorScheme.background,
+      color: getTheme(context).background,
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: [
           Card(
-            elevation: 0,
-            color: getPrimaryColor(context),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(24)),
-            ),
             child: SwitchListTile(
               onChanged: (bool newValue) {
                 /// Example: Change locale
                 /// The initial locale is automatically determined by the library.
                 /// Changing the locale like this will persist the selected locale.
-                context.setLocale(
-                  newValue ? const Locale('tr') : const Locale('en'),
-                );
+                // Use generated localization.
+                LocaleSettings.setLocale(newValue ? AppLocale.tr : AppLocale.en);
               },
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(24)),
-              ),
-              value: context.locale == const Locale('tr'),
+              value: context.t.$meta.locale == AppLocale.tr,
               title: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Ionicons.language_outline,
-                    color: getTheme(context).primary,
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    tr('screens.features.use_turkish'),
+                    context.t.features.use_turkish,
                     style: getTextTheme(context).titleSmall!.apply(fontWeightDelta: 2),
                   ),
                 ],
@@ -181,19 +171,19 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Divider(
-              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.4),
+              color: getTheme(context).onBackground.withOpacity(0.4),
             ),
           ),
           const SizedBox(height: 16),
           MasonryGridView.count(
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: feateures.length,
+            itemCount: features.length,
             shrinkWrap: true,
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             itemBuilder: (context, index) {
-              return feateures.elementAt(index);
+              return features.elementAt(index);
             },
           ),
           const SizedBox(height: 36),

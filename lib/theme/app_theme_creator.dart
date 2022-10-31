@@ -31,6 +31,7 @@ Future<ThemeModel> createAppTheme({bool isDark = false, Color? color}) async {
   final textTheme = isDark ? appTypography.white : appTypography.black;
 
   final customOnPrimaryColor = appColorScheme.primary.withOpacity(0.5);
+  final primaryColor = ElevationOverlay.colorWithOverlay(appColorScheme.surface, appColorScheme.primary, 3);
 
   final materialThemeData = MaterialThemeData(
     splashColor: Colors.transparent,
@@ -41,17 +42,31 @@ Future<ThemeModel> createAppTheme({bool isDark = false, Color? color}) async {
     useMaterial3: true,
     toggleableActiveColor: customOnPrimaryColor,
     appBarTheme: AppBarTheme(
+      elevation: Constants.defaultElevation,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarBrightness: appColorScheme.brightness,
       ),
-      elevation: 0,
     ),
     scaffoldBackgroundColor: appColorScheme.surface,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      elevation: 0,
-      highlightElevation: 0,
+      elevation: Constants.defaultElevation,
+      highlightElevation: Constants.defaultElevation,
     ),
-    splashFactory: NoSplash.splashFactory,
+    splashFactory: Constants.disableSplashEffectOnUI ? NoSplash.splashFactory : null,
+    iconTheme: IconThemeData(
+      color: appColorScheme.primary,
+    ),
+    cardTheme: CardTheme(
+      elevation: Constants.defaultElevation,
+      color: primaryColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            Constants.defaultBorderRadius,
+          ),
+        ),
+      ),
+    ),
   );
 
   return ThemeModel(

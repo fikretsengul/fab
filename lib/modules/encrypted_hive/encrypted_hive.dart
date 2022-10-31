@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -9,6 +10,14 @@ class EncryptedHive<T> {
   late Box<T> _hiveBox;
 
   static Future<EncryptedHive<T>> create<T>(String boxName) async {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) {
+      return EncryptedHive<T>._()
+        .._hiveBox = await Hive.openBox<T>(
+          'testing',
+          path: '.',
+        );
+    }
+
     final encryptedHive = EncryptedHive<T>._();
     await encryptedHive._load(boxName);
 

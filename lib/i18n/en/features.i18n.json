@@ -1,0 +1,65 @@
+{
+    "use_turkish": "Use turkish",
+    "try_now": "What you can try",
+    "others": "Others",
+    "api": {
+        "title": "API & Auth",
+        "explanation": "Rest and graphql api support with token renewal and socket support using Dio, GraphQL and Fresh."
+    },
+    "state": {
+        "title": "State & Architecture",
+        "explanation": "BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management."
+    },
+    "linting": {
+        "title": "Linting",
+        "explanation": "Linting rules with detailed settings to keep the health of the code good and up to the dart standards."
+    },
+    "di_locator": {
+        "title": "DI & Locator",
+        "explanation": "Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt."
+    },
+    "code_generation": {
+        "title": "Code Generation",
+        "explanation": "Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner."
+    },
+    "routing": {
+        "title": "Routing",
+        "explanation": "AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate."
+    },
+    "pattern": {
+        "title": "Desing Pattern",
+        "explanation": "Repository design pattern reduces the complexity of data layer, isolate unstructured data from the rest of the app and organizes project structure."
+    },
+    "exceptions": {
+        "title": "Exceptions",
+        "explanation": "It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing."
+    },
+    "storage": {
+        "title": "Storage",
+        "explanation": "Blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage."
+    },
+    "dynamic_theme": {
+        "title": "Dynamic Theme",
+        "explanation": "With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app."
+    },
+    "localization": {
+        "title": "Localization",
+        "explanation": "Easily localize the app into other languages with the support of variable keys by simply creating jsons to auto generate language files without requiring context."
+    },
+    "logging": {
+        "title": "Logging & Tracking",
+        "explanation": "A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry."
+    },
+    "native_splash": {
+        "title": "Native Splash",
+        "explanation": "Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image."
+    },
+    "env_variables": {
+        "title": "Env Variables",
+        "explanation": "Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such."
+    },
+    "refresh_rate": {
+        "title": "Refresh Rate",
+        "explanation": "Support for high refresh rate displays with the flutter displaymode package."
+    }
+}
