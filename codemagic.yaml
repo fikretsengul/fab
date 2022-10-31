@@ -1,8 +1,27 @@
+# Automatically generated on 2022-10-31 UTC from https://codemagic.io/app/6360294d58d53c61b12f5664/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
 workflows:
-    default-workflow:
-        name: Flutter Advanced Boilerplate Defauşt Workflow
-        max_build_duration: 30
-        scripts: |
-          flutter pub get
-          flutter pub run slang
-          flutter pub run build_runner build -d
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 30
+    environment:
+      flutter: default
+      xcode: latest
+      cocoapods: default
+    cache:
+      cache_paths: []
+    scripts:
+      - flutter pub get
+      - flutter pub run slang
+      - flutter pub run build_runner build -d
+      - flutter test
+      - cp -r test/**/**/goldens $CM_EXPORT_DIR
+    artifacts:
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - iam@fikretsengul.com
