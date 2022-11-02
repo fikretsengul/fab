@@ -6,7 +6,7 @@ class AppState with _$AppState {
     required int pageIndex,
   }) = _AppState;
 
-  factory AppState.initial() => const AppState(
+  factory AppState.initial() => const _AppState(
         pageIndex: 0,
       );
 }

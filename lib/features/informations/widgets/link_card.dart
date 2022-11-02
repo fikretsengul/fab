@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -29,16 +28,13 @@ class LinkCard extends StatelessWidget {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
-        trailing: Icon(
-          Ionicons.open_outline,
-          color: getTextTheme(context).titleMedium!.color,
-        ),
+        trailing: const Icon(Ionicons.open_outline),
         title: Row(
           children: [
-            Icon(icon, color: Theme.of(context).colorScheme.primary),
+            Icon(icon),
             const SizedBox(width: 16),
             Text(
-              tr(title),
+              title,
               style: getTextTheme(context).titleMedium!.apply(fontWeightDelta: 2),
             ),
           ],

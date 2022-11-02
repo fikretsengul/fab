@@ -31,7 +31,9 @@ There are several reasons why this boilerplate exists, these are in short to cre
  2. to make sure that I `keep everything stupid simple` (*controversial but I tried my best*),
  3. to ensure that project can `easily scale horizontally` as application grows,
  4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
- 5. to `maintain code quality and platform standards` in team projects with strictly linting rules.
+ 5. to `maintain code quality and platform standards` in team projects with strictly linting rules,
+ 6. to have `bloc and golden tests` in order to verify everything working as intended to be.
+ 7. to ship the application quickly and efficiently by using `CI & CD` to automate development process.
 
 ## :fire: Key Features
 
@@ -41,10 +43,16 @@ Rest and graphql api support with token renewal and socket support using Dio, Gr
 BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
 * `Advanced Linting`<br>
 Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
+* `Type Safety`<br>
+Project uses type-safety first approach (language, assets etc.) to help you avoid problems by catching null errors during development rather than at runtime.
+* `Testing`<br>
+The more features your app has, the harder it is to test manually. Automated tests help ensure that your app performs correctly before you publish it with bloc_test, golden_tookit and mocktail.
 * `Dependency Injection & Service Locator`<br>
 Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
 * `Code Generation`<br>
 Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner.
+* `CI & CD Integration`<br>
+CI/CD is used to continuously delivering code into production, and ensuring an ongoing flow of new features and bug fixes via the most efficient delivery method by using codemagic.
 * `Easy & Clean Routing`<br>
 AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate.
 * `Desing Pattern`<br>
@@ -56,7 +64,7 @@ Blazing fast and encrypted key-value database written in pure Dart with Hive and
 * `Dynamic Theme`<br>
 With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
 * `Localization`<br>
-Easily localize the app into other languages with the support of variable keys by simply creating jsons to auto generate language files without requiring context.
+Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
 * `Logging & Tracking`<br>
 A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry.
 * `Native Splash`<br>
@@ -89,8 +97,14 @@ $ cd flutter_advanced_boilerplate
 # Install dependencies
 $ flutter pub get
 
-# Generate data classes
-$ flutter packages pub run build_runner build --delete-conflicting-outputs
+# Generate structured language files
+$ flutter pub run slang
+
+# Generate data classes & structured asset files
+$ flutter packages pub run build_runner build --d
+
+# Update Goldens & Execute tests
+$ flutter test --update-goldens
 
 # Run the app
 $ flutter run

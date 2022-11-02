@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_advanced_boilerplate/features/app/models/auth_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/env_model.dart';
-import 'package:flutter_advanced_boilerplate/modules/token_refresh/token_storage.dart';
 import 'package:fresh_graphql/fresh_graphql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart' hide Response;
@@ -24,7 +23,7 @@ class GraphQLTokenRefresh {
   }
 
   final EnvModel _env;
-  final HiveTokenStorage _storage;
+  final TokenStorage<AuthModel> _storage;
   late final FreshLink<AuthModel> _fresh;
 
   FreshLink<AuthModel> get fresh => _fresh;

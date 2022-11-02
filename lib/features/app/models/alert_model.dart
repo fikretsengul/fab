@@ -1,3 +1,4 @@
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dio/dio_exception_handler.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,15 +46,15 @@ class AlertModel with _$AlertModel {
     switch (exception) {
       case BadNetworkException:
       case NetworkException:
-        message = 'core.error.has_no_internet_connection';
+        message = t['core.errors.others.no_internet_connection'] as String;
         translatable = true;
         break;
       case InternalServerException:
-        message = 'core.error.server_failure';
+        message = t['core.errors.others.server_failure'] as String;
         translatable = true;
         break;
       case InvalidJsonFormatException:
-        message = 'core.error.communication_error';
+        message = t['core.errors.others.communication_error'] as String;
         translatable = true;
         break;
       case ApiException:

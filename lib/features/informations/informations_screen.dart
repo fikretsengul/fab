@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/informations/widgets/grid_item.dart';
 import 'package:flutter_advanced_boilerplate/features/informations/widgets/link_card.dart';
 import 'package:flutter_advanced_boilerplate/features/informations/widgets/text_divider.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:ionicons/ionicons.dart';
 
 class InformationsScreen extends StatelessWidget {
@@ -16,13 +17,13 @@ class InformationsScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           LinkCard(
-            title: 'screens.informations.github_repository_title',
+            title: context.t.informations.github_repository_title,
             icon: Ionicons.logo_github,
             url: Uri.parse(
               'https://github.com/fikretsengul/flutter_advanced_boilerplate',
             ),
           ),
-          const TextDivider(text: 'screens.informations.author_divider_title'),
+          TextDivider(text: context.t.informations.author_divider_title),
           GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,
@@ -33,20 +34,20 @@ class InformationsScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               GridItem(
-                title: 'screens.informations.donate_card_title',
+                title: context.t.informations.donate_card_title,
                 icon: Ionicons.heart_outline,
                 url: Uri.parse(
                   'https://www.buymeacoffee.com/iamfikretB',
                 ),
               ),
               GridItem(
-                title: 'screens.informations.website_card_title',
+                title: context.t.informations.website_card_title,
                 icon: Ionicons.desktop_outline,
                 url: Uri.parse('https://fikretsengul.com'),
               ),
             ],
           ),
-          const TextDivider(text: 'screens.informations.packages_divider_title'),
+          TextDivider(text: context.t.informations.packages_divider_title),
           GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,

@@ -1,4 +1,5 @@
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 AlertModel graphQLExceptionHandler(OperationException result) {
@@ -24,11 +25,11 @@ AlertModel createAlertModel(String code) {
       message = 'This is an example error.';
       break;
     case 'INTERNAL_SERVER_ERROR':
-      message = 'core.errors.serverFailure';
+      message = t['core.errors.others.server_failure'] as String;
       translatable = true;
       break;
     default:
-      message = 'core.errors.anUnknownError';
+      message = t['core.errors.others.an_unknown_error'] as String;
       translatable = true;
       break;
   }

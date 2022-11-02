@@ -1,6 +1,6 @@
-import 'package:animations/animations.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_container_transform.dart';
+import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class InfoCard extends StatelessWidget {
@@ -21,38 +21,24 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = widget != null ? Theme.of(context).primaryTextTheme : Theme.of(context).textTheme;
 
-    return OpenContainer(
-      transitionType: ContainerTransitionType.fadeThrough,
-      closedElevation: 0,
-      openElevation: 0,
-      closedShape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
-      closedColor: Colors.transparent,
-      openColor: getTheme(context).surface,
-      middleColor: getTheme(context).surface,
-      tappable: widget != null,
-      openBuilder: (context, _) => widget ?? const SizedBox(),
+    return CustomContainerTransform(
+      openWidget: widget,
       closedBuilder: (context, _) {
         return Card(
-          elevation: 0,
           color: widget != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(24)),
-          ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(Constants.paddingM),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  tr(title),
+                  title,
                   style: textTheme.titleLarge!.apply(fontWeightDelta: 2),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  tr(content),
+                  content,
                   style: textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 16),
