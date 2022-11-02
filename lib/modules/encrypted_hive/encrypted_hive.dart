@@ -13,7 +13,7 @@ class EncryptedHive<T> {
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
       return EncryptedHive<T>._()
         .._hiveBox = await Hive.openBox<T>(
-          'testing',
+          'test',
           path: '.',
         );
     }

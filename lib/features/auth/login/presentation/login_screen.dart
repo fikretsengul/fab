@@ -1,17 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_button.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_textfield.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/utils/keyboard_dismisser.dart';
-import 'package:flutter_advanced_boilerplate/features/auth/blocs/auth_cubit.dart';
-import 'package:flutter_advanced_boilerplate/features/auth/form/login_form.dart';
+import 'package:flutter_advanced_boilerplate/features/auth/login/blocs/auth_cubit.dart';
+import 'package:flutter_advanced_boilerplate/features/auth/login/form/login_form.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/helpers/bar_helper.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
-import 'package:flutter_advanced_boilerplate/utils/router.gr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -57,20 +55,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ..markAsDisabled();
               _btnController.start();
             },
-            fail: () {
+            failed: (alert) {
               _form.markAsEnabled();
               _btnController.reset();
 
               BarHelper.showAlert(
                 context,
-                alert: AlertModel.alert(
-                  message: context.t.core.test.failed,
-                  type: AlertType.destructive,
-                ),
+                alert: alert,
                 isTest: widget.cubit != null,
               );
             },
-            success: () {
+            authenticated: (_) {
               _form
                 ..reset()
                 ..markAsEnabled();
@@ -85,8 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   isTest: true,
                 );
-              } else {
-                context.router.push(const MainNavigatorRoute());
               }
             },
             orElse: () {
@@ -105,20 +98,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomTextField(
+                      key: const Key('username'),
                       formControlName: 'username',
                       keyboardType: TextInputType.text,
                       labelText: context.t.core.form.username.label,
                       hintText: context.t.core.form.username.hint,
-                      minLength: 5,
+                      minLength: 4,
                       isRequired: true,
                     ),
                     CustomTextField(
+                      key: const Key('password'),
                       formControlName: 'password',
                       keyboardType: TextInputType.text,
                       obscureText: true,
                       labelText: context.t.core.form.password.label,
                       hintText: context.t.core.form.password.hint,
-                      minLength: 5,
+                      minLength: 4,
                       isRequired: true,
                     ),
                     const SizedBox(height: Constants.paddingM),

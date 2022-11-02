@@ -13,7 +13,7 @@ import 'package:sentry_dio/sentry_dio.dart';
 
 Dio initDioClient(
   EnvModel env,
-  TokenRefresh tokenRefresh,
+  DioTokenRefresh dioTokenRefresh,
 ) {
   final dio = Dio();
 
@@ -28,7 +28,7 @@ Dio initDioClient(
   dio.options.headers['Accept-Language'] = Platform.localeName.substring(0, 2);
   dio.options.connectTimeout = const Duration(seconds: 10).inMilliseconds;
   dio.options.receiveTimeout = const Duration(seconds: 10).inMilliseconds;
-  dio.interceptors.add(tokenRefresh.fresh);
+  dio.interceptors.add(dioTokenRefresh.fresh);
   dio.interceptors.add(BadNetworkErrorInterceptor());
   dio.interceptors.add(InternalServerErrorInterceptor());
   dio.interceptors.add(ApiErrorInterceptor());

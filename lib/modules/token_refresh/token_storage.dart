@@ -7,17 +7,17 @@ import 'package:fresh_dio/fresh_dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@LazySingleton(as: TokenStorage)
 @preResolve
 class HiveTokenStorage extends TokenStorage<AuthModel> {
   HiveTokenStorage._(this._hiveBox);
 
-  final Box<dynamic> _hiveBox;
+  final Box<String> _hiveBox;
 
   @override
   Future<void> delete() async {
     await _hiveBox.putAll(
-      <String, dynamic>{
+      {
         'tokenType': 'Bearer ',
         'accessToken': '',
         'refreshToken': '',
@@ -28,10 +28,10 @@ class HiveTokenStorage extends TokenStorage<AuthModel> {
 
   @override
   Future<AuthModel?> read() async {
-    final tokenType = _hiveBox.get('tokenType', defaultValue: 'Bearer ') as String;
-    final accessToken = _hiveBox.get('accessToken', defaultValue: '') as String;
-    final refreshToken = _hiveBox.get('refreshToken', defaultValue: '') as String;
-    final user = _hiveBox.get('user', defaultValue: '') as String;
+    final tokenType = _hiveBox.get('tokenType', defaultValue: 'Bearer ')!;
+    final accessToken = _hiveBox.get('accessToken', defaultValue: '')!;
+    final refreshToken = _hiveBox.get('refreshToken', defaultValue: '')!;
+    final user = _hiveBox.get('user', defaultValue: '')!;
 
     if (tokenType.isNotEmpty && accessToken.isNotEmpty && refreshToken.isNotEmpty && user.isNotEmpty) {
       return AuthModel(
@@ -48,7 +48,7 @@ class HiveTokenStorage extends TokenStorage<AuthModel> {
   @override
   Future<void> write(AuthModel token) async {
     await _hiveBox.putAll(
-      <String, dynamic>{
+      {
         'tokenType': token.tokenType,
         'accessToken': token.accessToken,
         'refreshToken': token.refreshToken,

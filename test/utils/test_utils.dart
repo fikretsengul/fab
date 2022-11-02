@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
-import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
@@ -15,14 +13,6 @@ Future<void> prepareRequirements() async {
 
   // Loads app fonts to use them in golden test.
   await loadAppFonts();
-
-  // Creates mock path_provider and flutter_secure_storage.
-  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler(
-    (MethodCall methodCall) async => '.',
-  );
-
-  // Configures dependency injection to init modules and singletons.
-  await configureDependencyInjection();
 }
 
 Future<void> prepareGoldenTests(FutureOr<void> Function() testMain) async {

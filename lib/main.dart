@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dar
 import 'package:flutter_advanced_boilerplate/modules/sentry/sentry_module.dart';
 import 'package:flutter_advanced_boilerplate/theme/app_theme_creator.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,13 +21,15 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(
     () async {
-      // Preserve splash screen until initialization complete.
-      WidgetsFlutterBinding.ensureInitialized();
+      // Preserve splash screen until authentication complete.
+      final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+      FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
       // Use device locale.
       LocaleSettings.useDeviceLocale();
 
       // Inits hive storage.
+      log('TEST');
       await Hive.initFlutter();
 
       // Configures dependency injection to init modules and singletons.
