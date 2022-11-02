@@ -22,10 +22,6 @@ void main() {
       await configureDependencyInjection();
     });
 
-/*     tearDownAll(() {
-      Hive.deleteBoxFromDisk('test');
-    }); */
-
     screenshotTest<MockAuthCubit, AuthState>(
       'Initial',
       cubit: cubit,

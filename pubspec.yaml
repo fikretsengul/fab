@@ -101,6 +101,7 @@ dev_dependencies:
   mocktail_image_network: ^0.3.1
   slang_flutter: ^3.2.0
   slang_build_runner: ^3.2.0
+  r_resources: ^1.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
