@@ -127,3 +127,6 @@ app.*.symbols
 **/*.gr.dart
 **/*.config.dart
 android/app/release/
+
+# don't check in golden failure output
+**/failures/*.png
