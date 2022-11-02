@@ -32,7 +32,7 @@ There are several reasons why this boilerplate exists, these are in short to cre
  3. to ensure that project can `easily scale horizontally` as application grows,
  4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
  5. to `maintain code quality and platform standards` in team projects with strictly linting rules,
- 6. to have `bloc and golden tests` in order to verify everything working as intended to be.
+ 6. to have `bloc and golden tests` in order to verify everything working as intended to be,
  7. to ship the application quickly and efficiently by using `CI & CD` to automate development process.
 
 ## :fire: Key Features
@@ -44,7 +44,7 @@ BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persis
 * `Advanced Linting`<br>
 Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
 * `Type Safety`<br>
-Project uses type-safety first approach (language, assets etc.) to help you avoid problems by catching null errors during development rather than at runtime.
+Project uses type-safety first approach (languages, assets etc.) to help you avoid problems by catching null errors during development rather than at runtime.
 * `Testing`<br>
 The more features your app has, the harder it is to test manually. Automated tests help ensure that your app performs correctly before you publish it with bloc_test, golden_tookit and mocktail.
 * `Dependency Injection & Service Locator`<br>
