@@ -4,14 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.0+3](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b8bb7bf..XXXXXXX) - 2022-11-04
 
-### New features
-
-- Q&A section added to Readme.MD and Changelog.MD file created.
-
 ### Changed features
 
 - Secure storage initialization and usage for token storage simplified and also some bugs fixed.
 - Packages updated.
+- Q&A section added to Readme.MD and Changelog.MD file created.
 
 ## [1.0.0+2](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/4e68479..b8bb7bf) - 2022-10-31
 
