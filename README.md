@@ -21,7 +21,7 @@
   <a href="#camera-screenshots">Screenshots</a> •
   <a href="#books-how-to-use">How To Use</a> •
   <a href="#file_folder-folder-structure">Folder Structure</a> •
-  <a href="https://github.com/fikretsengul/flutter_advanced_boilerplate/CHANGELOG.md">Changelog</a><br>
+  <a href="https://github.com/fikretsengul/flutter_advanced_boilerplate/blob/stage/CHANGELOG.md">Changelog</a><br>
   <a href="#star2-good-to-know">Good To Know</a> •
   <a href="#question-faq">FAQ</a> •
   <a href="#cherry_blossom-community">Community</a> •
