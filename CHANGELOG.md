@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0+3](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/XXXXXXX..b8bb7bf) - 2022-11-04
+## [1.0.0+3](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/d7f3d05..b8bb7bf) - 2022-11-04
 
 ### New features
 
