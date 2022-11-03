@@ -1,18 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class EncryptedHive<T> {
   EncryptedHive._();
 
-  late Box<T> _hiveBox;
+  late Box<T> _encryptedHiveBox;
 
   static Future<EncryptedHive<T>> create<T>(String boxName) async {
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
       return EncryptedHive<T>._()
-        .._hiveBox = await Hive.openBox<T>(
+        .._encryptedHiveBox = await Hive.openBox<T>(
           'test',
           path: '.',
         );
@@ -24,38 +25,31 @@ class EncryptedHive<T> {
     return encryptedHive;
   }
 
-  Box<T> get box => _hiveBox;
+  Box<T> get encryptedHiveBox => _encryptedHiveBox;
 
   Future<void> _load(String boxName) async {
-    const secureStorage = FlutterSecureStorage(
-      aOptions: AndroidOptions(
-        encryptedSharedPreferences: true,
-      ),
-    );
-    String? key;
+    String? encryptedKey;
 
     try {
-      // This try catch is for a crash that happens on some android devices.
-      key = await secureStorage.read(key: 'key');
+      encryptedKey = await getIt<FlutterSecureStorage>().read(key: 'encryptedKey');
     } catch (error) {
-      key = null;
+      encryptedKey = null;
     }
 
-    if (key == null) {
-      key = base64UrlEncode(Hive.generateSecureKey());
-      await secureStorage.write(
-        key: 'key',
-        value: key,
+    if (encryptedKey == null) {
+      encryptedKey = base64UrlEncode(Hive.generateSecureKey());
+      await getIt<FlutterSecureStorage>().write(
+        key: 'encryptedKey',
+        value: encryptedKey,
       );
     }
 
-    final encryptionKey = base64Url.decode(key);
-
+    final encryptionKey = base64Url.decode(encryptedKey);
     final encryptedBox = await Hive.openBox<T>(
       boxName,
       encryptionCipher: HiveAesCipher(encryptionKey),
     );
 
-    _hiveBox = encryptedBox;
+    _encryptedHiveBox = encryptedBox;
   }
 }

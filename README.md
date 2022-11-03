@@ -280,11 +280,11 @@ If you want to say **thank you** you can;
 
 Also code contributions are always welcome and appreciated.
 
- 1. **Report a bug**
+ 1. **Report a bug**<br>
 If you think you have encountered a bug, and I should know about it, feel free to report it and I will take care of it.
- 2. **Request a feature**
+ 2. **Request a feature**<br>
 You can also request for a feature, and if it will viable, it will be picked for development.
- 3. **Create a pull request**
+ 3. **Create a pull request**<br>
 It can't get better then this, your pull request will be appreciated by the community. You can get started by
     picking up any open issues and make a pull request.
 
