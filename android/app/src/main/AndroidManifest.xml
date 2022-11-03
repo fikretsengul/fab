@@ -3,7 +3,10 @@
    <application
         android:label="flutter_advanced_boilerplate"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/backup_rules">
+        <!-- By default Android backups data on Google Drive. It can cause exception java.security.InvalidKeyException:Failed to unwrap key while using flutter_secure_storage so two lines above fixes this. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_advanced_boilerplate/modules/encrypted_hive/encrypted_hive.dart';
+import 'package:flutter_advanced_boilerplate/modules/hive/encrypted_hive.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -30,8 +30,9 @@ class EnvModel with _$EnvModel {
     var env = const String.fromEnvironment('APP_ENV', defaultValue: 'dev');
 
     if (env == 'test' || env == 'dev') {
-      final box = (await EncryptedHive.create<String>('env')).box;
-      final savedEnv = box.get('env');
+      final encryptedHiveBox = (await EncryptedHive.create<String>('env')).encryptedHiveBox;
+
+      final savedEnv = encryptedHiveBox.get('env');
       if (savedEnv != null) {
         env = savedEnv;
       }

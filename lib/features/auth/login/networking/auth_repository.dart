@@ -28,7 +28,6 @@ class AuthRepository {
 
       return DC.data(auth);
     } else {
-      print('noluyo amk');
       final alert = AlertModel.quiet();
 
       return DC.error(alert);

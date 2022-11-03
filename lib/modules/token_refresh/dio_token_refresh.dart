@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class DioTokenRefresh {
-  DioTokenRefresh(this._storage) {
+  DioTokenRefresh(this._secureStorage) {
     _fresh = Fresh<AuthModel>(
-      tokenStorage: _storage,
+      tokenStorage: _secureStorage,
       refreshToken: (token, _) => _refreshToken(token),
       shouldRefresh: (response) {
         return response?.statusCode == 401;
@@ -17,7 +17,7 @@ class DioTokenRefresh {
     );
   }
 
-  final TokenStorage<AuthModel> _storage;
+  final TokenStorage<AuthModel> _secureStorage;
   late final Fresh<AuthModel> _fresh;
 
   Fresh<AuthModel> get fresh => _fresh;

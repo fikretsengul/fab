@@ -8,11 +8,11 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
-<img src="https://img.shields.io/badge/version-1.0.0%2B1-1EAEDB.svg">
+<img src="https://img.shields.io/badge/version-1.0.0%2B3-1EAEDB.svg">
 <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
 <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
-<img src="https://img.shields.io/badge/last%20updated-23--10--2022-ff69b4">
-<img src="https://img.shields.io/badge/completion-%2585-orange">
+<img src="https://img.shields.io/badge/last%20updated-2022--11--03-ff69b4">
+<img src="https://img.shields.io/badge/completion-%2595-orange">
 </p>
 
 <p align="center">
@@ -21,8 +21,12 @@
   <a href="#camera-screenshots">Screenshots</a> •
   <a href="#books-how-to-use">How To Use</a> •
   <a href="#file_folder-folder-structure">Folder Structure</a> •
+  <a href="https://github.com/fikretsengul/flutter_advanced_boilerplate/blob/stage/CHANGELOG.md">Changelog</a><br>
   <a href="#star2-good-to-know">Good To Know</a> •
-  <a href="#package-packages">Packages</a>
+  <a href="#question-faq">FAQ</a> •
+  <a href="#cherry_blossom-community">Community</a> •
+  <a href="#package-packages">Packages</a> •
+  <a href="#lock-license">License</a>
 </p>
 
 ## :memo: The Motivation
@@ -32,45 +36,47 @@ There are several reasons why this boilerplate exists, these are in short to cre
  3. to ensure that project can `easily scale horizontally` as application grows,
  4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
  5. to `maintain code quality and platform standards` in team projects with strictly linting rules,
- 6. to have `bloc and golden tests` in order to verify everything working as intended to be,
- 7. to ship the application quickly and efficiently by using `CI & CD` to automate development process.
+ 6. to have `bloc and golden tests` to verify everything working as intended to be,
+ 7. to ship the application quickly and efficiently by using `CI & CD` to automate the development process.
 
 ## :fire: Key Features
 
 * `API System & Authentication`<br>
-Rest and graphql api support with token renewal and socket support using Dio, GraphQL and Fresh.
+Rest and graphql api support with token renewal and socket support using Dio, GraphQL, and Fresh.
 * `State Management & Architecture`<br>
 BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
 * `Advanced Linting`<br>
 Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
 * `Type Safety`<br>
-Project uses type-safety first approach (languages, assets etc.) to help you avoid problems by catching null errors during development rather than at runtime.
+The boilerplate uses type-safety first approach (languages, assets, etc.) to help you avoid problems by catching null errors during development rather than at runtime.
+* `Forms`<br>
+Creating and managing forms has never been so easy and fun. Reactive forms is a model-driven approach to handling forms inputs and validations.
 * `Testing`<br>
-The more features your app has, the harder it is to test manually. Automated tests help ensure that your app performs correctly before you publish it with bloc_test, golden_tookit and mocktail.
+The more features the app has, the harder it is to test manually. Automated tests help ensure that the app performs correctly before you publish it with Bloc Test, Golden Tookit, and Mocktail.
 * `Dependency Injection & Service Locator`<br>
 Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
 * `Code Generation`<br>
-Maximize productivity and improve code quality by generating data classes with Freezed, Artemis and Build Runner.
+Maximize productivity and improve code quality by generating data classes with Freezed, Artemis, and Build Runner.
 * `CI & CD Integration`<br>
-CI/CD is used to continuously delivering code into production, and ensuring an ongoing flow of new features and bug fixes via the most efficient delivery method by using codemagic.
+CI/CD is used to continuously deliver code into production, and ensure an ongoing flow of new features and bug fixes via the most efficient delivery method by using Codemagic.
 * `Easy & Clean Routing`<br>
-AutoRouter allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes & reduce code boilerplate.
+AutoRouter allows for strongly-typed arguments passing, effortless deep-linking, and code generation to simplify routes  reduce code boilerplate.
 * `Desing Pattern`<br>
-Repository design pattern reduces the complexity of data layer, isolate unstructured data from the rest of the app and organizes project structure.
+Repository design pattern reduces the complexity of the data layer, isolates unstructured data from the rest of the app, and organizes project structure.
 * `Exception Handling`<br>
 It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
 * `Encrypted Storage`<br>
-Blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.
+The boilerplate provides a blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.
 * `Dynamic Theme`<br>
 With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
 * `Localization`<br>
 Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
 * `Logging & Tracking`<br>
-A detailed logging and error tracking mechanism to monitor every action taking place in the application in real time with Logging and Sentry.
+A detailed logging and error tracking mechanism to monitor every action taking place in the application in real-time with Logging and Sentry.
 * `Native Splash`<br>
 Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
 * `Refresh Rate`<br>
-Support for high refresh rate displays with the flutter displaymode package.
+Support for high refresh rate displays with the flutter_displaymode package.
 
 ## :camera: Screenshots
 #### Light Dynamic Theme
@@ -100,6 +106,9 @@ $ flutter pub get
 # Generate structured language files
 $ flutter pub run slang
 
+# Checks missing and unused translations
+$ flutter pub run slang analyze
+
 # Generate data classes & structured asset files
 $ flutter packages pub run build_runner build -d
 
@@ -110,7 +119,7 @@ $ flutter test --update-goldens
 $ flutter run
 ```
 ### Hide Generated Files
-In-order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing `'Add Pattern'` button:
+In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing the `'Add Pattern'` button:
 
 ```
 **/*.config.dart
@@ -131,16 +140,16 @@ In Android Studio, navigate to `'Android Studio'` -> `'Preferences'` -> `'Editor
 ```
 .
 └── assets
-	├── animations							-> put your animated files here eg. lottie
-	├── configs							-> put your env files here
-	│ ├── dev.json								-> env that is used for dev
-	│ ├── prod.json								-> env that is used for prod
-	│ └── test.json								-> env that is used for tes
-	├── fonts							-> put your custom font files here
-	├── images							-> put your image files here
-	└── translations						-> put your translation files here
-		├── en.json
-		└── tr.json
+    ├── animations                          -> put your animated files here eg. lottie
+    ├── configs                             -> put your env files here
+    │   ├── dev.json                           -> env that is used for dev
+    │   ├── prod.json                          -> env that is used for prod
+    │   └── test.json                          -> env that is used for tes
+    ├── fonts                               -> put your custom font files here
+    ├── images                              -> put your image files here
+    └── translations                        -> put your translation files here
+        ├── en.json
+        └── tr.json
 ```
 
 ### Features Folder
@@ -148,18 +157,19 @@ The `features` folder, which is the backbone of the application, was designed us
 ```
 .
 └── lib
-	└── features							-> stands for FEATURE FIRST STRUCTURE
-		└── feature_x							-> seperate and put your features here
-			├── blocs					-> stands for APPLICATION LAYER
-			│ ├── x_cubit.dart					-> seperate and put your logics here
-			│ └── x_state.dart
-			└── models					-> stands for DOMAIN LAYER
-				├── x_model.dart				-> seperate and put your models here
-			└── networking					-> stands for DATA LAYER
-				├── x_repository.dart				-> seperate and put your repos here
-			│ └── widgets					-> stands for PRESENTATION LAYER
-				├── x_header_widget.dart			-> seperate and put your widgets here
-			└── x_screen.dart
+    └── features                            -> stands for FEATURE FIRST STRUCTURE
+        └── feature_x                          -> seperate and put your features here
+            ├── blocs                          -> stands for APPLICATION LAYER
+            │   ├── x_cubit.dart                  -> seperate and put your logics here
+            │   └── x_state.dart
+            ├── models                         -> stands for DOMAIN LAYER
+            │   └── x_model.dart                  -> seperate and put your models here
+            ├── networking                     -> stands for DATA LAYER
+            │   └── x_repository.dart             -> seperate and put your repos here
+            └── presentation                   -> stands for PRESENTATION LAYER
+                ├── widgets                       -> seperate and put your widgets here
+                │   └── x_header_widget.dart
+                └── x_screen.dart
 ```
 
 ### Modules Folder
@@ -167,38 +177,42 @@ In the `modules` folder, there are dependency injection registration and initial
 ```
 .
 └── lib
-	└── modules
-		├── dependency_injection				-> add your modules injection here
-		│ ├── di.dart							-> must initialize di first
-		│ └── x_module_di.dart						-> example module injection
-		└── x_module						-> create folder for your modules
-			└── init_x.dart						-> create initialization files here
+    └── modules
+        ├── dependency_injection               -> add your modules injection here
+        │   ├── di.dart                           -> must initialize di first
+        │   └── x_module_di.dart                  -> example module injection
+        └── x_module                           -> create folder for your modules
+            └── init_x.dart                       -> create initialization files here
 ```
 ### Theme Folder
 The `theme` folder contains the necessary theme configuration and settings.
 ```
 .
 └── lib
-	└── theme
-		├── text
-		│ └── typography.dart
-		└── app_theme_creator.dart				-> theme creation configuration here
+    └── theme
+        ├── color
+        │   └── app_color_scheme.dart
+        ├── text
+        │   └── app_typography.dart
+        └── app_theme_creator.dart             -> theme creation configuration here
 ```
 ### Utils Folder
-Apart from the above, constants, helper classes and methods, shortcuts and many more used throughout the application are located in `utils` folder.
+Apart from the above, constants, helper classes, and methods, shortcuts and many more used throughout the application are located in the `utils` folder.
 ```
 .
 └── lib
-	└── utils
-		├── helpers						-> put your helpers here
-		│ └── bar_helper.dart						-> example bar helper to show alert
-		├── methods						-> put your methods here
-		│ └── aliases.dart						-> create alias variables here
-		│ └── shorcuts.dart						-> add shortcut methods here
-		├── constants.dart					-> configure app constants here
-		├── navigation.dart					-> add navigation destinations here
-		├── palette.dart					-> define colors here
-		└── router.dart						-> add new screens here
+    └── utils
+        ├── helpers                            -> put your helpers here
+        │   ├── bar_helper.dart                   -> bar helper to show alert
+        │   └── logging_helper.dart               -> logging helper to show fancy log in console
+        ├── methods                            -> put your methods here
+        │   └── aliases.dart                      -> create alias variables here
+        │   └── shorcuts.dart                     -> add shortcut methods here
+        ├── constants.dart                     -> configure app constants here
+        ├── navigation.dart                    -> add navigation destinations here
+        ├── palette.dart                       -> define colors here
+        ├── r.dart                             -> generated type-safe asset classes here (don't modify)
+        └── router.dart                        -> add new screens here
 ```
 ## :star2: Good To Know
 ### Resources I Highly Recommend you to Read & Watch
@@ -244,19 +258,23 @@ This repository makes use of the following pub packages:
 | [flutter_bloc](https://pub.dev/packages/flutter_bloc/versions/8.1.1) | ^8.1.1 | State & Architecture*
 | [hydrated_bloc](https://pub.dev/packages/hydrated_bloc/versions/8.1.0) | ^8.1.0 | State Persistance*
 | [very_good_analysis](https://pub.dev/packages/very_good_analysis/versions/3.1.0) | ^3.1.0 | Linting*
-| [dart_code_metrics](https://pub.dev/packages/dart_code_metrics/versions/4.21.2) | ^4.21.2 | Linting*
-| [injectable](https://pub.dev/packages/injectable/versions/1.5.3) | ^1.5.3 | Dependency Injection*
+| [dart_code_metrics](https://pub.dev/packages/dart_code_metrics/versions/4.19.1) | ^4.19.1 | Linting*
+| [reactive_forms](https://pub.dev/packages/reactive_forms/versions/14.1.0) | ^14.1.0 | Forms*
+| [injectable](https://pub.dev/packages/injectable/versions/1.5.4) | ^1.5.4 | Dependency Injection*
 | [get_it](https://pub.dev/packages/get_it/versions/7.2.0) | ^7.2.0 | Service Locator*
 | [freezed](https://pub.dev/packages/freezed/versions/2.2.0) | ^2.2.0 | Code Generation for Classes*
-| [artemis](https://pub.dev/packages/artemis/versions/6.18.4) | ^6.18.4 | Code Generation for GraphQL*
-| [build_runner](https://pub.dev/packages/build_runner/versions/2.3.2) | ^2.3.2 | Code Generation for Others*
-| [json_serializable](https://pub.dev/packages/json_serializable/versions/6.5.3) | ^6.5.3 | Code Generation for JSON*
-| [auto_route](https://pub.dev/packages/auto_route/versions/5.0.22) | ^5.0.22 | Routing*
+| [artemis](https://pub.dev/packages/artemis/versions/7.9.0-beta) | ^7.9.0-beta | Code Generation for GraphQL*
+| [build_runner](https://pub.dev/packages/build_runner/versions/2.3.0) | ^2.3.0 | Code Generation for Others*
+| [json_serializable](https://pub.dev/packages/json_serializable/versions/6.5.4) | ^6.5.4 | Code Generation for JSON*
+| [slang_flutter](https://pub.dev/packages/slang_flutter/versions/3.3.0) | ^3.3.0 | Code Generation for Languages*
+| [slang_build_runner](https://pub.dev/packages/slang_build_runner/versions/3.3.0) | ^3.3.0 | Code Generation for Languages*
+| [r_resources](https://pub.dev/packages/r_resources/versions/1.0.1) | ^1.0.1 | Code Generation for Assets*
+| [auto_route](https://pub.dev/packages/auto_route/versions/5.0.2) | ^5.0.2 | Routing*
 | [data_channel](https://pub.dev/packages/data_channel/versions/2.0.0+1) | ^2.0.0+1 | Exceptions*
 | [hive_flutter](https://pub.dev/packages/hive_flutter/versions/1.1.0) | ^1.1.0 | Storage*
 | [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage/versions/6.0.0) | ^6.0.0 | Storage*
 | [adaptive_theme](https://pub.dev/packages/adaptive_theme/versions/3.1.1) | ^3.1.1 | Theme
-| [easy_localization](https://pub.dev/packages/easy_localization/versions/3.0.1) | ^3.0.1 | Localization*
+| [slang](https://pub.dev/packages/slang/versions/3.3.1) | ^3.3.1 | Localization*
 | [logger](https://pub.dev/packages/logger/versions/1.1.0) | ^1.1.0 | Logging*
 | [pretty_dio_logger](https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1) | ^1.2.0-beta-1 | Logging*
 | [sentry_flutter](https://pub.dev/packages/sentry_flutter/versions/6.13.1) | ^6.13.1 | Tracking*
@@ -265,11 +283,44 @@ This repository makes use of the following pub packages:
 | [statsfl](https://pub.dev/packages/statsfl/versions/2.3.0) | ^2.3.0 | Tracking
 | [flutter_displaymode](https://pub.dev/packages/flutter_displaymode/versions/0.4.0) | ^0.4.0 | Refresh Rate
 | [animations](https://pub.dev/packages/animations/versions/2.0.7) | ^2.0.7 | Animations
+| [golden_toolkit](https://pub.dev/packages/golden_toolkit/versions/0.13.0) | ^0.13.0 | Testing
+| [bloc_test](https://pub.dev/packages/bloc_test/versions/9.1.0) | ^9.1.0 | Testing
+| [mocktail](https://pub.dev/packages/mocktail/versions/0.3.0) | ^0.3.0 | Testing
+| [mocktail_image_network](https://pub.dev/packages/mocktail_image_network/versions/0.3.1) | ^0.3.1 | Testing
 | [ionicons](https://pub.dev/packages/ionicons/versions/0.2.1) | ^0.2.1 | Icons
 | [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view/versions/0.6.2) | ^0.6.2 | Others
 | [custom_sliding_segmented_control](https://pub.dev/packages/custom_sliding_segmented_control/versions/1.7.3) | ^1.7.3 | Others
 | [url_launcher](https://pub.dev/packages/url_launcher/versions/6.1.6) | ^6.1.6 | Others
+| [path_provider](https://pub.dev/packages/path_provider/versions/2.0.11) | ^2.0.11 | Others*
+| [intl](https://pub.dev/packages/intl/versions/0.17.0) | ^0.17.0 | Others
+| [http](https://pub.dev/packages/http/versions/0.13.5) | ^0.13.5 | Others
+| [infinite_scroll_pagination](https://pub.dev/packages/infinite_scroll_pagination/versions/3.2.0) | ^3.2.0 | Others
+| [spring_button](https://pub.dev/packages/spring_button/versions/2.0.0) | ^2.0.0 | Others
+| [rounded_loading_button](https://pub.dev/packages/rounded_loading_button/versions/2.1.0) | ^2.1.0 | Others
+| [auto_size_text](https://pub.dev/packages/rounded_loading_button/versions/3.0.0) | ^3.0.0 | Others*
+| [styled_text](https://pub.dev/packages/styled_text/versions/6.0.0) | ^6.0.0 | Others*
+
 > *Recommended to keep regardless of your project.
+
+## :question: FAQ
+
+<details>
+  <summary>Why did you pick Hive instead of Isar?</summary><br>
+  Setup is quite straight forward for both, so ease of use probably comes down to syntax and sql/nosql preference, which in my personal opinion would be Hive. Isar currently doesn't support encryption (Creator says 'encryption is very close to impossible currently') and also doesn't support freezed to annotate and generate collections automatically. As a result, we will continue with the hive for the time being (2022-11-04).
+</details>
+<details>
+  <summary>Riverpod is quite popular these days for state management. I am curious to hear your thoughts on bloc and why do you prefer it over the others?</summary><br>
+  For me, BLoC scales better and is better for larger teams. Riverpod is more like a dependency injection system that also happens to have some state management included. You can totally use blocs or cubits instead of StateNotifier. Others may be;
+
+- If your single screen is so complicated and has so many states then bloc makes code so clean and handles every state easily (especially with the combination of freezed).
+- Bloc kinda forces you to separate UI and logic.
+- Bloc provides a way to encapsulate your functions with events. That allows you to use event transformers which are so cool. You could make a function concurrent, parallel, debounce, etc. All the while monitoring exactly what each event does and how the state is changed with the help of bloc observers.
+- Hydrated bloc is also another cool feature. Just extend hydrated bloc instead of bloc and now you can persist your app state between restarts.
+</details>
+<details>
+  <summary>I use go_router. Any particular reason you didn't use that?</summary><br>
+  Actually, I have just been using auto_route for several projects and it has been working for me so I stick to it because I already familiar with it. No need to jump the band wagon and do what most or everyone is doing because every day there is an alternative to a package.
+</details>
 
 ## :cherry_blossom: Community
 ### :fire: Contribution
@@ -280,11 +331,11 @@ If you want to say **thank you** you can;
 
 Also code contributions are always welcome and appreciated.
 
- 1. **Report a bug**
+ 1. **Report a bug**<br>
 If you think you have encountered a bug, and I should know about it, feel free to report it and I will take care of it.
- 2. **Request a feature**
+ 2. **Request a feature**<br>
 You can also request for a feature, and if it will viable, it will be picked for development.
- 3. **Create a pull request**
+ 3. **Create a pull request**<br>
 It can't get better then this, your pull request will be appreciated by the community. You can get started by
     picking up any open issues and make a pull request.
 

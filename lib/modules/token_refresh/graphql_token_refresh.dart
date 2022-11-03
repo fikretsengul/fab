@@ -9,9 +9,9 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class GraphQLTokenRefresh {
-  GraphQLTokenRefresh(this._env, this._storage) {
+  GraphQLTokenRefresh(this._env, this._secureStorage) {
     _fresh = FreshLink<AuthModel>(
-      tokenStorage: _storage,
+      tokenStorage: _secureStorage,
       refreshToken: refreshToken,
       shouldRefresh: shouldRefresh,
       tokenHeader: (token) {
@@ -23,7 +23,7 @@ class GraphQLTokenRefresh {
   }
 
   final EnvModel _env;
-  final TokenStorage<AuthModel> _storage;
+  final TokenStorage<AuthModel> _secureStorage;
   late final FreshLink<AuthModel> _fresh;
 
   FreshLink<AuthModel> get fresh => _fresh;
