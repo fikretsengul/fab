@@ -25,6 +25,6 @@ All notable changes to this project will be documented in this file.
 - `easy_localization` replaced with `slang` to make language system type-safe and be able to use it in tests.
 - Bugs fixed.
 
-## [1.0.0+1] - 2022-10-23
+## 1.0.0+1 - 2022-10-23
 
 - Boilerplate initialized.
