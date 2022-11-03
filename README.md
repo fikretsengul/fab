@@ -101,7 +101,7 @@ $ flutter pub get
 $ flutter pub run slang
 
 # Generate data classes & structured asset files
-$ flutter packages pub run build_runner build --d
+$ flutter packages pub run build_runner build -d
 
 # Update Goldens & Execute tests
 $ flutter test --update-goldens
