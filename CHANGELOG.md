@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed features
 
-- Secure storage initialization and usage for token storage simplified and also some bugs fixed.
+- Secure storage initialization and usage for token storage simplified also some bugs fixed.
 - Packages updated.
 - Q&A section added to Readme.MD and Changelog.MD file created.
 
