@@ -1,0 +1,30 @@
+{
+  "@@info": [
+    "Here are translations that exist in secondary locales but not in <en>.",
+    "[--full enabled] Furthermore, translations not used in 'lib/' according to the 't.<path>' pattern are written into <en>."
+  ],
+  "en": {
+    "features": {
+      "try_now": "What you can try",
+      "others": "Others"
+    },
+    "core": {
+      "errors": {
+        "form": {
+          "maxLength": "$field cannot be more than $count characters.",
+          "minLength": "$field cannot be less than $count characters."
+        },
+        "others": {
+          "an_unknown_error": "An unknown error happened.",
+          "no_internet_connection": "Internet connectivity is not available.",
+          "server_failure": "Server failure encountered.",
+          "communication_error": "There was an error with our communication with the servers."
+        }
+      },
+      "test": {
+        "failed": "Test failed."
+      }
+    }
+  },
+  "tr": {}
+}
