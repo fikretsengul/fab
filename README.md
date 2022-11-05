@@ -220,7 +220,7 @@ Apart from the above, constants, helper classes, and methods, shortcuts and many
  2. Reso Coder Tutorials • [Blog](https://resocoder.com/blog/) • [YouTube](https://www.youtube.com/c/ResoCoder/videos)
  3. Flutter • [YouTube](https://www.youtube.com/c/flutterdev/videos)
  4. Marcus Ng • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
- 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
+ 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/FlutterMapp)
 
 ### VSCode Extensions
 | Extension | Usage |
