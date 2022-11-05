@@ -1,5 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/user_model.dart';
 import 'package:flutter_advanced_boilerplate/features/auth/login/blocs/auth_cubit.dart';
@@ -81,19 +80,6 @@ void main() {
       finalState: AuthState.authenticated(user: UserModel.initial()),
       form: form,
       screen: (cubit, form) => LoginScreen(cubit: cubit, form: form),
-    );
-
-    screenshotTest<MockAuthCubit, AuthState>(
-      'Custom',
-      widgetTest: (key, tester) async {
-        final username = findNVerify(key, find.byKey(const Key('username')), findsOneWidget);
-        final password = findNVerify(key, find.byKey(const Key('password')), findsOneWidget);
-
-        await tester.enterText(username, 'custom_username');
-        await tester.enterText(password, 'custom_password');
-        await tester.pumpAndSettle();
-      },
-      screen: (_, __) => const LoginScreen(),
     );
   });
 }

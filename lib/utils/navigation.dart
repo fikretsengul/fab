@@ -4,7 +4,6 @@ import 'package:flutter_advanced_boilerplate/features/features/features_screen.d
 import 'package:flutter_advanced_boilerplate/features/informations/informations_screen.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 @immutable
@@ -38,14 +37,14 @@ abstract class Navigation {
   static List<NavigationDestination> bottomNavigationItems(BuildContext context) => [
         NavigationDestination(
           icon: const Icon(
-            Ionicons.eye_outline,
+            MdiIcons.fire,
             size: 24,
           ),
           label: context.t.core.navigation.bottom.features,
         ),
         NavigationDestination(
           icon: const Icon(
-            Ionicons.information_circle_outline,
+            MdiIcons.information,
             size: 24,
           ),
           label: context.t.core.navigation.bottom.informations,

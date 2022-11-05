@@ -9,7 +9,7 @@ import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dar
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class FeaturesScreen extends StatefulWidget {
   const FeaturesScreen({super.key});
@@ -25,78 +25,98 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
       InfoCard(
         title: context.t.features.api.title,
         content: context.t.features.api.explanation,
-        icon: Ionicons.swap_vertical_outline,
+        icon: MdiIcons.api,
         widget: const ApiFeatureScreen(),
       ),
       InfoCard(
         title: context.t.features.state.title,
         content: context.t.features.state.explanation,
-        icon: Ionicons.leaf_outline,
+        icon: MdiIcons.stateMachine,
       ),
       InfoCard(
         title: context.t.features.linting.title,
         content: context.t.features.linting.explanation,
-        icon: Ionicons.code_slash_outline,
+        icon: MdiIcons.spellcheck,
+      ),
+      InfoCard(
+        title: context.t.features.type_safety.title,
+        content: context.t.features.type_safety.explanation,
+        icon: MdiIcons.lightbulbAlert,
+      ),
+      InfoCard(
+        title: context.t.features.forms.title,
+        content: context.t.features.forms.explanation,
+        icon: MdiIcons.lightbulbAlert,
+      ),
+      InfoCard(
+        title: context.t.features.testing.title,
+        content: context.t.features.testing.explanation,
+        icon: MdiIcons.lightbulbAlert,
       ),
       InfoCard(
         title: context.t.features.di_locator.title,
         content: context.t.features.di_locator.explanation,
-        icon: Ionicons.locate_outline,
+        icon: MdiIcons.crosshairsGps,
       ),
       InfoCard(
         title: context.t.features.code_generation.title,
         content: context.t.features.code_generation.explanation,
-        icon: Ionicons.speedometer_outline,
+        icon: MdiIcons.fileCode,
+      ),
+      InfoCard(
+        title: context.t.features.ci_cd.title,
+        content: context.t.features.ci_cd.explanation,
+        icon: MdiIcons.cloudTags,
       ),
       InfoCard(
         title: context.t.features.routing.title,
         content: context.t.features.routing.explanation,
-        icon: Ionicons.chevron_back_outline,
+        icon: MdiIcons.routes,
       ),
       InfoCard(
         title: context.t.features.pattern.title,
         content: context.t.features.pattern.explanation,
-        icon: Ionicons.apps_outline,
+        icon: MdiIcons.folderNetwork,
       ),
       InfoCard(
         title: context.t.features.exceptions.title,
         content: context.t.features.exceptions.explanation,
-        icon: Ionicons.alert_circle_outline,
+        icon: MdiIcons.alert,
       ),
       InfoCard(
         title: context.t.features.storage.title,
         content: context.t.features.storage.explanation,
-        icon: Ionicons.folder_open_outline,
+        icon: MdiIcons.database,
       ),
       InfoCard(
         title: context.t.features.dynamic_theme.title,
         content: context.t.features.dynamic_theme.explanation,
-        icon: Ionicons.color_palette_outline,
+        icon: MdiIcons.shape,
       ),
       InfoCard(
         title: context.t.features.localization.title,
         content: context.t.features.localization.explanation,
-        icon: Ionicons.earth_outline,
-      ),
-      InfoCard(
-        title: context.t.features.logging.title,
-        content: context.t.features.logging.explanation,
-        icon: Ionicons.terminal_outline,
-      ),
-      InfoCard(
-        title: context.t.features.native_splash.title,
-        content: context.t.features.native_splash.explanation,
-        icon: Ionicons.star_outline,
+        icon: MdiIcons.translate,
       ),
       InfoCard(
         title: context.t.features.env_variables.title,
         content: context.t.features.env_variables.explanation,
-        icon: Ionicons.medical_outline,
+        icon: MdiIcons.arrowDecision,
+      ),
+      InfoCard(
+        title: context.t.features.logging.title,
+        content: context.t.features.logging.explanation,
+        icon: MdiIcons.mathLog,
+      ),
+      InfoCard(
+        title: context.t.features.native_splash.title,
+        content: context.t.features.native_splash.explanation,
+        icon: MdiIcons.cellphoneScreenshot,
       ),
       InfoCard(
         title: context.t.features.refresh_rate.title,
         content: context.t.features.refresh_rate.explanation,
-        icon: Ionicons.pulse_outline,
+        icon: MdiIcons.speedometer,
       ),
     ];
 
@@ -109,18 +129,12 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
           Card(
             child: SwitchListTile(
               onChanged: (bool newValue) {
-                /// Example: Change locale
-                /// The initial locale is automatically determined by the library.
-                /// Changing the locale like this will persist the selected locale.
-                // Use generated localization.
                 LocaleSettings.setLocale(newValue ? AppLocale.tr : AppLocale.en);
               },
               value: context.t.$meta.locale == AppLocale.tr,
               title: Row(
                 children: [
-                  const Icon(
-                    Ionicons.language_outline,
-                  ),
+                  const Icon(MdiIcons.translate),
                   const SizedBox(width: 16),
                   Text(
                     context.t.features.use_turkish,
@@ -142,17 +156,17 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
             children: [
               ThemeCard(
                 mode: ThemeMode.system,
-                icon: Ionicons.contrast_outline,
+                icon: MdiIcons.brightnessAuto,
                 onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.system),
               ),
               ThemeCard(
                 mode: ThemeMode.light,
-                icon: Ionicons.sunny_outline,
+                icon: MdiIcons.brightness7,
                 onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.light),
               ),
               ThemeCard(
                 mode: ThemeMode.dark,
-                icon: Ionicons.moon_outline,
+                icon: MdiIcons.brightness1,
                 onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.dark),
               ),
             ],
@@ -163,7 +177,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
             builder: (context, state) {
               return FastColorPicker(
                 selectedColor: getTheme(context).primary,
-                icon: Ionicons.color_palette_outline,
+                icon: MdiIcons.palette,
                 iconColor: getTheme(context).background,
                 disabled: state.theme.mode == ThemeMode.system,
                 onColorSelected: (color) => getIt<AppCubit>().setThemeColor(color: color),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
@@ -29,6 +31,8 @@ class AuthRepository {
         refreshToken: 'demo_refresh_token',
         user: user,
       );
+
+      Timer(const Duration(seconds: 3), () {});
 
       return DC.data(auth);
     } else {

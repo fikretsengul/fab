@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/theme_model.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/theme/app_theme.dart';
@@ -27,9 +29,11 @@ class AppCubit extends HydratedCubit<AppState> {
         dark: await createTheme(brightness: Brightness.dark),
       );
       emit(state.copyWith(theme: theme));
+      updateSystemOverlay();
     }
 
     emit(state.copyWith.theme(mode: mode));
+    updateSystemOverlay();
   }
 
   Future<void> setThemeColor({required Color color}) async {
@@ -40,6 +44,23 @@ class AppCubit extends HydratedCubit<AppState> {
     );
 
     emit(state.copyWith(theme: theme));
+
+    updateSystemOverlay();
+  }
+
+  void updateSystemOverlay() {
+    final systemModeIsDark = SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+
+    final isDark = state.theme.mode == ThemeMode.system ? systemModeIsDark : state.theme.mode == ThemeMode.dark;
+    final colorScheme = isDark ? state.theme.dark.colorScheme : state.theme.light.colorScheme;
+    final primaryColor = ElevationOverlay.colorWithOverlay(colorScheme.surface, colorScheme.primary, 3);
+
+    SystemChrome.setSystemUIOverlayStyle(
+      createOverlayStyle(
+        brightness: isDark ? Brightness.dark : Brightness.light,
+        primaryColor: primaryColor,
+      ),
+    );
   }
 
   @override

@@ -19,11 +19,6 @@ class GridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
-      color: getPrimaryColor(context),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(24)),
-      ),
       child: ListTile(
         onTap: _launchUrl,
         shape: const RoundedRectangleBorder(

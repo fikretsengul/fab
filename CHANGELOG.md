@@ -2,26 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0+4](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/XXXXXXX..aa4432a) - 2022-11-05 - NOT COMPLETED
+## [1.0.0+4](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/XXXXXXX..aa4432a) - 2022-11-05
 
 ### Upcoming enhancements
 
-- Codemagic configuration is not completed yet. CI & CD implementation will be completed and documented.
+- Codemagic configuration is not completed yet. CI & CD implementation will be completed.
 - `isar` local storage solution will be implemented instead of `hive` with an example feature.
-- NOTE: I'm also open to new feature or improvement requests. You can suggest by creating an issue.
 
 ### New features
 
-- Web and web icon support added. (NOT COMPLETED.)
+- Web support added. (Custom svg icons & fonts not supported by canvaskit renderer.)
 - State persistance example added with the new theme system by using `hydrated_storage`.
 
 ### Bug Fixes
 
-- Custom golden test fixed. (NOT COMPLETED.)
-- Android min and compile sdk versions updated for `flutter_secure_storage`.
+- Custom golden test fixed.
+- Android minimum and compile sdk versions updated for `flutter_secure_storage`.
 - `hive` storage removed for now.
 - Bugs fixed.
-- (SENTRY IS DISABLED FOR NOW, NOT COMPLETED.)
 
 ### Changed features
 
@@ -29,6 +27,9 @@ All notable changes to this project will be documented in this file.
 - `internet_connection_checker` replaced with `internet_connection_checker_plus` to support web.
 - `json_theme` added for encoding and decoding theme data.
 - `hydrated_bloc` updated from 8.1.0 to 9.0.0.
+- `ionicons` removed for web canvaskit support.
+- `universal_platform` added to identify all platforms.
+- `json_theme` to easily convert theme data toJson and fromJson.
 
 ## [1.0.0+3](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b8bb7bf..aa4432a) - 2022-11-03
 

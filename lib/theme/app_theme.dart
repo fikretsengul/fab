@@ -42,6 +42,7 @@ Future<ThemeData> createTheme({
         primaryColor: primaryColor,
       ),
     ),
+    splashFactory: InkRipple.splashFactory,
     scaffoldBackgroundColor: appColorScheme.surface,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       elevation: Constants.defaultElevation,
@@ -64,14 +65,17 @@ Future<ThemeData> createTheme({
   );
 }
 
-SystemUiOverlayStyle createOverlayStyle({required Brightness brightness, required Color primaryColor}) {
+SystemUiOverlayStyle createOverlayStyle({
+  required Brightness brightness,
+  required Color primaryColor,
+}) {
   final isDark = brightness == Brightness.dark;
 
   return SystemUiOverlayStyle(
     systemNavigationBarColor: primaryColor,
     systemNavigationBarContrastEnforced: false,
     systemStatusBarContrastEnforced: false,
-    systemNavigationBarIconBrightness: brightness,
+    systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     statusBarBrightness: isDark ? Brightness.dark : Brightness.light,

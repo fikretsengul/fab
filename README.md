@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/version-1.0.0%2B3-1EAEDB.svg">
 <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
 <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
-<img src="https://img.shields.io/badge/last%20updated-2022--11--04-ff69b4">
+<img src="https://img.shields.io/badge/last%20updated-2022--11--05-ff69b4">
 <img src="https://img.shields.io/badge/completion-%2595-orange">
 </p>
 
@@ -66,11 +66,13 @@ Repository design pattern reduces the complexity of the data layer, isolates uns
 * `Exception Handling`<br>
 It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
 * `Encrypted Storage`<br>
-The boilerplate provides a blazing fast and encrypted key-value database written in pure Dart with Hive and Secure Storage.
+Encrypted storage allows you to keep token and user informations in platforms keychain securely using Secure Storage.
 * `Dynamic Theme`<br>
 With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
 * `Localization`<br>
 Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
+* `Env Variables`<br>
+Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such.
 * `Logging & Tracking`<br>
 A detailed logging and error tracking mechanism to monitor every action taking place in the application in real-time with Logging and Sentry.
 * `Native Splash`<br>
@@ -80,13 +82,13 @@ Support for high refresh rate displays with the flutter_displaymode package.
 
 ## :camera: Screenshots
 #### Light Dynamic Theme
-| Features Light | Informations Light |
+| iOS Light TR | Android System Dark EN |
 | ------ | ------ |
-| <img src="./assets/images/github/features_light.png" width="400"> | <img src="./assets/images/github/informations_light.png" width="400"> |
+| <img src="./assets/images/github/ios_light_tr.png" width="400"> | <img src="./assets/images/github/android_dark_en.png" width="400"> |
 #### Dark Dynamic Theme
-| Features Dark | Informations Dark |
+| Web System Light TR | Web Dark EN |
 | ------ | ------ |
-| <img src="./assets/images/github/features_dark.png" width="400"> | <img src="./assets/images/github/informations_dark.png" width="400"> |
+| <img src="./assets/images/github/web_system_light_tr.png" width="400"> | <img src="./assets/images/github/web_dark_en.png" width="400"> |
 
 ## :books: How To Use
 
@@ -112,11 +114,15 @@ $ flutter pub run slang analyze
 # Generate data classes & structured asset files
 $ flutter packages pub run build_runner build -d
 
-# Update Goldens & Execute tests
+# Update goldens & Execute tests
 $ flutter test --update-goldens
 
 # Run the app
 $ flutter run
+
+# Run the app on web
+$ flutter run -d chrome --web-renderer html (low performance, low download size)
+$ flutter run -d chrome --web-renderer canvaskit (high performance, high download size)
 ```
 ### Hide Generated Files
 In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing the `'Add Pattern'` button:
@@ -252,7 +258,7 @@ This repository makes use of the following pub packages:
 | [dio](https://pub.dev/packages/dio/versions/4.0.6) | ^4.0.6 | API*
 | [graphql_flutter](https://pub.dev/packages/graphql_flutter/versions/5.1.0) | ^5.1.0 | API*
 | [web_socket_channel](https://pub.dev/packages/web_socket_channel/versions/2.2.0) | ^2.2.0 | API
-| [internet_connection_checker](https://pub.dev/packages/internet_connection_checker/versions/1.0.0+1) | ^1.0.0+1 | Network
+| [internet_connection_checker_plus](https://pub.dev/packages/internet_connection_checker_plus/versions/1.0.1) | ^1.0.1 | Network
 | [fresh_dio](https://pub.dev/packages/fresh_dio/versions/0.3.2) | ^0.3.2 | Auth*
 | [fresh_graphql](https://pub.dev/packages/fresh_graphql/versions/0.5.2) | ^0.5.2 | Auth*
 | [flutter_bloc](https://pub.dev/packages/flutter_bloc/versions/8.1.1) | ^8.1.1 | State & Architecture*
@@ -273,7 +279,6 @@ This repository makes use of the following pub packages:
 | [data_channel](https://pub.dev/packages/data_channel/versions/2.0.0+1) | ^2.0.0+1 | Exceptions*
 | [hive_flutter](https://pub.dev/packages/hive_flutter/versions/1.1.0) | ^1.1.0 | Storage*
 | [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage/versions/6.0.0) | ^6.0.0 | Storage*
-| [adaptive_theme](https://pub.dev/packages/adaptive_theme/versions/3.1.1) | ^3.1.1 | Theme
 | [slang](https://pub.dev/packages/slang/versions/3.3.1) | ^3.3.1 | Localization*
 | [logger](https://pub.dev/packages/logger/versions/1.1.0) | ^1.1.0 | Logging*
 | [pretty_dio_logger](https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1) | ^1.2.0-beta-1 | Logging*
@@ -287,6 +292,8 @@ This repository makes use of the following pub packages:
 | [bloc_test](https://pub.dev/packages/bloc_test/versions/9.1.0) | ^9.1.0 | Testing
 | [mocktail](https://pub.dev/packages/mocktail/versions/0.3.0) | ^0.3.0 | Testing
 | [mocktail_image_network](https://pub.dev/packages/mocktail_image_network/versions/0.3.1) | ^0.3.1 | Testing
+| [universal_platform](https://pub.dev/packages/universal_platform/versions/1.0.0+1) | ^1.0.0+1 | Tool*
+| [json_theme](https://pub.dev/packages/json_theme/versions/4.0.2+2) | ^4.0.2+2 | Tool*
 | [ionicons](https://pub.dev/packages/ionicons/versions/0.2.1) | ^0.2.1 | Icons
 | [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view/versions/0.6.2) | ^0.6.2 | Others
 | [custom_sliding_segmented_control](https://pub.dev/packages/custom_sliding_segmented_control/versions/1.7.3) | ^1.7.3 | Others
@@ -304,10 +311,6 @@ This repository makes use of the following pub packages:
 
 ## :question: FAQ
 
-<details>
-  <summary>Why did you pick Hive instead of Isar?</summary><br>
-  Setup is quite straight forward for both, so ease of use probably comes down to syntax and sql/nosql preference, which in my personal opinion would be Hive. Isar currently doesn't support encryption (Creator says 'encryption is very close to impossible currently') and also doesn't support freezed to annotate and generate collections automatically. As a result, we will continue with the hive for the time being (2022-11-04).
-</details>
 <details>
   <summary>Riverpod is quite popular these days for state management. I am curious to hear your thoughts on bloc and why do you prefer it over the others?</summary><br>
   For me, BLoC scales better and is better for larger teams. Riverpod is more like a dependency injection system that also happens to have some state management included. You can totally use blocs or cubits instead of StateNotifier. Others may be;

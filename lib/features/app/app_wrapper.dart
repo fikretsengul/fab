@@ -31,25 +31,7 @@ class _AppWrapperState extends State<AppWrapper> with WidgetsBindingObserver {
 
   @override
   Future<void> didChangePlatformBrightness() async {
-    final brightness = WidgetsBinding.instance.window.platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
-
-/*     if (AdaptiveTheme.of(context).mode == AdaptiveThemeMode.system) {
-      final lightTheme = await createTheme(brightness: Brightness.light);
-      final darkTheme = await createTheme(brightness: Brightness.dark);
-
-      if (!mounted) return;
-      AdaptiveTheme.of(context).setTheme(
-        light: lightTheme,
-        dark: darkTheme,
-      );
-      SystemChrome.setSystemUIOverlayStyle(
-        createOverlayStyle(
-          brightness: isDark ? Brightness.light : Brightness.dark,
-          colors: isDark ? darkTheme.colorScheme : lightTheme.colorScheme,
-        ),
-      );
-    } */
+    getIt<AppCubit>().updateSystemOverlay();
 
     super.didChangePlatformBrightness();
   }

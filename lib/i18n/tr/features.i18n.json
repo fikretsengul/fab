@@ -12,7 +12,19 @@
     },
     "linting": {
         "title": "Linting",
-        "explanation": "Kodun sağlığını iyi ve dart standartlarına uygun tutmak için ayrıntılı ayarlara sahip katı linting kuralları."
+        "explanation": "Kodun sağlığını yüksek ve dart standartlarına uygun tutmak için ayrıntılı ayarlara sahip katı linting kuralları."
+    },
+    "type_safety": {
+        "title": "Type Safety",
+        "explanation": "Bu proje type-safe kod yazmayı önceliği haline getirerek (languages ,assets, gibi.) hataları uygulama çalışırken değil, uygulama derlenmeden farketmenizi sağlar."
+    },
+    "forms": {
+        "title": "Forms",
+        "explanation": "Formları oluşturmak ve yönetmek hiç bu kadar kolay ve eğlenceli olmamıştı. Reaktif formlar, form girdilerini ve doğrulamalarını işlemek için model odaklı bir yaklaşım kullanır."
+    },
+    "testing": {
+        "title": "Testing",
+        "explanation": "Uygulamada ne kadar çok özellik varsa, manuel olarak test etmek o kadar zor olur. Otomatik testler, (Bloc Test, Golden Tookit ve Mocktail) uygulamanızı yayınlamadan önce doğru şekilde çalıştığından emin olmanıız sağlar."
     },
     "di_locator": {
         "title": "DI & Locator",
@@ -21,6 +33,10 @@
     "code_generation": {
         "title": "Code Generation",
         "explanation": "Freezed, Artemis ve Build Runner ile veri sınıfları oluşturarak üretkenliği en üst düzeye çıkarın ve kod kalitesini yükseltin."
+    },
+    "ci_cd": {
+        "title": "CI & CD Integration",
+        "explanation": "CI/CD, Codemagic, en verimli deploy yöntemiyle sürekli yeni özellikler ve hata düzeltmeleri akışı sağlamak için kullanılır. Böylece yeni versiyon yayınlamanız kolaylaşır."
     },
     "routing": {
         "title": "Routing",
@@ -46,6 +62,10 @@
         "title": "Localization",
         "explanation": "Context gerektirmeden ve variable keys desteğiyle basitçe json dosyaları oluşturarak uygulamayı diğer dillere kolayca yerelleştirin."
     },
+    "env_variables": {
+        "title": "Env Variables",
+        "explanation": "Environmental variables, API anahtarları, temel URL'ler ve benzeri şeyler için uygulamada paylaşılan genel bilgileri tanımlamaya olanak tanır."
+    },
     "logging": {
         "title": "Logging & Tracking",
         "explanation": "Uygulamada gerçekleşen işlem ve hataları gerçek zamanlı takip edebilmek için Logging ve Sentry ile detaylı bir loglama mekanizması."
@@ -53,10 +73,6 @@
     "native_splash": {
         "title": "Native Splash",
         "explanation": "Flutter Native Splash, açılış ekranını, arka plan rengini ve açılış görüntüsünü özelleştirmek için iOS, Android ve Web'de native kodu otomatik olarak oluşturur."
-    },
-    "env_variables": {
-        "title": "Env Variables",
-        "explanation": "Environmental variables, API anahtarları, temel URL'ler ve benzeri şeyler için uygulamada paylaşılan genel bilgileri tanımlamaya olanak tanır."
     },
     "refresh_rate": {
         "title": "Refresh Rate",

@@ -71,10 +71,10 @@ Future<void> main() async {
       );
     },
     (exception, stackTrace) async {
-/*       await Sentry.captureException(
+      await Sentry.captureException(
         exception,
         stackTrace: stackTrace,
-      ); */
+      );
     },
   );
 }
