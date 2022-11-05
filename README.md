@@ -81,11 +81,11 @@ Flutter Native Splash automatically generates iOS, Android, and Web-native code 
 Support for high refresh rate displays with the flutter_displaymode package.
 
 ## :camera: Screenshots
-#### Light Dynamic Theme
+#### Dynamic Theme on Mobile
 | iOS Light TR | Android System Dark EN |
 | ------ | ------ |
 | <img src="./assets/images/github/ios_light_tr.png" width="400"> | <img src="./assets/images/github/android_dark_en.png" width="400"> |
-#### Dark Dynamic Theme
+#### Dynamic Theme on Web
 | Web System Light TR | Web Dark EN |
 | ------ | ------ |
 | <img src="./assets/images/github/web_system_light_tr.png" width="400"> | <img src="./assets/images/github/web_dark_en.png" width="400"> |
