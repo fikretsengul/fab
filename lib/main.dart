@@ -31,7 +31,7 @@ Future<void> main() async {
         await FlutterDisplayMode.setHighRefreshRate();
       }
 
-      if (UniversalPlatform.isAndroid && UniversalPlatform.isIOS) {
+      if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
         // Sets up allowed device orientations and other settings for the app.
         await SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
