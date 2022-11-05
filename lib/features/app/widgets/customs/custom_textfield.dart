@@ -186,6 +186,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return Focus(
           onFocusChange: (focusStatus) => onFocusChange(focus: focusStatus),
           child: Stack(
+            alignment: Alignment.center,
             clipBehavior: Clip.none,
             children: [
               Padding(

@@ -1,9 +1,6 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
-import 'package:flutter_advanced_boilerplate/features/app/models/theme_model.dart';
-import 'package:flutter_advanced_boilerplate/features/auth/login/blocs/auth_cubit.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
@@ -14,36 +11,24 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:statsfl/statsfl.dart';
 
 class App extends StatelessWidget {
-  const App({
-    super.key,
-    required this.savedThemeMode,
-    required this.lightTheme,
-    required this.darkTheme,
-  });
-
-  final AdaptiveThemeMode savedThemeMode;
-  final ThemeModel lightTheme;
-  final ThemeModel darkTheme;
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<AppCubit>()),
-        BlocProvider(create: (context) => getIt<AuthCubit>()),
-      ],
-      child: StatsFl(
-        maxFps: 120,
-        align: Alignment.bottomRight,
-        child: AdaptiveTheme(
-          light: lightTheme.materialThemeData,
-          dark: darkTheme.materialThemeData,
-          initial: savedThemeMode,
-          builder: (theme, darkTheme) {
+    return StatsFl(
+      maxFps: 120,
+      align: Alignment.bottomRight,
+      isEnabled: env.debug,
+      child: BlocProvider(
+        create: (context) => getIt<AppCubit>(),
+        child: BlocBuilder<AppCubit, AppState>(
+          buildWhen: (p, c) => p.theme != c.theme,
+          builder: (context, state) {
             return MaterialApp.router(
               /// Theme configuration.
-              theme: theme,
-              darkTheme: darkTheme,
+              theme: state.theme.light,
+              darkTheme: state.theme.dark,
+              themeMode: state.theme.mode,
 
               /// Environment configuration.
               title: Constants.appTitle,

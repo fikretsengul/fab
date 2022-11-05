@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class Observer extends BlocObserver {
   @override
@@ -11,7 +8,7 @@ class Observer extends BlocObserver {
     logIt.info('onCreate -- ${bloc.runtimeType}');
   }
 
-  void stateToSentry(
+/*   void stateToSentry(
     BlocBase<dynamic> bloc, {
     Change<dynamic>? change,
     Object? error,
@@ -51,7 +48,7 @@ class Observer extends BlocObserver {
 
       Sentry.addBreadcrumb(errorState);
     }
-  }
+  } */
 
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
@@ -59,20 +56,20 @@ class Observer extends BlocObserver {
     logIt
       ..info('onChange-current -- ${bloc.runtimeType}, ${change.currentState}')
       ..info('onChange-next -- ${bloc.runtimeType}, ${change.nextState}');
-    stateToSentry(
+/*     stateToSentry(
       bloc,
       change: change,
-    );
+    ); */
   }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     logIt.error('onError -- ${bloc.runtimeType}, $error');
-    stateToSentry(
+/*     stateToSentry(
       bloc,
       error: error,
-    );
+    ); */
   }
 
   @override

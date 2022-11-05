@@ -1,12 +1,13 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/api_feature_screen.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/color_picker.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/info_card.dart';
 import 'package:flutter_advanced_boilerplate/features/features/widgets/theme_card.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:flutter_advanced_boilerplate/theme/app_theme_creator.dart';
+import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -133,37 +134,39 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
           GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            crossAxisCount: 2,
+            crossAxisCount: 3,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
-            childAspectRatio: 3 / 1,
+            childAspectRatio: 2 / 1,
             padding: EdgeInsets.zero,
             children: [
               ThemeCard(
-                mode: AdaptiveThemeMode.light,
-                icon: Ionicons.sunny_outline,
-                onTap: () => AdaptiveTheme.of(context).setLight(),
+                mode: ThemeMode.system,
+                icon: Ionicons.contrast_outline,
+                onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.system),
               ),
               ThemeCard(
-                mode: AdaptiveThemeMode.dark,
+                mode: ThemeMode.light,
+                icon: Ionicons.sunny_outline,
+                onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.light),
+              ),
+              ThemeCard(
+                mode: ThemeMode.dark,
                 icon: Ionicons.moon_outline,
-                onTap: () => AdaptiveTheme.of(context).setDark(),
+                onTap: () => getIt<AppCubit>().setThemeMode(mode: ThemeMode.dark),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          FastColorPicker(
-            selectedColor: getTheme(context).primary,
-            icon: Ionicons.color_palette_outline,
-            iconColor: getTheme(context).background,
-            onColorSelected: (color) async {
-              final lightThemeData = await createAppTheme(color: color);
-              final darkThemeData = await createAppTheme(isDark: true, color: color);
-
-              if (!mounted) return;
-              AdaptiveTheme.of(context).setTheme(
-                light: lightThemeData.materialThemeData,
-                dark: darkThemeData.materialThemeData,
+          BlocBuilder<AppCubit, AppState>(
+            buildWhen: (p, c) => p.theme != c.theme,
+            builder: (context, state) {
+              return FastColorPicker(
+                selectedColor: getTheme(context).primary,
+                icon: Ionicons.color_palette_outline,
+                iconColor: getTheme(context).background,
+                disabled: state.theme.mode == ThemeMode.system,
+                onColorSelected: (color) => getIt<AppCubit>().setThemeColor(color: color),
               );
             },
           ),

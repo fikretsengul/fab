@@ -15,6 +15,10 @@ class AuthRepository {
     required String username,
     required String password,
   }) async {
+    // Normally you should wrap the request with dioExceptionHandler.
+    // Where error is catched and the returned error message is parsed to
+    // create alert. But for the demo I will create alert without localization.
+
     final isIdPwCorrect = username == 'test' && password == 'test';
 
     if (isIdPwCorrect) {
@@ -28,7 +32,10 @@ class AuthRepository {
 
       return DC.data(auth);
     } else {
-      final alert = AlertModel.quiet();
+      final alert = AlertModel.alert(
+        message: 'ID or PW is wrong. Please enter test for demo to both fields.',
+        type: AlertType.destructive,
+      );
 
       return DC.error(alert);
     }

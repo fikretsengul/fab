@@ -11,8 +11,7 @@ abstract class Constants {
   /// Theme configuration.
 
   // This setting is only for android 12, on iOS appColor will be used as default theme color.
-  static const tryToGetColorPaletteFromWallpaper = false;
-  static const disableSplashEffectOnUI = true;
+  static const tryToGetColorPaletteFromWallpaper = true;
   static const defaultThemeColor = Palette.blue;
   static const defaultFontFamily = 'Nunito';
   static const double defaultElevation = 0;

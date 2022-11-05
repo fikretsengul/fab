@@ -1,14 +1,12 @@
-import 'dart:io' as io;
 import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-@lazySingleton
+@singleton
 class LoggingHelper {
   final Logger logIt = Logger(
     printer: PrettyPrinter(
       methodCount: 0,
-      colors: io.stdout.supportsAnsiEscapes,
     ),
   );
 

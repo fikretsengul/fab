@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_segmented_control.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/graphql_api_page/graphql_api_page.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/rest_api_page/rest_api_page.dart';
+import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class ApiFeatureScreen extends StatefulWidget {
   const ApiFeatureScreen({super.key});
@@ -31,6 +32,7 @@ class _ApiFeatureScreenState extends State<ApiFeatureScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -46,11 +48,11 @@ class _ApiFeatureScreenState extends State<ApiFeatureScreen> {
             ),
           ),
           title: CustomSegmentedControl<int>(
-            fixedWidth: 150,
+            fixedWidth: 120,
             currentIndex: currentPage,
-            children: const {
-              0: Text('Rest'),
-              1: Text('GraphQL'),
+            children: {
+              0: Text('Rest', style: getTextTheme(context).titleMedium),
+              1: Text('GraphQL', style: getTextTheme(context).titleMedium),
             },
             onValueChanged: (value) {
               controller.animateToPage(

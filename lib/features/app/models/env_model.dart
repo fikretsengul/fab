@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_advanced_boilerplate/modules/hive/encrypted_hive.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -27,16 +26,7 @@ class EnvModel with _$EnvModel {
 
   @factoryMethod
   static Future<EnvModel> create() async {
-    var env = const String.fromEnvironment('APP_ENV', defaultValue: 'dev');
-
-    if (env == 'test' || env == 'dev') {
-      final encryptedHiveBox = (await EncryptedHive.create<String>('env')).encryptedHiveBox;
-
-      final savedEnv = encryptedHiveBox.get('env');
-      if (savedEnv != null) {
-        env = savedEnv;
-      }
-    }
+    const env = String.fromEnvironment('APP_ENV', defaultValue: 'dev');
 
     final rawEnvData = await rootBundle.loadString(
       'assets/configs/$env.json',

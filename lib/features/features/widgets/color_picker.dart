@@ -13,7 +13,6 @@ const List<Color> colors1 = [
   Palette.magenta,
 ];
 
-final Map<int, double> _correctSizes = {};
 final PageController pageController = PageController();
 
 class FastColorPicker extends StatelessWidget {
@@ -21,6 +20,7 @@ class FastColorPicker extends StatelessWidget {
     super.key,
     this.icon,
     this.iconColor,
+    this.disabled = false,
     this.selectedColor = Colors.white,
     required this.onColorSelected,
   });
@@ -28,88 +28,51 @@ class FastColorPicker extends StatelessWidget {
   final Color selectedColor;
   final IconData? icon;
   final Color? iconColor;
+  final bool disabled;
   final void Function(Color) onColorSelected;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 32,
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-            ),
-            child: SelectedColor(
-              icon: icon,
-              iconColor: iconColor,
-              selectedColor: selectedColor,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SelectedColor(
+          icon: icon,
+          iconColor: iconColor,
+          selectedColor: selectedColor,
+        ),
+        const SizedBox(width: 6),
+        Opacity(
+          opacity: disabled ? 0.2 : 1,
+          child: Row(
+            children: createColors(colors1),
           ),
-          Row(
-            children: createColors(context, colors1),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  List<Widget> createColors(BuildContext context, List<Color> colors) {
-    final size = _correctSizes[colors.length] ??
-        correctButtonSize(
-          colors.length,
-          MediaQuery.of(context).size.width - 32,
-        );
-
+  List<Widget> createColors(List<Color> colors) {
     return [
       for (var c in colors)
         SpringButton(
           SpringButtonType.OnlyScale,
           Padding(
-            padding: EdgeInsets.all(size * 0.1),
-            child: AnimatedContainer(
-              width: size,
-              height: size,
-              duration: const Duration(milliseconds: 100),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Container(
+              width: 30,
+              height: 30,
               decoration: BoxDecoration(
                 color: c,
                 shape: BoxShape.circle,
-/*                 border: Border.all(
-                  width: c == selectedColor ? 4 : 2,
-                  color: Colors.white,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: size * 0.1,
-                    color: Colors.black12,
-                  ),
-                ], */
               ),
             ),
           ),
-          onTap: () {
-            onColorSelected.call(c);
-          },
+          onTap: !disabled ? () => onColorSelected.call(c) : null,
           useCache: false,
           scaleCoefficient: 0.9,
         ),
     ];
-  }
-
-  double correctButtonSize(int itemSize, double screenWidth) {
-    const firstSize = 52;
-    final maxWidth = screenWidth - firstSize;
-    var isSizeOkay = false;
-    var finalSize = 48;
-    do {
-      finalSize -= 2;
-      final eachSize = finalSize * 1.2;
-      final buttonsArea = itemSize * eachSize;
-      isSizeOkay = maxWidth > buttonsArea;
-    } while (!isSizeOkay);
-    _correctSizes[itemSize] = finalSize.toDouble();
-
-    return finalSize.toDouble();
   }
 }
 
@@ -126,13 +89,6 @@ class SelectedColor extends StatelessWidget {
       decoration: BoxDecoration(
         color: selectedColor,
         shape: BoxShape.circle,
-/*         border: const Border.fromBorderSide(BorderSide(width: 2, color: Colors.white)),
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 6,
-            color: Colors.black38,
-          ),
-        ], */
       ),
       child: icon != null
           ? Icon(

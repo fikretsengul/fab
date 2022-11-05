@@ -33,15 +33,17 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(const AuthState.loading());
 
-    final response = await _authRepository.login(
-      username: username,
-      password: password,
-    );
+    Future.delayed(const Duration(seconds: 3), () async {
+      final response = await _authRepository.login(
+        username: username,
+        password: password,
+      );
 
-    response.pick(
-      onError: (alert) => emit(AuthState.failed(alert: alert)),
-      onData: (auth) async => _dioTokenRefresh.fresh.setToken(auth),
-    );
+      response.pick(
+        onError: (alert) => emit(AuthState.failed(alert: alert)),
+        onData: (auth) async => _dioTokenRefresh.fresh.setToken(auth),
+      );
+    });
   }
 
   Future<void> logOut() async {

@@ -1,14 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/modules/dio/dio_exception_handler.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class BadNetworkErrorInterceptor extends Interceptor {
-  final InternetConnectionChecker _networkInfo = getIt<InternetConnectionChecker>();
-
   @override
   Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (err.response == null && !await _networkInfo.hasConnection) {
+    if (err.response == null && !await getIt<InternetConnectionCheckerPlus>().hasConnection) {
       return handler.reject(
         BadNetworkException(
           requestOptions: err.requestOptions,

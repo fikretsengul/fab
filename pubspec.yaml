@@ -40,8 +40,7 @@ dependencies:
   json_annotation: ^4.7.0
   get_it: ^7.2.0
   flutter_bloc: ^8.1.1
-  hydrated_bloc: ^8.1.0
-  hive_flutter: ^1.1.0
+  hydrated_bloc: ^9.0.0
   path_provider: ^2.0.11
   dio: ^4.0.6
   fresh_dio: ^0.3.2
@@ -51,10 +50,8 @@ dependencies:
   sentry_dart_plugin: ^1.0.0-beta.4
   flutter_secure_storage: ^6.0.0
   flutter_native_splash: ^2.2.13
-  adaptive_theme: ^3.1.1
   statsfl: ^2.3.0
   pretty_dio_logger: ^1.2.0-beta-1
-  internet_connection_checker: ^1.0.0+1
   logger: ^1.1.0
   dynamic_color: ^1.5.4
   animations: ^2.0.7
@@ -76,6 +73,9 @@ dependencies:
   styled_text: ^6.0.0
   material_design_icons_flutter: ^5.0.6996
   slang: ^3.3.1
+  universal_platform: ^1.0.0+1
+  internet_connection_checker_plus: ^1.0.1
+  json_theme: ^4.0.2+2
 
 dev_dependencies:
   flutter_test:
@@ -126,14 +126,20 @@ flutter:
   fonts:
     - family: Nunito
       fonts:
-        - asset: assets/fonts/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Nunito-Light.ttf
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
           weight: 300
+    - family: MaterialIcons
+      fonts:
+        - asset: assets/fonts/Icons/MaterialIcons-Regular.ttf
+    - family: IonIcons
+      fonts:
+        - asset: assets/fonts/Icons/IonIcons-Regular.ttf
 
 # Native splash screen settings.
 flutter_native_splash:

@@ -22,9 +22,9 @@ class CustomContainerTransform extends StatelessWidget {
       closedElevation: Constants.defaultElevation,
       openElevation: Constants.defaultElevation,
       closedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(closedBorderRadius ?? Constants.paddingM)),
+        borderRadius: BorderRadius.all(Radius.circular(closedBorderRadius ?? Constants.defaultBorderRadius)),
       ),
-      closedColor: Colors.transparent,
+      closedColor: getTheme(context).surface,
       openColor: getTheme(context).surface,
       middleColor: getTheme(context).surface,
       tappable: openWidget != null,
