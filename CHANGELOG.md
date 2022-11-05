@@ -16,7 +16,6 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-- Custom golden test fixed.
 - Android minimum and compile sdk versions updated for `flutter_secure_storage`.
 - `hive` storage removed for now.
 - Bugs fixed.
