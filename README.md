@@ -8,7 +8,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
-<img src="https://img.shields.io/badge/version-1.0.0%2B3-1EAEDB.svg">
+<img src="https://img.shields.io/badge/version-1.0.0%2B4-1EAEDB.svg">
 <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
 <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
 <img src="https://img.shields.io/badge/last%20updated-2022--11--05-ff69b4">
