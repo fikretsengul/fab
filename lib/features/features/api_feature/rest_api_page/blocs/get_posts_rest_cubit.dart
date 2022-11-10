@@ -24,7 +24,7 @@ class GetPoststRestCubit extends Cubit<GetPostsRestState> {
 
     final response = await _postsRestRepository.getPosts(
       page,
-      size ?? Constants.maxItemToBeFetchedAtOneTime,
+      size ?? $constants.api.maxItemToBeFetchedAtOneTime,
     );
 
     response.pick(

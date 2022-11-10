@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/navigation/bottom_navigation.dart';
-import 'package:flutter_advanced_boilerplate/utils/navigation.dart';
+import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppNavigator extends StatelessWidget {
@@ -12,17 +12,13 @@ class AppNavigator extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: Navigation.appbars(context).elementAt(state.pageIndex),
-          body: Stack(
-            children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: Navigation.bottomNavigationScreens(context).elementAt(state.pageIndex),
-              ),
-            ],
+          appBar: $constants.navigation.appbars(context).elementAt(state.pageIndex),
+          body: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: $constants.navigation.bottomNavigationScreens().elementAt(state.pageIndex),
           ),
           bottomNavigationBar: BottomNavigation(
-            destinations: Navigation.bottomNavigationItems(context),
+            destinations: $constants.navigation.bottomNavigationItems(context),
             currentPageIndex: state.pageIndex,
           ),
         );

@@ -27,8 +27,8 @@ class AuthRepository {
       final user = UserModel.initial();
       final auth = AuthModel(
         tokenType: 'Bearer ',
-        accessToken: 'demo_access_token',
-        refreshToken: 'demo_refresh_token',
+        accessToken: '',
+        refreshToken: '',
         user: user,
       );
 

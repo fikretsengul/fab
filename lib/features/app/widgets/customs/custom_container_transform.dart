@@ -19,10 +19,10 @@ class CustomContainerTransform extends StatelessWidget {
   Widget build(BuildContext context) {
     return OpenContainer(
       transitionType: ContainerTransitionType.fadeThrough,
-      closedElevation: Constants.defaultElevation,
-      openElevation: Constants.defaultElevation,
+      closedElevation: $constants.theme.defaultElevation,
+      openElevation: $constants.theme.defaultElevation,
       closedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(closedBorderRadius ?? Constants.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(Radius.circular(closedBorderRadius ?? $constants.theme.defaultBorderRadius)),
       ),
       closedColor: getTheme(context).surface,
       openColor: getTheme(context).surface,

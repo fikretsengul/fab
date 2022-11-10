@@ -16,12 +16,12 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(Constants.defaultBorderRadius),
-        topRight: Radius.circular(Constants.defaultBorderRadius),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular($constants.theme.defaultBorderRadius),
+        topRight: Radius.circular($constants.theme.defaultBorderRadius),
       ),
       child: NavigationBar(
-        height: 80,
+        height: 60,
         selectedIndex: currentPageIndex,
         onDestinationSelected: (index) => getIt<AppCubit>().changePageIndex(index: index),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,

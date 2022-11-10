@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_boilerplate/features/app/widgets/utils/skeleton_loader.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/rest_api_page/blocs/get_posts_rest_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/features/api_feature/rest_api_page/models/post_rest_model.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:keframe/keframe.dart';
 
 class RestApiPage extends StatefulWidget {
   const RestApiPage({super.key});
@@ -59,9 +61,41 @@ class _RestApiPageState extends State<RestApiPage> {
           firstPageProgressIndicatorBuilder: (_) => const Center(
             child: CircularProgressIndicator(),
           ),
-          itemBuilder: (_, post, __) => ListTile(
-            leading: Text(post.id),
-            title: Text(post.title),
+          itemBuilder: (_, post, index) => FrameSeparateWidget(
+            index: index,
+            placeHolder: _buildTileSkeleton(),
+            child: ListTile(
+              leading: Text(post.id),
+              title: Text(post.title),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTileSkeleton() {
+    return SkeletonLoader(
+      child: ListTile(
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 20,
+              width: 20,
+              constraints: const BoxConstraints(minHeight: 20, maxHeight: 20),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+          ],
+        ),
+        title: Container(
+          height: 20,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
         ),
       ),

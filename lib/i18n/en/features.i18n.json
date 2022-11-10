@@ -6,6 +6,10 @@
         "title": "API & Auth",
         "explanation": "Rest and graphql api support with token renewal and socket support using Dio, GraphQL, and Fresh."
     },
+    "performance": {
+        "title": "Performance",
+        "explanation": "Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via keframe."
+    },
     "state": {
         "title": "State & Architecture",
         "explanation": "BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management."
@@ -61,6 +65,10 @@
     "localization": {
         "title": "Localization",
         "explanation": "Easily localize the app into other languages with the support of type-safe structured 'slang' language generator."
+    },
+    "permission": {
+        "title": "Permission",
+        "explanation": "The boilerplate also provides a cross-platform (iOS, Android) example to request permissions and check their status with permission_handler."
     },
     "env_variables": {
         "title": "Env Variables",

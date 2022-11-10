@@ -2,12 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0+4](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/aa4432a..b26dbb2) - 2022-11-05
+## [1.0.0+5](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b26dbb2..XXXXXXX) - 2022-11-10
 
 ### Upcoming enhancements
 
 - Codemagic configuration is not completed yet. CI & CD implementation will be completed.
 - `isar` local storage solution will be implemented instead of `hive` with an example feature.
+
+### New features
+
+- ['Permission handling'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/14) system implemented for only mobile and an example added about image picker.
+- `shimmer` added for skeletons, `keframe` added for performance, `url_strategy` added to remove '#' from the url of the web version, `image_picker` added for image picker example, `permission_handler` added in order to manage permissions on only mobile.
+
+### Enhancements
+
+- Web support enhanced.
+- `Constants` in utils and `widgets` in presentation refactored.
+- Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via `keframe`.
+- `Skeleton loading` implemented for loading widgets via `shimmer`.
+
+### Bug Fixes
+
+- ['AuthCubit close when app still using'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/12) issue fixed.
+- ['Login screen - takes hitting tab twice to move to password field on web'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/9) issue fixed.
+
+## [1.0.0+4](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/aa4432a..b26dbb2) - 2022-11-05
 
 ### New features
 

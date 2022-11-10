@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/user_model.dart';
 import 'package:flutter_advanced_boilerplate/features/auth/login/networking/auth_repository.dart';
@@ -37,6 +39,8 @@ class AuthCubit extends Cubit<AuthState> {
       username: username,
       password: password,
     );
+
+    await Future.delayed(const Duration(seconds: 2), () {});
 
     response.pick(
       onError: (alert) => emit(AuthState.failed(alert: alert)),

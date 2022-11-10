@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/theme/text/app_text_theme.dart';
-import 'package:flutter_advanced_boilerplate/utils/palette.dart';
+import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_typography.freezed.dart';
@@ -15,8 +15,8 @@ class AppTypography with _$AppTypography {
   const AppTypography._();
 
   factory AppTypography.create({required String fontFamily}) => AppTypography(
-        black: _createTextTheme(fontFamily, Palette.black),
-        white: _createTextTheme(fontFamily, Palette.white),
+        black: _createTextTheme(fontFamily, $constants.palette.black),
+        white: _createTextTheme(fontFamily, $constants.palette.white),
       );
 
   Typography get materialTypography => Typography.material2021(

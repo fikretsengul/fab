@@ -56,10 +56,12 @@
 		</array>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
-		<string>https</string>
-		<string>http</string>
+			<string>https</string>
+			<string>http</string>
 		</array>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app needs photo library access to select a photo.</string>
 	</dict>
 </plist>

@@ -32,17 +32,13 @@ class _AppWrapperState extends State<AppWrapper> with WidgetsBindingObserver {
   @override
   Future<void> didChangePlatformBrightness() async {
     getIt<AppCubit>().updateSystemOverlay();
-
     super.didChangePlatformBrightness();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<AppCubit>()),
-        BlocProvider(create: (context) => getIt<AuthCubit>()),
-      ],
+    return BlocProvider(
+      create: (context) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           // Remove splash screen after initialization.

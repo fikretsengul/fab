@@ -8,10 +8,10 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/based%20on-flutter%20%7C%20bloc-blueviolet.svg">
-<img src="https://img.shields.io/badge/version-1.0.0%2B4-1EAEDB.svg">
+<img src="https://img.shields.io/badge/version-1.0.0%2B5-1EAEDB.svg">
 <img src="https://img.shields.io/badge/sdk->%3D2.18.2%20<3.0.0-brightgreen.svg">
 <img src="https://img.shields.io/badge/dependencies-up%20to%20date-success.svg">
-<img src="https://img.shields.io/badge/last%20updated-2022--11--05-ff69b4">
+<img src="https://img.shields.io/badge/last%20updated-2022--11--10-ff69b4">
 <img src="https://img.shields.io/badge/completion-%2595-orange">
 </p>
 
@@ -43,6 +43,8 @@ There are several reasons why this boilerplate exists, these are in short to cre
 
 * `API System & Authentication`<br>
 Rest and graphql api support with token renewal and socket support using Dio, GraphQL, and Fresh.
+* `Performance`<br>
+Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via keframe.
 * `State Management & Architecture`<br>
 BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
 * `Advanced Linting`<br>
@@ -71,6 +73,8 @@ Encrypted storage allows you to keep token and user informations in platforms ke
 With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
 * `Localization`<br>
 Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
+* `Permission`<br>
+The boilerplate also provides a cross-platform (iOS, Android) API to request permissions and check their status with permission_handler.
 * `Env Variables`<br>
 Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such.
 * `Logging & Tracking`<br>
@@ -123,6 +127,9 @@ $ flutter run
 # Run the app on web
 $ flutter run -d chrome --web-renderer html (low performance, low download size)
 $ flutter run -d chrome --web-renderer canvaskit (high performance, high download size)
+
+# If you update your splash screen configuration you can regenerate it via
+$ flutter pub run flutter_native_splash:create
 ```
 ### Hide Generated Files
 In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing the `'Add Pattern'` button:
@@ -210,13 +217,13 @@ Apart from the above, constants, helper classes, and methods, shortcuts and many
     └── utils
         ├── helpers                            -> put your helpers here
         │   ├── bar_helper.dart                   -> bar helper to show alert
-        │   └── logging_helper.dart               -> logging helper to show fancy log in console
+        │   ├── logging_helper.dart               -> logging helper to show fancy log in console
+        │   └── permission_helper.dart            -> permission helper to handle permission requests
         ├── methods                            -> put your methods here
         │   └── aliases.dart                      -> create alias variables here
         │   └── shorcuts.dart                     -> add shortcut methods here
         ├── constants.dart                     -> configure app constants here
         ├── navigation.dart                    -> add navigation destinations here
-        ├── palette.dart                       -> define colors here
         ├── r.dart                             -> generated type-safe asset classes here (don't modify)
         └── router.dart                        -> add new screens here
 ```
@@ -226,7 +233,8 @@ Apart from the above, constants, helper classes, and methods, shortcuts and many
  2. Reso Coder Tutorials • [Blog](https://resocoder.com/blog/) • [YouTube](https://www.youtube.com/c/ResoCoder/videos)
  3. Flutter • [YouTube](https://www.youtube.com/c/flutterdev/videos)
  4. Marcus Ng • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
- 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/FlutterMapp)
+ 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/FlutterMapp/videos)
+ 6. Max on Flutter • [YouTube](https://www.youtube.com/c/MaxonFlutter/videos)
 
 ### VSCode Extensions
 | Extension | Usage |
@@ -261,6 +269,7 @@ This repository makes use of the following pub packages:
 | [internet_connection_checker_plus](https://pub.dev/packages/internet_connection_checker_plus/versions/1.0.1) | ^1.0.1 | Network
 | [fresh_dio](https://pub.dev/packages/fresh_dio/versions/0.3.2) | ^0.3.2 | Auth*
 | [fresh_graphql](https://pub.dev/packages/fresh_graphql/versions/0.5.2) | ^0.5.2 | Auth*
+| [keframe](https://pub.dev/packages/keframe/versions/3.0.0) | ^3.0.0 | Performance*
 | [flutter_bloc](https://pub.dev/packages/flutter_bloc/versions/8.1.1) | ^8.1.1 | State & Architecture*
 | [hydrated_bloc](https://pub.dev/packages/hydrated_bloc/versions/8.1.0) | ^8.1.0 | State Persistance*
 | [very_good_analysis](https://pub.dev/packages/very_good_analysis/versions/3.1.0) | ^3.1.0 | Linting*
@@ -280,6 +289,7 @@ This repository makes use of the following pub packages:
 | [hive_flutter](https://pub.dev/packages/hive_flutter/versions/1.1.0) | ^1.1.0 | Storage*
 | [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage/versions/6.0.0) | ^6.0.0 | Storage*
 | [slang](https://pub.dev/packages/slang/versions/3.3.1) | ^3.3.1 | Localization*
+| [permission_handler](https://pub.dev/packages/permission_handler/versions/10.2.0) | ^10.2.0 | Permission
 | [logger](https://pub.dev/packages/logger/versions/1.1.0) | ^1.1.0 | Logging*
 | [pretty_dio_logger](https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta-1) | ^1.2.0-beta-1 | Logging*
 | [sentry_flutter](https://pub.dev/packages/sentry_flutter/versions/6.13.1) | ^6.13.1 | Tracking*
@@ -306,6 +316,9 @@ This repository makes use of the following pub packages:
 | [rounded_loading_button](https://pub.dev/packages/rounded_loading_button/versions/2.1.0) | ^2.1.0 | Others
 | [auto_size_text](https://pub.dev/packages/rounded_loading_button/versions/3.0.0) | ^3.0.0 | Others*
 | [styled_text](https://pub.dev/packages/styled_text/versions/6.0.0) | ^6.0.0 | Others*
+| [shimmer](https://pub.dev/packages/shimmer/versions/2.0.0) | ^2.0.0 | Others
+| [url_strategy](https://pub.dev/packages/url_strategy/versions/0.2.0) | ^0.2.0 | Others
+| [image_picker](https://pub.dev/packages/image_picker/versions/0.8.6) | ^0.8.6 | Others
 
 > *Recommended to keep regardless of your project.
 

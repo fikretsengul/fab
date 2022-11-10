@@ -15,7 +15,7 @@ class GetPostsGraphQLBloc extends QueryBloc<PostsPaginated$Query> {
               options: PageQueryOptions(
                 paginate: PaginateOptions(
                   page: 1,
-                  limit: Constants.maxItemToBeFetchedAtOneTime,
+                  limit: $constants.api.maxItemToBeFetchedAtOneTime,
                 ),
                 sort: [],
                 operators: [],
@@ -38,7 +38,7 @@ class GetPostsGraphQLBloc extends QueryBloc<PostsPaginated$Query> {
         final posts = data?.posts?.data ?? [];
 
         if (posts.isNotEmpty && posts.length < total) {
-          return posts.length % Constants.maxItemToBeFetchedAtOneTime == 0 && i == posts.length - threshold;
+          return posts.length % $constants.api.maxItemToBeFetchedAtOneTime == 0 && i == posts.length - threshold;
         }
 
         return false;
@@ -54,8 +54,8 @@ class GetPostsGraphQLBloc extends QueryBloc<PostsPaginated$Query> {
           variables: PostsPaginatedArguments(
             options: PageQueryOptions(
               paginate: PaginateOptions(
-                page: offset ~/ Constants.maxItemToBeFetchedAtOneTime + 1,
-                limit: Constants.maxItemToBeFetchedAtOneTime,
+                page: offset ~/ $constants.api.maxItemToBeFetchedAtOneTime + 1,
+                limit: $constants.api.maxItemToBeFetchedAtOneTime,
               ),
               sort: [],
               operators: [],

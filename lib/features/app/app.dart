@@ -31,7 +31,7 @@ class App extends StatelessWidget {
               themeMode: state.theme.mode,
 
               /// Environment configuration.
-              title: Constants.appTitle,
+              title: $constants.appTitle,
               debugShowCheckedModeBanner: env.debugShowCheckedModeBanner,
               debugShowMaterialGrid: env.debugShowMaterialGrid,
 

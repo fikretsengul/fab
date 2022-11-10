@@ -44,7 +44,6 @@ class AppCubit extends HydratedCubit<AppState> {
     );
 
     emit(state.copyWith(theme: theme));
-
     updateSystemOverlay();
   }
 

@@ -6,6 +6,10 @@
         "title": "API & Auth",
         "explanation": "Dio, GraphQL ve Fresh kullanarak token yenileme ve soket desteği ile Rest ve GraphQL desteği."
     },
+    "performance": {
+        "title": "Performance",
+        "explanation": "Sayfa geçişleri veya karmaşık listelerin hızlı kaydırılması gibi yapıların neden olduğu gecikmeler için keframe aracılığıyla performans optimize edilmiştir."
+    },
     "state": {
         "title": "State & Architecture",
         "explanation": "BLoC & Hydrated Bloc, kalıcı ve güçlü state yönetimi oluşturarak Business Logic'i UI'den ayırmaya yardımcı olur."
@@ -61,6 +65,10 @@
     "localization": {
         "title": "Localization",
         "explanation": "Context gerektirmeden ve variable keys desteğiyle basitçe json dosyaları oluşturarak uygulamayı diğer dillere kolayca yerelleştirin."
+    },
+    "permission": {
+        "title": "Permission",
+        "explanation": "Bu proje ayrıca izin isteme ve izin durumu bilgilerini kontrol etmek için permission_handler ile platformlar arası (iOS, Android) bir örnek sağlar."
     },
     "env_variables": {
         "title": "Env Variables",

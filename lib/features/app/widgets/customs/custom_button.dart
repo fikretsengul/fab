@@ -32,7 +32,7 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return RoundedLoadingButton(
-      elevation: Constants.defaultElevation,
+      elevation: $constants.theme.defaultElevation,
       width: widget.width,
       height: widget.height,
       color: widget.onPressed != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),

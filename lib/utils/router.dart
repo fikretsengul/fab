@@ -4,13 +4,20 @@ import 'package:flutter_advanced_boilerplate/features/app/app_wrapper.dart';
 import 'package:flutter_advanced_boilerplate/features/auth/login/presentation/login_screen.dart';
 
 @MaterialAutoRouter(
-  routes: [
-    MaterialRoute(
+  routes: <AutoRoute>[
+    AutoRoute(
+      path: '/',
       page: AppWrapper,
       initial: true,
       children: [
-        MaterialRoute(page: LoginScreen),
-        MaterialRoute(page: AppNavigator),
+        AutoRoute(
+          path: 'login',
+          page: LoginScreen,
+        ),
+        AutoRoute(
+          path: 'home',
+          page: AppNavigator,
+        ),
       ],
     ),
   ],

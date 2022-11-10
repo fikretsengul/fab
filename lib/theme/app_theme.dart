@@ -5,7 +5,6 @@ import 'package:flutter_advanced_boilerplate/theme/color/app_color_scheme.dart';
 import 'package:flutter_advanced_boilerplate/theme/text/app_text_theme.dart';
 import 'package:flutter_advanced_boilerplate/theme/text/app_typography.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
-import 'package:flutter_advanced_boilerplate/utils/palette.dart';
 
 Future<ThemeData> createTheme({
   Color? color,
@@ -20,7 +19,7 @@ Future<ThemeData> createTheme({
     brightness: brightness,
   );
 
-  final appTypography = AppTypography.create(fontFamily: Constants.defaultFontFamily);
+  final appTypography = AppTypography.create(fontFamily: $constants.theme.defaultFontFamily);
   final textTheme = _getTextTheme(appTypography: appTypography, brightness: brightness);
 
   final primaryColor = ElevationOverlay.colorWithOverlay(appColorScheme.surface, appColorScheme.primary, 3);
@@ -36,7 +35,7 @@ Future<ThemeData> createTheme({
     useMaterial3: true,
     toggleableActiveColor: customOnPrimaryColor,
     appBarTheme: AppBarTheme(
-      elevation: Constants.defaultElevation,
+      elevation: $constants.theme.defaultElevation,
       systemOverlayStyle: createOverlayStyle(
         brightness: brightness,
         primaryColor: primaryColor,
@@ -44,20 +43,20 @@ Future<ThemeData> createTheme({
     ),
     splashFactory: InkRipple.splashFactory,
     scaffoldBackgroundColor: appColorScheme.surface,
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      elevation: Constants.defaultElevation,
-      highlightElevation: Constants.defaultElevation,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      elevation: $constants.theme.defaultElevation,
+      highlightElevation: $constants.theme.defaultElevation,
     ),
     iconTheme: IconThemeData(
       color: appColorScheme.primary,
     ),
     cardTheme: CardTheme(
-      elevation: Constants.defaultElevation,
+      elevation: $constants.theme.defaultElevation,
       color: primaryColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
-            Constants.defaultBorderRadius,
+            $constants.theme.defaultBorderRadius,
           ),
         ),
       ),
@@ -97,7 +96,7 @@ ColorScheme _getColorScheme({
   required Brightness brightness,
 }) {
   return ColorScheme.fromSeed(
-    seedColor: color ?? Constants.defaultThemeColor,
+    seedColor: color ?? $constants.theme.defaultThemeColor,
     brightness: brightness,
   );
 }
@@ -113,11 +112,11 @@ AppColorScheme _getAppColorScheme({
   return AppColorScheme.fromMaterialColorScheme(
     color != null
         ? colorScheme
-        : Constants.tryToGetColorPaletteFromWallpaper
+        : $constants.theme.tryToGetColorPaletteFromWallpaper
             ? dynamicColorScheme ?? colorScheme
             : colorScheme,
-    disabled: Palette.grey,
-    onDisabled: isDark ? Palette.white : Palette.black,
+    disabled: $constants.palette.grey,
+    onDisabled: isDark ? $constants.palette.white : $constants.palette.black,
   );
 }
 

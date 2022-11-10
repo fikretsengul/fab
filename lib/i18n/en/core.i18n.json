@@ -31,6 +31,10 @@
             "communication_error": "There was an error with our communication with the servers."
         }
     },
+    "file_picker": {
+        "size_warning": "File size cannot be more than $maxSize mb.",
+        "no_permission": "We have no permission to open your gallery."
+    },
     "test": {
         "succeded": "Test successfull.",
         "failed": "Test failed."
