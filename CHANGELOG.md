@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 ### Enhancements
 
 - Web support enhanced.
-- `Constants` in utils and `widgets` in presentation refactored.
+- `Constants` in utils and `widgets` in presentations of features refactored.
 - Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via `keframe`.
 - `Skeleton loading` implemented for loading widgets via `shimmer`.
 
