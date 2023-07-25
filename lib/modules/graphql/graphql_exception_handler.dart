@@ -8,7 +8,10 @@ AlertModel graphQLExceptionHandler(OperationException result) {
 
     return e is NetworkException
         ? AlertModel.exception(exception: e)
-        : AlertModel.exception(exception: Exception('An unknown graphql client link exception occured.'));
+        : AlertModel.exception(
+            exception:
+                Exception('An unknown graphql client link exception occured.'),
+          );
   }
 
   final errors = result.graphqlErrors;
@@ -23,11 +26,9 @@ AlertModel createAlertModel(String code) {
   switch (code) {
     case 'EXAMPLEx001':
       message = 'This is an example error.';
-      break;
     case 'INTERNAL_SERVER_ERROR':
       message = t['core.errors.others.server_failure'] as String;
       translatable = true;
-      break;
     default:
       message = t['core.errors.others.an_unknown_error'] as String;
       translatable = true;

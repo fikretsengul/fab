@@ -13,40 +13,6 @@ class GraphQLApiResultsWidget extends StatelessWidget {
   final PostsPaginated$Query? data;
   final QueryResult? result;
 
-  @override
-  Widget build(BuildContext context) {
-    final total = data?.posts?.meta?.totalCount ?? 0;
-    final posts = data?.posts?.data ?? [];
-
-    return posts.isEmpty
-        ? Center(child: Text(context.t.core.errors.others.no_item_found))
-        : ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (BuildContext context, int index) {
-              if (BlocProvider.of<GetPostsGraphQLBloc>(context).shouldFetchMore(index, 5)) {
-                BlocProvider.of<GetPostsGraphQLBloc>(context).fetchMore(offset: posts.length);
-              }
-
-              Widget tile = FrameSeparateWidget(
-                index: index,
-                placeHolder: _buildTileSkeleton(),
-                child: ListTile(
-                  leading: Text(posts[index]?.id ?? ''),
-                  title: Text(posts[index]?.title ?? ''),
-                ),
-              );
-
-              if (index == posts.length - 1 && posts.length < total) {
-                tile = Column(
-                  children: [tile, const Padding(padding: EdgeInsets.all(16), child: CircularProgressIndicator())],
-                );
-              }
-
-              return tile;
-            },
-          );
-  }
-
   Widget _buildTileSkeleton() {
     return SkeletonLoader(
       child: ListTile(
@@ -73,5 +39,47 @@ class GraphQLApiResultsWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final total = data?.posts?.meta?.totalCount ?? 0;
+    final posts = data?.posts?.data ?? [];
+
+    return posts.isEmpty
+        ? Center(child: Text(context.t.core.errors.others.no_item_found))
+        : ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              if (BlocProvider.of<GetPostsGraphQLBloc>(context)
+                  .shouldFetchMore(index, 5)) {
+                BlocProvider.of<GetPostsGraphQLBloc>(context)
+                    .fetchMore(offset: posts.length);
+              }
+
+              Widget tile = FrameSeparateWidget(
+                index: index,
+                placeHolder: _buildTileSkeleton(),
+                child: ListTile(
+                  leading: Text(posts[index]?.id ?? ''),
+                  title: Text(posts[index]?.title ?? ''),
+                ),
+              );
+
+              if (index == posts.length - 1 && posts.length < total) {
+                tile = Column(
+                  children: [
+                    tile,
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CircularProgressIndicator(),
+                    )
+                  ],
+                );
+              }
+
+              return tile;
+            },
+          );
   }
 }

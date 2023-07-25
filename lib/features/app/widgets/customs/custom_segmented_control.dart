@@ -4,16 +4,16 @@ import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class CustomSegmentedControl<T> extends StatelessWidget {
   const CustomSegmentedControl({
+    required this.children,
+    required this.onValueChanged,
     super.key,
     this.currentIndex,
     this.fixedWidth,
-    required this.children,
-    required this.onValueChanged,
   });
 
+  final Map<T, Widget> children;
   final T? currentIndex;
   final double? fixedWidth;
-  final Map<T, Widget> children;
   final void Function(T) onValueChanged;
 
   @override

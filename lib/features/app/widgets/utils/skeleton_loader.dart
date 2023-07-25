@@ -6,8 +6,8 @@ enum SkeletonDirection { ltr, rtl, ttb, btt }
 
 class SkeletonLoader extends StatelessWidget {
   const SkeletonLoader({
-    super.key,
     required this.child,
+    super.key,
     this.isActive = true,
     this.baseColor,
     this.highlightColor,
@@ -27,16 +27,12 @@ class SkeletonLoader extends StatelessWidget {
     switch (skDirection) {
       case SkeletonDirection.ltr:
         direction = ShimmerDirection.ltr;
-        break;
       case SkeletonDirection.rtl:
         direction = ShimmerDirection.rtl;
-        break;
       case SkeletonDirection.btt:
         direction = ShimmerDirection.btt;
-        break;
       case SkeletonDirection.ttb:
         direction = ShimmerDirection.ttb;
-        break;
     }
 
     return direction;
@@ -49,7 +45,8 @@ class SkeletonLoader extends StatelessWidget {
 
       return Shimmer.fromColors(
         baseColor: baseColor ?? getTheme(context).primary.withOpacity(0.1),
-        highlightColor: highlightColor ?? getTheme(context).primary.withOpacity(0.2),
+        highlightColor:
+            highlightColor ?? getTheme(context).primary.withOpacity(0.2),
         direction: directionn,
         period: period,
         child: child,

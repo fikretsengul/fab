@@ -17,8 +17,8 @@ class DioTokenRefresh {
     );
   }
 
-  final TokenStorage<AuthModel> _secureStorage;
   late final Fresh<AuthModel> _fresh;
+  final TokenStorage<AuthModel> _secureStorage;
 
   Fresh<AuthModel> get fresh => _fresh;
 

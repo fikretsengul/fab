@@ -16,6 +16,12 @@ class _ApiFeatureScreenState extends State<ApiFeatureScreen> {
   int currentPage = 0;
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     controller.addListener(() {
       controller.addListener(() {
@@ -72,11 +78,5 @@ class _ApiFeatureScreenState extends State<ApiFeatureScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 }

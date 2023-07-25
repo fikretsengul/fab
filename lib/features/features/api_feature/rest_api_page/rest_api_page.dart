@@ -16,13 +16,41 @@ class RestApiPage extends StatefulWidget {
 }
 
 class _RestApiPageState extends State<RestApiPage> {
-  final PagingController<int, PostRestModel> _pagingController = PagingController(firstPageKey: 1);
   final GetPoststRestCubit _cubit = getIt<GetPoststRestCubit>();
+  final PagingController<int, PostRestModel> _pagingController = PagingController(firstPageKey: 1);
 
   @override
   void initState() {
     _pagingController.addPageRequestListener(_cubit.getPosts);
     super.initState();
+  }
+
+  Widget _buildTileSkeleton() {
+    return SkeletonLoader(
+      child: ListTile(
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 20,
+              width: 20,
+              constraints: const BoxConstraints(minHeight: 20, maxHeight: 20),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+          ],
+        ),
+        title: Container(
+          height: 20,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -68,34 +96,6 @@ class _RestApiPageState extends State<RestApiPage> {
               leading: Text(post.id),
               title: Text(post.title),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTileSkeleton() {
-    return SkeletonLoader(
-      child: ListTile(
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 20,
-              width: 20,
-              constraints: const BoxConstraints(minHeight: 20, maxHeight: 20),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-            ),
-          ],
-        ),
-        title: Container(
-          height: 20,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
         ),
       ),

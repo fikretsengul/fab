@@ -6,9 +6,9 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class CustomButton extends StatefulWidget {
   const CustomButton({
-    super.key,
     required this.controller,
     required this.text,
+    super.key,
     this.onPressed,
     this.resetAfterDuration = false,
     this.animateOnTap = false,
@@ -16,13 +16,13 @@ class CustomButton extends StatefulWidget {
     this.height = 60,
   });
 
-  final RoundedLoadingButtonController controller;
-  final String text;
   final void Function()? onPressed;
-  final bool resetAfterDuration;
   final bool animateOnTap;
-  final double width;
+  final RoundedLoadingButtonController controller;
   final double height;
+  final bool resetAfterDuration;
+  final String text;
+  final double width;
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -35,7 +35,9 @@ class _CustomButtonState extends State<CustomButton> {
       elevation: $constants.theme.defaultElevation,
       width: widget.width,
       height: widget.height,
-      color: widget.onPressed != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
+      color: widget.onPressed != null
+          ? getCustomOnPrimaryColor(context)
+          : getPrimaryColor(context),
       controller: widget.controller,
       onPressed: widget.onPressed,
       valueColor: getTheme(context).primary,

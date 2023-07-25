@@ -3,5 +3,5 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 
 @module
 abstract class NetworkInfoInjection {
-  InternetConnectionCheckerPlus get networkInfo => InternetConnectionCheckerPlus();
+  InternetConnection get networkInfo => InternetConnection();
 }

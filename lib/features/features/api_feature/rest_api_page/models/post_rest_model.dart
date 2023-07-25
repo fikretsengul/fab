@@ -10,10 +10,10 @@ class PostRestModel with _$PostRestModel {
     required String title,
   }) = _PostRestModel;
 
+  factory PostRestModel.fromJson(Map<String, dynamic> json) => _$PostRestModelFromJson(json);
+
   factory PostRestModel.initial() => const PostRestModel(
         id: '',
         title: '',
       );
-
-  factory PostRestModel.fromJson(Map<String, dynamic> json) => _$PostRestModelFromJson(json);
 }

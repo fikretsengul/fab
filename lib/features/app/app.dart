@@ -47,7 +47,7 @@ class App extends StatelessWidget {
 
               /// EasyLocalization configuration.
               locale: TranslationProvider.of(context).flutterLocale,
-              supportedLocales: LocaleSettings.supportedLocales,
+              supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,

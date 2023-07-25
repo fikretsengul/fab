@@ -8,17 +8,25 @@ import 'package:web_socket_channel/io.dart';
 
 class GraphQLLink extends Link {
   GraphQLLink({
+    required GraphQLTokenRefresh tokenRefresh,
     bool? isSubscription,
     String? url,
-    required GraphQLTokenRefresh tokenRefresh,
   })  : _isSubscription = isSubscription ?? false,
         _url = url ?? '',
         _tokenRefresh = tokenRefresh;
 
   final bool _isSubscription;
-  final String _url;
-  final GraphQLTokenRefresh _tokenRefresh;
   SocketClient? _socketClient;
+  final GraphQLTokenRefresh _tokenRefresh;
+  final String _url;
+
+  @override
+  Future<void> dispose() async {
+    if (_isSubscription) {
+      await _socketClient?.dispose();
+      _socketClient = null;
+    }
+  }
 
   @override
   Stream<Response> request(
@@ -26,7 +34,9 @@ class GraphQLLink extends Link {
     Stream<Response> Function(Request)? forward,
   ]) async* {
     final currentToken = await _tokenRefresh.fresh.token;
-    final tokenHeader = currentToken != null ? _tokenRefresh.getHeader(currentToken) : const <String, String>{};
+    final tokenHeader = currentToken != null
+        ? _tokenRefresh.getHeader(currentToken)
+        : const <String, String>{};
 
     if (_isSubscription) {
       if (_socketClient == null) {
@@ -111,13 +121,5 @@ class GraphQLLink extends Link {
         ),
       ),
     );
-  }
-
-  @override
-  Future<void> dispose() async {
-    if (_isSubscription) {
-      await _socketClient?.dispose();
-      _socketClient = null;
-    }
   }
 }

@@ -16,17 +16,19 @@ class FeaturesScreen extends StatelessWidget {
       children: [
         Card(
           child: SwitchListTile(
-            onChanged: (bool newValue) {
+            onChanged: (newValue) {
               LocaleSettings.setLocale(newValue ? AppLocale.tr : AppLocale.en);
             },
             value: context.t.$meta.locale == AppLocale.tr,
             title: Row(
               children: [
-                const Icon(MdiIcons.translate),
+                Icon(MdiIcons.translate),
                 const SizedBox(width: 16),
                 Text(
                   context.t.features.use_turkish,
-                  style: getTextTheme(context).titleSmall!.apply(fontWeightDelta: 2),
+                  style: getTextTheme(context)
+                      .titleSmall!
+                      .apply(fontWeightDelta: 2),
                 ),
               ],
             ),

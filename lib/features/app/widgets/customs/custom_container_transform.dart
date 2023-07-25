@@ -5,15 +5,15 @@ import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class CustomContainerTransform extends StatelessWidget {
   const CustomContainerTransform({
-    super.key,
     required this.closedBuilder,
+    super.key,
     this.openWidget,
     this.closedBorderRadius,
   });
 
+  final double? closedBorderRadius;
   final Widget Function(BuildContext, void Function()) closedBuilder;
   final Widget? openWidget;
-  final double? closedBorderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,11 @@ class CustomContainerTransform extends StatelessWidget {
       closedElevation: $constants.theme.defaultElevation,
       openElevation: $constants.theme.defaultElevation,
       closedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(closedBorderRadius ?? $constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            closedBorderRadius ?? $constants.theme.defaultBorderRadius,
+          ),
+        ),
       ),
       closedColor: getTheme(context).surface,
       openColor: getTheme(context).surface,

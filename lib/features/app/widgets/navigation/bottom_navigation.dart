@@ -5,13 +5,13 @@ import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
-    super.key,
     required this.destinations,
     required this.currentPageIndex,
+    super.key,
   });
 
-  final List<Widget> destinations;
   final int currentPageIndex;
+  final List<Widget> destinations;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class BottomNavigation extends StatelessWidget {
       child: NavigationBar(
         height: 60,
         selectedIndex: currentPageIndex,
-        onDestinationSelected: (index) => getIt<AppCubit>().changePageIndex(index: index),
+        onDestinationSelected: (index) =>
+            getIt<AppCubit>().changePageIndex(index: index),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         destinations: destinations,
       ),

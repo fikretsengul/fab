@@ -23,8 +23,8 @@ class GraphQLTokenRefresh {
   }
 
   final EnvModel _env;
-  final TokenStorage<AuthModel> _secureStorage;
   late final FreshLink<AuthModel> _fresh;
+  final TokenStorage<AuthModel> _secureStorage;
 
   FreshLink<AuthModel> get fresh => _fresh;
 

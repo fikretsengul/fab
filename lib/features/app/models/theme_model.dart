@@ -16,12 +16,6 @@ class ThemeModel with _$ThemeModel {
     required ThemeData dark,
   }) = _ThemeModel;
 
-  factory ThemeModel.initial() => ThemeModel(
-        mode: ThemeMode.system,
-        light: ThemeData.light(),
-        dark: ThemeData.dark(),
-      );
-
   ThemeModel._();
 
   factory ThemeModel.fromJson(Map<String, dynamic> json) {
@@ -40,8 +34,14 @@ class ThemeModel with _$ThemeModel {
     }
   }
 
+  factory ThemeModel.initial() => ThemeModel(
+        mode: ThemeMode.system,
+        light: ThemeData.light(),
+        dark: ThemeData.dark(),
+      );
+
   Map<String, dynamic> toJson() {
-    return {
+    return <String, dynamic>{
       'mode': mode.index,
       'light': ThemeEncoder.encodeThemeData(light),
       'dark': ThemeEncoder.encodeThemeData(dark),

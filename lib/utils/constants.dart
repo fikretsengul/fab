@@ -10,75 +10,97 @@ final $constants = Constants();
 
 @immutable
 class Constants {
+  /// API configuration.
+  late final api = _API();
+
   final appTitle = 'Flutter Advanced Boilerplate';
-
-  /// Theme defaults.
-  late final theme = _Theme();
-
-  /// Animation durations.
-  late final times = _Times();
-
   /// Rounded edge corner radiuses.
   late final corners = _Corners();
 
   /// Padding and margin values.
   late final insets = _Insets();
 
-  /// Text shadows.
-  late final shadows = _Shadows();
+  /// Navigation configuration.
+  late final navigation = _Navigation();
 
   /// Color $constants.palette.
   late final palette = _Palette();
 
-  /// API configuration.
-  late final api = _API();
+  /// Text shadows.
+  late final shadows = _Shadows();
 
-  /// Navigation configuration.
-  late final navigation = _Navigation();
+  /// Theme defaults.
+  late final theme = _Theme();
+
+  /// Animation durations.
+  late final times = _Times();
 }
 
 @immutable
 class _Times {
   final Duration fast = const Duration(milliseconds: 300);
   final Duration med = const Duration(milliseconds: 600);
-  final Duration slow = const Duration(milliseconds: 900);
   final Duration pageTransition = const Duration(milliseconds: 200);
+  final Duration slow = const Duration(milliseconds: 900);
 }
 
 @immutable
 class _Corners {
-  late final double sm = 4;
-  late final double md = 8;
   late final double lg = 32;
+  late final double md = 8;
+  late final double sm = 4;
 }
 
 @immutable
 class _Insets {
-  late final double xxs = 4;
-  late final double xs = 8;
-  late final double sm = 16;
-  late final double md = 24;
   late final double lg = 32;
-  late final double xl = 48;
-  late final double xxl = 56;
+  late final double md = 24;
   late final double offset = 80;
+  late final double sm = 16;
+  late final double xl = 48;
+  late final double xs = 8;
+  late final double xxl = 56;
+  late final double xxs = 4;
 }
 
 @immutable
 class _Shadows {
-  final textSoft = [
-    Shadow(color: Colors.black.withOpacity(0.25), offset: const Offset(0, 2), blurRadius: 4),
-  ];
   final text = [
-    Shadow(color: Colors.black.withOpacity(0.6), offset: const Offset(0, 2), blurRadius: 2),
+    Shadow(
+      color: Colors.black.withOpacity(0.6),
+      offset: const Offset(0, 2),
+      blurRadius: 2,
+    ),
   ];
+
+  final textSoft = [
+    Shadow(
+      color: Colors.black.withOpacity(0.25),
+      offset: const Offset(0, 2),
+      blurRadius: 4,
+    ),
+  ];
+
   final textStrong = [
-    Shadow(color: Colors.black.withOpacity(0.6), offset: const Offset(0, 4), blurRadius: 6),
+    Shadow(
+      color: Colors.black.withOpacity(0.6),
+      offset: const Offset(0, 4),
+      blurRadius: 6,
+    ),
   ];
 }
 
 @immutable
 class _Palette {
+  final black = const Color(0xFF000000);
+  final blue = const Color(0xFF0000FF);
+  final cyan = const Color(0xFF00FFFF);
+  final green = const Color(0xFF66B032);
+  final grey = const Color(0xFF9E9E9E);
+  final magenta = const Color(0xFFFF00FF);
+  final orange = const Color(0xFFFF8000);
+  final purple = const Color(0xFF0080FF);
+  final red = const Color(0xFFFF0000);
   final List<Color> themes = [
     const Color(0xFFFF0000),
     const Color(0xFFFF8000),
@@ -91,25 +113,16 @@ class _Palette {
   ];
 
   final white = const Color(0xFFFFFFFF);
-  final black = const Color(0xFF000000);
-  final grey = const Color(0xFF9E9E9E);
-  final red = const Color(0xFFFF0000);
-  final orange = const Color(0xFFFF8000);
   final yellow = const Color(0xFFFCCC1A);
-  final green = const Color(0xFF66B032);
-  final cyan = const Color(0xFF00FFFF);
-  final blue = const Color(0xFF0000FF);
-  final purple = const Color(0xFF0080FF);
-  final magenta = const Color(0xFFFF00FF);
 }
 
 @immutable
 class _Theme {
-  final tryToGetColorPaletteFromWallpaper = true;
-  final defaultThemeColor = const Color(0xFF0000FF);
-  final defaultFontFamily = 'Nunito';
-  final double defaultElevation = 0;
   final double defaultBorderRadius = 24;
+  final double defaultElevation = 0;
+  final defaultFontFamily = 'Nunito';
+  final defaultThemeColor = const Color(0xFF0000FF);
+  final tryToGetColorPaletteFromWallpaper = true;
 }
 
 @immutable
@@ -124,7 +137,7 @@ class _Navigation {
         AppBar(
           leading: IconButton(
             onPressed: () => getIt<AuthCubit>().logOut(),
-            icon: const Icon(MdiIcons.logout),
+            icon: Icon(MdiIcons.logout),
           ),
           title: Text(
             context.t.core.navigation.bottom.features,
@@ -145,14 +158,14 @@ class _Navigation {
 
   List<NavigationDestination> bottomNavigationItems(BuildContext context) => [
         NavigationDestination(
-          icon: const Icon(
+          icon: Icon(
             MdiIcons.fire,
             size: 24,
           ),
           label: context.t.core.navigation.bottom.features,
         ),
         NavigationDestination(
-          icon: const Icon(
+          icon: Icon(
             MdiIcons.information,
             size: 24,
           ),

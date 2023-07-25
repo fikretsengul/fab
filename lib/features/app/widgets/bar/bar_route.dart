@@ -9,7 +9,7 @@ class BarRoute<T> extends OverlayRoute<T> {
     required this.bar,
     super.settings,
   })  : _builder = Builder(
-          builder: (BuildContext innerContext) {
+          builder: (innerContext) {
             return GestureDetector(
               onTap: bar.onTap != null ? () => bar.onTap!(bar) : null,
               child: bar,
@@ -22,7 +22,6 @@ class BarRoute<T> extends OverlayRoute<T> {
 
   final Bar<dynamic> bar;
   BarStatus? currentStatus;
-
   /// This string is a workaround until Dismissible supports a returning item.
   String dismissibleKeyGen = '';
 
@@ -46,7 +45,7 @@ class BarRoute<T> extends OverlayRoute<T> {
     if (bar.blockBackgroundInteraction) {
       overlays.add(
         OverlayEntry(
-          builder: (BuildContext context) {
+          builder: (context) {
             return GestureDetector(
               onTap: bar.isDismissible ? bar.dismiss : null,
               child: _createBackgroundOverlay(),
@@ -59,7 +58,7 @@ class BarRoute<T> extends OverlayRoute<T> {
 
     overlays.add(
       OverlayEntry(
-        builder: (BuildContext context) {
+        builder: (context) {
           return Semantics(
             focused: false,
             container: true,
@@ -150,7 +149,8 @@ class BarRoute<T> extends OverlayRoute<T> {
   }
 
   @override
-  bool get finishedWhenPopped => _controller!.status == AnimationStatus.dismissed;
+  bool get finishedWhenPopped =>
+      _controller!.status == AnimationStatus.dismissed;
 
   @override
   void install() {
@@ -282,7 +282,8 @@ class BarRoute<T> extends OverlayRoute<T> {
         {
           _initialAlignment = const Alignment(-1, -2);
           _endAlignment = bar.endOffset != null
-              ? Alignment.topLeft + Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
+              ? Alignment.topLeft +
+                  Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
               : Alignment.topLeft;
           break;
         }
@@ -290,7 +291,8 @@ class BarRoute<T> extends OverlayRoute<T> {
         {
           _initialAlignment = const Alignment(-1, 2);
           _endAlignment = bar.endOffset != null
-              ? Alignment.topLeft + Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
+              ? Alignment.topLeft +
+                  Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
               : Alignment.topLeft;
           break;
         }
@@ -357,7 +359,8 @@ class BarRoute<T> extends OverlayRoute<T> {
       direction: _getDismissDirection(),
       resizeDuration: null,
       confirmDismiss: (_) {
-        if (currentStatus == BarStatus.isAppearing || currentStatus == BarStatus.isHiding) {
+        if (currentStatus == BarStatus.isAppearing ||
+            currentStatus == BarStatus.isHiding) {
           return Future.value(false);
         }
 
@@ -402,16 +405,13 @@ class BarRoute<T> extends OverlayRoute<T> {
         _onStatusChanged?.call(currentStatus);
         if (overlayEntries.isNotEmpty) overlayEntries.first.opaque = opaque;
 
-        break;
       case AnimationStatus.forward:
         currentStatus = BarStatus.isAppearing;
         _onStatusChanged?.call(currentStatus);
-        break;
       case AnimationStatus.reverse:
         currentStatus = BarStatus.isHiding;
         _onStatusChanged?.call(currentStatus);
         if (overlayEntries.isNotEmpty) overlayEntries.first.opaque = false;
-        break;
       case AnimationStatus.dismissed:
         assert(
           !overlayEntries.first.opaque,
@@ -434,7 +434,6 @@ class BarRoute<T> extends OverlayRoute<T> {
             'Overlay entries cannot be empty!',
           );
         }
-        break;
     }
     changedInternalState();
   }

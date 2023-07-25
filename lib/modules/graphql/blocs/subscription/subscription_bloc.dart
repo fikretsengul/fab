@@ -17,8 +17,30 @@ abstract class SubscriptionBloc<T> extends Bloc<SubscriptionEvent<T>, Subscripti
   }
 
   final WatchQueryOptions<Object?> options;
-  late Stream<QueryResult> subscription;
   StreamSubscription<QueryResult>? streamSubscription;
+  late Stream<QueryResult> subscription;
+
+  void run(SubscriptionOptions options) {
+    add(SubscriptionEvent<T>.run(options: options));
+  }
+
+  bool shouldFetchMore(int i, int threshold) => false;
+
+  bool get isLoading => state is _SubscriptionStateLoading;
+
+  bool get isLoaded => state is _SubscriptionStateLoaded;
+
+  T parseData(Map<String, dynamic>? data);
+
+  bool get hasData => state is _SubscriptionStateLoaded<T>;
+
+  bool get hasError => state is _SubscriptionStateError<T>;
+
+  AlertModel get getError => graphQLExceptionHandler((state as _SubscriptionStateError<T>).error);
+
+  void dispose() {
+    streamSubscription?.cancel();
+  }
 
   void _listener(QueryResult result) {
     if (result.isLoading && result.data == null) {
@@ -51,24 +73,6 @@ abstract class SubscriptionBloc<T> extends Bloc<SubscriptionEvent<T>, Subscripti
     }
   }
 
-  void run(SubscriptionOptions options) {
-    add(SubscriptionEvent<T>.run(options: options));
-  }
-
-  bool shouldFetchMore(int i, int threshold) => false;
-
-  bool get isLoading => state is _SubscriptionStateLoading;
-
-  bool get isLoaded => state is _SubscriptionStateLoaded;
-
-  T parseData(Map<String, dynamic>? data);
-
-  bool get hasData => state is _SubscriptionStateLoaded<T>;
-
-  bool get hasError => state is _SubscriptionStateError<T>;
-
-  AlertModel get getError => graphQLExceptionHandler((state as _SubscriptionStateError<T>).error);
-
   Future<void> _onEvent(
     SubscriptionEvent<T> event,
     Emitter<SubscriptionState<T>> emit,
@@ -84,9 +88,5 @@ abstract class SubscriptionBloc<T> extends Bloc<SubscriptionEvent<T>, Subscripti
       loading: (e) async => emit(SubscriptionState.loading(result: e.result)),
       loaded: (e) async => emit(SubscriptionState<T>.loaded(data: e.data, result: e.result)),
     );
-  }
-
-  void dispose() {
-    streamSubscription?.cancel();
   }
 }

@@ -8,16 +8,16 @@ class SubscriptionEvent<T> with _$SubscriptionEvent<T> {
     T? data,
   }) = _SubscriptionEventError<T>;
 
-  const factory SubscriptionEvent.run({
-    required SubscriptionOptions options,
-  }) = _SubscriptionEventRun<T>;
+  const factory SubscriptionEvent.loaded({
+    required T? data,
+    required QueryResult result,
+  }) = _SubscriptionEventLoaded<T>;
 
   const factory SubscriptionEvent.loading({
     required QueryResult result,
   }) = _SubscriptionEventLoading<T>;
 
-  const factory SubscriptionEvent.loaded({
-    required T? data,
-    required QueryResult result,
-  }) = _SubscriptionEventLoaded<T>;
+  const factory SubscriptionEvent.run({
+    required SubscriptionOptions options,
+  }) = _SubscriptionEventRun<T>;
 }

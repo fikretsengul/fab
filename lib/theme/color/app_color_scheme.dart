@@ -40,6 +40,8 @@ class AppColorScheme with _$AppColorScheme {
     required Color onDisabled,
   }) = _AppColorScheme;
 
+  const AppColorScheme._();
+
   factory AppColorScheme.fromMaterialColorScheme(
     ColorScheme colorScheme, {
     required Color disabled,
@@ -77,8 +79,6 @@ class AppColorScheme with _$AppColorScheme {
         disabled: disabled,
         onDisabled: onDisabled,
       );
-
-  const AppColorScheme._();
 
   MaterialColorScheme get materialColorScheme => MaterialColorScheme(
         brightness: brightness,

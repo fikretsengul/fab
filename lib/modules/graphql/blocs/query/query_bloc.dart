@@ -15,9 +15,9 @@ abstract class QueryBloc<T> extends Bloc<QueryEvent<T>, QueryState<T>> {
   QueryBloc({required this.options}) : super(QueryState<T>.initial()) {
     on<QueryEvent<T>>(_onEvent);
 
-    result = getIt<GraphQLClient>().watchQuery(options);
+    result = getIt<GraphQLClient>().watchQuery<Object?>(options);
 
-    result.stream.listen((QueryResult result) {
+    result.stream.listen((result) {
       if (state is _QueryStateRefetch &&
           result.source == QueryResultSource.cache &&
           options.fetchPolicy == FetchPolicy.cacheAndNetwork) {
@@ -48,7 +48,12 @@ abstract class QueryBloc<T> extends Bloc<QueryEvent<T>, QueryState<T>> {
   late ObservableQuery<dynamic> result;
 
   void run({Map<String, dynamic>? variables, Object? optimisticResult}) {
-    add(QueryEvent<T>.run(variables: variables, optimisticResult: optimisticResult));
+    add(
+      QueryEvent<T>.run(
+        variables: variables,
+        optimisticResult: optimisticResult,
+      ),
+    );
   }
 
   void refetch() {
@@ -68,11 +73,18 @@ abstract class QueryBloc<T> extends Bloc<QueryEvent<T>, QueryState<T>> {
   bool get isRefetching => state is _QueryStateRefetch<T>;
 
   bool get hasData =>
-      state is _QueryStateLoaded<T> || state is _QueryStateFetchMore<T> || state is _QueryStateRefetch<T>;
+      state is _QueryStateLoaded<T> ||
+      state is _QueryStateFetchMore<T> ||
+      state is _QueryStateRefetch<T>;
 
   bool get hasError => state is _QueryStateError<T>;
 
-  AlertModel get getError => graphQLExceptionHandler((state as _QueryStateError<T>).error);
+  AlertModel get getError =>
+      graphQLExceptionHandler((state as _QueryStateError<T>).error);
+
+  void dispose() {
+    result.close();
+  }
 
   Future<void> _onEvent(
     QueryEvent<T> event,
@@ -83,21 +95,25 @@ abstract class QueryBloc<T> extends Bloc<QueryEvent<T>, QueryState<T>> {
         emit(QueryState<T>.error(error: e.error, result: e.result));
       },
       run: (e) {
-        result.options =
-            result.options.copyWithVariables(e.variables != null ? e.variables! : result.options.variables);
+        result.options = result.options.copyWithVariables(
+          e.variables != null ? e.variables! : result.options.variables,
+        );
 
         if (e.optimisticResult != null) {
-          result.options = result.options.copyWithOptimisticResult(e.optimisticResult);
+          result.options =
+              result.options.copyWithOptimisticResult(e.optimisticResult);
         }
 
         result.fetchResults();
       },
       loading: (e) async => emit(QueryState.loading(result: e.result)),
-      loaded: (e) async => emit(QueryState<T>.loaded(data: e.data, result: e.result)),
+      loaded: (e) async =>
+          emit(QueryState<T>.loaded(data: e.data, result: e.result)),
       refetch: (e) async {
         emit(
           QueryState<T>.refetch(
-            data: state.maybeWhen(loaded: (data, _) => data, orElse: () => null),
+            data:
+                state.maybeWhen(loaded: (data, _) => data, orElse: () => null),
           ),
         );
 
@@ -105,15 +121,14 @@ abstract class QueryBloc<T> extends Bloc<QueryEvent<T>, QueryState<T>> {
       },
       fetchMore: (e) async {
         QueryState<T>.fetchMore(
-          data: state.maybeWhen(loaded: (data, _) => data!, orElse: () => null as T),
+          data: state.maybeWhen(
+            loaded: (data, _) => data!,
+            orElse: () => null as T,
+          ),
         );
 
         await result.fetchMore(e.options);
       },
     );
-  }
-
-  void dispose() {
-    result.close();
   }
 }

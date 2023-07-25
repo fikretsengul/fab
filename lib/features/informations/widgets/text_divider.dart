@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class TextDivider extends StatelessWidget {
-  const TextDivider({super.key, required this.text});
+  const TextDivider({required this.text, super.key});
 
   final String text;
 

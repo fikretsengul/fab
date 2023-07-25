@@ -7,8 +7,8 @@ import 'package:flutter_advanced_boilerplate/theme/text/app_typography.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 
 Future<ThemeData> createTheme({
-  Color? color,
   required Brightness brightness,
+  Color? color,
 }) async {
   final colorScheme = _getColorScheme(color: color, brightness: brightness);
   final dynamicColorScheme = await _getDynamicColors(brightness: brightness);
@@ -19,10 +19,16 @@ Future<ThemeData> createTheme({
     brightness: brightness,
   );
 
-  final appTypography = AppTypography.create(fontFamily: $constants.theme.defaultFontFamily);
-  final textTheme = _getTextTheme(appTypography: appTypography, brightness: brightness);
+  final appTypography =
+      AppTypography.create(fontFamily: $constants.theme.defaultFontFamily);
+  final textTheme =
+      _getTextTheme(appTypography: appTypography, brightness: brightness);
 
-  final primaryColor = ElevationOverlay.colorWithOverlay(appColorScheme.surface, appColorScheme.primary, 3);
+  final primaryColor = ElevationOverlay.colorWithOverlay(
+    appColorScheme.surface,
+    appColorScheme.primary,
+    3,
+  );
   final customOnPrimaryColor = appColorScheme.primary.withOpacity(0.5);
 
   return ThemeData(
@@ -33,7 +39,6 @@ Future<ThemeData> createTheme({
     brightness: appColorScheme.brightness,
     typography: appTypography.materialTypography,
     useMaterial3: true,
-    toggleableActiveColor: customOnPrimaryColor,
     appBarTheme: AppBarTheme(
       elevation: $constants.theme.defaultElevation,
       systemOverlayStyle: createOverlayStyle(
@@ -61,6 +66,48 @@ Future<ThemeData> createTheme({
         ),
       ),
     ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return customOnPrimaryColor;
+        }
+        return null;
+      }),
+    ),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return customOnPrimaryColor;
+        }
+        return null;
+      }),
+    ),
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return customOnPrimaryColor;
+        }
+        return null;
+      }),
+      trackColor: MaterialStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return customOnPrimaryColor;
+        }
+        return null;
+      }),
+    ),
   );
 }
 
@@ -74,7 +121,8 @@ SystemUiOverlayStyle createOverlayStyle({
     systemNavigationBarColor: primaryColor,
     systemNavigationBarContrastEnforced: false,
     systemStatusBarContrastEnforced: false,
-    systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+    systemNavigationBarIconBrightness:
+        isDark ? Brightness.light : Brightness.dark,
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
@@ -92,8 +140,8 @@ Future<ColorScheme?> _getDynamicColors({required Brightness brightness}) async {
 }
 
 ColorScheme _getColorScheme({
-  Color? color,
   required Brightness brightness,
+  Color? color,
 }) {
   return ColorScheme.fromSeed(
     seedColor: color ?? $constants.theme.defaultThemeColor,
@@ -102,10 +150,10 @@ ColorScheme _getColorScheme({
 }
 
 AppColorScheme _getAppColorScheme({
-  Color? color,
   required ColorScheme colorScheme,
-  ColorScheme? dynamicColorScheme,
   required Brightness brightness,
+  Color? color,
+  ColorScheme? dynamicColorScheme,
 }) {
   final isDark = brightness == Brightness.dark;
 
@@ -124,5 +172,7 @@ AppTextTheme _getTextTheme({
   required AppTypography appTypography,
   required Brightness brightness,
 }) {
-  return brightness == Brightness.dark ? appTypography.white : appTypography.black;
+  return brightness == Brightness.dark
+      ? appTypography.white
+      : appTypography.black;
 }

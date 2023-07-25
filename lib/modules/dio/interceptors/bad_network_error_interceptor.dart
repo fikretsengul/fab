@@ -5,8 +5,12 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 
 class BadNetworkErrorInterceptor extends Interceptor {
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (err.response == null && !await getIt<InternetConnectionCheckerPlus>().hasConnection) {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    if (err.response == null &&
+        !await getIt<InternetConnection>().hasInternetAccess) {
       return handler.reject(
         BadNetworkException(
           requestOptions: err.requestOptions,

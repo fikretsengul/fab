@@ -6,7 +6,14 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 part 'alert_model.freezed.dart';
 
-enum AlertType { constructive, destructive, error, notification, exception, quiet }
+enum AlertType {
+  constructive,
+  destructive,
+  error,
+  notification,
+  exception,
+  quiet
+}
 
 @freezed
 class AlertModel with _$AlertModel {
@@ -44,22 +51,18 @@ class AlertModel with _$AlertModel {
     var translatable = false;
 
     switch (exception) {
-      case BadNetworkException:
-      case NetworkException:
+      case BadNetworkException _:
+      case NetworkException _:
         message = t['core.errors.others.no_internet_connection'] as String;
         translatable = true;
-        break;
-      case InternalServerException:
+      case InternalServerException _:
         message = t['core.errors.others.server_failure'] as String;
         translatable = true;
-        break;
-      case InvalidJsonFormatException:
+      case InvalidJsonFormatException _:
         message = t['core.errors.others.communication_error'] as String;
         translatable = true;
-        break;
-      case ApiException:
-        message = (exception as ApiException).errorMessage;
-        break;
+      case ApiException _:
+        message = exception.errorMessage;
       default:
         message = exception.toString();
         break;
@@ -76,7 +79,8 @@ class AlertModel with _$AlertModel {
     );
   }
 
-  factory AlertModel.initial() => AlertModel.alert(message: '', type: AlertType.quiet);
+  factory AlertModel.initial() =>
+      AlertModel.alert(message: '', type: AlertType.quiet);
 
   factory AlertModel.quiet() {
     return const AlertModel(

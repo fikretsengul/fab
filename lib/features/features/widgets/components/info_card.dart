@@ -8,59 +8,19 @@ import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
-    super.key,
     required this.title,
     required this.content,
+    super.key,
     this.icon,
     this.widget,
     this.isPlaceholder = false,
   });
 
-  final String title;
   final String content;
   final IconData? icon;
-  final Widget? widget;
   final bool isPlaceholder;
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = widget != null ? Theme.of(context).primaryTextTheme : Theme.of(context).textTheme;
-
-    return CustomContainerTransform(
-      openWidget: widget,
-      closedBuilder: (context, _) {
-        return isPlaceholder
-            ? _buildSkeleton(context)
-            : Card(
-                color: widget != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
-                child: Padding(
-                  padding: EdgeInsets.all($constants.insets.sm),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: textTheme.titleLarge!.apply(fontWeightDelta: 2),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        content,
-                        style: textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 16),
-                      Icon(
-                        icon,
-                        size: 32,
-                        color: textTheme.bodyMedium!.color,
-                      ),
-                    ],
-                  ),
-                ),
-              );
-      },
-    );
-  }
+  final String title;
+  final Widget? widget;
 
   Widget _buildSkeleton(BuildContext context) {
     final rnd = Random();
@@ -68,7 +28,9 @@ class InfoCard extends StatelessWidget {
     return SizedBox(
       height: 275,
       child: Card(
-        color: widget != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
+        color: widget != null
+            ? getCustomOnPrimaryColor(context)
+            : getPrimaryColor(context),
         child: Padding(
           padding: EdgeInsets.all($constants.insets.sm),
           child: SkeletonLoader(
@@ -110,6 +72,50 @@ class InfoCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = widget != null
+        ? Theme.of(context).primaryTextTheme
+        : Theme.of(context).textTheme;
+
+    return CustomContainerTransform(
+      openWidget: widget,
+      closedBuilder: (context, _) {
+        return isPlaceholder
+            ? _buildSkeleton(context)
+            : Card(
+                color: widget != null
+                    ? getCustomOnPrimaryColor(context)
+                    : getPrimaryColor(context),
+                child: Padding(
+                  padding: EdgeInsets.all($constants.insets.sm),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: textTheme.titleLarge!.apply(fontWeightDelta: 2),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        content,
+                        style: textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 16),
+                      Icon(
+                        icon,
+                        size: 32,
+                        color: textTheme.bodyMedium!.color,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+      },
     );
   }
 }

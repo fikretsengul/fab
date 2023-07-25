@@ -11,6 +11,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 @isTest
 void screenshotTest<MC, S>(
   String description, {
+  required Widget Function(MC?, FormGroup?) screen,
   MockCubit<S>? cubit,
   S? initialState,
   S? finalState,
@@ -18,7 +19,6 @@ void screenshotTest<MC, S>(
   void Function(FormGroup)? formAction,
   FutureOr<void> Function()? setUp,
   Future<void> Function(Key, WidgetTester)? widgetTest,
-  required Widget Function(MC?, FormGroup?) screen,
   Future<void> Function(WidgetTester)? customPump,
 }) {
   return testGoldens(
@@ -27,7 +27,8 @@ void screenshotTest<MC, S>(
       final builder = DeviceBuilder(
         bgColor: Colors.lightBlue,
       )..addScenario(
-          onCreate: widgetTest != null ? (key) => widgetTest(key, tester) : null,
+          onCreate:
+              widgetTest != null ? (key) => widgetTest(key, tester) : null,
           widget: Builder(
             builder: (context) {
               if (cubit != null && initialState != null) {
@@ -55,7 +56,8 @@ void screenshotTest<MC, S>(
       await screenMatchesGolden(
         tester,
         description,
-        customPump: customPump ?? (tester) => tester.pump(const Duration(milliseconds: 500)),
+        customPump: customPump ??
+            (tester) => tester.pump(const Duration(milliseconds: 500)),
       );
     },
   );

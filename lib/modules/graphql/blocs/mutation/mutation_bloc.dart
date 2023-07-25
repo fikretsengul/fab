@@ -7,15 +7,26 @@ part 'mutation_bloc.freezed.dart';
 part 'mutation_event.dart';
 part 'mutation_state.dart';
 
-abstract class MutationBloc<T> extends Bloc<MutationEvent<T>, MutationState<T>> {
+abstract class MutationBloc<T>
+    extends Bloc<MutationEvent<T>, MutationState<T>> {
   MutationBloc({required this.options}) : super(const MutationState.initial()) {
     on<MutationEvent<T>>(_onEvent);
 
-    request = getIt<GraphQLClient>().watchQuery(options);
+    request = getIt<GraphQLClient>().watchQuery<Object?>(options);
   }
 
   final WatchQueryOptions<Object?> options;
   late ObservableQuery<dynamic> request;
+
+  void run(Map<String, dynamic> variables, {Object? optimisticResult}) {
+    add(MutationEvent<T>.run(variables, optimisticResult: optimisticResult));
+  }
+
+  T parseData(Map<String, dynamic>? data);
+
+  void dispose() {
+    request.close();
+  }
 
   Future<void> _onEvent(
     MutationEvent<T> event,
@@ -53,15 +64,5 @@ abstract class MutationBloc<T> extends Bloc<MutationEvent<T>, MutationState<T>> 
         );
       },
     );
-  }
-
-  void run(Map<String, dynamic> variables, {Object? optimisticResult}) {
-    add(MutationEvent<T>.run(variables, optimisticResult: optimisticResult));
-  }
-
-  T parseData(Map<String, dynamic>? data);
-
-  void dispose() {
-    request.close();
   }
 }

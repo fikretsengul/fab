@@ -9,8 +9,8 @@ import 'package:styled_text/styled_text.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    super.key,
     required this.formControlName,
+    super.key,
     this.validationMessages,
     this.keyboardType,
     this.textCapitalization = TextCapitalization.none,
@@ -38,6 +38,8 @@ class CustomTextField extends StatefulWidget {
         );
 
   final Map<String, String> Function(FormControl<Object?>)? validationMessages;
+  final void Function(FormControl<Object?>)? onTap;
+  final void Function(FormControl<Object?>)? onSubmitted;
   final String extraInfo;
   final String formControlName;
   final bool hasCounter;
@@ -50,15 +52,13 @@ class CustomTextField extends StatefulWidget {
   final int? maxLines;
   final int? minLength;
   final int? minLines;
-  final void Function(FormControl<Object?>)? onTap;
+  final bool obscureText;
   final bool readOnly;
   final bool showErrors;
   final String staticValue;
   final Widget? suffixIcon;
   final TextCapitalization textCapitalization;
-  final bool obscureText;
   final TextInputAction? textInputAction;
-  final void Function(FormControl<Object?>)? onSubmitted;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -69,11 +69,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   late Color _textFieldBackground;
 
   @override
-  void initState() {
-    _focusNode.addListener(() {
-      onFocusChange(focus: _focusNode.hasFocus);
-    });
-    super.initState();
+  void didChangeDependencies() {
+    _textFieldBackground = getCustomOnPrimaryColor(context).withOpacity(0.05);
+    super.didChangeDependencies();
   }
 
   @override
@@ -83,9 +81,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   @override
-  void didChangeDependencies() {
-    _textFieldBackground = getCustomOnPrimaryColor(context).withOpacity(0.05);
-    super.didChangeDependencies();
+  void initState() {
+    _focusNode.addListener(() {
+      onFocusChange(focus: _focusNode.hasFocus);
+    });
+    super.initState();
   }
 
   void onFocusChange({required bool focus}) {
@@ -99,33 +99,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
   InputDecoration getTextFieldDecoration(FormGroup form) {
     return InputDecoration(
       disabledBorder: UnderlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular($constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular($constants.theme.defaultBorderRadius),
+        ),
         borderSide: const BorderSide(
           style: BorderStyle.none,
         ),
       ),
       enabledBorder: UnderlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular($constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular($constants.theme.defaultBorderRadius),
+        ),
         borderSide: const BorderSide(
           style: BorderStyle.none,
         ),
       ),
       errorBorder: UnderlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular($constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular($constants.theme.defaultBorderRadius),
+        ),
         borderSide: BorderSide(
           color: $constants.palette.red.withOpacity(0.3),
           width: 4,
         ),
       ),
       focusedErrorBorder: UnderlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular($constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular($constants.theme.defaultBorderRadius),
+        ),
         borderSide: BorderSide(
           color: $constants.palette.red.withOpacity(0.3),
           width: 4,
         ),
       ),
       focusedBorder: UnderlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular($constants.theme.defaultBorderRadius)),
+        borderRadius: BorderRadius.all(
+          Radius.circular($constants.theme.defaultBorderRadius),
+        ),
         borderSide: BorderSide(
           color: widget.isRequired && form.control(widget.formControlName).valid
               ? $constants.palette.green.withOpacity(0.5)
@@ -168,18 +178,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             decoration: BoxDecoration(
               border: Border.fromBorderSide(
-                BorderSide(color: getCustomOnPrimaryColor(context).withOpacity(0.2)),
+                BorderSide(
+                  color: getCustomOnPrimaryColor(context).withOpacity(0.2),
+                ),
               ),
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
             child: StyledText(
               text: '<bold>$currentLength</bold>/$maxLength',
-              style: getTextTheme(context).caption,
+              style: getTextTheme(context).bodySmall,
               tags: {
                 'bold': StyledTextTag(
-                  style: getTextTheme(context).caption!.apply(
+                  style: getTextTheme(context).bodySmall!.apply(
                         fontWeightDelta: 1,
-                        color: widget.minLength != null && currentLength < widget.minLength!
+                        color: widget.minLength != null &&
+                                currentLength < widget.minLength!
                             ? $constants.palette.red.withOpacity(0.5)
                             : getTheme(context).primary,
                       ),
@@ -190,7 +203,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   IconData getIcon(FormGroup form) {
-    if (form.status != ControlStatus.disabled && !form.control(widget.formControlName).valid) {
+    if (form.status != ControlStatus.disabled &&
+        !form.control(widget.formControlName).valid) {
       return MdiIcons.asterisk;
     }
 
@@ -211,32 +225,46 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 children: [
                   ReactiveTextField(
                     showErrors: widget.showErrors ? null : (_) => false,
-                    controller: widget.staticValue.isNotEmpty ? TextEditingController(text: widget.staticValue) : null,
+                    controller: widget.staticValue.isNotEmpty
+                        ? TextEditingController(text: widget.staticValue)
+                        : null,
                     readOnly: widget.readOnly,
                     obscureText: widget.obscureText,
                     onTap: widget.onTap,
                     formControlName: widget.formControlName,
                     validationMessages: {
-                      ValidationMessage.minLength: (_) => Translations.of(context)
-                          .core
-                          .errors
-                          .form
-                          .minLength(field: widget.labelText, count: widget.minLength.toString()),
-                      ValidationMessage.maxLength: (_) => Translations.of(context)
-                          .core
-                          .errors
-                          .form
-                          .maxLength(field: widget.labelText, count: widget.maxLength.toString()),
-                      ValidationMessage.required: (_) => context.t.core.errors.form.required(field: widget.labelText),
-                      ValidationMessage.email: (_) => context.t.core.errors.form.email,
+                      ValidationMessage.minLength: (_) =>
+                          Translations.of(context).core.errors.form.minLength(
+                                field: widget.labelText,
+                                count: widget.minLength.toString(),
+                              ),
+                      ValidationMessage.maxLength: (_) =>
+                          Translations.of(context).core.errors.form.maxLength(
+                                field: widget.labelText,
+                                count: widget.maxLength.toString(),
+                              ),
+                      ValidationMessage.required: (_) => context
+                          .t.core.errors.form
+                          .required(field: widget.labelText),
+                      ValidationMessage.email: (_) =>
+                          context.t.core.errors.form.email,
                     },
                     maxLength: widget.maxLength,
                     maxLines: widget.maxLines,
                     minLines: widget.minLines,
                     keyboardType: widget.keyboardType,
                     textCapitalization: widget.textCapitalization,
-                    buildCounter: (context, {required int currentLength, required bool isFocused, int? maxLength}) {
-                      return buildCounter(context, currentLength: currentLength, maxLength: maxLength);
+                    buildCounter: (
+                      context, {
+                      required currentLength,
+                      required isFocused,
+                      maxLength,
+                    }) {
+                      return buildCounter(
+                        context,
+                        currentLength: currentLength,
+                        maxLength: maxLength,
+                      );
                     },
                     decoration: getTextFieldDecoration(form),
                     inputFormatters: widget.inputFormatters,
@@ -253,7 +281,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             MdiIcons.information,
                             size: 16,
                           ),
@@ -262,7 +290,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                               padding: const EdgeInsets.only(left: 8),
                               child: Text(
                                 widget.extraInfo,
-                                style: getTextTheme(context).caption!.copyWith(fontStyle: FontStyle.italic),
+                                style: getTextTheme(context)
+                                    .bodySmall!
+                                    .copyWith(fontStyle: FontStyle.italic),
                               ),
                             ),
                           ),

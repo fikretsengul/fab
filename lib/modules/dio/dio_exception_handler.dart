@@ -29,19 +29,19 @@ void reportException(Object e) {
   );
 }
 
-class BadNetworkException extends DioError implements Exception {
+class BadNetworkException extends DioException {
   BadNetworkException({required super.requestOptions});
 }
 
-class InternalServerException extends DioError implements Exception {
+class InternalServerException extends DioException {
   InternalServerException({required super.requestOptions});
 }
 
-class UnauthenticatedException extends DioError implements Exception {
+class UnauthenticatedException extends DioException {
   UnauthenticatedException({required super.requestOptions});
 }
 
-class ApiException extends DioError implements Exception {
+class ApiException extends DioException {
   ApiException({
     required this.errorMessage,
     required super.requestOptions,
@@ -53,6 +53,6 @@ class ApiException extends DioError implements Exception {
   final String errorMessage;
 }
 
-class InvalidJsonFormatException extends DioError implements Exception {
+class InvalidJsonFormatException extends DioException {
   InvalidJsonFormatException({required super.requestOptions});
 }
