@@ -28,7 +28,7 @@ class DioTokenRefresh {
     }
 
     try {
-      // TODO -> Implement dio token refresh algorithm.
+      // TODO(fikretsengul): Implement dio token refresh algorithm.
 
       return token;
     } catch (e) {

@@ -46,7 +46,7 @@ android {
     defaultConfig {
         applicationId "com.example.flutter_advanced_boilerplate"
         manifestPlaceholders = [applicationName: "android.app.Application"]
-        minSdkVersion 23 //flutter.minSdkVersion
+        minSdkVersion 25 //flutter.minSdkVersion
         targetSdkVersion 33 //flutter.targetSdkVersion
         versionCode 6.toInteger() //flutterVersionCode.toInteger()
         versionName '1.0.0' //flutterVersionName

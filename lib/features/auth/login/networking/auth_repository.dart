@@ -48,7 +48,7 @@ class AuthRepository {
 
   Future<DC<AlertModel, void>> logout({required AuthModel auth}) async {
     try {
-      // TODO: Implement custom logout operation with auth model.
+      // TODO(fikretsengul): Implement custom logout operation with auth model.
 
       return DC.data(null);
     } catch (e) {

@@ -2,12 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0+5](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b26dbb2..XXXXXXX) - 2022-11-10
+## [1.0.0+6](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/526ae91..XXXXXXX) - 2023-07-25
 
-### Upcoming enhancements
+### Enhancements
 
-- Codemagic configuration is not completed yet. CI & CD implementation will be completed.
-- `isar` local storage solution will be implemented instead of `hive` with an example feature.
+- Dependencies and flutter sdk updated to their latest versions. (from `>=2.18.2 <3.0.0` to `>=3.0.6 <4.0.0`)
+- Android and iOS projects and configurations updated. (Minimum iOS v. Latest 17-4= `iOS 13` - Minimum Android SDK v. Latest 33-8= `SDK 25, Android 7`)
+- Linting rules updated and styling applied to the code with ['flutter-stylizer'](https://github.com/gmlewis/go-flutter-stylizer). (Run this command `./flutter-stylizer -w lib/...` to manually stylize)
+
+## [1.0.0+5](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b26dbb2..526ae91) - 2022-11-10
 
 ### New features
 
