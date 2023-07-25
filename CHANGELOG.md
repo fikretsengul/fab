@@ -6,15 +6,31 @@ All notable changes to this project will be documented in this file.
 
 ### Enhancements
 
-- Dependencies and flutter sdk updated to their latest versions. (from `>=2.18.2 <3.0.0` to `>=3.0.6 <4.0.0`)
+- A simple CLI `fvm` to manage Flutter SDK configured in order to allows for consistency among users. (In case of future flutter updates, this will ensure long-term compabilty.)
+- Dependencies (their versions fixed to ensure long-term compability) and flutter sdk updated to their latest versions. (from `>=2.18.2 <3.0.0` to `>=3.0.6 <4.0.0`)
 - Android and iOS projects and configurations updated. (Minimum iOS v. Latest 17-4= `iOS 13` - Minimum Android SDK v. Latest 33-8= `SDK 25, Android 7`)
-- Linting rules updated and styling applied to the code with ['flutter-stylizer'](https://github.com/gmlewis/go-flutter-stylizer). (Run this command `./flutter-stylizer -w lib/...` to manually stylize)
+- Linting rules updated and styling applied to the code with [flutter-stylizer](https://github.com/gmlewis/go-flutter-stylizer). (Run this command `./flutter-stylizer -w lib/...` to manually stylize)
+
+**NOTE:** You should [install fvm first](https://fvm.app/docs/getting_started/installation) and add the version symlink for a dynamic switch. VS Code will always use the version selected within the project for all IDE tooling. Also, remove the Flutter SDK from search to make things easier. Just create a folder inside the project called `.vscode` and then create a file called `settings.json` and add the following file:
+```
+{
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  // Remove .fvm files from search
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  // Remove from file watching
+  "files.watcherExclude": {
+    "**/.fvm": true
+  }
+}
+```
 
 ## [1.0.0+5](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/b26dbb2..526ae91) - 2022-11-10
 
 ### New features
 
-- ['Permission handling'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/14) system implemented for only mobile and an example added about image picker.
+- [Permission handling](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/14) system implemented for only mobile and an example added about image picker.
 - `shimmer` added for skeletons, `keframe` added for performance, `url_strategy` added to remove '#' from the url of the web version, `image_picker` added for image picker example, `permission_handler` added in order to manage permissions on only mobile.
 
 ### Enhancements
@@ -26,8 +42,8 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-- ['AuthCubit close when app still using'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/12) issue fixed.
-- ['Login screen - takes hitting tab twice to move to password field on web'](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/9) issue fixed.
+- [AuthCubit close when app still using](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/12) issue fixed.
+- [Login screen - takes hitting tab twice to move to password field on web](https://github.com/fikretsengul/flutter_advanced_boilerplate/issues/9) issue fixed.
 
 ## [1.0.0+4](https://github.com/fikretsengul/flutter_advanced_boilerplate/compare/aa4432a..b26dbb2) - 2022-11-05
 

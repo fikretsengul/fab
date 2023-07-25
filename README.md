@@ -107,29 +107,29 @@ $ git clone https://github.com/fikretsengul/flutter_advanced_boilerplate
 $ cd flutter_advanced_boilerplate
 
 # Install dependencies
-$ flutter pub get
+$ fvm flutter pub get
 
 # Generate structured language files
-$ flutter pub run slang
+$ fvm flutter pub run slang
 
 # Checks missing and unused translations
-$ flutter pub run slang analyze
+$ fvm flutter pub run slang analyze
 
 # Generate data classes & structured asset files
-$ flutter packages pub run build_runner build -d
+$ fvm flutter packages pub run build_runner build -d
 
 # Update goldens & Execute tests
-$ flutter test --update-goldens
+$ fvm flutter test --update-goldens
 
 # Run the app
-$ flutter run
+$ fvm flutter run
 
 # Run the app on web
-$ flutter run -d chrome --web-renderer html (low performance, low download size)
-$ flutter run -d chrome --web-renderer canvaskit (high performance, high download size)
+$ fvm flutter run -d chrome --web-renderer html (low performance, low download size)
+$ fvm flutter run -d chrome --web-renderer canvaskit (high performance, high download size)
 
 # If you update your splash screen configuration you can regenerate it via
-$ flutter pub run flutter_native_splash:create
+$ fvm flutter pub run flutter_native_splash:create
 ```
 ### Hide Generated Files
 In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing the `'Add Pattern'` button:
