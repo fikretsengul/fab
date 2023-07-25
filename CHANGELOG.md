@@ -6,8 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Enhancements
 
-- A simple CLI `fvm` to manage Flutter SDK configured in order to allows for consistency among users. (In case of future flutter updates, this will ensure long-term compabilty.)
-- Dependencies (their versions fixed to ensure long-term compability) and flutter sdk updated to their latest versions. (from `>=2.18.2 <3.0.0` to `>=3.0.6 <4.0.0`)
+- A simple CLI `fvm` to manage Flutter SDK configured for long-term sdk compability.
+- Dependencies (their versions fixed to ensure long-term dependency compability) and flutter sdk updated to their latest versions. (from `>=2.18.2 <3.0.0` to `>=3.0.6 <4.0.0`)
 - Android and iOS projects and configurations updated. (Minimum iOS v. Latest 17-4= `iOS 13` - Minimum Android SDK v. Latest 33-8= `SDK 25, Android 7`)
 - Linting rules updated and styling applied to the code with [flutter-stylizer](https://github.com/gmlewis/go-flutter-stylizer). (Run this command `./flutter-stylizer -w lib/...` to manually stylize)
 
