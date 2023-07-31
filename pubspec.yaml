@@ -75,7 +75,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   internet_connection_checker_plus: ^1.0.1
   json_theme: ^4.0.2+2
-  shimmer: ^2.0.0
+  shimmer: ^3.0.0
   keframe: ^3.0.0
   url_strategy: ^0.2.0
   image_picker: ^0.8.6
