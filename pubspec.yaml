@@ -91,7 +91,7 @@ dev_dependencies:
   # lints to activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  very_good_analysis: ^3.1.0
+  very_good_analysis: ^4.0.0+1
   auto_route_generator: ^5.0.2
   injectable_generator: ^1.5.4
   build_runner: ^2.3.0
