@@ -14,6 +14,7 @@ class Constants {
   late final api = _API();
 
   final appTitle = 'Flutter Advanced Boilerplate';
+
   /// Rounded edge corner radiuses.
   late final corners = _Corners();
 

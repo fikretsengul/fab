@@ -34,9 +34,7 @@ class GraphQLLink extends Link {
     Stream<Response> Function(Request)? forward,
   ]) async* {
     final currentToken = await _tokenRefresh.fresh.token;
-    final tokenHeader = currentToken != null
-        ? _tokenRefresh.getHeader(currentToken)
-        : const <String, String>{};
+    final tokenHeader = currentToken != null ? _tokenRefresh.getHeader(currentToken) : const <String, String>{};
 
     if (_isSubscription) {
       if (_socketClient == null) {

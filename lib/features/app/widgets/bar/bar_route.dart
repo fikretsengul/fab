@@ -22,6 +22,7 @@ class BarRoute<T> extends OverlayRoute<T> {
 
   final Bar<dynamic> bar;
   BarStatus? currentStatus;
+
   /// This string is a workaround until Dismissible supports a returning item.
   String dismissibleKeyGen = '';
 
@@ -149,8 +150,7 @@ class BarRoute<T> extends OverlayRoute<T> {
   }
 
   @override
-  bool get finishedWhenPopped =>
-      _controller!.status == AnimationStatus.dismissed;
+  bool get finishedWhenPopped => _controller!.status == AnimationStatus.dismissed;
 
   @override
   void install() {
@@ -282,8 +282,7 @@ class BarRoute<T> extends OverlayRoute<T> {
         {
           _initialAlignment = const Alignment(-1, -2);
           _endAlignment = bar.endOffset != null
-              ? Alignment.topLeft +
-                  Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
+              ? Alignment.topLeft + Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
               : Alignment.topLeft;
           break;
         }
@@ -291,8 +290,7 @@ class BarRoute<T> extends OverlayRoute<T> {
         {
           _initialAlignment = const Alignment(-1, 2);
           _endAlignment = bar.endOffset != null
-              ? Alignment.topLeft +
-                  Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
+              ? Alignment.topLeft + Alignment(bar.endOffset!.dx, bar.endOffset!.dy)
               : Alignment.topLeft;
           break;
         }
@@ -359,8 +357,7 @@ class BarRoute<T> extends OverlayRoute<T> {
       direction: _getDismissDirection(),
       resizeDuration: null,
       confirmDismiss: (_) {
-        if (currentStatus == BarStatus.isAppearing ||
-            currentStatus == BarStatus.isHiding) {
+        if (currentStatus == BarStatus.isAppearing || currentStatus == BarStatus.isHiding) {
           return Future.value(false);
         }
 

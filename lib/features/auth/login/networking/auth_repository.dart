@@ -37,8 +37,7 @@ class AuthRepository {
       return DC.data(auth);
     } else {
       final alert = AlertModel.alert(
-        message:
-            'ID or PW is wrong. Please enter test for demo to both fields.',
+        message: 'ID or PW is wrong. Please enter test for demo to both fields.',
         type: AlertType.destructive,
       );
 

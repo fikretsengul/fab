@@ -23,8 +23,7 @@ class BottomNavigation extends StatelessWidget {
       child: NavigationBar(
         height: 60,
         selectedIndex: currentPageIndex,
-        onDestinationSelected: (index) =>
-            getIt<AppCubit>().changePageIndex(index: index),
+        onDestinationSelected: (index) => getIt<AppCubit>().changePageIndex(index: index),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         destinations: destinations,
       ),

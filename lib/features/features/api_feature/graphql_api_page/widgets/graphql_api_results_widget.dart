@@ -51,10 +51,8 @@ class GraphQLApiResultsWidget extends StatelessWidget {
         : ListView.builder(
             itemCount: posts.length,
             itemBuilder: (context, index) {
-              if (BlocProvider.of<GetPostsGraphQLBloc>(context)
-                  .shouldFetchMore(index, 5)) {
-                BlocProvider.of<GetPostsGraphQLBloc>(context)
-                    .fetchMore(offset: posts.length);
+              if (BlocProvider.of<GetPostsGraphQLBloc>(context).shouldFetchMore(index, 5)) {
+                BlocProvider.of<GetPostsGraphQLBloc>(context).fetchMore(offset: posts.length);
               }
 
               Widget tile = FrameSeparateWidget(

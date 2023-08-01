@@ -27,8 +27,7 @@ void screenshotTest<MC, S>(
       final builder = DeviceBuilder(
         bgColor: Colors.lightBlue,
       )..addScenario(
-          onCreate:
-              widgetTest != null ? (key) => widgetTest(key, tester) : null,
+          onCreate: widgetTest != null ? (key) => widgetTest(key, tester) : null,
           widget: Builder(
             builder: (context) {
               if (cubit != null && initialState != null) {
@@ -56,8 +55,7 @@ void screenshotTest<MC, S>(
       await screenMatchesGolden(
         tester,
         description,
-        customPump: customPump ??
-            (tester) => tester.pump(const Duration(milliseconds: 500)),
+        customPump: customPump ?? (tester) => tester.pump(const Duration(milliseconds: 500)),
       );
     },
   );

@@ -9,8 +9,7 @@ AlertModel graphQLExceptionHandler(OperationException result) {
     return e is NetworkException
         ? AlertModel.exception(exception: e)
         : AlertModel.exception(
-            exception:
-                Exception('An unknown graphql client link exception occured.'),
+            exception: Exception('An unknown graphql client link exception occured.'),
           );
   }
 
