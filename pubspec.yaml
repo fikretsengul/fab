@@ -52,7 +52,7 @@ dependencies:
   flutter_native_splash: ^2.2.13
   statsfl: ^2.3.0
   pretty_dio_logger: ^1.2.0-beta-1
-  logger: ^1.1.0
+  logger: ^2.0.2
   dynamic_color: ^1.5.4
   animations: ^2.0.7
   fresh_graphql: ^0.5.2
