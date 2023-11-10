@@ -1,75 +1,55 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
+include: all_lint_rules.yaml
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
-include: package:very_good_analysis/analysis_options.yaml
-
-# Disables warnings that happen in .freezed.dart
 analyzer:
-  plugins: 
-    - dart_code_metrics
-  exclude:
-    - "**/*.g.dart"
-    - "**/*.gr.dart"
-    - "**/*.freezed.dart"
-    - "**/*.config.dart"
-    - "**/*.graphql.dart"
-    - "**/graphql_api.dart"
+  plugins:
+    - custom_lint
+
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
   errors:
-    invalid_annotation_target: ignore
+    deprecated_member_use_from_same_package: ignore
+    included_file_warning: ignore
+    missing_required_param: error
+    missing_return: error
+    parameter_assignments: warning
+    todo: ignore
+
+  exclude:
+    - "**.freezed.dart"
+    - "**.g.dart"
+    - "**.gr.dart"
+    - "bin/cache/**"
+    - "build/**"
+    - "lib/generated_plugin_registrant.dart"
+    - "test/.test_coverage.dart"
+
+custom_lint:
+  rules:
+    - prefer_declaring_const_constructors: false
+    - max_lines_for_file:
+      max_lines: 100
+    - max_lines_for_function:
+      max_lines: 50
 
 linter:
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    public_member_api_docs: false
-    sort_pub_dependencies: false
     lines_longer_than_80_chars: false
+    do_not_use_environment: false
+    discarded_futures: false
+    prefer_expression_function_bodies: false
+    avoid_catches_without_on_clauses: false
+    always_specify_types: false
+    prefer_final_parameters: false
+    prefer_double_quotes: false
     flutter_style_todos: false
-
-dart_code_metrics:
-  metrics:
-    cyclomatic-complexity: 20
-    maximum-nesting-level: 5
-    number-of-parameters: 4
-    source-lines-of-code: 50
-  metrics-exclude:
-    - test/**
-    - "**/*.g.dart"
-    - "**/*.gr.dart"
-    - "**/*.freezed.dart"
-    - "**/*.config.dart"
-    - "**/*.graphql.dart"
-    - "**/graphql_api.dart"
-  rules:
-    - avoid-collection-methods-with-unrelated-types
-    - avoid-global-state
-    - avoid-missing-enum-constant-in-map
-    - avoid-non-ascii-symbols
-    - avoid-unnecessary-type-assertions
-    - avoid-unnecessary-type-casts
-    - avoid-unrelated-type-assertions
-    - avoid-unused-parameters
-    - binary-expression-operand-order
-    - double-literal-format
-    - format-comment
-    - newline-before-return
-    - no-boolean-literal-compare
-    - no-equal-then-else
-    - no-object-declaration
-    - prefer-async-await
-    - prefer-commenting-analyzer-ignores
-    - prefer-conditional-expressions
-    - prefer-first
-    - prefer-immediate-return
-    - prefer-last
-    - prefer-trailing-comma
-    - tag-name
-    - always-remove-listener
-    - avoid-border-all
-    - avoid-unnecessary-setstate
-    - prefer-const-border-radius
+    avoid_annotating_with_dynamic: false
+    sort_constructors_first: false
+    use_decorated_box: false
+    unnecessary_final: false
+    always_use_package_imports: false
+    diagnostic_describe_all_properties: false
+    public_member_api_docs: false
+    one_member_abstracts: false

@@ -1,0 +1,58 @@
+name: flutter_advanced_boilerplate
+repository:
+  type: github
+  origin: https://github.com/fikretsengul/flutter_advanced_boilerplate
+  owner: fikretsengul
+  name: flutter_advanced_boilerplate
+
+packages:
+  - .
+  - features/**
+  - packages/core/**
+  - packages/deps
+  - packages/locator
+
+sdkPath: .fvm/flutter_sdk
+ide:
+  intellij: true
+
+command:
+  version:
+    branch: main
+    linkToCommits: true
+    workspaceChangelog: true
+  bootstrap:
+    runPubGetInParallel: false
+    usePubspecOverrides: true
+    hooks:
+      post: melos run generate --no-select
+
+
+scripts:
+  clean:
+    description: Cleans all packages
+    run: |
+      melos exec -c 1 -- \
+        flutter clean
+
+  analyze:
+    description: Analyzes all packages
+    run: |
+      melos exec -c 5 -- \
+        dart analyze --fatal-infos .
+
+  format:
+    description: Formats all packages
+    run: dart format --set-exit-if-changed .
+
+  generate:
+    description: Generate codes for all packages
+    run:  |
+      melos exec -c 1 --depends-on="build_runner" -- \
+        dart run build_runner build -d
+
+  test:
+    description: Runs packages tests
+    run: |
+      melos exec -c 4 --fail-fast -- \
+        flutter test --coverage

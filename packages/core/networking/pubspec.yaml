@@ -1,0 +1,25 @@
+name: networking
+description: The networking implementation of flutter advanced boilerplate.
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  commons:
+    path: ../commons/
+  deps:
+    path: ../../deps/
+  dio_smart_retry: ^6.0.0
+  flutter:
+    sdk: flutter
+  internet_connection_checker_plus: ^2.1.0
+  locator:
+    path: ../../locator/
+  storage:
+    path: ../storage/
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  injectable_generator: ^2.4.1

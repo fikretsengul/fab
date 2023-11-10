@@ -1,0 +1,27 @@
+name: locator
+description: The locator of dependency injection for flutter advanced boilerplate.
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  analytics:
+    path: ../core/analytics
+  auth:
+    path: ../../features/auth
+  commons:
+    path: ../core/commons
+  deps:
+    path: ../deps
+  flutter:
+    sdk: flutter
+  networking:
+    path: ../core/networking
+  storage:
+    path: ../core/storage
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  injectable_generator: ^2.4.1

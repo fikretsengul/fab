@@ -1,85 +1,71 @@
-import 'dart:async';
+import 'package:analytics/analytics.dart';
+import 'package:analytics/logger.dart';
+import 'package:auth/auth.dart';
+import 'package:deps/flutter_bloc.dart';
+import 'package:deps/flutter_dotenv.dart';
+import 'package:flutter/material.dart' hide Router;
+import 'package:locator/locator.dart';
+import 'package:routing/application.dart';
+import 'package:routing/router.dart';
+import 'package:storage/cache.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_advanced_boilerplate/features/app/app.dart';
-import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:flutter_advanced_boilerplate/modules/bloc_observer/observer.dart';
-import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
-import 'package:flutter_advanced_boilerplate/modules/sentry/sentry_module.dart';
-import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:universal_platform/universal_platform.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'pages/error_page_widget.dart';
+import 'router/pages.dart';
 
-Future<void> main() async {
-  await runZonedGuarded<Future<void>>(
-    () async {
-      // Preserve splash screen until authentication complete.
-      final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-      FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-      // Use device locale.
-      LocaleSettings.useDeviceLocale();
+  // Inits env.
+  await dotenv.load();
 
-      // Removes leading # from the url running on web.
-      setPathUrlStrategy();
+  /// I don’t really like the code duplication implied by
+  /// having multiple main_*.dart files. I prefer determining
+  /// the environment at runtime using the package name & build
+  /// flavors or adding --dart-define=flavor=prod and calling
+  /// String.fromEnvironment('flavor') to initialize the locator.
+  const env = String.fromEnvironment('flavor', defaultValue: 'dev');
 
-      // Configures dependency injection to init modules and singletons.
-      await configureDependencyInjection();
+  // Inits service locator.
+  initLocator(env);
 
-      if (UniversalPlatform.isAndroid) {
-        // Increases android devices preferred refresh rate to its maximum.
-        await FlutterDisplayMode.setHighRefreshRate();
-      }
-
-      if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
-        // Sets up allowed device orientations and other settings for the app.
-        await SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-        );
-      }
-
-      // Sets system overylay style.
-      await SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual,
-        overlays: [
-          SystemUiOverlay.top,
-          SystemUiOverlay.bottom,
-        ],
-      );
-
-      // This setting smoothes transition color for LinearGradient.
-      Paint.enableDithering = true;
-
-      // Inits sentry for error tracking.
-      await initializeSentry();
-
-      // Set bloc observer and hydrated bloc storage.
-      Bloc.observer = Observer();
-      HydratedBloc.storage = await HydratedStorage.build(
-        storageDirectory:
-            UniversalPlatform.isWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
-      );
-
-      return runApp(
-        // Sentrie's performance tracing for AssetBundles.
-        DefaultAssetBundle(
-          bundle: SentryAssetBundle(),
-          child: TranslationProvider(
-            child: const App(),
-          ),
+  runApp(
+    BlocProvider(
+      create: (_) => di<AuthBloc>(),
+      child: ApplicationScope(
+        analytics: di<Analytics>(),
+        logger: di<Logger>(),
+        cache: di<ICache>(),
+        router: Router(
+          onRedirect: onRedirect,
+          errorPage: ErrorPageWidget.delegate,
+          refreshListenable: di<AuthBloc>().isAuthenticatedListenable(),
+          pages: pages,
         ),
-      );
-    },
-    (exception, stackTrace) async {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stackTrace,
-      );
-    },
+        child: Application(
+          title: 'Flutter Advanced Boilerplate',
+          theme: ThemeData.light(),
+        ),
+      ),
+    ),
   );
+}
+
+/// How redirects work for the application.
+String? onRedirect(
+  BuildContext context, {
+  required bool isAuthenticated,
+  required RouteInfo info,
+}) {
+  context.logger.log('isAuthenticated', data: isAuthenticated);
+  context.logger.log('Auth state:', data: di<AuthBloc>().state);
+
+  if (!isAuthenticated && info.path != Pages.login.path) {
+    return Pages.login.path;
+  }
+
+  if (isAuthenticated && info.path == Pages.login.path) {
+    return Pages.testA.path;
+  }
+
+  return null;
 }

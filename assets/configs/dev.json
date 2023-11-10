@@ -1,9 +1,0 @@
-{
-    "env": "dev",
-    "debug": true,
-    "debugShowCheckedModeBanner": false,
-    "debugShowMaterialGrid": false,
-    "debugApiClient": false,
-    "restApiUrl": "https://graphqlzero.almansi.me/api",
-    "graphQLApiUrl": "https://graphqlzero.almansi.me/api"
-}

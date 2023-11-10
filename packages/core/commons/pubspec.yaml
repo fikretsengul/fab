@@ -1,0 +1,21 @@
+name: commons
+description: The commons of flutter advanced boilerplate.
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  analytics:
+    path: ../analytics/
+  deps:
+    path: ../../deps/
+  flutter:
+    sdk: flutter
+  locator:
+    path: ../../locator/
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  injectable_generator: ^2.4.1

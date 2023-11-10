@@ -1,9 +1,0 @@
-{
-    "env": "test",
-    "debug": true,
-    "debugShowCheckedModeBanner": false,
-    "debugShowMaterialGrid": false,
-    "debugApiClient": true,
-    "restApiUrl": "API_URL",
-    "graphQLApiUrl": "GRAPHQL_API_URL"
-}
