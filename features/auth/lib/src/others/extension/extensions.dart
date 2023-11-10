@@ -9,6 +9,7 @@ extension AuthStateToBoolListenableExtension on BlocBase<AuthState> {
     stream.listen((value) {
       notifier.value = value is AuthAuthenticated;
     });
+
     return notifier;
   }
 }

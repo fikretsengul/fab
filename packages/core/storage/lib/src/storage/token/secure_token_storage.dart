@@ -23,14 +23,7 @@ class SecureTokenStorage extends IStorage<OAuth2Token> {
     final token = await _secureStorage.read(key: _key);
 
     if (token != null) {
-      final tokenJson = jsonDecode(token) as Map<String, dynamic>;
-      return OAuth2Token(
-        accessToken: tokenJson['accessToken'] as String,
-        tokenType: tokenJson['tokenType'] as String,
-        expiresIn: tokenJson['expiresIn'] as int,
-        refreshToken: tokenJson['refreshToken'] as String,
-        scope: tokenJson['scope'] as String,
-      );
+      return OAuth2Token.fromJson(jsonDecode(token));
     }
 
     return null;
@@ -40,7 +33,7 @@ class SecureTokenStorage extends IStorage<OAuth2Token> {
   Future<void> write(OAuth2Token value) async {
     await _secureStorage.write(
       key: _key,
-      value: jsonEncode(value),
+      value: jsonEncode(value.toJson()),
     );
   }
 }

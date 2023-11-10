@@ -2,7 +2,6 @@ import 'package:analytics/analytics.dart';
 import 'package:analytics/logger.dart';
 import 'package:auth/auth.dart';
 import 'package:deps/flutter_bloc.dart';
-import 'package:deps/flutter_dotenv.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:locator/locator.dart';
 import 'package:routing/application.dart';
@@ -16,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Inits env.
-  await dotenv.load();
+  //await dotenv.load();
 
   /// I don’t really like the code duplication implied by
   /// having multiple main_*.dart files. I prefer determining

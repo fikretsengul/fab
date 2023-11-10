@@ -1,23 +1,22 @@
-import 'package:deps/flutter_dotenv.dart';
 import 'package:deps/injectable.dart';
+import 'package:envied/envied.dart';
 
 import 'i_env.dart';
 
+part 'env_prod.g.dart';
+
 @Environment('prod')
 @Singleton(as: IEnv)
-class EnvProd extends IEnv {
+@Envied(path: '../../../.env.prod')
+class EnvProd implements IEnv {
   @override
-  String get analyticsUrl => dotenv.get(
-        'ANALYTICS_URL_PROD',
-        fallback: 'https://fallback.analytics.com/prod',
-      );
+  @EnviedField(varName: 'API_URL')
+  final String analyticsUrl = _EnvProd.analyticsUrl;
 
   @override
-  String get apiUrl => dotenv.get(
-        'API_URL_PROD',
-        fallback: 'https://fallback.mock.com/prod',
-      );
+  @EnviedField(varName: 'ANALYTICS_URL')
+  final String apiUrl = _EnvProd.apiUrl;
 
   @override
-  bool get isDebug => false;
+  final bool isDebug = true;
 }

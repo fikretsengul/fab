@@ -1,10 +1,10 @@
-# CUSTOM section is added for this project.
-# OFFICIAL section is taken from the flutter project on
+# <-CUSTOM-> section is added for this project.
+# <-OFFICIAL-> section is taken from the flutter project on
 # https://github.com/flutter/flutter/blob/master/.gitignore
 # If you make changes, don't forget to run;
 # "git rm -r --cached ." and "git add ."
 
-### CUSTOM
+# <-CUSTOM->
 
 # Fvm
 .fvm
@@ -20,7 +20,7 @@
 # Others
 **/.flutter-plugins-dependencies
 
-### OFFICIAL
+# <-OFFICIAL->
 
 # Miscellaneous
 *.class

@@ -1,6 +1,6 @@
+import 'package:auth/auth.dart';
 import 'package:routing/page.dart';
 
-import '../pages/login_page.dart';
 import '../pages/test_layout_page.dart';
 import '../pages/test_page_a.dart';
 import '../pages/test_page_b.dart';
@@ -35,6 +35,6 @@ final List<PageDelegate> pages = [
   SinglePage(
     name: Pages.login.name,
     path: Pages.login.path,
-    builder: (_) => const LoginPage(),
+    builder: (_) => const LoginScreen(),
   ),
 ];

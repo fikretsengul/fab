@@ -8,51 +8,118 @@ repository:
 packages:
   - .
   - features/**
-  - packages/core/**
-  - packages/deps
-  - packages/locator
+  - packages/**
+  - tests
 
+# To tell melos to use fvm as flutter sdk
 sdkPath: .fvm/flutter_sdk
-ide:
-  intellij: true
 
 command:
   version:
+    # Only allow versioning to happen on main branch.
     branch: main
+    # Generate commit links in package changelogs.
     linkToCommits: true
+    # Additionally build a changelog at the root of the workspace.
     workspaceChangelog: true
+
+  # If a dependency from environment, dependencies or dev_dependencies
+  # in the melos.yaml exists in a package, the dependency version in this
+  # package will be updated to match the version defined in the bootstrap
+  # config every time melos bootstrap is run.
+  environment:
+    sdk: ">=3.1.5 <4.0.0"
+    flutter: ">=3.13.9 <4.0.0"
   bootstrap:
+    dev_dependencies:
+      build_runner: ^2.4.6
+      freezed: ^2.4.5
+      injectable_generator: ^2.4.1
+      json_annotation: ^4.8.1
+      json_serializable: ^6.7.1
+
+    # It seems so that running "pub get" in parallel has some issues (like
+    # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
+    # makes the CI much more stable.
     runPubGetInParallel: false
     usePubspecOverrides: true
+
+    # To run something such as a build runner automatically after melos bootstrap
     hooks:
       post: melos run generate --no-select
 
 
+# We are setting the concurrency to 1 in some commands because a higher
+# concurrency can crash the analysis server on low performance machines
+# (like GitHub Actions).
 scripts:
-  clean:
-    description: Cleans all packages
+  reset:
+    description: Clean things very deeply by removing untracked files.
+    run: git clean -x -d -f -q -e .fvm
+
+  clean:pods:
+    description: Clean ios pods to fix any pods related issues.
     run: |
-      melos exec -c 1 -- \
-        flutter clean
+      cd ios && \
+      rm -Rf Pods || true && \
+      rm Podfile.lock || true && \
+      pod install --repo-update
+
+  check:
+    description: Run all targets generally expected in CI for a full local quality check.
+    run:  |
+      melos run reset && \
+      melos clean && \
+      melos bootstrap && \
+      melos analyze && \
+      melos format && \
 
   analyze:
-    description: Analyzes all packages
+    description: Analyzes all packages.
     run: |
       melos exec -c 5 -- \
         dart analyze --fatal-infos .
 
   format:
-    description: Formats all packages
-    run: dart format --set-exit-if-changed .
+    description: Formats all packages.
+    run: dart format .
+
+  format-check:
+    description: Run `dart format` checks for all packages.
+    run: melos exec dart format . --set-exit-if-changed
 
   generate:
-    description: Generate codes for all packages
+    description: Generate codes for all packages.
     run:  |
       melos exec -c 1 --depends-on="build_runner" -- \
         dart run build_runner build -d
 
+  # Tests
   test:
-    description: Runs packages tests
+    description: Run all Flutter tests in this project.
+    run: melos run test:select --no-select
+
+  test:select:
+    description: Run `flutter test` for selected packages.
+    run: melos exec -c 1 -- flutter test
+    packageFilters:
+      dirExists: test
+
+  test:coverage:
+    description: Generate coverage for the selected package.
     run: |
       melos exec -c 4 --fail-fast -- \
         flutter test --coverage
+
+  test:update-goldens:
+    description: Re-generate all golden test files.
+    run: melos exec -- flutter test --update-goldens
+    packageFilters:
+      dirExists: test
+
+  # Builds
+  build:all:
+    run: |
+      melos run build:example_ios_pub --no-select && \
+      melos run build:example_android_pub --no-select
+    description: Build all example apps.

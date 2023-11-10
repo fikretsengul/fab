@@ -4,7 +4,7 @@ import 'package:deps/freezed_annotation.dart';
 import 'package:deps/injectable.dart';
 import 'package:networking/networking.dart';
 
-part 'auth_cubit.freezed.dart';
+part 'auth.bloc.freezed.dart';
 part 'state/auth.state.dart';
 
 @lazySingleton

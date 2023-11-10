@@ -11,10 +11,11 @@ import '../others/failure/failures.dart';
 
 @lazySingleton
 class AuthService {
-  AuthService(this._dio);
+  AuthService(this._dio, this._dioTokenRefresh);
 
   // ignore: unused_field
   final DioClient _dio;
+  final DioTokenRefresh _dioTokenRefresh;
 
   AsyncEither<User> login(
     String username,
@@ -34,7 +35,8 @@ class AuthService {
     if (isIdPwCorrect) {
       final user = User.empty();
 
-      Timer(const Duration(seconds: 2), () {});
+      await Future<void>.delayed(const Duration(seconds: 2));
+      await _dioTokenRefresh.interceptor.setToken(OAuth2Token.empty());
 
       return Right(user);
     } else {

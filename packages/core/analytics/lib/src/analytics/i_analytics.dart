@@ -1,10 +1,4 @@
-import 'offline_analytics.dart';
-
 abstract class IAnalytics {
-  factory IAnalytics.offline() {
-    return OfflineAnalytics();
-  }
-
   /// Setting [id] to null will remove the user from analytics.
   void setUserId(String? id);
 

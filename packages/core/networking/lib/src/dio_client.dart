@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_function
+
 import 'dart:io';
 
 import 'package:commons/envs.dart';
@@ -40,16 +42,16 @@ class DioClient implements INetworkClient {
         ),
       );
 
-    if (_env.isDebug) {
-/*       _dio.interceptors.add(
+/*     if (_env.isDebug) {
+      _dio.interceptors.add(
         TalkerDioLogger(
           settings: const TalkerDioLoggerSettings(
             printRequestHeaders: true,
             printResponseHeaders: true,
           ),
         ),
-      ); */
-    }
+      );
+    } */
   }
 
   final Dio _dio;

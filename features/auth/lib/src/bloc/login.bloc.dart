@@ -6,7 +6,7 @@ import 'package:deps/injectable.dart';
 import '../model/user.module.dart';
 import '../service/auth.service.dart';
 
-part 'login_cubit.freezed.dart';
+part 'login.bloc.freezed.dart';
 part 'state/login.state.dart';
 
 @lazySingleton

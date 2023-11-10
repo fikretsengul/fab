@@ -1,10 +1,35 @@
-import 'package:flutter/widgets.dart';
+import 'package:deps/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:locator/locator.dart';
+
+import '../bloc/login.bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return BlocProvider(
+      create: (_) => di<LoginBloc>(),
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Login Page'),
+              ElevatedButton(
+                onPressed: () {
+                  di<LoginBloc>().login(
+                    username: 'test',
+                    password: 'test',
+                  );
+                },
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
