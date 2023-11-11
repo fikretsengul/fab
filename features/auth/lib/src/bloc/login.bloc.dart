@@ -1,7 +1,7 @@
-import 'package:commons/errors.dart';
-import 'package:deps/flutter_bloc.dart';
-import 'package:deps/freezed_annotation.dart';
-import 'package:deps/injectable.dart';
+import 'package:deps/core/commons/errors.dart';
+import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/freezed_annotation.dart';
+import 'package:deps/packages/injectable.dart';
 
 import '../model/user.module.dart';
 import '../service/auth.service.dart';

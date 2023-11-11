@@ -6,10 +6,9 @@ repository:
   name: flutter_advanced_boilerplate
 
 packages:
-  - .
+  - app
   - features/**
-  - packages/**
-  - tests
+  - infrastructure/**
 
 # To tell melos to use fvm as flutter sdk
 sdkPath: .fvm/flutter_sdk

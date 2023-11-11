@@ -1,4 +1,4 @@
-import 'package:deps/freezed_annotation.dart';
+import 'package:deps/packages/freezed_annotation.dart';
 
 part 'user.module.freezed.dart';
 part 'user.module.g.dart';

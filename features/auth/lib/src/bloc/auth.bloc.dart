@@ -1,8 +1,8 @@
-import 'package:commons/enums.dart';
-import 'package:deps/flutter_bloc.dart';
-import 'package:deps/freezed_annotation.dart';
-import 'package:deps/injectable.dart';
-import 'package:networking/networking.dart';
+import 'package:deps/core/commons/enums.dart';
+import 'package:deps/core/networking/networking.dart';
+import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/freezed_annotation.dart';
+import 'package:deps/packages/injectable.dart';
 
 part 'auth.bloc.freezed.dart';
 part 'state/auth.state.dart';

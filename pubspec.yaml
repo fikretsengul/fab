@@ -6,32 +6,7 @@ version: 0.0.1
 environment:
   sdk: ">=3.1.5 <4.0.0"
 
-dependencies:
-  analytics:
-    path: packages/core/analytics
-  auth:
-    path: features/auth
-  commons:
-    path: packages/core/commons
-  deps:
-    path: packages/deps
-  flutter:
-    sdk: flutter
-  locator:
-    path: packages/locator
-  routing:
-    path: packages/core/routing
-  storage:
-    path: packages/core/storage
-
 dev_dependencies:
   custom_lint: ^0.5.6
   melos: ^3.2.0
   pyramid_lint: ^1.1.0
-
-flutter:
-  uses-material-design: true
-  generate: true
-
-assets:
-  - .env

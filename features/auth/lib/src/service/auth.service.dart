@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:commons/errors.dart';
-import 'package:commons/types.dart';
-import 'package:deps/fpdart.dart';
-import 'package:deps/injectable.dart';
-import 'package:networking/networking.dart';
+import 'package:deps/core/commons/errors.dart';
+import 'package:deps/core/commons/types.dart';
+import 'package:deps/core/networking/networking.dart';
+import 'package:deps/packages/fpdart.dart';
+import 'package:deps/packages/injectable.dart';
 
 import '../model/user.module.dart';
 import '../others/failure/failures.dart';

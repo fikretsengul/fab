@@ -1,0 +1,17 @@
+name: app
+description: The main app of flutter advanced boilerplate.
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  deps:
+    path: ../infrastructure/deps
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  generate: true

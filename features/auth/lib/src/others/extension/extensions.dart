@@ -1,4 +1,4 @@
-import 'package:deps/flutter_bloc.dart';
+import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../bloc/auth.bloc.dart';

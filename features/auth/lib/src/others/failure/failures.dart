@@ -1,5 +1,5 @@
-import 'package:commons/enums.dart';
-import 'package:commons/errors.dart';
+import 'package:deps/core/commons/enums.dart';
+import 'package:deps/core/commons/errors.dart';
 
 class WrongCredentialsFailure extends Failure {
   WrongCredentialsFailure()
