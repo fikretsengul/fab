@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deps/core/commons/enums.dart';
+import 'package:deps/features/auth.dart';
 
 import '../i_storage.dart';
 

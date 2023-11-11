@@ -85,6 +85,7 @@ linter:
     prefer_const_constructors_in_immutables: false
 
     ## Disabled rules because the repository doesn't respect them (yet)
+    avoid_classes_with_only_static_members: false
     do_not_use_environment: false
     discarded_futures: false
     use_decorated_box: false
