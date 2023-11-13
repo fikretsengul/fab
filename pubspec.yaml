@@ -56,7 +56,7 @@ dependencies:
   dynamic_color: ^1.5.4
   animations: ^2.0.7
   fresh_graphql: ^0.5.2
-  graphql_flutter: ^5.1.0
+  graphql_flutter: ^5.1.2
   web_socket_channel: ^2.2.0
   intl: ^0.17.0
   http: ^0.13.5
