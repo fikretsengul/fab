@@ -79,7 +79,7 @@ dependencies:
   keframe: ^3.0.0
   url_strategy: ^0.2.0
   image_picker: ^0.8.6
-  permission_handler: ^10.2.0
+  permission_handler: ^11.0.1
   permission_handler_web: ^0.0.2
 
 dev_dependencies:
