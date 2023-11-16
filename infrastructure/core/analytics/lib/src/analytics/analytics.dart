@@ -1,5 +1,5 @@
 import 'package:deps/packages/injectable.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:deps/packages/sentry_flutter.dart';
 
 import 'i_analytics.dart';
 

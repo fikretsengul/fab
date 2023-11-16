@@ -14,6 +14,7 @@ mixin TokenStorageMixin<T> {
 
   /// Setter for the [IStorage] instance.
   set tokenStorage(IStorage<T> tokenStorage) {
+    // ignore: prefer_async_await
     _tokenStorage = tokenStorage..read().then(_updateStatus);
   }
 
@@ -23,6 +24,7 @@ mixin TokenStorageMixin<T> {
       return _token;
     }
     await authStatus.first;
+
     return _token;
   }
 

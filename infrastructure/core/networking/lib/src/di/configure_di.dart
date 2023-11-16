@@ -1,7 +1,7 @@
 import 'package:deps/packages/dio.dart';
 import 'package:deps/packages/get_it.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:deps/packages/internet_connection_checker_plus.dart';
 
 import './configure_di.config.dart';
 

@@ -1,3 +1,6 @@
+import 'package:deps/core/theming/theming.dart';
+import 'package:deps/locator/locator.dart';
+import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'application_scope.dart';
@@ -20,11 +23,19 @@ class Application extends StatefulWidget {
 class _AppState extends State<Application> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      themeMode: ThemeMode.light,
-      title: widget.title,
-      theme: widget.theme,
-      routerConfig: context.app.router.config,
+    return BlocProvider(
+      create: (_) => di<ThemeCubit>(),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            // Configures theme.
+            themeMode: state.theme.mode,
+            theme: createTheme(state.theme),
+            title: widget.title,
+            routerConfig: context.app.router.config,
+          );
+        },
+      ),
     );
   }
 }

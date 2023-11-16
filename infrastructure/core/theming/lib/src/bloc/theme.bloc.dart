@@ -15,25 +15,25 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
   ThemeCubit() : super(ThemeState.initial());
 
   @override
-  ThemeState? fromJson(Map<String, dynamic> json) {
+  ThemeState fromJson(Map<String, dynamic> json) {
     try {
-      final theme = CustomTheme.fromJson(json['theme'] as Map<String, dynamic>);
+/*       final theme = CustomTheme.fromJson(json['theme'] as Map<String, dynamic>);
 
-      return ThemeState(theme: theme);
+      return ThemeState(theme: theme); */
+      return ThemeState(theme: di<CustomTheme>());
     } catch (e) {
       return ThemeState(theme: di<CustomTheme>());
     }
   }
 
   @override
-  Map<String, dynamic>? toJson(ThemeState state) {
+  Map<String, dynamic> toJson(ThemeState state) {
     return <String, dynamic>{
       'theme': state.theme.toJson(),
     };
   }
 
-  Future<void> setThemeMode(
-    BuildContext context, {
+  Future<void> setThemeMode({
     ThemeMode? mode,
     ThemeColors? colors,
   }) async {

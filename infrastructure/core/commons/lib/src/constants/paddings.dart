@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_widgets
+
 import 'package:flutter/material.dart';
 
 enum Paddings {
@@ -7,20 +9,20 @@ enum Paddings {
   /// 8px.
   xs(8, left: 8, top: 8, right: 8, bottom: 8),
 
+  /// 12px.
+  sm(12, left: 12, top: 12, right: 12, bottom: 12),
+
   /// 16px.
-  sm(16, left: 16, top: 16, right: 16, bottom: 16),
+  md(16, left: 16, top: 16, right: 16, bottom: 16),
 
   /// 24px.
-  md(24, left: 24, top: 24, right: 24, bottom: 24),
+  lg(24, left: 24, top: 24, right: 24, bottom: 24),
 
   /// 32px.
-  lg(32, left: 32, top: 32, right: 32, bottom: 32),
+  xl(32, left: 32, top: 32, right: 32, bottom: 32),
 
   /// 48px.
-  xl(48, left: 48, top: 48, right: 48, bottom: 48),
-
-  /// 56px.
-  xxl(56, left: 56, top: 56, right: 56, bottom: 56);
+  xxl(48, left: 48, top: 48, right: 48, bottom: 48);
 
   const Paddings(
     this.px, {

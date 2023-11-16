@@ -31,7 +31,7 @@ enum Radiuses {
   final double? bottomRight;
 
   Radius get circularRadius => Radius.circular(px);
-  BorderRadius get circularBorder => BorderRadius.circular(px);
+  BorderRadius get circularBorder => BorderRadius.all(Radius.circular(px));
 
   BorderRadius only({bool tl = false, bool tr = false, bool bl = false, bool br = false}) => BorderRadius.only(
         topLeft: _rd(tl),

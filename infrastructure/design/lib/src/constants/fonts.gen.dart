@@ -10,6 +10,9 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: IBMPlexMono
+  static const String iBMPlexMono = 'IBMPlexMono';
+
   /// Font family: SpaceGrotesk
   static const String spaceGrotesk = 'SpaceGrotesk';
 }

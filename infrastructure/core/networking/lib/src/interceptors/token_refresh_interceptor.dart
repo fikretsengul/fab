@@ -41,7 +41,7 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
     Dio? httpClient,
   })  : _refreshToken = refreshToken,
         _tokenHeader = tokenHeader,
-        _shouldRefresh = shouldRefresh ?? _defaultShouldRefresh,
+        _shouldRefresh = shouldRefresh ?? shouldRefreshDefault,
         _dio = httpClient ?? Dio() {
     this.tokenStorage = tokenStorage;
   }
@@ -142,6 +142,7 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
 
     await setToken(refreshedToken);
     _dio.options.baseUrl = response.requestOptions.baseUrl;
+
     return _dio.request<dynamic>(
       response.requestOptions.path,
       cancelToken: response.requestOptions.cancelToken,
@@ -168,7 +169,7 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
     );
   }
 
-  static bool _defaultShouldRefresh(Response<dynamic>? response) {
+  static bool shouldRefreshDefault(Response<dynamic>? response) {
     return response?.statusCode == 401;
   }
 }

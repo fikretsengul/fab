@@ -26,6 +26,8 @@ custom_lint:
       max_lines: 125
     - max_lines_for_function:
       max_lines: 50
+    - boolean_prefix:
+      valid_prefixes: [updateShouldNotify]
 
 linter:
   rules:

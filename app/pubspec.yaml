@@ -15,3 +15,24 @@ dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  fonts:
+  - family: SpaceGrotesk
+    fonts:
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+        weight: 700
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+        weight: 500
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+        weight: 400
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+        weight: 300
+  - family: IBMPlexMono
+    fonts:
+      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
+        weight: 700
+      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
+        weight: 500
+      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
+        weight: 400
+      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
+        weight: 300

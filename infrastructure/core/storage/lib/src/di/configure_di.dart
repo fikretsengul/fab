@@ -1,6 +1,6 @@
+import 'package:deps/packages/flutter_secure_storage.dart';
 import 'package:deps/packages/get_it.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './configure_di.config.dart';
 

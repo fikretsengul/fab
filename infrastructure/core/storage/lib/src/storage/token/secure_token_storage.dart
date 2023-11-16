@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:deps/core/networking/networking.dart';
+import 'package:deps/packages/flutter_secure_storage.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../i_storage.dart';
 

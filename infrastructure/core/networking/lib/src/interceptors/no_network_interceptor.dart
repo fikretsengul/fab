@@ -1,6 +1,6 @@
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/dio.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:deps/packages/internet_connection_checker_plus.dart';
 
 import '../exceptions/dio_exceptions.dart';
 

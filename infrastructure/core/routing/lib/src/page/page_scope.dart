@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_widgets
+
 import 'package:deps/core/analytics/logger.dart';
 import 'package:deps/core/storage/cache.dart';
 import 'package:flutter/widgets.dart';

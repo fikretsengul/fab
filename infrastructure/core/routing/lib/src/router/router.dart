@@ -1,12 +1,10 @@
+import 'package:deps/packages/go_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../application/application_scope.dart';
+import '../others/extensions/router_extensions.dart';
 import '../page/page_delegate.dart';
-import '../page/page_scope.dart';
-import '../page/page_type.dart';
 import 'i_router.dart';
 import 'route_info.dart';
 
@@ -32,7 +30,7 @@ class Router implements IRouter {
       navigatorKey: rootKey,
       initialLocation: homePath,
       refreshListenable: refreshListenable,
-      errorPageBuilder: errorPage._toPage,
+      errorPageBuilder: errorPage.toPage,
       routes: _createRoutes(rootKey, pages),
       redirect: (context, state) => onRedirect(
         context,
@@ -45,6 +43,7 @@ class Router implements IRouter {
       ),
 /*       observers: [TalkerRouteObserver(di<Talker>())], */
     );
+
     return Router._(routerConfig);
   }
 
@@ -74,113 +73,8 @@ class Router implements IRouter {
   ) {
     return delegates
         .map(
-          (page) => page._toRoute(rootKey, null),
+          (page) => page.toRoute(rootKey, null),
         )
         .toList(growable: false);
-  }
-}
-
-/// Extensions to provide route conversion methods for
-/// PageDelegate, SinglePage, LayoutPage, and ErrorPage.
-extension _PageDelegateExtensions on PageDelegate {
-  RouteBase _toRoute(
-    GlobalKey<NavigatorState> rootKey,
-    GlobalKey<NavigatorState>? shellKey,
-  ) {
-    if (this is SinglePage) {
-      return (this as SinglePage)._toGoRoute(rootKey, shellKey);
-    }
-    return (this as LayoutPage)._toShellRoute(rootKey);
-  }
-}
-
-extension _SinglePageExtensions on SinglePage {
-  GoRoute _toGoRoute(
-    GlobalKey<NavigatorState> rootKey,
-    GlobalKey<NavigatorState>? shellKey,
-  ) {
-    return GoRoute(
-      name: name,
-      path: path,
-      parentNavigatorKey: shellKey ?? rootKey,
-      pageBuilder: (context, state) => _createPageBasedOnType(
-        context,
-        state,
-        builder(context),
-        type,
-      ),
-    );
-  }
-}
-
-extension _LayoutPageExtensions on LayoutPage {
-  ShellRoute _toShellRoute(GlobalKey<NavigatorState> rootKey) {
-    final shellKey = GlobalKey<NavigatorState>();
-    return ShellRoute(
-      navigatorKey: shellKey,
-      pageBuilder: (context, state, child) => _createPageBasedOnType(
-        context,
-        state,
-        builder(context, child),
-        type,
-      ),
-      routes: childPages
-          .map(
-            (delegate) => delegate._toRoute(rootKey, shellKey),
-          )
-          .toList(growable: false),
-    );
-  }
-}
-
-extension _ErrorPageExtensions on ErrorPage {
-  Page<dynamic> _toPage(BuildContext context, GoRouterState state) {
-    return _createPageBasedOnType(
-      context,
-      state,
-      builder(context, state.error),
-      type,
-    );
-  }
-}
-
-/// A method to consolidate page creation based on the PageType.
-Page<dynamic> _createPageBasedOnType(
-  BuildContext context,
-  GoRouterState state,
-  Widget childWidget,
-  PageType type,
-) {
-  // PageScope creation to wrap around the child widget.
-  final pageScope = PageScope(
-    cache: context.app.cache,
-    name: state.matchedLocation,
-    path: state.uri.toString(),
-    pathParams: state.pathParameters,
-    queryParams: state.uri.queryParameters,
-    logger: context.app.logger,
-    child: childWidget,
-  );
-
-  // Set the page in analytics
-  context.app.analytics.setPage(
-    state.matchedLocation,
-    childWidget.runtimeType.toString(),
-  );
-
-  // Return the appropriate page based on the type
-  switch (type) {
-    case PageType.auto:
-      if (defaultTargetPlatform == TargetPlatform.iOS ||
-          defaultTargetPlatform == TargetPlatform.macOS) {
-        return CupertinoPage(child: pageScope);
-      }
-      return MaterialPage(child: pageScope);
-    case PageType.material:
-      return MaterialPage(child: pageScope);
-    case PageType.cupertino:
-      return CupertinoPage(child: pageScope);
-    case PageType.noTransition:
-      return NoTransitionPage(child: pageScope);
   }
 }

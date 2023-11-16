@@ -1,9 +1,9 @@
 import 'package:deps/design/design.dart';
+import 'package:deps/packages/flex_color_scheme.dart';
 import 'package:deps/packages/freezed_annotation.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../others/json_color_type_serializer.dart';
+import '../others/serializer/json_color_type_serializer.dart';
 
 part 'theme_colors.freezed.dart';
 part 'theme_colors.g.dart';
@@ -31,7 +31,7 @@ class ThemeColors with _$ThemeColors {
 
   factory ThemeColors.fromJson(Map<String, dynamic> json) => _$ThemeColorsFromJson(json);
 
-  factory ThemeColors.inital() => ThemeConstants.defaultTheme;
+  factory ThemeColors.inital() => ThemeSettings.defaultTheme;
 
   FlexSchemeColor get toFlexSchemeColor =>
       FlexSchemeColor.from(primary: primary, secondary: secondary, tertiary: tertiary);

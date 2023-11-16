@@ -9,12 +9,11 @@ import 'package:deps/core/commons/errors.dart';
 import 'package:deps/core/commons/types.dart';
 import 'package:deps/core/storage/storage.dart';
 import 'package:deps/packages/dio.dart';
+import 'package:deps/packages/dio_smart_retry.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:deps/packages/talker_dio_logger.dart';
 import 'package:flutter/foundation.dart';
-import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
-import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 
 import 'dio_token_refresh.dart';
 import 'exceptions/dio_exceptions.dart';

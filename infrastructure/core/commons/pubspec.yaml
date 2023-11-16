@@ -9,7 +9,6 @@ environment:
 dependencies:
   deps:
     path: ../../deps/
-  envied: ^0.5.1
   flutter:
     sdk: flutter
 

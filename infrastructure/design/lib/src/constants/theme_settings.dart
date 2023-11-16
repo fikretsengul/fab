@@ -2,8 +2,11 @@ import 'dart:ui';
 
 import 'package:deps/core/theming/theming.dart';
 
-abstract class ThemeConstants {
-  static final themes = [
+/// Defines the style of the FabButton.
+enum ButtonType { primary, classic }
+
+class ThemeSettings {
+  static final themeColors = [
     ThemeColors.custom(primary: const Color(0xFFBEFD73)),
     ThemeColors.custom(primary: const Color(0xFF77DD77)),
     ThemeColors.custom(primary: const Color(0xFFA0FFF0)),
@@ -14,5 +17,15 @@ abstract class ThemeConstants {
     ThemeColors.custom(primary: const Color(0xFFFFB677)),
     ThemeColors.custom(primary: const Color(0xFFFFF97E)),
   ];
-  static final defaultTheme = themes.elementAt(2);
+
+  static final defaultTheme = ThemeColors.custom(
+    primary: const Color(0xFF7e9e56),
+    secondary: const Color(0xFF002f49),
+    tertiary: const Color(0xFFd9c47c),
+  );
+  static const borderRadius = 16.0;
+  static const borderWidth = 2.0;
+  static const shadowBlurRadius = 0.0;
+  static const offset = Offset(4, 4);
+  static const shadowBlurStyle = BlurStyle.normal;
 }

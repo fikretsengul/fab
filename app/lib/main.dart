@@ -6,16 +6,15 @@ import 'package:deps/core/storage/cache.dart';
 import 'package:deps/features/auth.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/hydrated_bloc.dart';
+import 'package:deps/packages/path_provider.dart';
 import 'package:flutter/material.dart' hide Router;
 
-import 'pages/error_page_widget.dart';
+import 'pages/error.page.dart';
 import 'router/pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Inits env.
-  //await dotenv.load();
 
   /// I don’t really like the code duplication implied by
   /// having multiple main_*.dart files. I prefer determining
@@ -26,6 +25,11 @@ void main() async {
 
   // Inits service locator.
   initLocator(env);
+
+  // Inits hydrated bloc storage.
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
 
   runApp(
     BlocProvider(
@@ -49,21 +53,17 @@ void main() async {
   );
 }
 
-/// How redirects work for the application.
 String? onRedirect(
   BuildContext context, {
   required bool isAuthenticated,
   required RouteInfo info,
 }) {
-  context.logger.log('isAuthenticated', data: isAuthenticated);
-  context.logger.log('Auth state:', data: di<AuthBloc>().state);
-
   if (!isAuthenticated && info.path != Pages.login.path) {
     return Pages.login.path;
   }
 
   if (isAuthenticated && info.path == Pages.login.path) {
-    return Pages.testA.path;
+    return Pages.home.path;
   }
 
   return null;

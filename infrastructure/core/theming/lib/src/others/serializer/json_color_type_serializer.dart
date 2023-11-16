@@ -1,5 +1,5 @@
+import 'package:deps/packages/freezed_annotation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 class JsonColorTypeSerializer implements JsonConverter<Color, int> {
   const JsonColorTypeSerializer();

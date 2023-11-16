@@ -16,6 +16,7 @@ class InMemoryCache implements ICache {
     if (value is T) {
       return value;
     }
+
     return null;
   }
 
@@ -27,6 +28,7 @@ class InMemoryCache implements ICache {
     if (value is T) {
       return value;
     }
+
     return null;
   }
 

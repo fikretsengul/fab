@@ -1,6 +1,7 @@
-// ignore_for_file: avoid_returning_widgets
+/* // ignore_for_file: avoid_returning_widgets
 import 'package:deps/core/routing/application.dart';
 import 'package:deps/core/routing/page.dart';
+import 'package:deps/design/design.dart';
 import 'package:flutter/material.dart';
 
 import '../router/pages.dart';
@@ -31,24 +32,24 @@ class TestLayoutPage extends StatelessWidget {
 
   final _destination = [
     Destination(
-      label: Pages.testA.name,
+      label: Pages.home.name,
       icon: const Icon(Icons.home_outlined),
       selectedIcon: const Icon(Icons.home),
-      onSelected: (context) => context.to(Pages.testA.name),
+      onSelected: (context) => context.to(Pages.home.name),
     ),
     Destination(
-      label: Pages.testB.name,
+      label: Pages.settings.name,
       icon: const Icon(Icons.search_outlined),
       selectedIcon: const Icon(Icons.search),
-      onSelected: (context) => context.to(Pages.testB.name),
+      onSelected: (context) => context.to(Pages.settings.name),
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: child,
+      appBar: FabAppBar(),
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         selectedIndex: context.currentIndex,
@@ -83,3 +84,4 @@ extension on BuildContext {
     }
   }
 }
+ */

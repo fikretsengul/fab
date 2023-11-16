@@ -11,7 +11,6 @@ dependencies:
     path: ../../deps/
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   build_runner: ^2.4.6

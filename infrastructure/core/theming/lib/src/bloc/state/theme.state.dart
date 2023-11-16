@@ -7,6 +7,6 @@ class ThemeState with _$ThemeState {
   }) = _ThemeState;
 
   factory ThemeState.initial() => _ThemeState(
-        theme: di<CustomTheme>(),
+        theme: CustomTheme.initial(),
       );
 }

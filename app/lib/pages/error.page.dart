@@ -22,7 +22,7 @@ class ErrorPageWidget extends StatelessWidget {
         title: const Text('Error Page'),
       ),
       body: Center(
-        child: Text('Error Message: $exception'),
+        child: Text('Error Message: \n$exception'),
       ),
     );
   }

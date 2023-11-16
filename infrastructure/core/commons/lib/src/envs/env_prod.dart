@@ -1,5 +1,5 @@
+import 'package:deps/packages/envied.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:envied/envied.dart';
 
 import 'i_env.dart';
 
