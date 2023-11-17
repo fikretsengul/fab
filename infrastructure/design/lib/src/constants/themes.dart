@@ -77,7 +77,7 @@ class Themes {
         ), */
         usedColors: 1,
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
-        scaffoldBackground: Colors.transparent,
+        //scaffoldBackground: Colors.transparent,
         appBarStyle: FlexAppBarStyle.background,
         blendLevel: 20,
         //lightIsWhite: true,

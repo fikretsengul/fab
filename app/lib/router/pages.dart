@@ -1,4 +1,4 @@
-import 'package:deps/core/routing/page.dart';
+import 'package:deps/core/routing/routing.dart';
 import 'package:deps/features/auth.dart';
 import 'package:flutter/material.dart';
 

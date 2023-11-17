@@ -1,7 +1,19 @@
 import 'package:deps/packages/awesome_extensions.dart';
+import 'package:deps/packages/widgetbook_annotation.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/paddings.dart';
 import '../../constants/theme_settings.dart';
+
+@UseCase(
+  name: 'FAB Container',
+  type: FabContainer,
+)
+Widget fabContainer(BuildContext context) {
+  return FabContainer(
+    margin: Paddings.md.symmetric(h: true),
+  );
+}
 
 class FabContainer extends StatefulWidget {
   FabContainer({
@@ -57,7 +69,7 @@ class FabContainerState extends State<FabContainer> {
         ),
         boxShadow: [
           BoxShadow(
-            color: widget.shadowColor ?? context.theme.colorScheme.shadow,
+            color: widget.shadowColor ?? context.theme.colorScheme.onBackground,
             blurRadius: widget.shadowBlurRadius,
             offset: widget.offset,
             blurStyle: widget.shadowBlurStyle,

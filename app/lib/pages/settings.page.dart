@@ -1,3 +1,4 @@
+import 'package:deps/design/design.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -5,11 +6,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text('Test Page B'),
-      ),
-    );
+    return const CrosshatchBackground();
   }
 }

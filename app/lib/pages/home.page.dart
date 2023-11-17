@@ -1,4 +1,3 @@
-import 'package:deps/core/commons/constants.dart';
 import 'package:deps/design/design.dart';
 import 'package:deps/packages/awesome_extensions.dart';
 import 'package:deps/packages/uicons.dart';
@@ -9,38 +8,35 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StripesBackground(
-      direction: StripeDirection.vertical,
-      stripeWidth: 2,
+    return DottedBackground(
       child: Column(
         children: [
           FabTextButton(
             onPressed: () {},
             text: 'Button',
           ),
-          const SizedBox(height: 8),
+          //Paddings.sm.vertical,
           FabIconButton(
             onPressed: () {},
             icon: UIcons.boldRounded.star,
             size: 15,
           ),
-          const SizedBox(height: 8),
+          //Paddings.sm.vertical,
           FabTextButton(
             onPressed: () {},
             text: 'Button',
             buttonType: ButtonType.classic,
           ),
-          const SizedBox(height: 8),
+          //Paddings.sm.vertical,
           FabContainer(
-            margin: Paddings.md.symmetric(h: true),
-            padding: Paddings.sm.all,
+            //padding: Paddings.sm.all,
             child: FabHighlightedText(
               text: 'Selam <a>Hilal</a>. Benim adım <b>Fikret</b>.',
               style: context.textTheme.titleLarge!,
               tags: {
                 'a': HighlightedTextStyle(
                   style: context.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
-                  highlightColor: const Color.fromARGB(255, 233, 30, 230),
+                  highlightColor: const Color.fromARGB(255, 255, 133, 188),
                 ),
                 'b': HighlightedTextStyle(
                   style: context.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),

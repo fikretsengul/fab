@@ -1,9 +1,9 @@
 // ignore_for_file: max_lines_for_file
 
-import 'package:deps/core/commons/constants.dart';
 import 'package:deps/packages/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/paddings.dart';
 import '../../constants/theme_settings.dart';
 import '../containers/fab_container.dart';
 
@@ -12,12 +12,6 @@ import '../containers/fab_container.dart';
 /// This button allows for extensive customization including colors, border, shadow, and animation.
 /// It takes a [child] widget which is typically an Icon or Text widget.
 class FabButton extends StatefulWidget {
-  /// Creates a FabButton.
-  ///
-  /// The button can be styled using color parameters and can optionally be animated on press.
-  /// [child] is required and typically an Icon or Text widget.
-  /// [onPressed] is the callback that is called when the button is tapped.
-  /// If [animated] is true, the button animates on press, controlled by [animationDuration].
   FabButton({
     required this.child,
     this.animated = true,

@@ -6,7 +6,7 @@ import 'package:deps/core/theming/theming.dart';
 enum ButtonType { primary, classic }
 
 class ThemeSettings {
-  static final themeColors = [
+  static final themes = [
     ThemeColors.custom(primary: const Color(0xFFBEFD73)),
     ThemeColors.custom(primary: const Color(0xFF77DD77)),
     ThemeColors.custom(primary: const Color(0xFFA0FFF0)),
@@ -18,11 +18,7 @@ class ThemeSettings {
     ThemeColors.custom(primary: const Color(0xFFFFF97E)),
   ];
 
-  static final defaultTheme = ThemeColors.custom(
-    primary: const Color(0xFF7e9e56),
-    secondary: const Color(0xFF002f49),
-    tertiary: const Color(0xFFd9c47c),
-  );
+  static final defaultTheme = themes.elementAt(6);
   static const borderRadius = 16.0;
   static const borderWidth = 2.0;
   static const shadowBlurRadius = 0.0;

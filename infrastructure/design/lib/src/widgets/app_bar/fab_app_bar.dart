@@ -1,4 +1,3 @@
-import 'package:deps/core/commons/constants.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +9,9 @@ class _CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!Navigator.canPop(context)) {
-      return Padding(
-        padding: Paddings.sm.all,
-        child: FabIconButton(
-          icon: UIcons.boldRounded.angle_left,
-          onPressed: () => Navigator.maybePop(context),
-        ),
+      return FabIconButton(
+        icon: UIcons.boldRounded.angle_left,
+        onPressed: () => Navigator.maybePop(context),
       );
     } else {
       return const SizedBox();

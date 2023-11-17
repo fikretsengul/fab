@@ -4,16 +4,8 @@ import '../../constants/fonts.gen.dart';
 import '../../constants/theme_settings.dart';
 import 'fab_button.dart';
 
-/// A text button styled as per the Floating Action Button (FAB) design.
-///
-/// This button extends the functionalities of [FabButton] to include text-specific features,
-/// such as text style customization.
+/// A specialized version of FabButton that uses text as its child.
 class FabTextButton extends FabButton {
-  /// Creates a FAB styled text button.
-  ///
-  /// The [text] parameter is required and specifies the text to display on the button.
-  /// The [textStyle] parameter allows for custom styling of the text.
-  /// All other parameters are inherited from [FabButton] and control the button's appearance and behavior.
   FabTextButton({
     required this.text,
     this.textStyle,
@@ -51,17 +43,13 @@ class FabTextButton extends FabButton {
   final TextStyle? textStyle;
 
   /// Provides a default text style for the button text.
-  ///
-  /// The style is determined by the [buttonType] and uses the appropriate color scheme
-  /// from the provided [BuildContext].
   static TextStyle _defaultTextStyle({required BuildContext context, required ButtonType buttonType}) {
     final theme = Theme.of(context);
     final color = buttonType == ButtonType.primary ? theme.colorScheme.onPrimary : theme.colorScheme.onBackground;
 
     return TextStyle(
       color: color,
-      fontFamily: FontFamily.iBMPlexMono, // Specific font family
-      // Additional default styles can be added here
+      fontFamily: FontFamily.iBMPlexMono,
     );
   }
 }

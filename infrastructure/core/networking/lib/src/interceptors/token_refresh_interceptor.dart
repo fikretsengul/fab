@@ -1,3 +1,7 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: max_lines_for_file
 
 import 'package:deps/core/storage/storage.dart';
@@ -5,25 +9,25 @@ import 'package:deps/packages/dio.dart';
 
 import '../token/o_auth2_token.dart';
 
-/// An Exception that should be thrown when overriding `refreshToken` if the
-/// refresh fails and should result in a force-logout.
+/// Exception to be thrown when a token refresh attempt fails,
+/// potentially leading to a forced logout.
 class RevokeTokenException implements Exception {}
 
-/// Signature for `shouldRefresh` on [TokenRefreshInterceptor].
+/// Signature for `shouldRefresh` function in [TokenRefreshInterceptor].
+/// Determines whether a token refresh should be attempted based on the response.
 typedef ShouldRefresh = bool Function(Response<dynamic>? response);
 
-/// Signature for `refreshToken` on [TokenRefreshInterceptor].
+/// Signature for `refreshToken` function in [TokenRefreshInterceptor].
+/// Handles the process of refreshing the authentication token.
 typedef RefreshToken<T> = Future<T> Function(T? token, Dio dio);
 
-/// Function responsible for building the token header(s) give a [token].
-typedef TokenHeaderBuilder<T> = Map<String, String> Function(
-  T token,
-);
+/// Function to build token headers given a [token].
+typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
 
 /// A Dio Interceptor for automatic token refresh.
-/// Requires a concrete implementation of [IStorage] and [RefreshToken].
-/// Handles transparently refreshing/caching tokens.
+/// Handles transparently refreshing and caching tokens, based on token validity.
 ///
+/// Example usage:
 /// ```dart
 /// dio.interceptors.add(
 ///   TokenRefreshInterceptor<OAuth2Token>(
@@ -51,53 +55,12 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
   final ShouldRefresh _shouldRefresh;
   final TokenHeaderBuilder<T> _tokenHeader;
 
-  @override
-  Future<dynamic> onError(
-    DioException err,
-    ErrorInterceptorHandler handler,
-  ) async {
-    final response = err.response;
-    if (response == null || await token == null || err.error is RevokeTokenException || !_shouldRefresh(response)) {
-      return handler.next(err);
-    }
-    try {
-      final refreshResponse = await _tryRefresh(response);
-      handler.resolve(refreshResponse);
-    } on DioException catch (error) {
-      handler.next(error);
-    }
-  }
+  // Error, Request, and Response interceptors overridden here...
 
-  @override
-  Future<dynamic> onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    final currentToken = await token;
-    final headers = currentToken != null ? _tokenHeader(currentToken) : const <String, String>{};
-    options.headers.addAll(headers);
-    handler.next(options);
-  }
-
-  @override
-  Future<dynamic> onResponse(
-    Response<dynamic> response,
-    ResponseInterceptorHandler handler,
-  ) async {
-    if (await token == null || !_shouldRefresh(response)) {
-      return handler.next(response);
-    }
-    try {
-      final refreshResponse = await _tryRefresh(response);
-      handler.resolve(refreshResponse);
-    } on DioException catch (error) {
-      handler.reject(error);
-    }
-  }
-
-  /// A constructor that returns a [TokenRefreshInterceptor] interceptor
-  /// that uses an [OAuth2Token] token.
+  /// Static constructor for creating an interceptor specifically for `OAuth2Token`.
+  /// Simplifies setting up the interceptor for OAuth2 authentication scenarios.
   ///
+  /// Example usage:
   /// ```dart
   /// dio.interceptors.add(
   ///   TokenRefreshInterceptor.oAuth2(
@@ -127,6 +90,80 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
     );
   }
 
+  // Private method _tryRefresh for attempting the token refresh...
+
+  /// Default implementation for `shouldRefresh`.
+  /// Determines refresh necessity based on a 401 Unauthorized response status.
+  static bool shouldRefreshDefault(Response<dynamic>? response) {
+    return response?.statusCode == 401;
+  }
+
+  /// Intercepts and handles errors during network requests.
+  /// Specifically checks for scenarios where a token refresh might be needed,
+  /// such as a 401 Unauthorized response.
+  ///
+  /// [err]: The Dio exception encountered.
+  /// [handler]: The error interceptor handler for further error processing.
+  @override
+  Future<dynamic> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    final response = err.response;
+    // Check if the error response meets criteria for a token refresh.
+    if (response == null || await token == null || err.error is RevokeTokenException || !_shouldRefresh(response)) {
+      return handler.next(err);
+    }
+    try {
+      final refreshResponse = await _tryRefresh(response);
+      handler.resolve(refreshResponse);
+    } on DioException catch (error) {
+      handler.next(error);
+    }
+  }
+
+  /// Intercepts and handles outgoing network requests.
+  /// Adds authentication token headers to the request if a valid token exists.
+  ///
+  /// [options]: The request options.
+  /// [handler]: The request interceptor handler for further request processing.
+  @override
+  Future<dynamic> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final currentToken = await token;
+    final headers = currentToken != null ? _tokenHeader(currentToken) : const <String, String>{};
+    options.headers.addAll(headers);
+    handler.next(options);
+  }
+
+  /// Intercepts and processes responses from network requests.
+  /// Checks if a token refresh is needed based on the response.
+  ///
+  /// [response]: The response from the network request.
+  /// [handler]: The response interceptor handler for further response processing.
+  @override
+  Future<dynamic> onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) async {
+    if (await token == null || !_shouldRefresh(response)) {
+      return handler.next(response);
+    }
+    try {
+      final refreshResponse = await _tryRefresh(response);
+      handler.resolve(refreshResponse);
+    } on DioException catch (error) {
+      handler.reject(error);
+    }
+  }
+
+  /// Attempts to refresh the token if the conditions for refresh are met.
+  /// This method is called when a refresh is deemed necessary.
+  ///
+  /// [response]: The original response that triggered the token refresh.
+  /// Returns a new response obtained after the token refresh.
   Future<Response<dynamic>> _tryRefresh(Response<dynamic> response) async {
     late final T refreshedToken;
     try {
@@ -167,9 +204,5 @@ class TokenRefreshInterceptor<T> extends QueuedInterceptor with TokenStorageMixi
         listFormat: response.requestOptions.listFormat,
       ),
     );
-  }
-
-  static bool shouldRefreshDefault(Response<dynamic>? response) {
-    return response?.statusCode == 401;
   }
 }
