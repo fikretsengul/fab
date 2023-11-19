@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="55" cy="55" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.8" cx="55" cy="115" r="8" stroke="black" stroke-width="4"/>
+<circle cx="55" cy="85" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.6" cx="55" cy="145" r="8" stroke="black" stroke-width="4"/>
+<circle cx="85" cy="55" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.6" cx="85" cy="115" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.8" cx="85" cy="85" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.4" cx="85" cy="145" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.8" cx="115" cy="55" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.4" cx="115" cy="115" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.6" cx="115" cy="85" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.2" cx="115" cy="145" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.6" cx="145" cy="55" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.2" cx="145" cy="115" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.4" cx="145" cy="85" r="8" stroke="black" stroke-width="4"/>
+<circle opacity="0.05" cx="145" cy="145" r="8" stroke="black" stroke-width="4"/>
+</svg>

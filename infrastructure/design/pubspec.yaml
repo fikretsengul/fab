@@ -21,7 +21,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/shapes/variant-one-colored/
+    - assets/shapes/variant-two-uncolored/
+    - assets/shapes/variant-three-3d/
   fonts:
     - family: SpaceGrotesk
       fonts:
@@ -33,19 +35,13 @@ flutter:
           weight: 400
         - asset: assets/fonts/SpaceGrotesk/SpaceGrotesk-Light.ttf
           weight: 300
-    - family: IBMPlexMono
+    - family: FogtwoNo5
       fonts:
-        - asset: assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/IBMPlexMono/IBMPlexMono-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/IBMPlexMono/IBMPlexMono-Regular.ttf
+        - asset: assets/fonts/FogtwoNo5/FogtwoNo5-Regular.ttf
           weight: 400
-        - asset: assets/fonts/IBMPlexMono/IBMPlexMono-Light.ttf
-          weight: 300
 
 flutter_gen:
   output: lib/src/constants/
   line_length: 120
   integrations:
-    lottie: true
+    flutter_svg: true

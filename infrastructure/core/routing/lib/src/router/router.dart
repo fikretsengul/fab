@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../extensions.dart';
 import '../page/page_delegate.dart';
+import '../page/page_extensions.dart';
 import 'i_router.dart';
 import 'route_info.dart';
 

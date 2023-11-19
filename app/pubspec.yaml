@@ -14,25 +14,22 @@ dependencies:
 
 flutter:
   uses-material-design: true
-  generate: true
+  assets:
+    - ../infrastructure/design/assets/shapes/variant-one-colored/
+    - ../infrastructure/design/assets/shapes/variant-two-uncolored/
+    - ../infrastructure/design/assets/shapes/variant-three-3d/
   fonts:
   - family: SpaceGrotesk
     fonts:
       - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
         weight: 700
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Medium.ttf
         weight: 500
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Regular.ttf
         weight: 400
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Light.ttf
         weight: 300
-  - family: IBMPlexMono
+  - family: FogtwoNo5
     fonts:
-      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
-        weight: 700
-      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
-        weight: 500
-      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
+      - asset: ../infrastructure/design/assets/fonts/FogtwoNo5/FogtwoNo5-Regular.ttf
         weight: 400
-      - asset: ../infrastructure/design/assets/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf
-        weight: 300

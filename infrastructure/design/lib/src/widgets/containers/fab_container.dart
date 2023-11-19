@@ -30,7 +30,7 @@ class FabContainer extends StatefulWidget {
     this.padding,
     this.margin,
     this.child,
-    this.borderRadius,
+    this.borderRadius = ThemeSettings.borderRadius,
   });
 
   final Offset offset;
@@ -56,7 +56,7 @@ class FabContainerState extends State<FabContainer> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      height: widget.height ?? 100,
+      height: widget.height,
       padding: widget.padding,
       margin: widget.margin,
       decoration: BoxDecoration(

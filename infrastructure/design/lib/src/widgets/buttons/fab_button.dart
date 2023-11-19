@@ -53,7 +53,7 @@ class FabButton extends StatefulWidget {
   final ButtonType buttonType;
 
   /// The radius of the border's corners.
-  final double borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// The offset for the button's shadow.
   final Offset offset;
@@ -184,7 +184,7 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
             width: widget.buttonWidth,
             height: widget.buttonHeight,
             padding: widget.padding ?? Paddings.sm.symmetric(h: true),
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+            borderRadius: widget.borderRadius,
             color: widget.buttonColor ?? _getButtonColor(),
             borderColor: widget.borderColor ?? context.theme.colorScheme.onBackground,
             borderWidth: widget.borderWidth,

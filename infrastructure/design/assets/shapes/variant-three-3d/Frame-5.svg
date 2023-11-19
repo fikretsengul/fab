@@ -1,0 +1,34 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.7872 34.2887L50 18.5774L77.2128 34.2887V65.7113L50 81.4226L22.7872 65.7113V34.2887Z" stroke="url(#paint0_linear_422_61)"/>
+<path d="M26.2513 36.2887L50 22.5774L73.7487 36.2887V63.7113L50 77.4226L26.2513 63.7113V36.2887Z" stroke="url(#paint1_linear_422_61)"/>
+<path d="M29.7154 38.2887L50 26.5774L70.2846 38.2887V61.7113L50 73.4226L29.7154 61.7113V38.2887Z" stroke="url(#paint2_linear_422_61)"/>
+<path d="M33.1795 40.2887L50 30.5774L66.8205 40.2887V59.7113L50 69.4226L33.1795 59.7113V40.2887Z" stroke="url(#paint3_linear_422_61)"/>
+<path d="M36.6436 42.2887L50 34.5774L63.3564 42.2887V57.7113L50 65.4227L36.6436 57.7113V42.2887Z" stroke="url(#paint4_linear_422_61)"/>
+<path d="M50 38L60.3923 44V56L50 62L39.6077 56V44L50 38Z" fill="url(#paint5_radial_422_61)"/>
+<defs>
+<linearGradient id="paint0_linear_422_61" x1="39.5" y1="18" x2="63.5" y2="82" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_422_61" x1="40.8125" y1="22" x2="61.8125" y2="78" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint2_linear_422_61" x1="42.125" y1="26" x2="60.125" y2="74" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint3_linear_422_61" x1="43.4375" y1="30" x2="58.4375" y2="70" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint4_linear_422_61" x1="44.75" y1="34" x2="56.75" y2="66" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint5_radial_422_61" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(12)">
+<stop stop-color="white" stop-opacity="0.9"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

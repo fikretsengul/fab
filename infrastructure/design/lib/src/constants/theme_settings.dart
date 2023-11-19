@@ -1,6 +1,9 @@
-import 'dart:ui';
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 import 'package:deps/core/theming/theming.dart';
+import 'package:flutter/material.dart';
 
 /// Defines the style of the FabButton.
 enum ButtonType { primary, classic }
@@ -19,7 +22,7 @@ class ThemeSettings {
   ];
 
   static final defaultTheme = themes.elementAt(6);
-  static const borderRadius = 16.0;
+  static const borderRadius = BorderRadius.all(Radius.circular(16));
   static const borderWidth = 2.0;
   static const shadowBlurRadius = 0.0;
   static const offset = Offset(4, 4);

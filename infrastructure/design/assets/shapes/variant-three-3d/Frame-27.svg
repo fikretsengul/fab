@@ -1,0 +1,194 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="49.9999" r="3.1" stroke="url(#paint0_angular_500_6017)"/>
+<circle cx="50" cy="49.9999" r="3.1" stroke="url(#paint1_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50.0001" r="4.9" stroke="url(#paint2_angular_500_6017)"/>
+<circle cx="50" cy="50.0001" r="4.9" stroke="url(#paint3_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="6.7" stroke="url(#paint4_angular_500_6017)"/>
+<circle cx="50" cy="50" r="6.7" stroke="url(#paint5_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="8" stroke="url(#paint6_angular_500_6017)" stroke-width="2"/>
+<circle cx="50" cy="50" r="8" stroke="url(#paint7_linear_500_6017)" stroke-opacity="0.2" stroke-width="2"/>
+<circle cx="50" cy="50" r="10.3" stroke="url(#paint8_angular_500_6017)"/>
+<circle cx="50" cy="50" r="10.3" stroke="url(#paint9_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="49.9999" r="12.1" stroke="url(#paint10_angular_500_6017)"/>
+<circle cx="50" cy="49.9999" r="12.1" stroke="url(#paint11_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50.0001" r="13.9" stroke="url(#paint12_angular_500_6017)"/>
+<circle cx="50" cy="50.0001" r="13.9" stroke="url(#paint13_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="15.2" stroke="url(#paint14_angular_500_6017)" stroke-width="2"/>
+<circle cx="50" cy="50" r="15.2" stroke="url(#paint15_linear_500_6017)" stroke-opacity="0.2" stroke-width="2"/>
+<circle cx="50" cy="50" r="17.5" stroke="url(#paint16_angular_500_6017)"/>
+<circle cx="50" cy="50" r="17.5" stroke="url(#paint17_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="19.3" stroke="url(#paint18_angular_500_6017)"/>
+<circle cx="50" cy="50" r="19.3" stroke="url(#paint19_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="49.9999" r="21.1" stroke="url(#paint20_angular_500_6017)"/>
+<circle cx="50" cy="49.9999" r="21.1" stroke="url(#paint21_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50.0001" r="22.4" stroke="url(#paint22_angular_500_6017)" stroke-width="2"/>
+<circle cx="50" cy="50.0001" r="22.4" stroke="url(#paint23_linear_500_6017)" stroke-opacity="0.2" stroke-width="2"/>
+<circle cx="50" cy="50" r="24.7" stroke="url(#paint24_angular_500_6017)"/>
+<circle cx="50" cy="50" r="24.7" stroke="url(#paint25_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="26.5" stroke="url(#paint26_angular_500_6017)"/>
+<circle cx="50" cy="50" r="26.5" stroke="url(#paint27_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="28.3" stroke="url(#paint28_angular_500_6017)"/>
+<circle cx="50" cy="50" r="28.3" stroke="url(#paint29_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="49.9999" r="29.6" stroke="url(#paint30_angular_500_6017)" stroke-width="2"/>
+<circle cx="50" cy="49.9999" r="29.6" stroke="url(#paint31_linear_500_6017)" stroke-opacity="0.2" stroke-width="2"/>
+<circle cx="50" cy="50" r="31.9" stroke="url(#paint32_angular_500_6017)"/>
+<circle cx="50" cy="50" r="31.9" stroke="url(#paint33_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="33.7" stroke="url(#paint34_angular_500_6017)"/>
+<circle cx="50" cy="50" r="33.7" stroke="url(#paint35_linear_500_6017)" stroke-opacity="0.2"/>
+<circle cx="50" cy="50" r="35.5" stroke="url(#paint36_angular_500_6017)"/>
+<circle cx="50" cy="50" r="35.5" stroke="url(#paint37_linear_500_6017)" stroke-opacity="0.2"/>
+<defs>
+<radialGradient id="paint0_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 49.9999) rotate(90) scale(3.6)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint1_linear_500_6017" x1="50" y1="46.3999" x2="50" y2="53.5999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint2_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50.0001) rotate(90) scale(5.4)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint3_linear_500_6017" x1="50" y1="44.6001" x2="50" y2="55.4001" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint4_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(7.2)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint5_linear_500_6017" x1="50" y1="42.8" x2="50" y2="57.2" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint6_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(9)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint7_linear_500_6017" x1="50" y1="41" x2="50" y2="59" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint8_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(10.8)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint9_linear_500_6017" x1="50" y1="39.2" x2="50" y2="60.8" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint10_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 49.9999) rotate(90) scale(12.6)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint11_linear_500_6017" x1="50" y1="37.3999" x2="50" y2="62.5999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint12_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50.0001) rotate(90) scale(14.4)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint13_linear_500_6017" x1="50" y1="35.6001" x2="50" y2="64.4001" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint14_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(16.2)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint15_linear_500_6017" x1="50" y1="33.8" x2="50" y2="66.2001" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint16_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(18)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint17_linear_500_6017" x1="50" y1="32" x2="50" y2="68" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint18_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(19.8)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint19_linear_500_6017" x1="50" y1="30.2" x2="50" y2="69.7999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint20_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 49.9999) rotate(90) scale(21.6)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint21_linear_500_6017" x1="50" y1="28.3999" x2="50" y2="71.5999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint22_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50.0001) rotate(90) scale(23.4)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint23_linear_500_6017" x1="50" y1="26.6001" x2="50" y2="73.4001" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint24_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(25.2)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint25_linear_500_6017" x1="50" y1="24.8" x2="50" y2="75.2001" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint26_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(27)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint27_linear_500_6017" x1="50" y1="23" x2="50" y2="77" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint28_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(28.8)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint29_linear_500_6017" x1="50" y1="21.2" x2="50" y2="78.7999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint30_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 49.9999) rotate(90) scale(30.6)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint31_linear_500_6017" x1="50" y1="19.3999" x2="50" y2="80.5999" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint32_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(32.4)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint33_linear_500_6017" x1="50" y1="17.6" x2="50" y2="82.4" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint34_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(34.2)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint35_linear_500_6017" x1="50" y1="15.8" x2="50" y2="84.2" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint36_angular_500_6017" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(36)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint37_linear_500_6017" x1="50" y1="14" x2="50" y2="86" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

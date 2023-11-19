@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_6_8168" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="40" y="40" width="120" height="120">
+<circle cx="100" cy="100" r="60" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_6_8168)">
+<circle cx="100" cy="100" r="58" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="42" r="58" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="42" r="48" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="42" r="38" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="158" r="58" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="158" r="48" stroke="black" stroke-width="4"/>
+<circle cx="158" cy="158" r="38" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="42" r="58" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="42" r="48" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="42" r="38" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="158" r="58" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="158" r="48" stroke="black" stroke-width="4"/>
+<circle cx="42" cy="158" r="38" stroke="black" stroke-width="4"/>
+</g>
+</svg>

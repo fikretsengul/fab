@@ -1,4 +1,5 @@
 export 'src/constants/fonts.gen.dart';
+export 'src/constants/paddings.dart';
 export 'src/constants/theme_settings.dart';
 export 'src/constants/themes.dart';
 export 'src/widgets/app_bar/fab_app_bar.dart';
@@ -6,8 +7,9 @@ export 'src/widgets/backgrounds/checkers_background.dart';
 export 'src/widgets/backgrounds/crosshatch_background.dart';
 export 'src/widgets/backgrounds/diagonal_stripes_background.dart';
 export 'src/widgets/backgrounds/dotted_background.dart';
+export 'src/widgets/backgrounds/random_svg_background.dart';
 export 'src/widgets/backgrounds/stripes_background.dart';
-export 'src/widgets/bottom_navbar/fab_bottom_navbar.dart';
+export 'src/widgets/bottom_nav_bar/fab_bottom_nav_bar.dart';
 export 'src/widgets/buttons/fab_icon_button.dart';
 export 'src/widgets/buttons/fab_text_button.dart';
 export 'src/widgets/containers/fab_container.dart';

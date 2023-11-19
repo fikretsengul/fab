@@ -7,6 +7,11 @@ import 'package:flutter/widgets.dart';
 
 import '../enums.dart';
 
+typedef PageWidgetBuilder = Widget Function(
+  BuildContext context,
+  GoRouterState state,
+);
+
 /// A type alias for a builder function that creates a widget for error pages.
 /// Receives a context and an optional error object.
 typedef ErrorPageWidgetBuilder = Widget Function(
@@ -45,23 +50,27 @@ abstract class PageDelegate {
 }
 
 /// Represents a single page in the routing system.
-class SinglePage extends PageDelegate {
-  /// Constructs a `SinglePage` with a specific name, path, and widget builder.
-  SinglePage({
+class CustomPage extends PageDelegate {
+  /// Constructs a `SinglePage` with a specific destination, and widget builder.
+  CustomPage({
     required this.name,
     required this.path,
     required this.builder,
+    this.pages = const [],
     PageType? type,
-  }) : super(type: type ?? PageType.auto, routes: []);
+  }) : super(type: type ?? PageType.auto, routes: pages);
 
   /// The builder function to create the widget for this page.
-  final WidgetBuilder builder;
+  final PageWidgetBuilder builder;
 
   /// The unique name for this page.
   final String name;
 
   /// The path associated with this page.
   final String path;
+
+  /// Child routes that can be navigated to from this page.
+  final List<PageDelegate> pages;
 }
 
 /// Represents a layout page that can host other pages.

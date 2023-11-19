@@ -117,6 +117,8 @@ class FabHighlightedText extends StatelessWidget {
     }
 
     // Combine all spans into a RichText widget.
-    return Text.rich(TextSpan(children: children));
+    return Text.rich(
+      TextSpan(children: children),
+    );
   }
 }
