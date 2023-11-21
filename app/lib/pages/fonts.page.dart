@@ -1,6 +1,8 @@
 import 'package:deps/design/design.dart';
+import 'package:deps/packages/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class FontsPage extends StatelessWidget {
   const FontsPage({
     this.title = '',
@@ -12,12 +14,17 @@ class FontsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FabAppBar(title: 'Fonts'),
       body: DottedBackground(
         shape: DotsShape.texture,
         child: RandomSvgBackground(
-          count: 5,
-          child: const SizedBox.expand(),
+          count: 3,
+          child: Center(
+            child: FabContainer(
+              margin: Paddings.sm.all,
+              padding: Paddings.sm.all,
+              child: const Column(),
+            ),
+          ),
         ),
       ),
     );

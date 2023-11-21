@@ -9,7 +9,6 @@ import 'package:deps/packages/injectable.dart';
 import 'package:flutter/material.dart';
 
 import '../model/custom_theme.dart';
-import '../model/theme_colors.dart';
 
 part 'state/theme.state.dart';
 part 'theme.bloc.freezed.dart';
@@ -57,7 +56,7 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
   /// [colors]: Optional `ThemeColors` to update.
   Future<void> setThemeMode({
     ThemeMode? mode,
-    ThemeColors? colors,
+    ThemeData? data,
   }) async {
     final themeMode = mode ?? state.theme.mode;
     final brightness = themeMode == ThemeMode.system
@@ -66,10 +65,10 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
             ? Brightness.light
             : Brightness.dark;
 
-    final theme = CustomTheme.custom(
+    final theme = CustomTheme(
       mode: themeMode,
       brightness: brightness,
-      colors: colors ?? state.theme.colors,
+      data: data ?? state.theme.data,
     );
 
     emit(state.copyWith(theme: theme));

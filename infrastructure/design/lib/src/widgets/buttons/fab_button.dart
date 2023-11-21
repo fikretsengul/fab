@@ -3,9 +3,7 @@
 import 'package:deps/packages/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/paddings.dart';
-import '../../constants/theme_settings.dart';
-import '../containers/fab_container.dart';
+import '../../../design.dart';
 
 /// A customizable floating action button (FabButton) that exhibits a press animation.
 ///
@@ -23,10 +21,9 @@ class FabButton extends StatefulWidget {
     this.buttonType = ButtonType.primary,
     this.borderRadius = ThemeSettings.borderRadius,
     this.offset = ThemeSettings.offset,
-    this.buttonHeight = 30,
+    this.buttonHeight,
     this.buttonWidth,
     this.padding,
-    this.shadowBlurRadius = ThemeSettings.shadowBlurRadius,
     this.borderWidth = ThemeSettings.borderWidth,
     this.animationDuration = 100,
   });
@@ -53,22 +50,19 @@ class FabButton extends StatefulWidget {
   final ButtonType buttonType;
 
   /// The radius of the border's corners.
-  final BorderRadiusGeometry? borderRadius;
+  final double? borderRadius;
 
   /// The offset for the button's shadow.
   final Offset offset;
 
   /// The height of the button.
-  final double buttonHeight;
+  final double? buttonHeight;
 
   /// The width of the button, if not set the button wraps its content.
   final double? buttonWidth;
 
   /// The internal padding for the button's child.
   final EdgeInsets? padding;
-
-  /// The blur radius of the button's shadow.
-  final double shadowBlurRadius;
 
   /// The width of the button's border.
   final double borderWidth;
@@ -117,7 +111,7 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
 
   void _onTapCancel() {
     // Reset animation and trigger action on tap cancel.
-    _resetAnimationAndAction();
+    _resetAnimation();
   }
 
   void _onTapDown(TapDownDetails details) {
@@ -129,15 +123,15 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
 
   void _onTapUp(TapUpDetails details) {
     // Reset animation and trigger action on tap up.
-    _resetAnimationAndAction();
+    _resetAnimation();
+    widget.onPressed?.call();
   }
 
-  void _resetAnimationAndAction() {
+  void _resetAnimation() {
     // Reverse the animation if enabled, and call the onPressed callback if provided.
     if (widget.animated) {
       _controller.reverse();
     }
-    widget.onPressed?.call();
   }
 
   Color _getButtonColor() {
@@ -183,13 +177,15 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
             // FabContainer is a custom container widget used here to apply styling.
             width: widget.buttonWidth,
             height: widget.buttonHeight,
-            padding: widget.padding ?? Paddings.sm.symmetric(h: true),
+            padding: widget.padding ?? EdgeInsets.symmetric(horizontal: Paddings.sm.value, vertical: Paddings.xs.value),
             borderRadius: widget.borderRadius,
             color: widget.buttonColor ?? _getButtonColor(),
-            borderColor: widget.borderColor ?? context.theme.colorScheme.onBackground,
+            borderColor: widget.borderColor ??
+                (widget.buttonType == ButtonType.primary
+                    ? context.theme.colorScheme.primary
+                    : context.theme.colorScheme.onBackground),
             borderWidth: widget.borderWidth,
             shadowColor: widget.shadowColor ?? context.theme.colorScheme.onBackground,
-            shadowBlurRadius: widget.shadowBlurRadius,
             offset: widget.offset - _animation.value, // Adjust offset for the shadow
             child: Center(child: widget.child), // Center the button's child.
           ),

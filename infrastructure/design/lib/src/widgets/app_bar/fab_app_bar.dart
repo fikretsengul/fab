@@ -1,36 +1,15 @@
 import 'package:deps/packages/awesome_extensions.dart';
-import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
 import '../../../design.dart';
-
-class _CustomBackButton extends StatelessWidget {
-  const _CustomBackButton();
-
-  @override
-  Widget build(BuildContext context) {
-    if (Navigator.canPop(context)) {
-      return Row(
-        children: [
-          FabIconButton(
-            icon: UIcons.boldRounded.angle_left,
-            buttonType: ButtonType.classic,
-            onPressed: () => Navigator.maybePop(context),
-          ),
-          Paddings.md.horizontal,
-        ],
-      );
-    } else {
-      return const SizedBox();
-    }
-  }
-}
+import '../../constants/radiuses.dart';
+import 'others/custom_auto_router_back_button.dart';
 
 class FabAppBar extends StatefulWidget implements PreferredSizeWidget {
   FabAppBar({
     required this.title,
     super.key,
-  }) : preferredSize = const Size.fromHeight(kToolbarHeight);
+  }) : preferredSize = const Size.fromHeight(46);
 
   final String title;
 
@@ -48,36 +27,36 @@ class _FabAppBarState extends State<FabAppBar> {
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(4),
+        preferredSize: const Size.fromHeight(2),
         child: Container(
-          color: context.theme.colorScheme.onBackground,
+          margin: Paddings.md.horizontal,
           height: ThemeSettings.borderWidth,
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.onBackground,
+            borderRadius: Radiuses.md.circularBorder,
+          ),
         ),
       ),
       title: Padding(
-        padding: Paddings.sm.symmetric(h: true),
+        padding: Paddings.md.horizontal,
         child: Row(
           children: [
-            const _CustomBackButton(),
+            const CustomAutoRouterBackButton(),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 2),
                 child: Text(
                   widget.title,
+                  textAlign: TextAlign.center,
                   style: context.titleMedium!.copyWith(
-                    fontFamily: FontFamily.fogtwoNo5,
-                    letterSpacing: 0.8,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
+                    fontFamily: FontFamily.tTRamillasTrial,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 30,
                   ),
                 ),
               ),
             ),
-            Paddings.md.horizontal,
-            Container(
-              color: Colors.red,
-              height: 20,
-            ),
+            const SizedBox(width: 30, height: 30),
           ],
         ),
       ),

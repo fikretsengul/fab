@@ -10,18 +10,15 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: FogtwoNo5
-  static const String fogtwoNo5 = 'FogtwoNo5';
+  /// Font family: Arial
+  static const String arial = 'Arial';
 
-  /// Font family: IBMPlexMono
-  static const String iBMPlexMono = 'IBMPlexMono';
+  /// Font family: Fog_Two_No5
+  static const String fogTwoNo5 = 'Fog_Two_No5';
 
-  /// Font family: Lack
-  static const String lack = 'Lack';
+  /// Font family: TTRamillasInitialsTrial
+  static const String tTRamillasInitialsTrial = 'TTRamillasInitialsTrial';
 
-  /// Font family: LackLine
-  static const String lackLine = 'LackLine';
-
-  /// Font family: SpaceGrotesk
-  static const String spaceGrotesk = 'SpaceGrotesk';
+  /// Font family: TTRamillasTrial
+  static const String tTRamillasTrial = 'TTRamillasTrial';
 }

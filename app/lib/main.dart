@@ -2,16 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:deps/core/routing/routing.dart';
-import 'package:deps/features/auth.dart';
 import 'package:deps/locator/locator.dart';
-import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/hydrated_bloc.dart';
 import 'package:deps/packages/path_provider.dart';
 import 'package:flutter/material.dart' hide Router;
 
-import 'pages/error.page.dart';
-import 'router/pages.dart';
+import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,46 +28,5 @@ void main() async {
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
-  runApp(
-    // Provides the `AuthBloc` to the widget tree.
-    BlocProvider(
-      create: (_) => di<AuthBloc>(),
-      child: Application(
-        title: 'Flutter Advanced Boilerplate',
-        theme: ThemeData.light(),
-        router: Router(
-          onRedirect: onRedirect,
-          errorPage: ErrorPageWidget.delegate,
-          refreshListenable: di<AuthBloc>().isAuthenticatedListenable(),
-          pages: pages,
-        ),
-      ),
-    ),
-  );
-}
-
-/// Determines the redirect logic based on the authentication status and current route.
-///
-/// [context]: The build context.
-/// [isAuthenticated]: A boolean indicating if the user is authenticated.
-/// [info]: The `RouteInfo` object containing details about the current route.
-///
-/// Returns a string representing the path to redirect to, or null if no redirect is needed.
-String? onRedirect(
-  BuildContext context, {
-  required bool isAuthenticated,
-  required RouteInfo info,
-}) {
-  // Redirects to the login page if the user is not authenticated and not on the login page.
-  if (!isAuthenticated && info.path != Pages.login.path) {
-    return Pages.login.path;
-  }
-
-  // Redirects to the home page if the user is authenticated and on the login page.
-  if (isAuthenticated && info.path == Pages.login.path) {
-    return Pages.home.path;
-  }
-
-  // No redirection needed.
-  return null;
+  runApp(const App());
 }

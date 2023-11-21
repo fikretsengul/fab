@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 /// `Durations` is a collection of commonly used `Duration` constants.
@@ -9,6 +11,8 @@ import 'package:flutter/foundation.dart';
 /// throughout the application. It can be used for animations, delays, transitions, and more.
 @immutable
 class Durations {
+  const Durations._();
+
   /// A very short delay of 50 milliseconds, useful for minimal pauses.
   static const delay = Duration(milliseconds: 50);
 
@@ -26,4 +30,11 @@ class Durations {
 
   /// An extra slow duration of 900 milliseconds, for longer lasting effects.
   static const xSlow = Duration(milliseconds: 900);
+}
+
+extension DurationsExt on Duration {
+  Future delay([FutureOr Function()? callback]) async => Future.delayed(
+        this,
+        callback,
+      );
 }

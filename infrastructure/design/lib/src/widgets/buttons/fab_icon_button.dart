@@ -1,7 +1,7 @@
 import 'package:deps/packages/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/theme_settings.dart';
+import '../../../design.dart';
 import 'fab_button.dart';
 
 /// A specialized version of FabButton that uses an icon as its child.
@@ -21,7 +21,6 @@ class FabIconButton extends FabButton {
     super.buttonWidth = 30,
     super.offset,
     super.onPressed,
-    super.shadowBlurRadius,
     super.shadowColor,
   }) : super(
           child: Builder(

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_returning_widgets
+/* // ignore_for_file: avoid_returning_widgets
 import 'package:deps/design/design.dart';
 import 'package:deps/packages/go_router.dart';
 import 'package:flutter/material.dart';
@@ -41,3 +41,4 @@ class AppLayoutPage extends StatelessWidget {
     );
   }
 }
+ */

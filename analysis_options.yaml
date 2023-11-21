@@ -14,8 +14,10 @@ analyzer:
     # Exclude generated files
     - "**.freezed.dart"
     - "**.g.dart"
+    - "**.gm.dart"
     - "**.gr.dart"
     - "**.gform.dart"
+    - "**.tailor.dart"
     - "**/generated_plugin_registrant.dart"
 
 custom_lint:

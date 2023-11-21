@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+dev_dependencies:
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.6
+
 flutter:
   uses-material-design: true
   assets:
@@ -19,17 +23,85 @@ flutter:
     - ../infrastructure/design/assets/shapes/variant-two-uncolored/
     - ../infrastructure/design/assets/shapes/variant-three-3d/
   fonts:
-  - family: SpaceGrotesk
+  - family: TTRamillasInitialsTrial
     fonts:
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Bold.ttf
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Black.ttf
+        weight: 900
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Bold.ttf
         weight: 700
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Medium.ttf
-        weight: 500
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Regular.ttf
-        weight: 400
-      - asset: ../infrastructure/design/assets/fonts/SpaceGrotesk/SpaceGrotesk-Light.ttf
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_ExtraBold.ttf
+        weight: 800
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_ExtraLight.ttf
+        weight: 200
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Light.ttf
         weight: 300
-  - family: FogtwoNo5
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Medium.ttf
+        weight: 500
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Regular.ttf
+        weight: 400
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Variable.ttf
+
+  - family: TTRamillasTrial
     fonts:
-      - asset: ../infrastructure/design/assets/fonts/FogtwoNo5/FogtwoNo5-Regular.ttf
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Decor_Italic.ttf
+        weight: 900
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Decor.ttf
+        weight: 900
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Italic.ttf
+        weight: 900
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Outline_Italic.ttf
+        weight: 900
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Outline.ttf
+        weight: 900
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black.ttf
+        weight: 900
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Bold_Italic.ttf
+        weight: 700
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Bold.ttf
+        weight: 700
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraBold_Italic.ttf
+        weight: 800
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraBold.ttf
+        weight: 800
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraLight_Italic.ttf
+        weight: 200
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraLight.ttf
+        weight: 200
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Italic.ttf
+        # Weight and style defaults for regular italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Light_Italic.ttf
+        weight: 300
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Light.ttf
+        weight: 300
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Medium_Italic.ttf
+        weight: 500
+        style: italic
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Medium.ttf
+        weight: 500
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Regular.ttf
+        # Default weight and style for regular
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Variable_Italic.ttf
+        # Variable fonts typically do not need specific weights or styles
+      - asset: ../infrastructure/design/assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Variable_Roman.ttf
+  - family: Arial
+    fonts:
+      - asset: ../infrastructure/design/assets/fonts/Arial/Arial.ttf
+      - asset: ../infrastructure/design/assets/fonts/Arial/Arial_Bold.ttf
+        weight: 700
+      - asset: ../infrastructure/design/assets/fonts/Arial/Arial_Narrow.ttf
+        weight: 400
+      - asset: ../infrastructure/design/assets/fonts/Arial/Arial_Light.ttf
+        weight: 300
+
+        # Optionally specify a weight or style if necessary
+  - family: Fog_Two_No5
+    fonts:
+      - asset: ../infrastructure/design/assets/fonts/Fog_Two_No5/Fog_Two_No5_Regular.ttf
         weight: 400

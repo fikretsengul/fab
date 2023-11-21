@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/fonts.gen.dart';
-import '../../constants/theme_settings.dart';
+import '../../../design.dart';
 import 'fab_button.dart';
 
 /// A specialized version of FabButton that uses text as its child.
@@ -21,7 +20,6 @@ class FabTextButton extends FabButton {
     super.buttonWidth,
     super.offset = ThemeSettings.offset,
     super.onPressed,
-    super.shadowBlurRadius,
     super.shadowColor,
     super.padding,
   }) : super(
@@ -49,7 +47,7 @@ class FabTextButton extends FabButton {
 
     return TextStyle(
       color: color,
-      fontFamily: FontFamily.iBMPlexMono,
+      fontWeight: FontWeight.w400,
     );
   }
 }

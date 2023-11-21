@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  auto_route_generator: ^7.3.2
   build_runner: ^2.4.6
   freezed: ^2.4.5
   injectable_generator: ^2.4.1

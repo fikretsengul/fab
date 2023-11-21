@@ -19,6 +19,6 @@ class ThemeState with _$ThemeState {
   ///
   /// Returns a `ThemeState` with an initial `CustomTheme`.
   factory ThemeState.initial() => _ThemeState(
-        theme: CustomTheme.initial(),
+        theme: CustomTheme.inital(),
       );
 }

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/settings.dart';
+
 class CustomIndicatorShape extends ShapeBorder {
-  CustomIndicatorShape({required this.borderSide, required this.borderRadius});
+  CustomIndicatorShape({
+    this.borderSide = const BorderSide(width: ThemeSettings.borderWidth),
+    this.borderRadius = const BorderRadius.all(Radius.circular(ThemeSettings.borderRadius)),
+  });
+
   final BorderSide borderSide;
   final BorderRadius borderRadius;
 

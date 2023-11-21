@@ -1,7 +1,8 @@
 export 'src/constants/fonts.gen.dart';
 export 'src/constants/paddings.dart';
-export 'src/constants/theme_settings.dart';
+export 'src/constants/settings.dart';
 export 'src/constants/themes.dart';
+export 'src/enums.dart';
 export 'src/widgets/app_bar/fab_app_bar.dart';
 export 'src/widgets/backgrounds/checkers_background.dart';
 export 'src/widgets/backgrounds/crosshatch_background.dart';

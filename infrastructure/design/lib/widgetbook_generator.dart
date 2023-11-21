@@ -1,4 +1,3 @@
-import 'package:deps/core/theming/theming.dart';
 import 'package:deps/design/design.dart';
 import 'package:deps/packages/widgetbook.dart';
 import 'package:deps/packages/widgetbook_annotation.dart' as widgetbook;
@@ -32,7 +31,7 @@ class WidgetbookApp extends StatelessWidget {
           initialDevice: Devices.ios.iPhone13,
         ),
         InspectorAddon(enabled: true),
-        ThemeAddon(
+/*         ThemeAddon(
           themes: [
             WidgetbookTheme(
               name: 'Light - Red',
@@ -40,7 +39,7 @@ class WidgetbookApp extends StatelessWidget {
                 CustomTheme.custom(
                   mode: ThemeMode.light,
                   brightness: Brightness.light,
-                  colors: ThemeSettings.defaultTheme,
+                  colors: ThemeSettingsdefaultTheme,
                 ),
               ),
             ),
@@ -50,27 +49,7 @@ class WidgetbookApp extends StatelessWidget {
                 CustomTheme.custom(
                   mode: ThemeMode.dark,
                   brightness: Brightness.dark,
-                  colors: ThemeSettings.defaultTheme,
-                ),
-              ),
-            ),
-            WidgetbookTheme(
-              name: 'Light - Blue',
-              data: createTheme(
-                CustomTheme.custom(
-                  mode: ThemeMode.light,
-                  brightness: Brightness.light,
-                  colors: ThemeSettings.themes.elementAt(3),
-                ),
-              ),
-            ),
-            WidgetbookTheme(
-              name: 'Dark - Blue',
-              data: createTheme(
-                CustomTheme.custom(
-                  mode: ThemeMode.dark,
-                  brightness: Brightness.dark,
-                  colors: ThemeSettings.themes.elementAt(3),
+                  colors: ThemeSettingsdefaultTheme,
                 ),
               ),
             ),
@@ -81,7 +60,7 @@ class WidgetbookApp extends StatelessWidget {
               child: child,
             );
           },
-        ),
+        ), */
         BuilderAddon(
           name: 'ScreenUtil',
           builder: (context, child) {
