@@ -1,1 +1,1 @@
-export 'src/configure_di.dart';
+export 'di/configure_di.dart';

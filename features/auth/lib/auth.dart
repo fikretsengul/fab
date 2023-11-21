@@ -1,7 +1,7 @@
-export 'src/bloc/auth.bloc.dart';
-export 'src/login.page.dart';
-export 'src/others/di/configure_di.dart';
-export 'src/others/enum/enums.dart';
-export 'src/others/extension/extensions.dart';
-export 'src/routes/router.dart';
-export 'src/routes/router.gm.dart';
+export 'blocs/auth.bloc.dart';
+export 'others/di/configure_di.dart';
+export 'others/enums/enums.dart';
+export 'others/extensions/extensions.dart';
+export 'pages/login.page.dart';
+export 'routes/router.dart';
+export 'routes/router.gm.dart';

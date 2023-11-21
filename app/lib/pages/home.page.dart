@@ -1,3 +1,4 @@
+import 'package:deps/core/commons/helpers.dart';
 import 'package:deps/core/theming/theming.dart';
 import 'package:deps/design/design.dart';
 import 'package:deps/locator/locator.dart';

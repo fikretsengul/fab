@@ -1,3 +1,3 @@
-export 'src/bloc/theme.bloc.dart';
-export 'src/di/configure_di.dart';
-export 'src/model/custom_theme.dart';
+export 'blocs/theme.bloc.dart';
+export 'models/custom_theme.model.dart';
+export 'others/di/configure_di.dart';

@@ -12,7 +12,8 @@ dependencies:
   auth:
     path: ../../features/auth
   auto_route: ^7.8.4
-  awesome_extensions: ^2.0.10
+  commons:
+    path: ../core/commons
   design:
     path: ../design
   dio: ^5.3.3
@@ -45,7 +46,6 @@ dependencies:
   styled_text: ^8.1.0
   talker_dio_logger: ^2.3.1
   talker_flutter: ^3.5.4
-  theme_tailor_annotation: ^2.0.2
   theming:
     path: ../core/theming
   uicons: ^1.0.1

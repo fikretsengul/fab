@@ -1,1 +1,1 @@
-export 'package:analytics/common.dart';
+export 'package:analytics/others.dart';

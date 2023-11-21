@@ -1,1 +1,1 @@
-export 'src/logger/logger.dart';
+export 'logger/logger.dart';

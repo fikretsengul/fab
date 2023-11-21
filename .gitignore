@@ -13,6 +13,7 @@
 **/*.freezed.dart
 **/*.g.dart
 **/*.gr.dart
+**/*.gm.dart
 **/*.gform.dart
 **/*.tailor.dart
 **/*.config.dart

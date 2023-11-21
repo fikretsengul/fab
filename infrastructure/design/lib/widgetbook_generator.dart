@@ -2,7 +2,6 @@ import 'package:deps/design/design.dart';
 import 'package:deps/packages/widgetbook.dart';
 import 'package:deps/packages/widgetbook_annotation.dart' as widgetbook;
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgetbook_generator.directories.g.dart';
 
@@ -62,18 +61,11 @@ class WidgetbookApp extends StatelessWidget {
           },
         ), */
         BuilderAddon(
-          name: 'ScreenUtil',
+          name: 'Builder',
           builder: (context, child) {
-            return ScreenUtilInit(
-              designSize: const Size(375, 812),
-              minTextAdapt: true,
-              splitScreenMode: true,
-              useInheritedMediaQuery: true,
-              builder: (context, child) => child!,
-              child: DottedBackground(
-                shape: DotsShape.texture,
-                child: Center(child: child),
-              ),
+            return DottedBackground(
+              shape: DotsShape.texture,
+              child: Center(child: child),
             );
           },
         ),

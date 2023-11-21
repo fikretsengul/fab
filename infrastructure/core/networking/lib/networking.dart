@@ -1,4 +1,4 @@
-export 'src/di/configure_di.dart';
-export 'src/dio_client.dart';
-export 'src/dio_token_refresh.dart';
-export 'src/token/o_auth2_token.dart';
+export 'client/dio_client.dart';
+export 'client/dio_token_refresh.dart';
+export 'models/o_auth2_token.model.dart';
+export 'others/di/configure_di.dart';

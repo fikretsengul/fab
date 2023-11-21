@@ -1,2 +1,2 @@
-export 'src/analytics/analytics.dart';
-export 'src/di/configure_di.dart';
+export 'analytics/analytics.dart';
+export 'others/di/configure_di.dart';

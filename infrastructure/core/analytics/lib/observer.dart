@@ -1,1 +1,1 @@
-export 'src/observers/failure_observer.dart';
+export 'observers/failure_observer.dart';
