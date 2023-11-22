@@ -18,3 +18,4 @@ dev_dependencies:
   freezed: ^2.4.5
   injectable_generator: ^2.4.1
   json_serializable: ^6.7.1
+  pyramid_lint: ^1.1.0

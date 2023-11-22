@@ -8,6 +8,8 @@ enum Radiuses {
   none._(0),
   xs._(4),
   sm._(8),
+
+  /// 12px
   md._(12),
   lg._(16),
   xl._(20),

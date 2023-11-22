@@ -14,5 +14,6 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.6
-  envied_generator: ^0.5.1
+  envied_generator: ^0.5.2
   injectable_generator: ^2.4.1
+  pyramid_lint: ^1.1.0

@@ -15,3 +15,4 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.4.6
   injectable_generator: ^2.4.1
+  pyramid_lint: ^1.1.0

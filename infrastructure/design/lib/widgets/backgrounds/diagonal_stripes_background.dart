@@ -1,37 +1,7 @@
 import 'package:deps/core/commons/extensions.dart';
-import 'package:deps/packages/widgetbook.dart';
-import 'package:deps/packages/widgetbook_annotation.dart';
 import 'package:flutter/material.dart';
 
-@UseCase(
-  name: 'Diagonal Stripes Background',
-  type: DiagonalStripesBackground,
-)
-Widget diagonalStripesBackground(BuildContext context) {
-  return DiagonalStripesBackground(
-    stripeCount: context.knobs.int.input(
-      label: 'Stripe Count',
-      initialValue: 20,
-    ),
-    stripeWidth: context.knobs.double.slider(
-      label: 'Stripe Width',
-      initialValue: 2,
-    ),
-    direction: context.knobs.list(
-      label: 'Direction',
-      options: DiagonalStripeDirection.values,
-      labelBuilder: (o) => o.name.capitalizeFirst(),
-    ),
-    bgColor: context.knobs.color(
-      label: 'Background Color',
-      initialValue: context.background,
-    ),
-    fgColor: context.knobs.color(
-      label: 'Foreground Color',
-      initialValue: context.onBackground,
-    ),
-  );
-}
+import 'others/diagonal_stripes_background_painter.dart';
 
 /// Enum defining the direction of the diagonal stripes: left-to-right or right-to-left.
 enum DiagonalStripeDirection { leftToRight, rightToLeft }
@@ -70,8 +40,7 @@ class DiagonalStripesBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     // CustomPaint widget is used for custom drawing of the diagonal stripes.
     return CustomPaint(
-      size: MediaQuery.of(context).size,
-      painter: _DiagonalStripesPainter(
+      painter: DiagonalStripesBackgroundPainter(
         stripeCount: stripeCount,
         bgColor: bgColor ?? context.background,
         fgColor: fgColor ?? context.onBackground,
@@ -81,65 +50,4 @@ class DiagonalStripesBackground extends StatelessWidget {
       child: child,
     );
   }
-}
-
-/// CustomPainter class for drawing the diagonal stripes pattern.
-class _DiagonalStripesPainter extends CustomPainter {
-  _DiagonalStripesPainter({
-    required this.stripeCount,
-    required this.stripeWidth,
-    required this.bgColor,
-    required this.fgColor,
-    required this.direction,
-  });
-  final int stripeCount;
-  final double stripeWidth;
-  final Color bgColor;
-  final Color fgColor;
-  final DiagonalStripeDirection direction;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Paint object for filling the stripes
-    final paint = Paint()
-      ..style = PaintingStyle.fill
-      ..color = bgColor;
-
-    // Fill the entire background
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
-
-    // Update the paint color for the foreground stripes
-    paint.color = fgColor;
-
-    // Calculate the spacing between the start of each stripe
-    final spacing = (size.width + size.height) / stripeCount;
-
-    // Loop to draw each diagonal stripe
-    for (var i = -size.height; i < size.width; i += spacing) {
-      final path = Path();
-
-      // Drawing stripes based on the specified direction
-      if (direction == DiagonalStripeDirection.leftToRight) {
-        // Diagonal stripes slanting from left to right
-        path
-          ..moveTo(size.width - i, 0)
-          ..lineTo(size.width - (i + stripeWidth), 0)
-          ..lineTo(size.width - (i + size.height + stripeWidth), size.height)
-          ..lineTo(size.width - (i + size.height), size.height);
-      } else {
-        // Diagonal stripes slanting from right to left
-        path
-          ..moveTo(i, 0)
-          ..lineTo(i + stripeWidth, 0)
-          ..lineTo(i + size.height + stripeWidth, size.height)
-          ..lineTo(i + size.height, size.height);
-      }
-
-      path.close();
-      canvas.drawPath(path, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

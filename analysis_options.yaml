@@ -25,11 +25,15 @@ custom_lint:
     - prefer_declaring_const_constructors: false
     - avoid_dynamic: false
     - max_lines_for_file:
-      max_lines: 125
+      max_lines: 100
     - max_lines_for_function:
-      max_lines: 50
+      max_lines: 100
     - boolean_prefix:
-      valid_prefixes: [updateShouldNotify]
+      valid_prefixes: [
+        debugDoingBuild,
+        updateShouldNotify,
+        mq
+      ]
 
 linter:
   rules:
@@ -89,6 +93,7 @@ linter:
     prefer_const_constructors_in_immutables: false
 
     ## Disabled rules because the repository doesn't respect them (yet)
+    comment_references: false
     avoid_classes_with_only_static_members: false
     do_not_use_environment: false
     discarded_futures: false

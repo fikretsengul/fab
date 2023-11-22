@@ -91,7 +91,8 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
       vsync: this,
       duration: Duration(milliseconds: widget.animationDuration),
     )..addListener(() {
-        setState(() {});
+        // ignore: avoid_empty_blocks
+        setState(() {}); // This setState is just to trigger a rebuild.
       });
 
     // Define the animation with a curve to simulate a bouncing effect.
@@ -115,14 +116,14 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
     _resetAnimation();
   }
 
-  void _onTapDown(TapDownDetails details) {
+  void _onTapDown() {
     // Start the animation on tap down if animation is enabled.
     if (widget.animated) {
       _controller.forward();
     }
   }
 
-  void _onTapUp(TapUpDetails details) {
+  void _onTapUp() {
     // Reset animation and trigger action on tap up.
     _resetAnimation();
     widget.onPressed?.call();
@@ -160,8 +161,8 @@ class _FabButtonState extends State<FabButton> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     // Build the button with gesture detection and animated press effect.
     return GestureDetector(
-      onTapDown: widget.isEnabled ? _onTapDown : null,
-      onTapUp: widget.isEnabled ? _onTapUp : null,
+      onTapDown: (_) => widget.isEnabled ? _onTapDown : null,
+      onTapUp: (_) => widget.isEnabled ? _onTapUp : null,
       onTapCancel: widget.isEnabled ? _onTapCancel : null,
       child: AnimatedBuilder(
         animation: _animation,

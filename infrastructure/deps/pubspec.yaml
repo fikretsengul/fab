@@ -16,9 +16,9 @@ dependencies:
     path: ../core/commons
   design:
     path: ../design
-  dio: ^5.3.3
+  dio: ^5.3.4
   dio_smart_retry: ^6.0.0
-  envied: ^0.5.1
+  envied: ^0.5.2
   flavors:
     path: ../core/flavors
   flex_color_scheme: ^7.3.1

@@ -62,7 +62,7 @@ class WidgetbookApp extends StatelessWidget {
         ), */
         BuilderAddon(
           name: 'Builder',
-          builder: (context, child) {
+          builder: (_, child) {
             return DottedBackground(
               shape: DotsShape.texture,
               child: Center(child: child),

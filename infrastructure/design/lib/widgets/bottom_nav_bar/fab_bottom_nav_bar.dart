@@ -15,7 +15,7 @@ class FabBottomNavBar extends StatelessWidget {
   });
 
   final int selectedIndex;
-  final void Function(int)? onDestinationSelected;
+  final ValueChanged<int>? onDestinationSelected;
   final List<Widget> destinations;
   final NavigationDestinationLabelBehavior? labelBehavior;
 

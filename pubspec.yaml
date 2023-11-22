@@ -7,6 +7,6 @@ environment:
   sdk: ">=3.2.0 <4.0.0"
 
 dev_dependencies:
-  custom_lint: ^0.5.6
+  custom_lint: ^0.5.7
   melos: ^3.2.0
   pyramid_lint: ^1.1.0

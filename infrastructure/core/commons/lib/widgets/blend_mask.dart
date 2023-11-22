@@ -21,9 +21,9 @@ class BlendMask extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(BuildContext context, RenderBlendMask renderObject) {
-    renderObject._blendMode = _blendMode;
-    // ignore: cascade_invocations
-    renderObject._opacity = _opacity;
+    renderObject
+      .._blendMode = _blendMode
+      .._opacity = _opacity;
   }
 }
 

@@ -14,3 +14,4 @@ export 'widgets/buttons/fab_icon_button.dart';
 export 'widgets/buttons/fab_text_button.dart';
 export 'widgets/containers/fab_container.dart';
 export 'widgets/text/fab_highlighted_text.dart';
+export 'widgets/text/others/highlighted_text_style.dart';

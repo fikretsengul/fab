@@ -10,7 +10,7 @@ class CustomAutoRouterBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoLeadingButton(
-      builder: (context, leadingType, action) {
+      builder: (_, leadingType, action) {
         if (leadingType == LeadingType.noLeading) {
           return const SizedBox(width: 30, height: 30);
         }

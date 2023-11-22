@@ -1,19 +1,7 @@
 import 'package:deps/core/commons/extensions.dart';
-import 'package:deps/core/commons/helpers.dart';
-import 'package:deps/packages/widgetbook_annotation.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/theme_settings.dart';
-
-@UseCase(
-  name: 'FAB Container',
-  type: FabContainer,
-)
-Widget fabContainer(BuildContext context) {
-  return FabContainer(
-    margin: Paddings.md.horizontal,
-  );
-}
 
 class FabContainer extends StatefulWidget {
   FabContainer({

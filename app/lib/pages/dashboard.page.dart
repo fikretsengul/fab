@@ -17,8 +17,8 @@ class DashboardPage extends StatelessWidget {
         HomeRouter(),
         SettingsRoute(),
       ],
-      appBarBuilder: (context, tabsRouter) => FabAppBar(
-        title: localizedRouteTitlesMap(context)[tabsRouter.topRoute.name] ?? '',
+      appBarBuilder: (_, tabsRouter) => FabAppBar(
+        title: localizedRouteTitlesMap()[tabsRouter.topRoute.name] ?? '',
       ),
       bottomNavigationBuilder: (_, tabsRouter) {
         return FabBottomNavBar(
@@ -28,11 +28,11 @@ class DashboardPage extends StatelessWidget {
           destinations: [
             NavigationDestination(
               icon: Icon(UIcons.boldRounded.home, size: 16),
-              label: localizedRouteTitlesMap(context)[HomeRoute.name] ?? 'Home',
+              label: localizedRouteTitlesMap()[HomeRoute.name] ?? 'Home',
             ),
             NavigationDestination(
               icon: Icon(UIcons.boldRounded.settings, size: 16),
-              label: localizedRouteTitlesMap(context)[SettingsRoute.name] ?? 'Settings',
+              label: localizedRouteTitlesMap()[SettingsRoute.name] ?? 'Settings',
             ),
           ],
         );

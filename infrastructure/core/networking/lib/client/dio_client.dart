@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 // ignore_for_file: max_lines_for_file
-// ignore_for_file: max_lines_for_function
 
 import 'dart:io';
 

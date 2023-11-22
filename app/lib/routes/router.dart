@@ -1,10 +1,9 @@
 import 'package:deps/features/auth.dart';
 import 'package:deps/packages/auto_route.dart';
-import 'package:flutter/material.dart';
 
 import 'router.gr.dart';
 
-Map<String, String> localizedRouteTitlesMap(BuildContext context) => {
+Map<String, String> localizedRouteTitlesMap() => {
       DashboardRoute.name: 'Dashboard',
       HomeRoute.name: 'Home',
       SettingsRoute.name: 'Settings',

@@ -11,3 +11,8 @@ dependencies:
     path: ../../deps/
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+dev_dependencies:
+  pyramid_lint: ^1.1.0
