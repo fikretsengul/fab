@@ -21,8 +21,7 @@ class DashboardPage extends StatelessWidget {
         title: localizedRouteTitlesMap()[tabsRouter.topRoute.name] ?? '',
       ),
       bottomNavigationBuilder: (_, tabsRouter) {
-        return FabBottomNavBar(
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        return NavigationBar(
           selectedIndex: tabsRouter.activeIndex,
           onDestinationSelected: tabsRouter.setActiveIndex,
           destinations: [

@@ -4,7 +4,7 @@ publish_to: none
 version: 0.0.1
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.2.2 <4.0.0"
 
 dependencies:
   deps:
@@ -15,4 +15,4 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  pyramid_lint: ^1.1.0
+  pyramid_lint: ^1.2.0

@@ -25,14 +25,12 @@ custom_lint:
     - prefer_declaring_const_constructors: false
     - avoid_dynamic: false
     - max_lines_for_file:
-      max_lines: 100
+      max_lines: 150
     - max_lines_for_function:
       max_lines: 100
     - boolean_prefix:
       valid_prefixes: [
-        debugDoingBuild,
         updateShouldNotify,
-        mq
       ]
 
 linter:

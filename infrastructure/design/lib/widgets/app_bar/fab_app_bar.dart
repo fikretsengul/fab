@@ -1,52 +1,40 @@
 import 'package:deps/core/commons/extensions.dart';
-import 'package:deps/core/commons/helpers.dart';
+import 'package:deps/core/commons/utils.dart';
+import 'package:deps/packages/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../design.dart';
-import 'others/custom_auto_router_back_button.dart';
 
-class FabAppBar extends StatefulWidget implements PreferredSizeWidget {
+class FabAppBar extends StatelessWidget implements PreferredSizeWidget {
   FabAppBar({
     required this.title,
+    this.leading,
+    this.trailing,
     super.key,
-  }) : preferredSize = const Size.fromHeight(46);
+  }) : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   final String title;
+  final Widget? leading;
+  final Widget? trailing;
 
   @override
   final Size preferredSize;
 
   @override
-  State<FabAppBar> createState() => _FabAppBarState();
-}
-
-class _FabAppBarState extends State<FabAppBar> {
-  @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       titleSpacing: 0,
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(2),
-        child: Container(
-          margin: Paddings.md.horizontal,
-          height: ThemeSettings.borderWidth,
-          decoration: BoxDecoration(
-            color: context.onBackground,
-            borderRadius: Radiuses.md.circularBorder,
-          ),
-        ),
-      ),
       title: Padding(
         padding: Paddings.md.horizontal,
         child: Row(
           children: [
-            const CustomAutoRouterBackButton(),
+            leading ?? const AutoLeadingButton(),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 2),
                 child: Text(
-                  widget.title,
+                  title,
                   textAlign: TextAlign.center,
                   style: context.titleMedium?.copyWith(
                     fontFamily: FontFamily.tTRamillasTrial,
@@ -56,7 +44,7 @@ class _FabAppBarState extends State<FabAppBar> {
                 ),
               ),
             ),
-            const SizedBox(width: 30, height: 30),
+            trailing ?? const SizedBox(width: 30, height: 30),
           ],
         ),
       ),

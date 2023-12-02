@@ -12,8 +12,8 @@ abstract interface class ILogger {
   /// [message]: The primary log message.
   /// [data]: Optional additional data to include in the log.
   void log(
-    String message, {
-    dynamic data,
+    dynamic data, {
+    String? message,
   });
 
   /// Logs a message related to constructive actions or events.

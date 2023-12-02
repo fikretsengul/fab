@@ -4,7 +4,7 @@ publish_to: none
 version: 0.0.1
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.2.2 <4.0.0"
 
 dependencies:
   analytics:
@@ -16,7 +16,7 @@ dependencies:
     path: ../core/commons
   design:
     path: ../design
-  dio: ^5.3.4
+  dio: ^5.4.0
   dio_smart_retry: ^6.0.0
   envied: ^0.5.2
   flavors:
@@ -40,18 +40,18 @@ dependencies:
     path: ../core/networking
   path_provider: ^2.1.1
   rxdart: ^0.27.7
-  sentry_flutter: ^7.13.1
+  sentry_flutter: ^7.13.2
   storage:
     path: ../core/storage
   styled_text: ^8.1.0
-  talker_dio_logger: ^2.3.1
-  talker_flutter: ^3.5.4
+  talker_dio_logger: ^2.3.2
+  talker_flutter: ^3.5.5
   theming:
     path: ../core/theming
   uicons: ^1.0.1
-  widgetbook: ^3.4.1
+  widgetbook: ^3.5.0
   widgetbook_annotation: ^3.1.0
 
 dev_dependencies:
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
   injectable_generator: ^2.4.1

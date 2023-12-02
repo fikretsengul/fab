@@ -1,7 +1,7 @@
 // ignore_for_file: max_lines_for_file
 import 'package:flutter/material.dart';
 
-import '../helpers.dart';
+import '../utils.dart';
 
 class AvatarImage extends StatelessWidget {
   /// Create Avatar of all types i,e, square, circle, standard with different sizes.

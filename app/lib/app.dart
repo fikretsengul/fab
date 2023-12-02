@@ -25,7 +25,6 @@ class _AppState extends State<App> {
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (_, state) {
-          // MaterialApp with router and theme configurations based on Bloc state.
           return MaterialApp.router(
             themeMode: state.theme.mode,
             theme: state.theme.data,

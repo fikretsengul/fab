@@ -1,3 +1,4 @@
+// ignore_for_file: boolean_prefix
 import 'package:flutter/material.dart';
 
 /// A [Nil] instance, you can use in your layouts.

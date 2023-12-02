@@ -27,20 +27,20 @@ command:
   # package will be updated to match the version defined in the bootstrap
   # config every time melos bootstrap is run.
   environment:
-    sdk: ">=3.2.0 <4.0.0"
-    flutter: ">=3.16.0 <4.0.0"
-  bootstrap:
+    sdk: ">=3.2.2 <4.0.0"
+    flutter: ">=3.16.2 <4.0.0"
 
+  bootstrap:
     # Dev dependencies used in all packages to control their versioning
     dev_dependencies:
       auto_route_generator: ^7.3.2
-      build_runner: ^2.4.6
+      build_runner: ^2.4.7
       injectable_generator: ^2.4.1
       freezed: ^2.4.5
       envied_generator: ^0.5.1
       json_serializable: ^6.7.1
       flutter_gen_runner: ^5.3.2
-      pyramid_lint: ^1.1.0
+      pyramid_lint: ^1.2.0
 
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature

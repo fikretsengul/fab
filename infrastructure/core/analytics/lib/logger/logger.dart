@@ -57,11 +57,15 @@ class Logger implements ILogger {
   /// [data]: Optional additional data to include in the log.
   @override
   void log(
-    String message, {
-    dynamic data,
+    dynamic data, {
+    String? message,
   }) {
+    final hasMessage = message != null;
+    final text = hasMessage ? 'MESSAGE' : 'TYPE';
+    final value = hasMessage ? message : data.runtimeType;
+
     _talker.debug(
-      "\n• MESSAGE\t› $message${data != null ? '\n• DATA\t› $data' : ''}",
+      "\n• $text\t› $value${data != null ? '\n• DATA\t› $data' : ''}",
     );
   }
 }

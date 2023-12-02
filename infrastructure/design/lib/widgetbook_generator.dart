@@ -1,4 +1,3 @@
-import 'package:deps/design/design.dart';
 import 'package:deps/packages/widgetbook.dart';
 import 'package:deps/packages/widgetbook_annotation.dart' as widgetbook;
 import 'package:flutter/material.dart';
@@ -60,15 +59,6 @@ class WidgetbookApp extends StatelessWidget {
             );
           },
         ), */
-        BuilderAddon(
-          name: 'Builder',
-          builder: (_, child) {
-            return DottedBackground(
-              shape: DotsShape.texture,
-              child: Center(child: child),
-            );
-          },
-        ),
       ],
     );
   }

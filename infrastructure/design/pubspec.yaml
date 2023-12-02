@@ -4,7 +4,7 @@ publish_to: none
 version: 0.0.1
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.2.2 <4.0.0"
 
 dependencies:
   deps:
@@ -13,100 +13,27 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
   flutter_gen_runner: ^5.3.2
   json_serializable: ^6.7.1
-  pyramid_lint: ^1.1.0
+  pyramid_lint: ^1.2.0
   widgetbook_generator: ^3.3.0
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/shapes/variant-one-colored/
-    - assets/shapes/variant-two-uncolored/
-    - assets/shapes/variant-three-3d/
+    - assets/images/
   fonts:
-    - family: TTRamillasInitialsTrial
+    - family: Nunito
       fonts:
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Black.ttf
-          weight: 900
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Bold.ttf
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
           weight: 700
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Light.ttf
-          weight: 300
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Medium.ttf
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
           weight: 500
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
           weight: 400
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Initials_Trial_Variable.ttf
-
-    - family: TTRamillasTrial
-      fonts:
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Decor_Italic.ttf
-          weight: 900
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Decor.ttf
-          weight: 900
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Italic.ttf
-          weight: 900
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Outline_Italic.ttf
-          weight: 900
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black_Outline.ttf
-          weight: 900
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Black.ttf
-          weight: 900
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Bold_Italic.ttf
-          weight: 700
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Bold.ttf
-          weight: 700
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraBold_Italic.ttf
-          weight: 800
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraLight_Italic.ttf
-          weight: 200
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Italic.ttf
-          # Weight and style defaults for regular italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Light_Italic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
           weight: 300
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Light.ttf
-          weight: 300
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Medium_Italic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Medium.ttf
-          weight: 500
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Regular.ttf
-          # Default weight and style for regular
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Variable_Italic.ttf
-          # Variable fonts typically do not need specific weights or styles
-        - asset: assets/fonts/TT_Ramillas/TT_Ramillas_Trial_Variable_Roman.ttf
-    - family: Arial
-      fonts:
-        - asset: assets/fonts/Arial/Arial.ttf
-        - asset: assets/fonts/Arial/Arial_Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Arial/Arial_Narrow.ttf
-          weight: 400
-        - asset: assets/fonts/Arial/Arial_Light.ttf
-          weight: 300
-
-    - family: Fog_Two_No5
-      fonts:
-        - asset: assets/fonts/Fog_Two_No5/Fog_Two_No5_Regular.ttf
-          weight: 400
 
 flutter_gen:
   output: lib/constants/

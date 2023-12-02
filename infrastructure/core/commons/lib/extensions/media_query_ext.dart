@@ -1,5 +1,7 @@
-// ignore_for_file: prefer_dedicated_media_query_method
+// ignore_for_file: prefer_dedicated_media_query_method, boolean_prefix
 import 'package:flutter/material.dart';
+
+import '../widgets/my_platform.dart';
 
 extension MediaQueryExt on BuildContext {
   Size get mediaQuerySize => MediaQuery.of(this).size;
@@ -44,17 +46,23 @@ extension MediaQueryExt on BuildContext {
   /// and less than 1200 return [tablet] value.
   /// if the device width is less than 300  return [watch] value.
   /// in other cases return [mobile] value.
-/*   T? responsiveValue<T>({
+  T? responsiveValue<T>({
     T? mobile,
     T? tablet,
     T? desktop,
   }) {
     var deviceWidth = mediaQuerySize.shortestSide;
+
     if (MyPlatform.isDesktop) {
       deviceWidth = mediaQuerySize.width;
     }
-    if (deviceWidth >= 1200 && desktop != null) return desktop;
-    if (deviceWidth >= 600 && tablet != null) return tablet;
+    if (deviceWidth >= 1200 && desktop != null) {
+      return desktop;
+    }
+    if (deviceWidth >= 600 && tablet != null) {
+      return tablet;
+    }
+
     return mobile;
-  } */
+  }
 }
