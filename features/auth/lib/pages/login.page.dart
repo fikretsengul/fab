@@ -7,7 +7,7 @@ import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../blocs/login.bloc.dart';
+import '../cubits/login.cubit.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {

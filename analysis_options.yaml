@@ -17,12 +17,12 @@ analyzer:
     - "**.gm.dart"
     - "**.gr.dart"
     - "**.gform.dart"
-    - "**.tailor.dart"
     - "**/generated_plugin_registrant.dart"
 
 custom_lint:
   rules:
     - prefer_declaring_const_constructors: false
+    - unnecessary_nullable_return_type: false
     - avoid_dynamic: false
     - max_lines_for_file:
       max_lines: 150

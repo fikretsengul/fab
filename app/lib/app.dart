@@ -1,5 +1,5 @@
-import 'package:deps/core/theming/theming.dart';
 import 'package:deps/features/auth.dart';
+import 'package:deps/infrastructure/theming.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => di<AuthBloc>()),
+        BlocProvider(create: (_) => di<AuthCubit>()),
         BlocProvider(create: (_) => di<ThemeCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

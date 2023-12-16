@@ -1,4 +1,4 @@
-import 'package:deps/design/design.dart';
+import 'package:deps/infrastructure/commons.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,12 @@ class DashboardPage extends StatelessWidget {
         HomeRouter(),
         SettingsRoute(),
       ],
-      appBarBuilder: (_, tabsRouter) => FabAppBar(
-        title: localizedRouteTitlesMap()[tabsRouter.topRoute.name] ?? '',
+      appBarBuilder: (_, tabsRouter) => AppBar(
+        leading: const AutoLeadingButton(),
+        title: Text(
+          localizedRouteTitlesMap()[tabsRouter.topRoute.name] ?? '',
+          style: context.textTheme.headlineMedium,
+        ),
       ),
       bottomNavigationBuilder: (_, tabsRouter) {
         return NavigationBar(

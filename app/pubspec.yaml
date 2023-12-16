@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   deps:
-    path: ../infrastructure/deps
+    path: ../deps
   flutter:
     sdk: flutter
 
@@ -20,15 +20,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - ../infrastructure/design/assets/images/
+    - ../design/assets/images/
   fonts:
   - family: Nunito
     fonts:
-      - asset: ../infrastructure/design/assets/fonts/Nunito/Nunito-Bold.ttf
+      - asset: ../design/assets/fonts/Nunito/Nunito-Bold.ttf
         weight: 700
-      - asset: ../infrastructure/design/assets/fonts/Nunito/Nunito-Medium.ttf
+      - asset: ../design/assets/fonts/Nunito/Nunito-Medium.ttf
         weight: 500
-      - asset: ../infrastructure/design/assets/fonts/Nunito/Nunito-Regular.ttf
+      - asset: ../design/assets/fonts/Nunito/Nunito-Regular.ttf
         weight: 400
-      - asset: ../infrastructure/design/assets/fonts/Nunito/Nunito-Light.ttf
+      - asset: ../design/assets/fonts/Nunito/Nunito-Light.ttf
         weight: 300

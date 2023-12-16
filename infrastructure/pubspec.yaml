@@ -1,0 +1,24 @@
+name: infrastructure
+description: The infrastructure of flutter advanced boilerplate.
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ">=3.2.2 <4.0.0"
+
+dependencies:
+  deps:
+    path: ../deps
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  build_runner: ^2.4.7
+  envied_generator: ^0.5.2
+  freezed: ^2.4.5
+  injectable_generator: ^2.4.1
+  json_serializable: ^6.7.1
+  pyramid_lint: ^1.2.0

@@ -8,5 +8,5 @@ environment:
 
 dev_dependencies:
   custom_lint: ^0.5.7
-  melos: ^3.2.0
-  pyramid_lint: ^1.1.0
+  melos: ^3.4.0
+  pyramid_lint: ^1.2.0

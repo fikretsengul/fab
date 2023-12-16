@@ -4,14 +4,13 @@
 
 import 'dart:async';
 
-import 'package:deps/core/analytics/common.dart';
-import 'package:deps/core/analytics/failure.dart';
-import 'package:deps/core/networking/networking.dart';
+import 'package:deps/infrastructure/analytics.dart';
+import 'package:deps/infrastructure/networking.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:deps/packages/injectable.dart';
 
 import '../models/user.model.dart';
-import '../others/failure/failures.dart';
+import '../others/failures.dart';
 
 /// `AuthService` provides authentication-related functionalities,
 /// including login and logout operations.
