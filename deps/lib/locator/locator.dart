@@ -1,4 +1,4 @@
-import 'package:auth/_di/_di.dart';
+import 'package:features/_di/_di.dart';
 import 'package:infrastructure/_di/_di.dart';
 
 import '../packages/get_it.dart';
@@ -20,7 +20,7 @@ void initLocator(String env) {
   injectInfrastructure(di, env);
 
   // Inject feature-level dependencies.
-  injectAuthFeature(di, env);
+  injectAllFeatures(di, env);
 
   // Finalize the initialization of dependencies.
   di.init(environment: env);

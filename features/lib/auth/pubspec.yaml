@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   deps:
-    path: ../../deps
+    path: ../../../deps
   flutter:
     sdk: flutter
   json_annotation: ^4.8.1
@@ -16,7 +16,8 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.7
-  freezed: ^2.4.5
+  freezed: ^2.4.6
   injectable_generator: ^2.4.1
   json_serializable: ^6.7.1
   pyramid_lint: ^1.2.0
+  slang_build_runner: ^3.27.0

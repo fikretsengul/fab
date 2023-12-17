@@ -1,4 +1,4 @@
-import 'package:deps/features/auth.dart';
+import 'package:deps/infrastructure/networking.dart';
 import 'package:deps/infrastructure/theming.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/flutter_bloc.dart';
@@ -18,21 +18,18 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => di<AuthCubit>()),
-        BlocProvider(create: (_) => di<ThemeCubit>()),
-      ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (_, state) {
-          return MaterialApp.router(
-            themeMode: state.theme.mode,
-            theme: state.theme.data,
-            title: 'Flutter Advanced Boilerplate',
-            routerConfig: _appRouter.config(),
-          );
-        },
-      ),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      bloc: di<ThemeCubit>(),
+      builder: (context, state) {
+        return MaterialApp.router(
+          themeMode: state.theme.mode,
+          theme: state.theme.data,
+          title: 'Flutter Advanced Boilerplate',
+          routerConfig: _appRouter.config(
+            reevaluateListenable: di<DioTokenRefresh>().interceptor.getAuthStatusListenable(),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:deps/infrastructure/commons.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,15 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Placeholder(),
+    return Scaffold(
+      appBar: AppBar(
+        leading: const AutoLeadingButton(),
+        title: Text(
+          context.router.topRoute.title(context),
+          style: context.textTheme.headlineMedium?.bold,
+        ),
+      ),
+      body: const Placeholder(),
     );
   }
 }

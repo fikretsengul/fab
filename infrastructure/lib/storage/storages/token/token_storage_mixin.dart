@@ -4,8 +4,9 @@
 
 import 'dart:async';
 
-import 'package:deps/features/auth.dart';
+import 'package:flutter/foundation.dart';
 
+import '../../../commons/enums/auth_status_enum.dart';
 import '../i_storage.dart';
 
 /// A mixin which handles core token refresh functionality.
@@ -30,6 +31,18 @@ mixin TokenStorageMixin<T> {
     await authStatus.first;
 
     return _token;
+  }
+
+  /// Creates a [ValueListenable<bool>] for listening to authentication status.
+  /// The value is `true` if the status is [AuthStatus.authenticated], `false` otherwise.
+  ValueListenable<bool> getAuthStatusListenable() {
+    final notifier = ValueNotifier<bool>(_authStatus == AuthStatus.authenticated);
+
+    _controller.stream.listen((status) {
+      notifier.value = status == AuthStatus.authenticated;
+    });
+
+    return notifier;
   }
 
   /// Returns a [Stream<AuthenticationStatus>] which can be used to get notified

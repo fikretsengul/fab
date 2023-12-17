@@ -12,19 +12,19 @@ class LoginState with _$LoginState {
   /// This state is emitted when a login attempt fails, along with the failure reason.
   ///
   /// [failure]: The `Failure` object containing details about the login failure.
-  const factory LoginState.failed(Failure failure) = LoginFailed;
+  const factory LoginState.failed(Failure failure) = LoginStateFailed;
 
   /// Represents the initial state of the login process.
   /// This is the default state before any login attempts are made.
-  const factory LoginState.initial() = LoginInitial;
+  const factory LoginState.initial() = LoginStateInitial;
 
   /// Represents the loading state of the login process.
   /// This state is emitted during the ongoing login operation.
-  const factory LoginState.loading() = LoginLoading;
+  const factory LoginState.loading() = LoginStateLoading;
 
   /// Represents the succeeded state of the login process.
   /// This state is emitted when a login attempt is successful, along with the user details.
   ///
   /// [user]: The `User` object containing details of the successfully logged-in user.
-  const factory LoginState.succeeded(User user) = LoginSucceeded;
+  const factory LoginState.succeeded(User user) = LoginStateSucceeded;
 }

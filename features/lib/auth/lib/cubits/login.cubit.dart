@@ -16,12 +16,12 @@ part 'states/login.state.dart';
 
 /// `LoginBloc` is a Bloc class that manages the login process.
 /// It listens to login requests and emits states corresponding to different stages of the login process.
-@lazySingleton
+@injectable
 class LoginBloc extends Cubit<LoginState> {
   /// Constructs `LoginBloc` with a dependency on `AuthService` and initializes with `LoginInitial` state.
   ///
   /// [_service]: The authentication service responsible for performing login operations.
-  LoginBloc(this._service) : super(const LoginInitial());
+  LoginBloc(this._service) : super(const LoginStateInitial());
 
   final AuthService _service;
 
@@ -32,11 +32,13 @@ class LoginBloc extends Cubit<LoginState> {
   ///
   /// [username]: The username for login.
   /// [password]: The password for login.
-  Future<void> login({
+  Future<bool> login({
     required String username,
     required String password,
   }) async {
-    emit(const LoginLoading());
+    var didLogin = false;
+
+    emit(const LoginStateLoading());
 
     final response = await _service.login(username, password);
 
@@ -45,8 +47,18 @@ class LoginBloc extends Cubit<LoginState> {
 
     // Handles the response from the login operation.
     response.fold(
-      (failure) => emit(LoginFailed(failure)),
-      (user) => emit(LoginSucceeded(user)),
+      (failure) {
+        emit(LoginStateFailed(failure));
+
+        didLogin = false;
+      },
+      (user) {
+        emit(LoginStateSucceeded(user));
+
+        didLogin = true;
+      },
     );
+
+    return didLogin;
   }
 }

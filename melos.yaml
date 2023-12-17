@@ -38,7 +38,7 @@ command:
       auto_route_generator: ^7.3.2
       build_runner: ^2.4.7
       injectable_generator: ^2.4.1
-      freezed: ^2.4.5
+      freezed: ^2.4.6
       envied_generator: ^0.5.2
       json_serializable: ^6.7.1
       flutter_gen_runner: ^5.3.2

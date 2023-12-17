@@ -1,14 +1,14 @@
-import 'package:deps/features/auth.dart';
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 
 import 'router.gr.dart';
 
-Map<String, String> localizedRouteTitlesMap() => {
+/* Map<String, String> localizedRouteTitlesMap() => {
       DashboardRoute.name: 'Dashboard',
       HomeRoute.name: 'Home',
       SettingsRoute.name: 'Settings',
       FontsRoute.name: 'Fonts',
-    };
+    }; */
 
 @AutoRouterConfig(
   modules: [
@@ -25,17 +25,18 @@ class AppRouter extends $AppRouter {
           path: '/',
           page: DashboardRoute.page,
           initial: true,
+          guards: [AuthGuard()],
           children: [
             AutoRoute(
               page: HomeRouter.page,
               children: [
-                AutoRoute(path: 'home', page: HomeRoute.page, initial: true),
-                AutoRoute(path: 'fonts', page: FontsRoute.page),
+                AutoRoute(title: (context, _) => 'Home', path: 'home', page: HomeRoute.page, initial: true),
+                AutoRoute(title: (context, _) => 'Fonts', path: 'fonts', page: FontsRoute.page),
               ],
             ),
-            AutoRoute(path: 'settings', page: SettingsRoute.page),
+            AutoRoute(title: (context, _) => 'Settings', path: 'settings', page: SettingsRoute.page),
           ],
         ),
-        AutoRoute(path: '/login', page: LoginRoute.page),
+        AutoRoute(title: (context, _) => 'Login', path: '/login', page: LoginRoute.page),
       ];
 }
