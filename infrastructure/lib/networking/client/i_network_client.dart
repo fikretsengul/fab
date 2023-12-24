@@ -3,10 +3,9 @@
 // license that can be found in the LICENSE file.
 
 import '../../analytics/others/typedefs.dart';
-
-/// Enum `RequestType` defines different types of HTTP requests.
-/// These types are used in the `INetworkClient` to specify the desired HTTP method.
-enum RequestType { get, post, put, delete, patch }
+import '../../commons/enums/request_type_enum.dart';
+import '../../storage/storages/token/token_storage_mixin.dart';
+import '../models/o_auth2_token.model.dart';
 
 /// `INetworkClient` is an abstract interface class defining the contract for a network client.
 /// This interface specifies how network requests should be made within the application.
@@ -25,10 +24,12 @@ abstract interface class INetworkClient {
   ///
   /// Returns an `AsyncEither<T>`, which is either a `Failure` or a successful response of type `T`.
   AsyncEither<T> invoke<T>(
-    String url,
+    String path,
     RequestType requestType, {
     Map<String, String>? queryParameters,
     Map<String, String>? headers,
     dynamic requestBody,
   });
+
+  TokenStorageMixin<OAuth2Token> get tokenStorage;
 }

@@ -1,1 +1,1 @@
-export 'package:features/features.dart';
+export 'package:_features_locator/_features_locator.dart';

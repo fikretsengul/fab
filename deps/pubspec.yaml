@@ -7,14 +7,14 @@ environment:
   sdk: ">=3.2.2 <4.0.0"
 
 dependencies:
+  _features_locator:
+    path: ../features/_features_locator
   auto_route: ^7.8.4
   design:
     path: ../design
   dio: ^5.4.0
   dio_smart_retry: ^6.0.0
   envied: ^0.5.2
-  features:
-    path: ../features
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
@@ -29,15 +29,21 @@ dependencies:
     path: ../infrastructure
   injectable: ^2.3.2
   internet_connection_checker_plus: ^2.1.0
+  intl: ^0.19.0
+  json_annotation: ^4.8.1
   json_theme: ^6.4.0
+  logger: ^2.0.2+1
   path_provider: ^2.1.1
+  reactive_forms: ^16.1.1
+  reactive_forms_annotations: ^4.2.0
   rxdart: ^0.27.7
   sentry_flutter: ^7.13.2
   slang: ^3.27.0
   slang_flutter: ^3.27.0
   styled_text: ^8.1.0
+  talker_bloc_logger: ^2.4.0
   talker_dio_logger: ^2.4.0
-  talker_flutter: ^3.5.6
+  talker_flutter: ^3.6.0
   uicons: ^1.0.1
   widgetbook: ^3.7.0
   widgetbook_annotation: ^3.1.0

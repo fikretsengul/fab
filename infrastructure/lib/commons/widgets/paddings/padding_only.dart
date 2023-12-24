@@ -16,7 +16,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.xxs,
+        padding: Paddings.xxs.value,
         key: key,
         child: child,
       );
@@ -33,7 +33,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.xs,
+        padding: Paddings.xs.value,
         key: key,
         child: child,
       );
@@ -50,7 +50,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.sm,
+        padding: Paddings.sm.value,
         key: key,
         child: child,
       );
@@ -67,7 +67,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.md,
+        padding: Paddings.md.value,
         key: key,
         child: child,
       );
@@ -84,7 +84,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.lg,
+        padding: Paddings.lg.value,
         key: key,
         child: child,
       );
@@ -101,7 +101,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.xl,
+        padding: Paddings.xl.value,
         key: key,
         child: child,
       );
@@ -118,7 +118,7 @@ class PaddingOnly extends StatelessWidget {
         right: right,
         top: top,
         bottom: bottom,
-        padding: Paddings.xxl,
+        padding: Paddings.xxl.value,
         key: key,
         child: child,
       );

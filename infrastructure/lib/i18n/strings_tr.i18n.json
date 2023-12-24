@@ -1,0 +1,26 @@
+{
+  "failures": {
+    "network": {
+      "badCertificate": "Sunucu sertifikası geçerli değil. Lütfen sunucunun güvenlik sertifikasını kontrol edin ve yeniden deneyin.",
+      "badRequest": "İstek doğru biçimde formatlanmamış ve anlaşılamadı. Lütfen istek formatını kontrol edin ve yeniden deneyin.",
+      "badResponse": "Sunucu beklenmedik bir format veya durum koduyla yanıt verdi. Lütfen yanıtı kontrol edin ve yeniden deneyin.",
+      "clientError": "Bir istemci hatası oluştu. Lütfen isteği kontrol edin ve yeniden deneyin.",
+      "connection": "Sunucuya bağlanılamadı. Lütfen ağ bağlantınızı kontrol edin ve yeniden deneyin.",
+      "connectionTimeout": "Sunucuya ulaşmaya çalışılırken bağlantı zaman aşımına uğradı. Lütfen ağ ayarlarınızı kontrol edin ve yeniden deneyin.",
+      "forbidden": "İstek geçerliydi, ancak sunucu işlemi reddediyor. Lütfen izinlerinizi kontrol edin ve yeniden deneyin.",
+      "internalServer": "Sunucu, isteği yerine getirmesini engelleyen beklenmedik bir durumla karşılaştı. Lütfen daha sonra yeniden deneyin.",
+      "noNetwork": "Ağ bağlantısı yok. Lütfen internet bağlantınızı kontrol edin ve yeniden deneyin.",
+      "notFound": "İstenen kaynak bulunamadı. Lütfen URL'yi kontrol edin ve yeniden deneyin.",
+      "receiveTimeout": "Sunucu bir yanıt göndermek için çok uzun sürdü. Lütfen bağlantınızı kontrol edin ve yeniden deneyin.",
+      "requestCancel": "İstek iptal edildi. Lütfen isteğinizi kontrol edin ve yeniden deneyin.",
+      "requestTimeout": "Sunucu, isteği beklerken zaman aşımına uğradı. Lütfen yeniden bağlanmayı deneyin ve tekrar deneyin.",
+      "sendTimeout": "Veri gönderilirken istek zaman aşımına uğradı. Lütfen bağlantınızı kontrol edin ve yeniden deneyin.",
+      "serverError": "Sunucu, isteği yerine getirmesini engelleyen bir durumla karşılaştı. Lütfen daha sonra yeniden deneyin.",
+      "timeout": "Ağ isteği zaman aşımına uğradı. Lütfen bağlantınızı kontrol edin ve yeniden deneyin.",
+      "tooManyRequests": "Kullanıcı belirli bir süre içinde çok fazla istek gönderdi. Lütfen biraz bekledikten sonra yeniden deneyin.",
+      "unauthorized": "Kimlik doğrulama gerekli ve başarısız oldu veya sağlanmadı. Lütfen kimlik bilgilerinizi doğrulayın ve yeniden deneyin.",
+      "unexpected": "Beklenmeyen bir ağ hatası oluştu. Lütfen bağlantınızı kontrol edin ve yeniden deneyin.",
+      "unexpectedTokenRefresh": "Kimlik doğrulama jetonunu yenilerken beklenmeyen bir hata oluştu. Lütfen yeniden kimlik doğrulaması yapın ve tekrar deneyin."
+    }
+  }
+}

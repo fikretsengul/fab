@@ -21,32 +21,17 @@ class HomePage extends StatelessWidget {
         leading: const AutoLeadingButton(),
         actions: [
           IconButton(
-            onPressed: () => di<LogoutCubit>().logout(),
+            onPressed: () => di<UserCubit>().logout(),
             icon: Icon(UIcons.boldRounded.exit),
             iconSize: 16,
           ),
         ],
         title: Text(
-          context.tr.auth.loginButton,
-          //context.router.topRoute.title(context),
+          context.router.topRoute.title(context),
           style: context.textTheme.headlineMedium?.bold,
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () => context.setLocaleTr(),
-              child: const Text('TR'),
-            ),
-            ElevatedButton(
-              onPressed: () => context.setLocaleEn(),
-              child: const Text('EN'),
-            ),
-          ],
-        ),
-      ),
+      body: const Placeholder(),
     );
   }
 }

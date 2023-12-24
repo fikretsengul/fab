@@ -15,21 +15,47 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _appRouter = AppRouter();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
+  void showPersistentSnackBar(BuildContext context) {
+    _scaffoldKey.currentState?.showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.fixed,
+        content: Text('This is a persistent SnackBar!'),
+        duration: Duration(days: 1),
+      ),
+    );
+  }
+
+  void dismissSnackBar(BuildContext context) {
+    _scaffoldKey.currentState?.hideCurrentSnackBar();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      bloc: di<ThemeCubit>(),
-      builder: (context, state) {
-        return MaterialApp.router(
-          themeMode: state.theme.mode,
-          theme: state.theme.data,
-          title: 'Flutter Advanced Boilerplate',
-          routerConfig: _appRouter.config(
-            reevaluateListenable: di<DioTokenRefresh>().interceptor.getAuthStatusListenable(),
-          ),
-        );
+    return BlocListener<NetworkCubit, NetworkState>(
+      bloc: di<NetworkCubit>(),
+      listener: (_, state) {
+        if (state == NetworkState.connected) {
+          dismissSnackBar(context);
+        } else if (state == NetworkState.disconnected) {
+          showPersistentSnackBar(context);
+        }
       },
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        bloc: di<ThemeCubit>(),
+        builder: (context, state) {
+          return MaterialApp.router(
+            scaffoldMessengerKey: _scaffoldKey,
+            themeMode: state.theme.mode,
+            theme: state.theme.data,
+            title: 'Flutter Advanced Boilerplate',
+            routerConfig: _appRouter.config(
+              reevaluateListenable: di<INetworkClient>().tokenStorage.getAuthStatusListenable(),
+            ),
+          );
+        },
+      ),
     );
   }
 }

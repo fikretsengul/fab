@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/paddings.dart';
+import '../../constants/radiuses.dart';
 
 class RadiusOnly extends StatelessWidget {
-  factory RadiusOnly.xxs({
+  factory RadiusOnly.none({
     required Widget child,
     bool topLeft = false,
     bool topRight = false,
@@ -16,7 +16,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.xxs,
+        radius: Radiuses.none.value,
         key: key,
         child: child,
       );
@@ -33,7 +33,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.xs,
+        radius: Radiuses.xs.value,
         key: key,
         child: child,
       );
@@ -50,7 +50,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.sm,
+        radius: Radiuses.sm.value,
         key: key,
         child: child,
       );
@@ -67,7 +67,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.md,
+        radius: Radiuses.md.value,
         key: key,
         child: child,
       );
@@ -84,7 +84,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.lg,
+        radius: Radiuses.lg.value,
         key: key,
         child: child,
       );
@@ -101,7 +101,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.xl,
+        radius: Radiuses.xl.value,
         key: key,
         child: child,
       );
@@ -118,7 +118,7 @@ class RadiusOnly extends StatelessWidget {
         topRight: topRight,
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
-        radius: Paddings.xxl,
+        radius: Radiuses.xxl.value,
         key: key,
         child: child,
       );

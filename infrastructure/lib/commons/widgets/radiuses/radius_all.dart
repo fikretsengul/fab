@@ -4,13 +4,19 @@ import '../../constants/radiuses.dart';
 
 class RadiusAll extends StatelessWidget {
   factory RadiusAll.none({required Widget child, Key? key}) =>
-      RadiusAll._(radius: Radiuses.none, key: key, child: child);
-  factory RadiusAll.xs({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.xs, key: key, child: child);
-  factory RadiusAll.sm({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.sm, key: key, child: child);
-  factory RadiusAll.md({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.md, key: key, child: child);
-  factory RadiusAll.lg({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.lg, key: key, child: child);
-  factory RadiusAll.xl({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.xl, key: key, child: child);
-  factory RadiusAll.xxl({required Widget child, Key? key}) => RadiusAll._(radius: Radiuses.xxl, key: key, child: child);
+      RadiusAll._(radius: Radiuses.none.value, key: key, child: child);
+  factory RadiusAll.xs({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.xs.value, key: key, child: child);
+  factory RadiusAll.sm({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.sm.value, key: key, child: child);
+  factory RadiusAll.md({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.md.value, key: key, child: child);
+  factory RadiusAll.lg({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.lg.value, key: key, child: child);
+  factory RadiusAll.xl({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.xl.value, key: key, child: child);
+  factory RadiusAll.xxl({required Widget child, Key? key}) =>
+      RadiusAll._(radius: Radiuses.xxl.value, key: key, child: child);
 
   const RadiusAll._({required this.radius, required this.child, super.key});
 

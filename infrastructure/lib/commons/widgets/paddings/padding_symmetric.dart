@@ -12,7 +12,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.xxs,
+        padding: Paddings.xxs.value,
         key: key,
         child: child,
       );
@@ -25,7 +25,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.xs,
+        padding: Paddings.xs.value,
         key: key,
         child: child,
       );
@@ -38,7 +38,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.sm,
+        padding: Paddings.sm.value,
         key: key,
         child: child,
       );
@@ -51,7 +51,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.md,
+        padding: Paddings.md.value,
         key: key,
         child: child,
       );
@@ -64,7 +64,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.lg,
+        padding: Paddings.lg.value,
         key: key,
         child: child,
       );
@@ -77,7 +77,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.xl,
+        padding: Paddings.xl.value,
         key: key,
         child: child,
       );
@@ -90,7 +90,7 @@ class PaddingSymmetric extends StatelessWidget {
       PaddingSymmetric._(
         vertical: vertical,
         horizontal: horizontal,
-        padding: Paddings.xxl,
+        padding: Paddings.xxl.value,
         key: key,
         child: child,
       );

@@ -98,7 +98,7 @@ scripts:
   generate:
     description: Generate codes for all packages.
     run:  |
-      melos exec -c 5 --depends-on="build_runner" -- \
+      melos exec -c 1 --depends-on="build_runner" -- \
         dart run build_runner build -d
 
   # Tests

@@ -6,7 +6,14 @@ part of '_di.dart';
 @module
 abstract class TalkerModule {
   /// Provides a singleton instance of [Talker] initialized using [TalkerFlutter.init].
-  Talker talker() => TalkerFlutter.init();
+  Talker get talker => TalkerFlutter.init(
+        logger: TalkerLogger(
+          formatter: FancyTalkerLogFormatter(),
+          settings: const TalkerLoggerSettings(
+            maxLineWidth: 100,
+          ),
+        ),
+      );
 }
 
 /// A module to provide [Dio] instance for dependency injection.

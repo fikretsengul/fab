@@ -1,0 +1,12 @@
+{
+  "widgets": {
+    "reactives": {
+      "fabReactiveTextfield": {
+        "email": "$field geçerli bir eposta adresi olmalıdır.",
+        "maxLength": "$field alanı $count karakterden uzun olamaz.",
+        "minLength": "$field alanı $count karakterden kısa olamaz.",
+        "required": "$field alanı zorunludur."
+      }
+    }
+  }
+}

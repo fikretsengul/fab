@@ -1,0 +1,12 @@
+{
+  "widgets": {
+    "reactives": {
+      "fabReactiveTextfield": {
+        "email": "$field should be a valid email address",
+        "maxLength": "$field cannot be more than $count characters",
+        "minLength": "$field cannot be less than $count characters",
+        "required": "$field is required."
+      }
+    }
+  }
+}

@@ -17,6 +17,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.3.2
   json_serializable: ^6.7.1
   pyramid_lint: ^1.2.0
+  slang_build_runner: ^3.27.0
   widgetbook_generator: ^3.3.0
 
 flutter:

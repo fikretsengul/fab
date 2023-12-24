@@ -4,8 +4,8 @@
 
 import 'package:deps/locator/locator.dart';
 
-import '../../analytics/logger/logger.dart';
+import '../../analytics/logger/i_logger.dart';
 
 /// Global instances for easy access throughout the application.
 
-final console = di<Logger>();
+final logger = di<ILogger>();

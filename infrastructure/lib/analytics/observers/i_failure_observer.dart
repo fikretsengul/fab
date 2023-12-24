@@ -10,7 +10,7 @@ import '../failure/failure.dart';
 /// This interface is intended to be implemented by classes that need to
 /// respond to or log failures occurring within the application. It provides
 /// a single method to be called when a failure is encountered.
-abstract interface class IFailureObserver {
+abstract class IFailureObserver {
   /// Called when a [Failure] is encountered in the application.
   ///
   /// Implement this method to define how failures should be handled,

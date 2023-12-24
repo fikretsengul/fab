@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
+import 'package:deps/infrastructure/i18n.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/hydrated_bloc.dart';
 import 'package:deps/packages/path_provider.dart';
@@ -30,8 +32,12 @@ void main() async {
   );
 
   runApp(
-    FeaturesTranslationProvider(
-      child: const App(),
+    const InfrastructureI18nProvider(
+      child: DesignI18nProvider(
+        child: FeaturesI18nProvider(
+          child: App(),
+        ),
+      ),
     ),
   );
 }

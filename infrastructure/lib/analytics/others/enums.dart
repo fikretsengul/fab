@@ -22,25 +22,29 @@ enum LogType {
 
 /// Defines different types of failures.
 enum FailureType {
-  /// Indicates a constructive failure, which may include informational or non-critical issues.
+  /// Indicates a constructive failure, used in app for snack-bar purposes.
   constructive,
 
-  /// Indicates a destructive failure, often representing errors or critical issues.
+  /// Indicates a destructive failure, used in app for snack-bar purposes.
   destructive,
 
   /// Represents an exception, typically used for unexpected errors.
   exception,
 
-  slient,
+  /// Represents a critical failure or critical issues.
+  error,
+
+  /// Indicates empty failure type.
+  empty,
 }
 
 /// Enumerates various tags used to categorize failures.
 enum FailureTag {
   /// Failure in a Cubit (BLoC pattern component).
-  cubit,
+  state,
 
-  /// Failure related to network requests (Dio package).
-  dio,
+  /// Failure related to network requests.
+  network,
 
   /// Failure encountered in a repository layer.
   repository,
@@ -50,4 +54,7 @@ enum FailureTag {
 
   /// Uncaught or unexpected failure.
   uncaught,
+
+  /// Indicates empty failure tag.
+  empty,
 }

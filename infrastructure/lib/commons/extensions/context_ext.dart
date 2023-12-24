@@ -9,6 +9,7 @@ extension ContextExt on BuildContext {
   /// Theme related extensions
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => Theme.of(this).textTheme;
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get primaryTextTheme => Theme.of(this).primaryTextTheme;
   BottomAppBarTheme get bottomAppBarTheme => Theme.of(this).bottomAppBarTheme;
   BottomSheetThemeData get bottomSheetTheme => Theme.of(this).bottomSheetTheme;
@@ -33,6 +34,18 @@ extension ContextExt on BuildContext {
   bool get isSmallTablet => mediaQueryShortestSide >= 600;
   bool get isLargeTablet => mediaQueryShortestSide >= 720;
   bool get isTablet => isSmallTablet || isLargeTablet;
+
+  /// Media query of related extensions
+  Size get mqSize => MediaQuery.sizeOf(this);
+  double get mqHeight => mqSize.height;
+  double get mqWidth => mqSize.width;
+  EdgeInsets get mqPadding => MediaQuery.paddingOf(this);
+  EdgeInsets get mqViewPadding => MediaQuery.viewPaddingOf(this);
+  EdgeInsets get mqViewInsets => MediaQuery.viewInsetsOf(this);
+  Orientation get mqOrientation => MediaQuery.orientationOf(this);
+  bool get mqAlwaysUse24HourFormat => MediaQuery.alwaysUse24HourFormatOf(this);
+  double get mqDevicePixelRatio => MediaQuery.devicePixelRatioOf(this);
+  Brightness get mqPlatformBrightness => MediaQuery.platformBrightnessOf(this);
 
   /// Returns specific values according to screen size for responsive design.
   T? responsiveValue<T>({

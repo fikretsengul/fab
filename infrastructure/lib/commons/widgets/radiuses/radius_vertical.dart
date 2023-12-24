@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/paddings.dart';
+import '../../constants/radiuses.dart';
 
 class RadiusVertical extends StatelessWidget {
-  factory RadiusVertical.xxs({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.xxs, key: key, child: child);
+  factory RadiusVertical.none({required Widget child, Key? key}) =>
+      RadiusVertical._(radius: Radiuses.none.value, key: key, child: child);
 
   factory RadiusVertical.xs({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.xs, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.xs.value, key: key, child: child);
 
   factory RadiusVertical.sm({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.sm, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.sm.value, key: key, child: child);
 
   factory RadiusVertical.md({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.md, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.md.value, key: key, child: child);
 
   factory RadiusVertical.lg({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.lg, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.lg.value, key: key, child: child);
 
   factory RadiusVertical.xl({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.xl, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.xl.value, key: key, child: child);
 
   factory RadiusVertical.xxl({required Widget child, Key? key}) =>
-      RadiusVertical._(radius: Paddings.xxl, key: key, child: child);
+      RadiusVertical._(radius: Radiuses.xxl.value, key: key, child: child);
 
   const RadiusVertical._({required this.radius, required this.child, super.key});
 

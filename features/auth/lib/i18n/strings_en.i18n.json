@@ -1,0 +1,7 @@
+{
+  "loginForm": {
+    "email": "E-mail",
+    "password": "Password",
+    "loginButton": "Login"
+  }
+}

@@ -75,7 +75,7 @@ class AvatarImage extends StatelessWidget {
         color: effectiveBackgroundColor,
         image: backgroundImage != null ? DecorationImage(image: backgroundImage!, fit: BoxFit.cover) : null,
         shape: _avatarShape,
-        borderRadius: shape != AvatarImageShape.circle ? borderRadius ?? Radiuses.md.circularBorder() : null,
+        borderRadius: shape != AvatarImageShape.circle ? borderRadius ?? Radiuses.md.circularBorder : null,
       ),
       child: child,
     );
