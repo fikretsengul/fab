@@ -32,20 +32,19 @@ dependencies:
   intl: ^0.19.0
   json_annotation: ^4.8.1
   json_theme: ^6.4.0
-  logger: ^2.0.2+1
   path_provider: ^2.1.1
   reactive_forms: ^16.1.1
   reactive_forms_annotations: ^4.2.0
   rxdart: ^0.27.7
-  sentry_flutter: ^7.13.2
-  slang: ^3.27.0
-  slang_flutter: ^3.27.0
+  sentry_flutter: ^7.14.0
+  slang: ^3.28.0
+  slang_flutter: ^3.28.0
   styled_text: ^8.1.0
   talker_bloc_logger: ^2.4.0
   talker_dio_logger: ^2.4.0
   talker_flutter: ^3.6.0
   uicons: ^1.0.1
-  widgetbook: ^3.7.0
+  widgetbook: ^3.7.1
   widgetbook_annotation: ^3.1.0
 
 dev_dependencies:
