@@ -8,7 +8,7 @@ import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/freezed_annotation.dart';
 import 'package:deps/packages/injectable.dart';
 
-import '../services/auth.service.dart';
+import '../../../data/auth.service.dart';
 
 part 'login.cubit.freezed.dart';
 part 'states/login.state.dart';

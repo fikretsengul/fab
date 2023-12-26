@@ -1,25 +1,57 @@
 targets:
   $default:
     builders:
+      # Envied
+      envied_generator:
+        generate_for:
+          include:
+            - lib/flavors/**.dart
+      # Freezed
+      freezed:
+        options:
+          map: false
+          when:
+            when: false
+            maybe_when: false
+            when_or_null: true
+        generate_for:
+          include:
+            - lib/infrastructure/networking/models/*.model.dart
+            - lib/infrastructure/theming/models/*.model.dart
+            - lib/infrastructure/theming/cubits/states/*.state.dart
+      # Json Serializable
+      json_serializable:
+        options:
+          create_factory: true
+          create_to_json: true
+          explicit_to_json: true
+          field_rename: snake
+          include_if_null: true
+        generate_for:
+          include:
+            - lib/infrastructure/networking/models/*.model.dart
+            - lib/infrastructure/theming/models/*.model.dart
+      # Slang
       slang_build_runner:
         options:
-          base_locale: en
           fallback_strategy: base_locale
-          input_directory: lib/i18n
-          input_file_pattern: .i18n.json
-          output_directory: lib/i18n
+          input_directory: lib/core/i18n
+          output_directory: lib/core/i18n
           output_file_name: translations.g.dart
-          output_format: single_file
-          locale_handling: true
-          flutter_integration: true
-          namespaces: false
           translate_var: tr
-          enum_name: AppLocale
-          translation_class_visibility: private
           key_case: camel
           key_map_case: camel
           param_case: camel
-          string_interpolation: dart
           flat_map: false
-          translation_overrides: false
-          timestamp: true
+        generate_for:
+          include:
+            - lib/core/i18n/*
+      # Injectable
+      injectable_generator:
+        generate_for:
+          include:
+            - lib/_di/*.dart
+            - lib/analytics/**/*.dart
+            - lib/networking/**/*.dart
+            - lib/storage/**/*.dart
+            - lib/theming/**/*.dart

@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import '../../analytics/others/typedefs.dart';
-import '../../commons/enums/request_type_enum.dart';
+import '../../core/enums/request_type_enum.dart';
 import '../../storage/storages/token/token_storage_mixin.dart';
 import '../models/o_auth2_token.model.dart';
 

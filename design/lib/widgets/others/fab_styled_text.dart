@@ -1,4 +1,4 @@
-import 'package:deps/infrastructure/commons.dart';
+import 'package:deps/infrastructure/core.dart';
 import 'package:deps/packages/styled_text.dart';
 import 'package:flutter/widgets.dart';
 

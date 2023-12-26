@@ -10,7 +10,7 @@ import '../i_analytics.dart';
 /// [Analytics] class implementing [IAnalytics] interface.
 /// Uses Sentry for capturing events and user information.
 /// Registered as a singleton in the dependency injection system.
-@Singleton(as: IAnalytics)
+@LazySingleton(as: IAnalytics)
 class SentryAnalytics implements IAnalytics {
   SentryAnalytics();
 

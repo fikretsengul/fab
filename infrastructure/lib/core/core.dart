@@ -10,6 +10,7 @@ export 'extensions/color_ext.dart';
 export 'extensions/context_ext.dart';
 export 'extensions/string_ext.dart';
 export 'extensions/text_style_ext.dart';
+export 'i18n/i18n.dart';
 export 'widgets/avatar_image.dart';
 export 'widgets/blend_mask.dart';
 export 'widgets/nil.dart';

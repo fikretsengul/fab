@@ -5,15 +5,15 @@
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/infrastructure/analytics.dart';
-import 'package:deps/infrastructure/commons.dart';
+import 'package:deps/infrastructure/core.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/i18n/translations.g.dart';
+import '../../../domain/forms/login.form.dart';
 import '../cubits/login.cubit.dart';
-import '../forms/login.form.dart';
-import '../i18n/translations.g.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {

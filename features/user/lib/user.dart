@@ -1,2 +1,2 @@
-export 'cubits/user.cubit.dart';
-export 'models/user.model.dart';
+export 'domain/models/user.model.dart';
+export 'presentation/cubits/user.cubit.dart';

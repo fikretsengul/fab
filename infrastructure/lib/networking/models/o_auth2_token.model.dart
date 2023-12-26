@@ -13,7 +13,7 @@ part 'o_auth2_token.model.g.dart';
 /// This class defines the structure of an OAuth2 token, including all necessary
 /// fields typically used in OAuth2 authentication processes.
 @freezed
-class OAuth2Token with _$OAuth2Token {
+sealed class OAuth2Token with _$OAuth2Token {
   /// Constructs an `OAuth2Token`.
   ///
   /// - [accessToken]: The actual token string used for accessing resources.

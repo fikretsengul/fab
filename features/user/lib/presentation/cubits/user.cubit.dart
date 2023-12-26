@@ -4,7 +4,7 @@ import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/freezed_annotation.dart';
 import 'package:deps/packages/injectable.dart';
 
-import '../models/user.model.dart';
+import '../../domain/models/user.model.dart';
 
 part 'states/user.state.dart';
 part 'user.cubit.freezed.dart';

@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import '../../../commons/enums/auth_status_enum.dart';
+import '../../../core/enums/auth_status_enum.dart';
 import '../i_storage.dart';
 
 /// A mixin which handles core token refresh functionality.

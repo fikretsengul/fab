@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 part 'custom_theme.model.freezed.dart';
 
 @freezed
-class CustomTheme with _$CustomTheme {
+sealed class CustomTheme with _$CustomTheme {
   factory CustomTheme({
     required ThemeMode mode,
     required Brightness brightness,

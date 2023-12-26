@@ -6,7 +6,7 @@ part 'user.model.g.dart';
 enum UserRoleEnum { customer, admin }
 
 @freezed
-class UserModel with _$UserModel {
+sealed class UserModel with _$UserModel {
   factory UserModel({
     required int id,
     required String email,

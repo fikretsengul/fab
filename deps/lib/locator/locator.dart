@@ -1,4 +1,4 @@
-import 'package:_features_locator/_di/_di.dart';
+import 'package:features_core/_di/_di.dart';
 import 'package:infrastructure/_di/_di.dart';
 
 import '../packages/get_it.dart';

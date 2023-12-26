@@ -1,5 +1,5 @@
 import 'package:deps/features/features.dart';
-import 'package:deps/infrastructure/commons.dart';
+import 'package:deps/infrastructure/core.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/uicons.dart';

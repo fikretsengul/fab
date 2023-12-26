@@ -4,7 +4,7 @@
 
 import '../../../analytics/failure/failure.dart';
 import '../../../analytics/others/enums.dart';
-import '../../../i18n/translations.g.dart';
+import '../../../core/i18n/translations.g.dart';
 
 class NoNetworkFailure extends Failure {
   NoNetworkFailure({super.exception, super.stack})

@@ -1,1 +1,1 @@
-export 'package:infrastructure/i18n/i18n.dart';
+export 'package:infrastructure/core/i18n/i18n.dart';

@@ -7,7 +7,7 @@ part of '../login.cubit.dart';
 /// `LoginState` is an immutable class representing the different states of the login process.
 /// It uses the `freezed` package to provide copyable, equatable, and immutable state objects.
 @freezed
-class LoginState with _$LoginState {
+sealed class LoginState with _$LoginState {
   /// Represents the failed state of the login process.
   /// This state is emitted when a login attempt fails, along with the failure reason.
   ///

@@ -1,4 +1,4 @@
-export 'others/guard.dart';
-export 'pages/login.page.dart';
-export 'routes/router.dart';
-export 'routes/router.gm.dart';
+export 'core/routes/guard.dart';
+export 'core/routes/router.dart';
+export 'core/routes/router.gm.dart';
+export 'presentation/login/views/login.page.dart';

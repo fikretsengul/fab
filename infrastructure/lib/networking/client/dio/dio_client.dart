@@ -17,7 +17,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../analytics/logger/i_logger.dart';
 import '../../../analytics/others/typedefs.dart';
-import '../../../commons/enums/request_type_enum.dart';
+import '../../../core/enums/request_type_enum.dart';
 import '../../../flavors/i_env.dart';
 import '../../../storage/storages/i_storage.dart';
 import '../../../storage/storages/token/token_storage_mixin.dart';

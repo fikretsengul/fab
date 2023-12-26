@@ -7,7 +7,7 @@ part of '../theme.cubit.dart';
 /// `ThemeState` is an immutable state class representing the theme state of the application.
 /// It uses the `freezed` package to provide an immutable and copyable state model.
 @freezed
-class ThemeState with _$ThemeState {
+sealed class ThemeState with _$ThemeState {
   /// Constructs a `ThemeState` with a given `CustomTheme`.
   ///
   /// [theme]: The `CustomTheme` instance representing the current theme state.

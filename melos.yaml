@@ -68,7 +68,7 @@ scripts:
   clean:pods:
     description: Clean ios pods to fix any pods related issues.
     run: |
-      cd ios && \
+      cd app/ios && \
       rm -Rf Pods || true && \
       rm Podfile.lock || true && \
       pod install --repo-update

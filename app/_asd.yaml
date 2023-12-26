@@ -1,11 +1,6 @@
 targets:
   $default:
     builders:
-      # Reactive Forms
-      reactive_forms_generator:
-        generate_for:
-          include:
-            - lib/domain/forms/*.form.dart
       # Auto Route
       auto_route_generator:auto_router_generator:
         options:
@@ -29,9 +24,9 @@ targets:
             when_or_null: true
         generate_for:
           include:
-            - lib/domain/forms/*.form.dart
-            - lib/domain/models/*.model.dart
-            - lib/presentation/**/cubits/states/*.state.dart
+            - lib/infrastructure/networking/models/*.model.dart
+            - lib/infrastructure/theming/models/*.model.dart
+            - lib/infrastructure/theming/cubits/states/*.state.dart
       # Json Serializable
       json_serializable:
         options:
@@ -42,8 +37,8 @@ targets:
           include_if_null: true
         generate_for:
           include:
-            - lib/domain/forms/*.form.dart
-            - lib/domain/models/*.model.dart
+            - lib/infrastructure/networking/models/*.model.dart
+            - lib/infrastructure/theming/models/*.model.dart
       # Slang
       slang_build_runner:
         options:
@@ -64,5 +59,7 @@ targets:
         generate_for:
           include:
             - lib/_di/*.dart
-            - lib/presentation/**/cubits/*.cubit.dart
-            - lib/data/*.service.dart
+            - lib/analytics/**/*.dart
+            - lib/networking/**/*.dart
+            - lib/storage/**/*.dart
+            - lib/theming/**/*.dart

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:deps/infrastructure/commons.dart';
+import 'package:deps/infrastructure/core.dart';
 import 'package:deps/infrastructure/networking.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 
-import '../routes/router.gm.dart';
+import 'router.gm.dart';
 
 class AuthGuard extends AutoRouteGuard {
   @override

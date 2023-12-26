@@ -3,7 +3,7 @@ part of '../user.cubit.dart';
 enum UserStateStatus { initial, loading, failed, succeeded }
 
 @freezed
-class UserState with _$UserState {
+sealed class UserState with _$UserState {
   const factory UserState({
     required UserStateStatus status,
     required UserModel user,
