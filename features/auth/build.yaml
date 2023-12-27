@@ -31,7 +31,7 @@ targets:
           include:
             - lib/domain/forms/*.form.dart
             - lib/domain/models/*.model.dart
-            - lib/presentation/**/cubits/states/*.state.dart
+            - lib/presentation/**/*.cubit.dart
       # Json Serializable
       json_serializable:
         options:

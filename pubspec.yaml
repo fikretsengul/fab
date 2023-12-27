@@ -8,10 +8,5 @@ environment:
 
 dev_dependencies:
   custom_lint: ^0.5.7
-  fvm: ^2.4.1
   melos: ^3.4.0
   pyramid_lint: ^1.2.0
-
-dependency_overrides:
-  cli_util: ^0.4.0
-  pub_updater: ^0.4.0

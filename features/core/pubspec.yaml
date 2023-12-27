@@ -1,4 +1,4 @@
-name: core
+name: feature_core
 description: Core for all features of flutter advanced boilerplate.
 publish_to: none
 version: 0.0.1
@@ -7,14 +7,14 @@ environment:
   sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
-  auth:
-    path: ../auth
   deps:
     path: ../../deps
+  feature_auth:
+    path: ../auth
+  feature_user:
+    path: ../user
   flutter:
     sdk: flutter
-  user:
-    path: ../user
 
 dev_dependencies:
   build_runner: ^2.4.7

@@ -19,7 +19,7 @@ import '../cubits/login.cubit.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({required this.onResult, super.key});
 
-  final Function(bool) onResult;
+  final Function(bool didLogin) onResult;
 
   Future<void> login() async {
     final didLogin = await di<LoginCubit>().login(
@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
         child: Scaffold(
           body: LoginFormFormBuilder(
             model: LoginForm.empty(),
-            builder: (context, data, child) {
+            builder: (context, data, _) {
               return PaddingAll.md(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +88,7 @@ class LoginPage extends StatelessWidget {
                       onSubmitted: (_) => data.form.valid ? login() : null,
                     ),
                     ReactiveLoginFormFormConsumer(
-                      builder: (context, data, child) {
+                      builder: (context, _, __) {
                         return ElevatedButton(
                           onPressed: login,
                           child: Text(context.tr.loginForm.loginButton),

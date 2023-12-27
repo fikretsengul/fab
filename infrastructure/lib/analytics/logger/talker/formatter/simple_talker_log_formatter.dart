@@ -24,9 +24,8 @@ class SimpleTalkerLogFormatter implements LoggerFormatter {
     final topBorder = details.pen.write('${'*' * maxLineWidth}\n');
     // Ensure a newline before the bottom border
     final bottomBorder = details.pen.write('\n${'*' * maxLineWidth}');
-    final coloredMsg = topBorder + coloredLines.join('\n') + bottomBorder;
 
-    return coloredMsg;
+    return topBorder + coloredLines.join('\n') + bottomBorder;
   }
 
   // Handle long lines that need to be wrapped
@@ -41,6 +40,7 @@ class SimpleTalkerLogFormatter implements LoggerFormatter {
       wrappedLines.add(currentLine.substring(0, cutPoint));
       currentLine = currentLine.substring(cutPoint).trim(); // Update the local variable
     }
+
     return wrappedLines;
   }
 }

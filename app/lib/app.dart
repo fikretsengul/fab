@@ -17,7 +17,7 @@ class _AppState extends State<App> {
   final _appRouter = AppRouter();
   final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
-  void showPersistentSnackBar(BuildContext context) {
+  void showPersistentSnackBar() {
     _scaffoldKey.currentState?.showSnackBar(
       const SnackBar(
         behavior: SnackBarBehavior.fixed,
@@ -27,7 +27,7 @@ class _AppState extends State<App> {
     );
   }
 
-  void dismissSnackBar(BuildContext context) {
+  void dismissSnackBar() {
     _scaffoldKey.currentState?.hideCurrentSnackBar();
   }
 
@@ -37,14 +37,14 @@ class _AppState extends State<App> {
       bloc: di<NetworkCubit>(),
       listener: (_, state) {
         if (state == NetworkState.connected) {
-          dismissSnackBar(context);
+          dismissSnackBar();
         } else if (state == NetworkState.disconnected) {
-          showPersistentSnackBar(context);
+          showPersistentSnackBar();
         }
       },
       child: BlocBuilder<ThemeCubit, ThemeState>(
         bloc: di<ThemeCubit>(),
-        builder: (context, state) {
+        builder: (_, state) {
           return MaterialApp.router(
             scaffoldMessengerKey: _scaffoldKey,
             themeMode: state.theme.mode,

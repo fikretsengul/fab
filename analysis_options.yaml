@@ -21,6 +21,7 @@ analyzer:
 
 custom_lint:
   rules:
+    - avoid_abbreviations_in_doc_comments: false
     - prefer_declaring_const_constructors: false
     - unnecessary_nullable_return_type: false
     - avoid_dynamic: false

@@ -36,7 +36,9 @@ class Counter extends StatelessWidget {
         horizontal: 4,
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: context.theme.dividerColor),
+        border: Border.fromBorderSide(
+          BorderSide(color: context.theme.dividerColor),
+        ),
         borderRadius: Radiuses.lg.circularBorder,
       ),
       child: FabStyledText(

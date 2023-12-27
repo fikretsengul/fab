@@ -1,4 +1,4 @@
-import 'package:auth/core/i18n/translations.g.dart' as auth_tr;
+import 'package:feature_auth/core/i18n/translations.g.dart' as auth_tr;
 import 'package:flutter/widgets.dart';
 
 class FeaturesI18nProvider extends StatelessWidget {

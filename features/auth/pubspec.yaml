@@ -1,4 +1,4 @@
-name: auth
+name: feature_auth
 description: The auth feature of flutter advanced boilerplate.
 publish_to: none
 version: 0.0.1

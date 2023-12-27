@@ -1,1 +1,1 @@
-export 'package:features_core/core.dart';
+export 'package:feature_core/core.dart';

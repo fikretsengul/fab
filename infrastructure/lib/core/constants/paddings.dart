@@ -37,5 +37,5 @@ extension PaddingsExt on Paddings {
   EdgeInsets get all => EdgeInsets.all(value);
   EdgeInsets get horizontal => EdgeInsets.symmetric(horizontal: value);
   EdgeInsets get vertical => EdgeInsets.symmetric(vertical: value);
-  EdgeInsets get symmetric => EdgeInsets.symmetric(vertical: value, horizontal: value);
+  EdgeInsets get symmetric => EdgeInsets.all(value);
 }

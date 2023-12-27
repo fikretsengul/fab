@@ -61,6 +61,7 @@ class AvatarImage extends StatelessWidget {
     if (shape == AvatarImageShape.circle) {
       return BoxShape.circle;
     }
+
     return BoxShape.rectangle;
   }
 

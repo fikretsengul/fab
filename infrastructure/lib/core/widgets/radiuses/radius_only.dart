@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_file
+
 import 'package:flutter/material.dart';
 
 import '../../constants/radiuses.dart';

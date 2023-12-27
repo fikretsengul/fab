@@ -30,13 +30,13 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               page: HomeRouter.page,
               children: [
-                AutoRoute(title: (context, _) => 'Home', path: 'home', page: HomeRoute.page, initial: true),
-                AutoRoute(title: (context, _) => 'Fonts', path: 'fonts', page: FontsRoute.page),
+                AutoRoute(title: (_, __) => 'Home', path: 'home', page: HomeRoute.page, initial: true),
+                AutoRoute(title: (_, __) => 'Fonts', path: 'fonts', page: FontsRoute.page),
               ],
             ),
-            AutoRoute(title: (context, _) => 'Settings', path: 'settings', page: SettingsRoute.page),
+            AutoRoute(title: (_, __) => 'Settings', path: 'settings', page: SettingsRoute.page),
           ],
         ),
-        AutoRoute(title: (context, _) => 'Login', path: '/login', page: LoginRoute.page),
+        AutoRoute(title: (_, __) => 'Login', path: '/login', page: LoginRoute.page),
       ];
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_dedicated_media_query_method, boolean_prefix
+
 // https://github.com/nank1ro/awesome_flutter_extensions
 
 import 'package:flutter/material.dart';
