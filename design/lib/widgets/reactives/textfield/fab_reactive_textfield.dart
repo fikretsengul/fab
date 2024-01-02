@@ -1,4 +1,6 @@
-import 'package:deps/infrastructure/core.dart';
+// ignore_for_file: max_lines_for_file
+
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/reactive_forms.dart';
 import 'package:deps/packages/styled_text.dart';
 import 'package:flutter/material.dart';

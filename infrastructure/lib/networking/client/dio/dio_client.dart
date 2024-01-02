@@ -15,11 +15,10 @@ import 'package:deps/packages/talker_dio_logger.dart';
 import 'package:deps/packages/talker_flutter.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../_core/enums/request_type_enum.dart';
 import '../../../analytics/logger/i_logger.dart';
 import '../../../analytics/others/typedefs.dart';
-import '../../../core/enums/request_type_enum.dart';
 import '../../../flavors/i_env.dart';
-import '../../../storage/storages/i_storage.dart';
 import '../../../storage/storages/token/token_storage_mixin.dart';
 import '../../models/o_auth2_token.model.dart';
 import '../../others/failures/network_errors.dart';
@@ -39,7 +38,12 @@ import 'interceptors/dio_other_failures_interceptor.dart';
 class DioClient implements INetworkClient {
   /// Constructs `DioClient` with environment, logger, Dio instance, and storage dependencies.
   /// Sets up Dio with base URL, headers, connection timeouts, and interceptors.
-  DioClient(this._env, this._logger, this._dio, this._storage) {
+  DioClient(
+    this._env,
+    this._logger,
+    this._dio,
+    this._tokenRefresh,
+  ) {
     _dio
       // Configuration for Dio.
       ..options.baseUrl = _env.apiUrl
@@ -47,7 +51,7 @@ class DioClient implements INetworkClient {
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
       // Adding various interceptors.
-      ..interceptors.add(tokenStorage as QueuedInterceptor)
+      ..interceptors.add(_tokenRefresh.interceptor)
       ..interceptors.add(DioHttpFailuresInterceptor())
       ..interceptors.add(DioOtherFailuresInterceptor())
       // Retry interceptor for network retries.
@@ -76,10 +80,10 @@ class DioClient implements INetworkClient {
   final Dio _dio;
   final IEnv _env;
   final ILogger _logger;
-  final IStorage<OAuth2Token> _storage;
+  final DioTokenRefresh _tokenRefresh;
 
   @override
-  TokenStorageMixin<OAuth2Token> get tokenStorage => DioTokenRefresh(_storage).interceptor;
+  TokenStorageMixin<OAuth2Token> get tokenStorage => _tokenRefresh.interceptor;
 
   /// Overrides `invoke` from `INetworkClient` to handle various types of HTTP requests.
   /// Implements error handling and mapping Dio responses to Either types.

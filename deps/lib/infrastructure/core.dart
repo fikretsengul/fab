@@ -1,1 +1,1 @@
-export 'package:infrastructure/core/core.dart';
+export 'package:infrastructure/_core/core.dart';

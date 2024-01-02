@@ -39,7 +39,7 @@ class Counter extends StatelessWidget {
         border: Border.fromBorderSide(
           BorderSide(color: context.theme.dividerColor),
         ),
-        borderRadius: Radiuses.lg.circularBorder,
+        borderRadius: $.radiuses.lg.circularBorder,
       ),
       child: FabStyledText(
         text: '<c>${maxLength! - currentLength}</c>/$maxLength',

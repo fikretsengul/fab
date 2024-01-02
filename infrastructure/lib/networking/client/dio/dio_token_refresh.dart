@@ -1,7 +1,3 @@
-// Copyright 2024 Fikret Şengül. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:deps/packages/injectable.dart';
 
 import '../../../storage/storages/i_storage.dart';
@@ -9,36 +5,44 @@ import '../../models/o_auth2_token.model.dart';
 import '../../others/failures/network_errors.dart';
 import 'interceptors/dio_token_refresh_interceptor.dart';
 
-/// `DioTokenRefresh` configures and provides a `TokenRefreshInterceptor` for OAuth2 tokens.
-/// This class is responsible for initializing the interceptor with a token refresh logic
-/// and a method to build the token headers.
 @lazySingleton
 class DioTokenRefresh {
-  /// Constructs `DioTokenRefresh` with the given token storage.
-  /// Initializes the `TokenRefreshInterceptor` with specific behaviors for token refresh.
   DioTokenRefresh(this._storage) {
-    interceptor = DioTokenRefreshInterceptor<OAuth2Token>(
+    _initializeInterceptor();
+  }
+
+  final IStorage<OAuth2Token> _storage;
+
+  late final DioTokenRefreshInterceptor<OAuth2Token> _interceptor;
+
+  /// Gets the configured TokenRefreshInterceptor instance for use with a Dio client.
+  DioTokenRefreshInterceptor<OAuth2Token> get interceptor => _interceptor;
+
+  /// Initializes the TokenRefreshInterceptor with specific behaviors for token refresh.
+  void _initializeInterceptor() {
+    _interceptor = DioTokenRefreshInterceptor<OAuth2Token>(
       tokenStorage: _storage,
-      refreshToken: (token, _) async {
-        if (token == null) {
-          throw UnexpectedTokenRefreshNetworkError();
-        }
-
-        // TODO -> Implement the actual token refresh logic.
-        // This should include making a network request to refresh the token
-        // and returning the new token.
-
-        return token;
-      },
-      tokenHeader: (token) {
-        // Builds the authorization header using the token.
-        return {'authorization': '${token.tokenType} ${token.accessToken}'};
-      },
+      refreshToken: _refreshToken,
+      tokenHeader: _buildTokenHeader,
     );
   }
 
-  /// The configured `TokenRefreshInterceptor` instance for use with a Dio client.
-  late final DioTokenRefreshInterceptor<OAuth2Token> interceptor;
+  /// Refreshes the OAuth2Token.
+  /// TODO: Implement the actual token refresh logic.
+  Future<OAuth2Token> _refreshToken(OAuth2Token? token, _) async {
+    if (token == null) {
+      throw UnexpectedTokenRefreshNetworkError();
+    }
 
-  final IStorage<OAuth2Token> _storage;
+    // Implement actual token refresh logic here
+    // This should include making a network request to refresh the token
+    // and returning the new token.
+
+    return token; // Placeholder return. Replace with actual refreshed token.
+  }
+
+  /// Builds the authorization header using the token.
+  Map<String, String> _buildTokenHeader(OAuth2Token token) {
+    return {'Authorization': '${token.tokenType} ${token.accessToken}'};
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:deps/infrastructure/core.dart';
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/freezed_annotation.dart';
 import 'package:deps/packages/reactive_forms_annotations.dart';
 

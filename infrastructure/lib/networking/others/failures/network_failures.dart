@@ -4,9 +4,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import '../../../_core/i18n/translations.g.dart';
 import '../../../analytics/failure/failure.dart';
 import '../../../analytics/others/enums.dart';
-import '../../../core/i18n/translations.g.dart';
 
 class NoNetworkFailure extends Failure {
   NoNetworkFailure({super.exception, super.stack})

@@ -5,7 +5,7 @@
 import 'package:deps/packages/get_it.dart';
 import 'package:deps/packages/injectable.dart';
 
-import './_di.config.dart';
+import '_di.config.dart';
 
 /// Initializes the authentication feature's dependencies.
 ///

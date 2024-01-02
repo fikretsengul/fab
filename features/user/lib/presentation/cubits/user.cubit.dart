@@ -21,5 +21,6 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> logout() async {
     await _client.tokenStorage.clearToken();
+    emit(state.copyWith(user: UserModel.empty()));
   }
 }

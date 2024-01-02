@@ -4,12 +4,9 @@
 
 import 'package:deps/features/features.dart';
 import 'package:deps/infrastructure/analytics.dart';
-import 'package:deps/infrastructure/core.dart';
 import 'package:deps/infrastructure/networking.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:deps/packages/injectable.dart';
-
-import '../domain/failures/auth.failure.dart';
 
 /// `AuthService` provides authentication-related functionalities,
 /// including login and logout operations.
@@ -36,7 +33,18 @@ class AuthService {
     String email,
     String password,
   ) async {
-    final response = await _client.invoke<Map<String, dynamic>>(
+    await _client.tokenStorage.setToken(OAuth2Token.empty());
+
+    return Right(
+      UserModel(
+        id: 1,
+        email: 'test@gmail.com',
+        name: 'Test User',
+        role: UserRoleEnum.admin,
+        avatar: 'https://picsum.photos/200/300',
+      ),
+    );
+/*     final response = await _client.invoke<Map<String, dynamic>>(
       '/auth/login',
       RequestType.post,
       requestBody: {
@@ -58,7 +66,7 @@ class AuthService {
 
         return Right(UserModel.empty());
       },
-    );
+    ); */
   }
 
   /// Handles the logout operation.

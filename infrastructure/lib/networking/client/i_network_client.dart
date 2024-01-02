@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import '../../_core/enums/request_type_enum.dart';
 import '../../analytics/others/typedefs.dart';
-import '../../core/enums/request_type_enum.dart';
 import '../../storage/storages/token/token_storage_mixin.dart';
 import '../models/o_auth2_token.model.dart';
 

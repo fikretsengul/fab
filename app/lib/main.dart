@@ -1,16 +1,15 @@
+// ignore_for_file: max_lines_for_file
 // Copyright 2024 Fikret Şengül. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
-import 'package:deps/infrastructure/i18n.dart';
+import 'package:deps/infrastructure/core.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/hydrated_bloc.dart';
 import 'package:deps/packages/path_provider.dart';
 import 'package:flutter/material.dart' hide Router;
-
-import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +31,10 @@ void main() async {
   );
 
   runApp(
-    const InfrastructureI18nProvider(
+    InfrastructureI18nProvider(
       child: DesignI18nProvider(
         child: FeaturesI18nProvider(
-          child: App(),
+          child: FeaturesApp(),
         ),
       ),
     ),

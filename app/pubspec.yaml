@@ -13,8 +13,6 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  auto_route_generator: ^7.3.2
-  build_runner: ^2.4.7
   pyramid_lint: ^1.2.0
 
 flutter:

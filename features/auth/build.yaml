@@ -18,7 +18,7 @@ targets:
           enable_cached_builds: true
         generate_for:
           include:
-            - lib/presentation/**/views/*.page.dart
+            - lib/presentation/**/*.page.dart
       # Freezed
       freezed:
         options:
@@ -64,5 +64,5 @@ targets:
         generate_for:
           include:
             - lib/_di/*.dart
-            - lib/presentation/**/cubits/*.cubit.dart
+            - lib/presentation/**/*.cubit.dart
             - lib/data/*.service.dart

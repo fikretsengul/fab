@@ -8,13 +8,14 @@ environment:
 
 dependencies:
   auto_route: ^7.8.4
+  back_button_interceptor: ^7.0.0
   design:
     path: ../design
   dio: ^5.4.0
   dio_smart_retry: ^6.0.0
   envied: ^0.5.2
   feature_core:
-    path: ../features/core
+    path: ../features/_core
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
