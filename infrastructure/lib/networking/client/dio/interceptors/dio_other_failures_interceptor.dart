@@ -3,8 +3,8 @@ import 'package:deps/packages/dio.dart';
 import 'package:deps/packages/internet_connection_checker_plus.dart';
 
 import '../../../../analytics/failure/i_failure.dart';
-import '../../../others/failures/network_errors.dart';
-import '../../../others/failures/network_failures.dart';
+import '../../../failures/network_errors.dart';
+import '../../../failures/network_failures.dart';
 import '../dio_failure.dart';
 
 class DioOtherFailuresInterceptor extends Interceptor {
@@ -13,7 +13,7 @@ class DioOtherFailuresInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    final connection = di<InternetConnection>();
+    final connection = locator<InternetConnection>();
     late IFailure failure;
 
     switch (err.type) {

@@ -16,12 +16,12 @@ import 'package:deps/packages/talker_flutter.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../_core/enums/request_type_enum.dart';
+import '../../../_core/typedefs/either_typedef.dart';
 import '../../../analytics/logger/i_logger.dart';
-import '../../../analytics/others/typedefs.dart';
 import '../../../flavors/i_env.dart';
 import '../../../storage/storages/token/token_storage_mixin.dart';
+import '../../failures/network_errors.dart';
 import '../../models/o_auth2_token.model.dart';
-import '../../others/failures/network_errors.dart';
 import '../i_network_client.dart';
 import 'dio_failure.dart';
 import 'dio_token_refresh.dart';
@@ -67,7 +67,7 @@ class DioClient implements INetworkClient {
     if (_env.isDebug) {
       _dio.interceptors.add(
         TalkerDioLogger(
-          talker: di<Talker>(),
+          talker: locator<Talker>(),
           settings: const TalkerDioLoggerSettings(
             printRequestHeaders: true,
             printResponseHeaders: true,

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../i18n/translations.g.dart';
+import 'translations.g.dart';
 
 extension DesignI18nExt on BuildContext {
   // This changes the locale for all packages,

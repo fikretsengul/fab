@@ -5,7 +5,7 @@
 
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
-import 'package:deps/infrastructure/core.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/hydrated_bloc.dart';
 import 'package:deps/packages/path_provider.dart';

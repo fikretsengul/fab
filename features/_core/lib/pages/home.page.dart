@@ -1,5 +1,4 @@
 import 'package:deps/features/features.dart';
-import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              di<UserCubit>().logout();
+              $.get<UserCubit>().logout();
               //$.navigator.reevaluate();
             },
             icon: Icon(UIcons.boldRounded.exit),

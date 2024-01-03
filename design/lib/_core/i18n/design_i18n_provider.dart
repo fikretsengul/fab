@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../i18n/translations.g.dart';
+import 'translations.g.dart';
 
 class DesignI18nProvider extends StatelessWidget {
   const DesignI18nProvider({required this.child, super.key});

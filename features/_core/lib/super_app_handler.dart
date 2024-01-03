@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'super/super.dart';
 
 @RoutePage()
-class AppHandler extends StatelessWidget {
-  const AppHandler({super.key});
+class SuperAppHandler extends StatelessWidget {
+  const SuperAppHandler({super.key});
 
   @override
   Widget build(BuildContext context) {

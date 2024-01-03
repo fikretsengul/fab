@@ -8,8 +8,8 @@ import 'package:deps/packages/dio.dart';
 
 import '../../../../storage/storages/i_storage.dart';
 import '../../../../storage/storages/token/token_storage_mixin.dart';
+import '../../../failures/network_errors.dart';
 import '../../../models/o_auth2_token.model.dart';
-import '../../../others/failures/network_errors.dart';
 
 /// Signature for `shouldRefresh` function in [TokenRefreshInterceptor].
 /// Determines whether a token refresh should be attempted based on the response.

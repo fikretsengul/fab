@@ -1,4 +1,4 @@
-import 'package:deps/infrastructure/networking.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/injectable.dart';
 
 @injectable

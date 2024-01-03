@@ -1,9 +1,9 @@
-import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:feature_user/presentation/cubits/user.cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'router/router.dart';
+import 'super/super.dart';
 
 class FeaturesApp extends StatefulWidget {
   FeaturesApp({super.key});
@@ -18,7 +18,7 @@ class _FeaturesAppState extends State<FeaturesApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di<UserCubit>(),
+      create: (_) => $.get<UserCubit>(),
       child: MaterialApp.router(
         title: 'Flutter Advanced Boilerplate',
         routerConfig: _featuresRouter.config(),

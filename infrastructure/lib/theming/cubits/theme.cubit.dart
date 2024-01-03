@@ -33,7 +33,7 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
 
       return ThemeState(theme: theme);
     } catch (e) {
-      return ThemeState(theme: di<CustomTheme>());
+      return ThemeState(theme: locator<CustomTheme>());
     }
   }
 

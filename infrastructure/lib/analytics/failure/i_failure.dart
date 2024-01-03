@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import '../others/enums.dart';
+import '../../_core/enums/failure_tag_enum.dart';
 
 /// `IFailure` abstract interface class representing a standardized failure or error.
 /// Implements [Exception] and provides detailed information about the failure.

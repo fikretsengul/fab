@@ -4,11 +4,11 @@
 
 import 'package:deps/packages/injectable.dart';
 
+import '../../_core/enums/failure_tag_enum.dart';
 import '../../flavors/i_env.dart';
 import '../analytics/i_analytics.dart';
 import '../failure/failure.dart';
 import '../logger/i_logger.dart';
-import '../others/enums.dart';
 import 'i_failure_observer.dart';
 
 /// `FailureObserver` class implementing `IFailureObserver`.

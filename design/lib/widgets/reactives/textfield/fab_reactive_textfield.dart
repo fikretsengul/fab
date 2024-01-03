@@ -1,4 +1,4 @@
-// ignore_for_file: max_lines_for_file
+// ignore_for_file: max_lines_for_file, prefer_underscore_for_unused_callback_parameters
 
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/reactive_forms.dart';
@@ -6,7 +6,7 @@ import 'package:deps/packages/styled_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../i18n/translations.g.dart';
+import '../../../_core/i18n/translations.g.dart';
 import '../../others/fab_styled_text.dart';
 
 part '_atoms/counter.dart';
@@ -39,7 +39,7 @@ class FabReactiveTextfield extends StatelessWidget {
     super.key,
   });
 
-  final Map<String, String Function(Object)>? validationMessages;
+  final Map<String, String Function(Object messages)>? validationMessages;
   final bool autofocus;
   final BorderRadius? borderRadius;
   final String? extraInfo;
@@ -58,12 +58,12 @@ class FabReactiveTextfield extends StatelessWidget {
   final String? staticValue;
   final Widget? suffixIcon;
   final TextCapitalization textCapitalization;
-  final void Function(FormControl<Object?>)? onChanged;
+  final ValueChanged<FormControl<Object?>>? onChanged;
   final bool reverseFocusColor;
-  final void Function(FormControl<Object?>)? onSubmitted;
+  final ValueChanged<FormControl<Object?>>? onSubmitted;
   final TextInputAction? textInputAction;
 
-  Map<String, String Function(Object)>? _validationMessages(BuildContext context) {
+  Map<String, String Function(Object messages)>? _validationMessages(BuildContext context) {
     return {
       ValidationMessage.minLength: (error) => context.tr.widgets.reactives.fabReactiveTextfield.minLength(
             field: labelText.capitalize(),
@@ -73,10 +73,10 @@ class FabReactiveTextfield extends StatelessWidget {
             field: labelText.capitalize(),
             count: (error as Map)['requiredLength'].toString(),
           ),
-      ValidationMessage.required: (error) => context.tr.widgets.reactives.fabReactiveTextfield.required(
+      ValidationMessage.required: (_) => context.tr.widgets.reactives.fabReactiveTextfield.required(
             field: labelText.capitalize(),
           ),
-      ValidationMessage.email: (error) => context.tr.widgets.reactives.fabReactiveTextfield.email(
+      ValidationMessage.email: (_) => context.tr.widgets.reactives.fabReactiveTextfield.email(
             field: labelText.capitalize(),
           ),
       if (validationMessages != null) ...validationMessages!,
@@ -86,7 +86,7 @@ class FabReactiveTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConsumer(
-      builder: (context, form, child) {
+      builder: (context, _, __) {
         //final isValid = formControl.valid;
         //final isRequired = formControl.validators.any((v) => v is RequiredValidator);
         final minLength = formControl.validators.whereType<MinLengthValidator>().map((v) => v.minLength).firstOrNull;
@@ -101,7 +101,7 @@ class FabReactiveTextfield extends StatelessWidget {
               autofocus: autofocus,
               controller: staticValue != null ? TextEditingController(text: staticValue) : null,
               readOnly: readOnly,
-              onTap: (control) => onTap?.call(),
+              onTap: (_) => onTap?.call(),
               maxLength: maxLength,
               maxLines: maxLines,
               minLines: minLines,
@@ -114,7 +114,7 @@ class FabReactiveTextfield extends StatelessWidget {
                 hintText: hintText,
               ),
               buildCounter: (
-                context, {
+                _, {
                 required currentLength,
                 required isFocused,
                 maxLength,

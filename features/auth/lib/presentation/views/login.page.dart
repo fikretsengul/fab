@@ -4,7 +4,6 @@
 
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
-import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,10 @@ class LoginPage extends StatelessWidget {
   final Function(bool didLogin) onResult;
 
   Future<void> login() async {
-    final isSucceeded = await di<LoginCubit>().login(
-      email: 'test',
-      password: 'test',
-    );
+    final isSucceeded = await $.get<LoginCubit>().login(
+          email: 'test',
+          password: 'test',
+        );
 
     if (isSucceeded) {
       onResult(true);
@@ -33,12 +32,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di<LoginCubit>(),
+      create: (_) => $.get<LoginCubit>(),
       child: BlocListener<LoginCubit, LoginState>(
         listener: (_, state) {
           state.whenOrNull(
             //failed: (failure) => showAlertDialog(context, failure),
-            succeeded: (user) => di<UserCubit>().loggedIn(user),
+            succeeded: (user) => $.get<UserCubit>().loggedIn(user),
           );
         },
         child: Scaffold(

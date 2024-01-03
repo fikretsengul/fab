@@ -9,7 +9,7 @@ import 'package:deps/packages/injectable.dart';
 import 'package:deps/packages/internet_connection_checker_plus.dart';
 import 'package:deps/packages/talker_flutter.dart';
 
-import '../analytics/logger/talker/formatter/fancy_talker_log_formatter.dart';
+import '../../analytics/logger/talker/formatter/fancy_talker_log_formatter.dart';
 import '_di.config.dart';
 
 part '_modules.dart';

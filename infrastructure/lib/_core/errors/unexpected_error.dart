@@ -1,5 +1,5 @@
-import '../../others/enums.dart';
-import '../failure.dart';
+import '../../analytics/failure/failure.dart';
+import '../enums/failure_tag_enum.dart';
 
 class UnexpectedError extends Failure {
   UnexpectedError({super.exception, super.stack})

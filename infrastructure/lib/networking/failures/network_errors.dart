@@ -1,6 +1,6 @@
-import '../../../_core/i18n/translations.g.dart';
-import '../../../analytics/failure/failure.dart';
-import '../../../analytics/others/enums.dart';
+import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/i18n/translations.g.dart';
+import '../../analytics/failure/failure.dart';
 
 class UnexpectedNetworkError extends Failure {
   UnexpectedNetworkError({super.exception, super.stack})

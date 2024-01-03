@@ -4,8 +4,8 @@
 
 import 'package:deps/locator/locator.dart';
 
+import '../../_core/enums/failure_tag_enum.dart';
 import '../observers/i_failure_observer.dart';
-import '../others/enums.dart';
 import 'i_failure.dart';
 
 /// `Failure` class implementing the `IFailure` interface.
@@ -18,7 +18,7 @@ class Failure implements IFailure {
     required this.message,
     Exception? exception,
     this.stack,
-  })  : _failureObserver = di<IFailureObserver>(),
+  })  : _failureObserver = locator<IFailureObserver>(),
         exception = (type == FailureType.exception || type == FailureType.error)
             ? (exception ??
                 (throw ArgumentError('Exception must be provided for FailureType.exception or FailureType.error')))

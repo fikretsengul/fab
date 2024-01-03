@@ -1,12 +1,12 @@
 import 'package:feature_core/_di/_di.dart';
-import 'package:infrastructure/_di/_di.dart';
+import 'package:infrastructure/_core/_di/_di.dart';
 
 import '../packages/get_it.dart';
 import '../packages/injectable.dart';
 import 'locator.config.dart';
 
 /// Global instance of [GetIt] for dependency injection.
-final GetIt di = GetIt.instance;
+final GetIt locator = GetIt.instance;
 
 /// Initializes the service locator [GetIt] with infrastructure and feature dependencies.
 ///
@@ -17,11 +17,11 @@ final GetIt di = GetIt.instance;
 @InjectableInit(initializerName: 'init')
 void initLocator(String env) {
   // Inject infrastructure-level dependencies.
-  injectInfrastructure(di, env);
+  injectInfrastructure(locator, env);
 
   // Inject feature-level dependencies.
-  injectAllFeatures(di, env);
+  injectAllFeatures(locator, env);
 
   // Finalize the initialization of dependencies.
-  di.init(environment: env);
+  locator.init(environment: env);
 }

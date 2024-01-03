@@ -4,8 +4,8 @@
 
 import 'package:deps/packages/fpdart.dart';
 
-import '../failure/failure.dart';
-import '../failure/i_failure.dart';
+import '../../analytics/failure/failure.dart';
+import '../../analytics/failure/i_failure.dart';
 
 /// A type definition for asynchronous operations that return either a [Failure] or a result of type [T].
 ///

@@ -1,8 +1,8 @@
 import 'package:deps/packages/injectable.dart';
 
 import '../../../storage/storages/i_storage.dart';
+import '../../failures/network_errors.dart';
 import '../../models/o_auth2_token.model.dart';
-import '../../others/failures/network_errors.dart';
 import 'interceptors/dio_token_refresh_interceptor.dart';
 
 @lazySingleton

@@ -1,7 +1,7 @@
 import 'package:deps/packages/dio.dart';
 
 import '../../../../analytics/failure/i_failure.dart';
-import '../../../others/failures/network_failures.dart';
+import '../../../failures/network_failures.dart';
 import '../dio_failure.dart';
 
 class DioHttpFailuresInterceptor extends Interceptor {

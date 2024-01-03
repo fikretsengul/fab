@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:deps/features/features.dart';
-import 'package:deps/infrastructure/analytics.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/freezed_annotation.dart';
 import 'package:deps/packages/injectable.dart';

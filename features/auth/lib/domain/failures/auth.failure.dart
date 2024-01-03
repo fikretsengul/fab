@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:deps/infrastructure/analytics.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 
 /// `WrongCredentialsFailure` is a specific type of failure that occurs
 /// when authentication fails due to incorrect credentials.

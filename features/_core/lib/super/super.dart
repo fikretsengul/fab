@@ -1,16 +1,16 @@
 // ignore_for_file: file_names
 
-import 'package:deps/infrastructure/analytics.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
 
 import 'constants/paddings.dart';
 import 'constants/platform.dart';
 import 'constants/radiuses.dart';
 import 'constants/timings.dart';
-import 'utilities/bloc_context.dart';
-import 'utilities/modal_context.dart';
-import 'utilities/navigator_context.dart';
-import 'utilities/overlay_context.dart';
+import 'context/bloc_context.dart';
+import 'context/modal_context.dart';
+import 'context/navigator_context.dart';
+import 'context/overlay_context.dart';
 
 final class $ {
   factory $() => _instance;
@@ -24,6 +24,7 @@ final class $ {
     _radiuses = Radiuses();
     _paddings = Paddings();
     _platform = Platform();
+    _permissions = Permissions();
   }
 
   static final $ _instance = $._internal();
@@ -38,8 +39,9 @@ final class $ {
   late final Radiuses _radiuses;
   late final Paddings _paddings;
   late final Platform _platform;
+  late final Permissions _permissions;
 
-  /// Utilities
+  /// Context
   static NavigatorContext navigator = _instance._navigator;
   static ModalContext modal = _instance._modal;
   static OverlayContext overlay = _instance._overlay;
@@ -50,8 +52,9 @@ final class $ {
   static Radiuses get radiuses => _instance._radiuses;
   static Paddings get paddings => _instance._paddings;
   static Platform get platform => _instance._platform;
+  static Permissions get permissions => _instance._permissions;
 
   /// Aliases
-  static T locator<T extends Object>() => di<T>();
-  static void debug(dynamic data, [String? message]) => di<ILogger>().log(data, message);
+  static T get<T extends Object>() => locator<T>();
+  static void debug(dynamic data, [String? message]) => locator<ILogger>().log(data, message);
 }

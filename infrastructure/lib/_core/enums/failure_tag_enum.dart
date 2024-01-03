@@ -50,10 +50,13 @@ enum FailureTag {
   repository,
 
   /// Failure related to page or UI components.
-  page,
+  presentation,
 
   /// Uncaught or unexpected failure.
   uncaught,
+
+  /// Permission failure
+  permission,
 
   /// Indicates empty failure tag.
   empty,

@@ -21,6 +21,9 @@
       "unauthorized": "Authentication is required and has failed or has not been provided. Please verify your credentials and try again.",
       "unexpected": "An unexpected network error occurred. Please check your connection and try again.",
       "unexpectedTokenRefresh": "An unexpected error occurred while refreshing the authentication token. Please re-authenticate and try again."
+    },
+    "permissions": {
+      "invalidPermissionType": "Invalid permission type: $type"
     }
   }
 }

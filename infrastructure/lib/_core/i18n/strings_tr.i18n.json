@@ -21,6 +21,9 @@
       "unauthorized": "Kimlik doğrulama gerekli ve başarısız oldu veya sağlanmadı. Lütfen kimlik bilgilerinizi doğrulayın ve yeniden deneyin.",
       "unexpected": "Beklenmeyen bir ağ hatası oluştu. Lütfen bağlantınızı kontrol edin ve yeniden deneyin.",
       "unexpectedTokenRefresh": "Kimlik doğrulama jetonunu yenilerken beklenmeyen bir hata oluştu. Lütfen yeniden kimlik doğrulaması yapın ve tekrar deneyin."
+    },
+    "permissions": {
+      "invalidPermissionType": "Geçersiz izin türü: $type"
     }
   }
 }

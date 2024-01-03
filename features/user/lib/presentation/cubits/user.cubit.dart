@@ -1,5 +1,4 @@
-import 'package:deps/infrastructure/analytics.dart';
-import 'package:deps/infrastructure/networking.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/freezed_annotation.dart';
 import 'package:deps/packages/injectable.dart';

@@ -34,6 +34,7 @@ dependencies:
   json_annotation: ^4.8.1
   json_theme: ^6.4.0
   path_provider: ^2.1.1
+  permission_handler: ^11.1.0
   reactive_forms: ^16.1.1
   reactive_forms_annotations: ^4.2.0
   rxdart: ^0.27.7
