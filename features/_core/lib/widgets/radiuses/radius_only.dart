@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../super/super.dart';
+import '../../_core/super/super.dart';
 
 class RadiusOnly extends StatelessWidget {
   factory RadiusOnly.none({

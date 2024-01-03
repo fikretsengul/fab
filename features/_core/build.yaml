@@ -1,0 +1,44 @@
+targets:
+  $default:
+    builders:
+      # Auto Route
+      auto_route_generator:auto_router_generator:
+        options:
+          enable_cached_builds: true
+        generate_for:
+          include:
+            - lib/router/router.dart
+      auto_route_generator:auto_route_generator:
+        options:
+          enable_cached_builds: true
+        generate_for:
+          include:
+            - lib/_core/super/_core/**/*.dart
+            - lib/pages/*.dart
+            - lib/super_handler.dart
+      # Slang
+      slang_build_runner:
+        options:
+          locale_handling: false
+          translation_class_visibility: public
+          fallback_strategy: base_locale
+          input_directory: lib/_core/_i18n
+          output_directory: lib/_core/_i18n
+          output_file_name: translations.g.dart
+          key_case: camel
+          key_map_case: camel
+          param_case: camel
+          flat_map: false
+          imports:
+            - 'package:feature_core/_core/super/permissions/_core/permission_type_enum.dart'
+          contexts:
+            PermissionType:
+              generate_enum: false
+        generate_for:
+          include:
+            - lib/_core/_i18n/*
+      # Injectable
+      injectable_generator:
+        generate_for:
+          include:
+            - lib/_core/_di/*.dart

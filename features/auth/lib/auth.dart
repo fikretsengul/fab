@@ -1,2 +1,3 @@
-export 'core/routes/router.dart';
-export 'core/routes/router.gm.dart';
+export '_core/mixins/i18n_mixin.dart';
+export '_core/routes/router.dart';
+export '_core/routes/router.gm.dart';

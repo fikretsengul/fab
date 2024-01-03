@@ -6,8 +6,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../extensions/double_ext.dart';
-import '../super/super.dart';
+import '../_core/extensions/double_ext.dart';
+import '../_core/super/super.dart';
 
 /// A widget for displaying avatars, supporting various shapes and sizes.
 class AvatarImage extends StatelessWidget {

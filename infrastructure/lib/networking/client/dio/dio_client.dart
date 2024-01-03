@@ -11,8 +11,6 @@ import 'package:deps/packages/dio.dart';
 import 'package:deps/packages/dio_smart_retry.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:deps/packages/injectable.dart';
-import 'package:deps/packages/talker_dio_logger.dart';
-import 'package:deps/packages/talker_flutter.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../_core/enums/request_type_enum.dart';
@@ -58,22 +56,14 @@ class DioClient implements INetworkClient {
       ..interceptors.add(
         RetryInterceptor(
           dio: _dio,
-          logPrint: _logger.log,
+          logPrint: _logger.debug,
           retries: 2,
         ),
       );
 
     // Additional logging interceptor for debug mode.
     if (_env.isDebug) {
-      _dio.interceptors.add(
-        TalkerDioLogger(
-          talker: locator<Talker>(),
-          settings: const TalkerDioLoggerSettings(
-            printRequestHeaders: true,
-            printResponseHeaders: true,
-          ),
-        ),
-      );
+      _dio.interceptors.add(locator<ILogger>().dioTalker);
     }
   }
 

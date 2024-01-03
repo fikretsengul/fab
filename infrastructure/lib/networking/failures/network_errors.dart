@@ -1,5 +1,4 @@
 import '../../_core/enums/failure_tag_enum.dart';
-import '../../_core/i18n/translations.g.dart';
 import '../../analytics/failure/failure.dart';
 
 class UnexpectedNetworkError extends Failure {
@@ -8,7 +7,7 @@ class UnexpectedNetworkError extends Failure {
           code: 'unexpected-network-error',
           type: FailureType.error,
           tag: FailureTag.network,
-          message: tr.failures.network.unexpected,
+          message: 'An unexpected network error occurred. Please check your connection and try again.',
         );
 }
 
@@ -18,6 +17,7 @@ class UnexpectedTokenRefreshNetworkError extends Failure {
           code: 'unexpected-token-refresh-network-error',
           type: FailureType.error,
           tag: FailureTag.network,
-          message: tr.failures.network.unexpectedTokenRefresh,
+          message:
+              'An unexpected error occurred while refreshing the authentication token. Please re-authenticate and try again.',
         );
 }

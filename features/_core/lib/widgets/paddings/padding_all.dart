@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../super/super.dart';
+import '../../_core/super/super.dart';
 
 class PaddingAll extends StatelessWidget {
   factory PaddingAll.xxs({required Widget child, Key? key}) =>

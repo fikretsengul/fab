@@ -20,4 +20,3 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   json_serializable: ^6.7.1
   pyramid_lint: ^1.2.0
-  slang_build_runner: ^3.28.0

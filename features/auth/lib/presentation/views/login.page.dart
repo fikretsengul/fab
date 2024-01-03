@@ -8,7 +8,6 @@ import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/i18n/translations.g.dart';
 import '../../../domain/forms/login.form.dart';
 import '../cubits/login.cubit.dart';
 
@@ -43,7 +42,7 @@ class LoginPage extends StatelessWidget {
         child: Scaffold(
           body: LoginFormFormBuilder(
             model: LoginForm.empty(),
-            builder: (context, data, _) {
+            builder: (_, data, __) {
               return PaddingAll.md(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +50,7 @@ class LoginPage extends StatelessWidget {
                     FabReactiveTextfield(
                       formControl: data.emailControl,
                       keyboardType: TextInputType.emailAddress,
-                      labelText: context.tr.loginForm.email,
+                      labelText: $.tr.auth.loginForm.email,
                       textInputAction: TextInputAction.next,
                       onSubmitted: (_) => data.passwordControl.focus(),
                     ),
@@ -59,15 +58,15 @@ class LoginPage extends StatelessWidget {
                     FabReactiveTextfield(
                       formControl: data.passwordControl,
                       keyboardType: TextInputType.text,
-                      labelText: context.tr.loginForm.password,
+                      labelText: $.tr.auth.loginForm.password,
                       textInputAction: TextInputAction.send,
                       onSubmitted: (_) => data.form.valid ? login() : null,
                     ),
                     ReactiveLoginFormFormConsumer(
-                      builder: (context, _, __) {
+                      builder: (_, __, ___) {
                         return ElevatedButton(
                           onPressed: login,
-                          child: Text(context.tr.loginForm.loginButton),
+                          child: Text($.tr.auth.loginForm.loginButton),
                         );
                       },
                     ),

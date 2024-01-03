@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../super/super.dart';
+import '../../_core/super/super.dart';
 
 class PaddingRight extends StatelessWidget {
   factory PaddingRight.xxs({required Widget child, Key? key}) =>

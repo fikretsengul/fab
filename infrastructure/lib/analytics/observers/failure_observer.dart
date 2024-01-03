@@ -37,10 +37,6 @@ class FailureObserver implements IFailureObserver {
     }
 
     switch (failure.type) {
-      case FailureType.constructive:
-        _logger.constructive(failure);
-      case FailureType.destructive:
-        _logger.destructive(failure);
       case FailureType.exception:
         _logger.exception(failure);
       case FailureType.error:

@@ -45,6 +45,7 @@ command:
       pyramid_lint: ^1.2.0
       widgetbook_generator: ^3.7.0
       slang_build_runner: ^3.28.0
+      reactive_forms_generator: ^4.4.0
 
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature

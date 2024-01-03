@@ -6,7 +6,6 @@ import 'package:deps/packages/styled_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../_core/i18n/translations.g.dart';
 import '../../others/fab_styled_text.dart';
 
 part '_atoms/counter.dart';
@@ -63,25 +62,23 @@ class FabReactiveTextfield extends StatelessWidget {
   final ValueChanged<FormControl<Object?>>? onSubmitted;
   final TextInputAction? textInputAction;
 
-  Map<String, String Function(Object messages)>? _validationMessages(BuildContext context) {
-    return {
-      ValidationMessage.minLength: (error) => context.tr.widgets.reactives.fabReactiveTextfield.minLength(
-            field: labelText.capitalize(),
-            count: (error as Map)['requiredLength'].toString(),
-          ),
-      ValidationMessage.maxLength: (error) => context.tr.widgets.reactives.fabReactiveTextfield.maxLength(
-            field: labelText.capitalize(),
-            count: (error as Map)['requiredLength'].toString(),
-          ),
-      ValidationMessage.required: (_) => context.tr.widgets.reactives.fabReactiveTextfield.required(
-            field: labelText.capitalize(),
-          ),
-      ValidationMessage.email: (_) => context.tr.widgets.reactives.fabReactiveTextfield.email(
-            field: labelText.capitalize(),
-          ),
-      if (validationMessages != null) ...validationMessages!,
-    };
-  }
+  Map<String, String Function(Object messages)>? get _validationMessages => {
+        ValidationMessage.minLength: (error) => $.tr.design.widgets.reactives.fabReactiveTextfield.minLength(
+              field: labelText.capitalize(),
+              count: (error as Map)['requiredLength'].toString(),
+            ),
+        ValidationMessage.maxLength: (error) => $.tr.design.widgets.reactives.fabReactiveTextfield.maxLength(
+              field: labelText.capitalize(),
+              count: (error as Map)['requiredLength'].toString(),
+            ),
+        ValidationMessage.required: (_) => $.tr.design.widgets.reactives.fabReactiveTextfield.required(
+              field: labelText.capitalize(),
+            ),
+        ValidationMessage.email: (_) => $.tr.design.widgets.reactives.fabReactiveTextfield.email(
+              field: labelText.capitalize(),
+            ),
+        if (validationMessages != null) ...validationMessages!,
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +118,7 @@ class FabReactiveTextfield extends StatelessWidget {
               }) {
                 return Counter(hasCounter, currentLength, minLength, maxLength);
               },
-              validationMessages: _validationMessages(context),
+              validationMessages: _validationMessages,
               showErrors:
                   showErrors ? (control) => control.invalid && (control.touched || control.dirty) : (_) => false,
             ),

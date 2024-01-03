@@ -3,18 +3,17 @@
 // license that can be found in the LICENSE file.
 
 import 'package:deps/packages/injectable.dart';
-import 'package:deps/packages/intl.dart';
-import 'package:deps/packages/talker_bloc_logger.dart';
-import 'package:deps/packages/talker_dio_logger.dart';
+import 'package:deps/packages/talker_bloc_logger.dart' hide TalkerBlocObserver;
+import 'package:deps/packages/talker_dio_logger.dart' hide TalkerDioLogger;
 import 'package:deps/packages/talker_flutter.dart';
 
 import '../../failure/i_failure.dart';
+import '../../observers/talker/talker_bloc_observer.dart';
+import '../../observers/talker/talker_dio_observer.dart';
+import '../../observers/talker/talker_route_observer.dart';
 import '../i_logger.dart';
-import 'logs/constructive_log.dart';
-import 'logs/destructive_log.dart';
-import 'logs/error_log.dart';
-import 'logs/exception_log.dart';
-import 'logs/log.dart';
+import 'logs/debug_log.dart';
+import 'logs/failure_log.dart';
 
 /// Implementation of the [ILogger] interface using the Talker package.
 ///
@@ -27,8 +26,20 @@ class TalkerLogger implements ILogger {
 
   final Talker _talker;
 
-  Talker get talker => _talker;
-  TalkerBlocObserver get blocTalker => TalkerBlocObserver(talker: _talker);
+  @override
+  TalkerBlocObserver get blocTalker => TalkerBlocObserver(
+        talker: _talker,
+        settings: const TalkerBlocLoggerSettings(
+          printChanges: true,
+          printCreations: true,
+          printClosings: true,
+        ),
+      );
+
+  @override
+  TalkerRouteObserver get routerTalker => TalkerRouteObserver(talker: _talker);
+
+  @override
   TalkerDioLogger get dioTalker => TalkerDioLogger(
         talker: _talker,
         settings: const TalkerDioLoggerSettings(
@@ -37,81 +48,24 @@ class TalkerLogger implements ILogger {
         ),
       );
 
-  /// Logs a constructive message using the Talker package.
-  @override
-  void constructive(IFailure failure) {
-    final log = [
-      '\n',
-      '« CONSTRUCTIVE ALERT on ${DateFormat('HH:mm:ss.SSS').format(DateTime.now())} »',
-      '• TAG:\t\t  → ${failure.tag.name}',
-      '• CODE:\t\t → ${failure.code}',
-      '• MESSAGE:\t  → ${failure.message}',
-    ].join('\n');
-
-    _talker.logTyped(ConstructiveLog(log));
-  }
-
-  /// Logs a destructive message, typically used for warnings or errors.
-  @override
-  void destructive(IFailure failure) {
-    final log = [
-      '\n',
-      '« DESTRUCTIVE ALERT on ${DateFormat('HH:mm:ss.SSS').format(DateTime.now())} »',
-      '• TAG:\t\t  → ${failure.tag.name}',
-      '• CODE:\t\t → ${failure.code}',
-      '• MESSAGE:\t  → ${failure.message}',
-    ].join('\n');
-
-    _talker.logTyped(DestructiveLog(log));
-  }
-
   /// Logs an exception with an optional stack trace.
   @override
   void exception(IFailure failure) {
-    final message = [
-      '\n',
-      '« EXCEPTION FAILURE on ${DateFormat('HH:mm:ss.SSS').format(DateTime.now())} »',
-      '• TAG:\t\t  → ${failure.tag.name}',
-      '• CODE:\t\t → ${failure.code}',
-      '• MESSAGE:\t  → ${failure.message}',
-      '• EXCEPTION:\t→ ${failure.exception}',
-    ].join('\n');
-
-    _talker.logTyped(ExceptionLog(message));
+    _talker.logTyped(FailureLog(failure));
   }
 
   @override
   void error(IFailure failure) {
-    final log = [
-      '\n',
-      '« ERROR FAILURE on ${DateTime.now()} »',
-      '• TAG:\t\t  → ${failure.tag.name}',
-      '• CODE:\t\t → ${failure.code}',
-      '• MESSAGE:\t  → ${failure.message}',
-      '• EXCEPTION:\t→ ${failure.exception}',
-    ].join('\n');
-
-    _talker.logTyped(ErrorLog(log));
+    _talker.logTyped(FailureLog(failure));
   }
 
   /// Logs general data with an optional message.
   /// Formats the log output to include either the message or the data type and the data itself.
   @override
-  void log(
+  void debug(
     dynamic data, [
     String? message,
   ]) {
-    final hasMessage = message != null;
-    final text = hasMessage ? 'MESSAGE:\t ' : 'TYPE:\t\t';
-    final value = hasMessage ? message : data.runtimeType;
-
-    final log = [
-      '\n',
-      '« LOGGING on ${DateFormat('HH:mm:ss.SSS').format(DateTime.now())} »',
-      '• $text → $value',
-      if (data != null) '• DATA:\t\t → $data' else '',
-    ].join('\n');
-
-    _talker.logTyped(Log(log));
+    _talker.logTyped(DebugLog(data, message));
   }
 }

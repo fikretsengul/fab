@@ -3,6 +3,7 @@ import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
+import '../_core/super/permissions/_core/permission_type_enum.dart';
 import '../router/router.gr.dart';
 
 @RoutePage()
@@ -21,10 +22,7 @@ class HomePage extends StatelessWidget {
         leading: const AutoLeadingButton(),
         actions: [
           IconButton(
-            onPressed: () {
-              $.get<UserCubit>().logout();
-              //$.navigator.reevaluate();
-            },
+            onPressed: $.get<UserCubit>().logout,
             icon: Icon(UIcons.boldRounded.exit),
             iconSize: 16,
           ),
@@ -38,13 +36,28 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text($.tr.core.permissions.dialog.buttons.openSettings),
+            ElevatedButton(
+              onPressed: $.tr.setEN,
+              child: const Text('EN'),
+            ),
+            ElevatedButton(
+              onPressed: $.tr.setTR,
+              child: const Text('TR'),
+            ),
             ElevatedButton(
               onPressed: () => $.navigator.push(FontsRoute()),
-              child: const Text('Go to fonts'),
+              child: const Text('Go to super'),
             ),
             ElevatedButton(
               onPressed: () => $.debug($.bloc.read<UserCubit>().state.user),
               child: const Text('Log user'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await $.permissions.request(PermissionType.photos);
+              },
+              child: const Text('Open Image Picker'),
             ),
           ],
         ),

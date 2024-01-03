@@ -31,21 +31,6 @@ targets:
           include:
             - lib/networking/**/*.model.dart
             - lib/theming/**/*.model.dart
-      # Slang
-      slang_build_runner:
-        options:
-          fallback_strategy: base_locale
-          input_directory: lib/_core/i18n
-          output_directory: lib/_core/i18n
-          output_file_name: translations.g.dart
-          translate_var: tr
-          key_case: camel
-          key_map_case: camel
-          param_case: camel
-          flat_map: false
-        generate_for:
-          include:
-            - lib/_core/i18n/*
       # Injectable
       injectable_generator:
         generate_for:

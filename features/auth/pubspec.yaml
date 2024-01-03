@@ -20,5 +20,5 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   json_serializable: ^6.7.1
   pyramid_lint: ^1.2.0
-  reactive_forms_generator: ^4.3.0
+  reactive_forms_generator: ^4.4.0
   slang_build_runner: ^3.28.0

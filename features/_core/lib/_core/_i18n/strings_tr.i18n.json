@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "failures": {
+      "unknownPermissionRequest": "İzin istenirken bir hata oluştu.",
+      "invalidPermissionType": "Geçersiz izin türü: $type"
+    },
+    "dialog": {
+      "denied": {
+        "title": "@:permissions.type İzni Reddedilmiş",
+        "description": "@:permissions.type izni ilerlemek için gereklidir. Lütfen uygulama ayarlarından etkinleştirin."
+      },
+      "permanentlyDenied": {
+        "title": "@:permissions.type İzni Kalıcı Olarak Reddedilmiş",
+        "description": "@:permissions.type izni gerekli ancak kalıcı olarak reddedilmiş. Lütfen uygulama ayarlarından etkinleştirin."
+      },
+      "restricted": {
+        "title": "@:permissions.type İzni Kısıtlanmış",
+        "description": "@:permissions.type erişimi sistem politikaları veya ebeveyn kontrolleri tarafından kısıtlanmıştır."
+      },
+      "limited": {
+        "title": "@:permissions.type İzni Sınırlı",
+        "description": "Sınırlı @:permissions.type erişimi sağladınız. Tam erişim izni vermek istiyorsanız, lütfen ayarlarınızı düzenleyin."
+      },
+      "provisional": {
+        "title": "Geçici @:permissions.type İzni",
+        "description": "Uygulama geçici olarak yetkilendirilmiş. Bazı özellikler sınırlı olabilir."
+      },
+      "buttons": {
+        "openSettings": "Ayarları Aç",
+        "retry": "Yeniden Dene",
+        "cancel": "İptal",
+        "understood": "Anladım",
+        "ok": "Tamam"
+      }
+    },
+    "type(context=PermissionType)": {
+        "calendar": "Takvim",
+        "camera": "Kamera",
+        "contacts": "Kişiler",
+        "location": "Konum",
+        "locationAlways": "Daima Konum",
+        "locationWhenInUse": "Kullanıldığında Konum",
+        "mediaLibrary": "Medya Kütüphanesi",
+        "microphone": "Mikrofon",
+        "phone": "Telefon",
+        "photos": "Fotoğraflar",
+        "photosAddOnly": "Sadece Fotoğraf Ekle",
+        "reminders": "Hatırlatıcılar",
+        "sensors": "Sensörler",
+        "sms": "SMS",
+        "speech": "Konuşma",
+        "storage": "Depolama",
+        "ignoreBatteryOptimizations": "Batarya Optimizasyonlarını Yoksay",
+        "notification": "Bildirim",
+        "accessMediaLocation": "Medya Konumuna Erişim",
+        "activityRecognition": "Aktivite Tanıma",
+        "unknown": "Bilinmeyen",
+        "bluetooth": "Bluetooth",
+        "manageExternalStorage": "Harici Depolamayı Yönet",
+        "systemAlertWindow": "Sistem Uyarı Penceresi",
+        "requestInstallPackages": "Paket Yükleme İsteği",
+        "appTrackingTransparency": "Uygulama Takip Şeffaflığı",
+        "criticalAlerts": "Kritik Uyarılar",
+        "accessNotificationPolicy": "Bildirim Politikasına Erişim",
+        "bluetoothScan": "Bluetooth Taraması",
+        "bluetoothAdvertise": "Bluetooth Reklamı",
+        "bluetoothConnect": "Bluetooth Bağlantısı",
+        "nearbyWifiDevices": "Yakındaki Wi-Fi Cihazları",
+        "videos": "Videolar",
+        "audio": "Ses",
+        "scheduleExactAlarm": "Kesin Alarmı Planla",
+        "sensorsAlways": "Daima Sensörler",
+        "calendarWriteOnly": "Sadece Takvim Yaz",
+        "calendarFullAccess": "Takvime Tam Erişim"
+      }
+  }
+}

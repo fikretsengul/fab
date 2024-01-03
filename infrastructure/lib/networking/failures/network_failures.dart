@@ -5,7 +5,6 @@
 // license that can be found in the LICENSE file.
 
 import '../../_core/enums/failure_tag_enum.dart';
-import '../../_core/i18n/translations.g.dart';
 import '../../analytics/failure/failure.dart';
 
 class NoNetworkFailure extends Failure {
@@ -14,7 +13,7 @@ class NoNetworkFailure extends Failure {
           code: 'no-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.noNetwork,
+          message: 'No network connection. Please check your internet connection and try again.',
         );
 }
 
@@ -24,7 +23,7 @@ class TimeoutNetworkFailure extends Failure {
           code: 'timeout-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.timeout,
+          message: 'The network request timed out. Please check your connection and try again.',
         );
 }
 
@@ -34,7 +33,8 @@ class BadRequestNetworkFailure extends Failure {
           code: 'bad-request-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.badRequest,
+          message:
+              'The request was not formatted correctly and could not be understood. Please check the request format and try again.',
         );
 }
 
@@ -44,7 +44,8 @@ class UnauthorizedNetworkFailure extends Failure {
           code: 'unauthorized-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.unauthorized,
+          message:
+              'Authentication is required and has failed or has not been provided. Please verify your credentials and try again.',
         );
 }
 
@@ -54,7 +55,8 @@ class ForbiddenNetworkFailure extends Failure {
           code: 'forbidden-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.forbidden,
+          message:
+              'The request was valid, but the server is refusing action. Please check your permissions and try again.',
         );
 }
 
@@ -64,7 +66,7 @@ class NotFoundNetworkFailure extends Failure {
           code: 'not-found-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.notFound,
+          message: 'The requested resource could not be found. Please check the URL and try again.',
         );
 }
 
@@ -74,7 +76,7 @@ class RequestTimeoutNetworkFailure extends Failure {
           code: 'request-timeout-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.requestTimeout,
+          message: 'The server timed out waiting for the request. Please attempt to reconnect and try again.',
         );
 }
 
@@ -84,7 +86,7 @@ class TooManyRequestsNetworkFailure extends Failure {
           code: 'too-many-requests-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.tooManyRequests,
+          message: 'The user has sent too many requests in a given amount of time. Please wait before trying again.',
         );
 }
 
@@ -94,7 +96,8 @@ class InternalServerNetworkFailure extends Failure {
           code: 'internal-server-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.internalServer,
+          message:
+              'The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later.',
         );
 }
 
@@ -104,7 +107,8 @@ class ServerErrorNetworkFailure extends Failure {
           code: 'server-error-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.serverError,
+          message:
+              'The server encountered a condition which prevented it from fulfilling the request. Please try again later.',
         );
 }
 
@@ -114,7 +118,7 @@ class ClientErrorNetworkFailure extends Failure {
           code: 'client-error-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: 'A client error occurred.',
+          message: 'A client error occurred. Please check the request and try again.',
         );
 }
 
@@ -124,7 +128,8 @@ class ConnectionTimeoutNetworkFailure extends Failure {
           code: 'connection-timeout-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.connectionTimeout,
+          message:
+              'The connection timed out while attempting to reach the server. Please check your network settings and try again.',
         );
 }
 
@@ -134,7 +139,7 @@ class SendTimeoutNetworkFailure extends Failure {
           code: 'send-timeout-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.sendTimeout,
+          message: 'The request timed out while trying to send data. Please check your connection and try again.',
         );
 }
 
@@ -144,7 +149,7 @@ class ReceiveTimeoutNetworkFailure extends Failure {
           code: 'receive-timeout-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.receiveTimeout,
+          message: 'The server took too long to send a response. Please check your connection and try again.',
         );
 }
 
@@ -154,7 +159,7 @@ class BadCertificateNetworkFailure extends Failure {
           code: 'bad-certificate-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.badCertificate,
+          message: "The server certificate is not valid. Please check the server's security certificate and try again.",
         );
 }
 
@@ -164,7 +169,8 @@ class BadResponseNetworkFailure extends Failure {
           code: 'bad-response-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.badResponse,
+          message:
+              'The server responded with an unexpected format or status code. Please check the response and try again.',
         );
 }
 
@@ -174,7 +180,7 @@ class RequestCancelNetworkFailure extends Failure {
           code: 'request-cancel-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.requestCancel,
+          message: 'The request was cancelled. Please check your request and try again.',
         );
 }
 
@@ -184,6 +190,6 @@ class ConnectionNetworkFailure extends Failure {
           code: 'connection-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message: tr.failures.network.connection,
+          message: 'Failed to connect to the server. Please check your network connection and try again.',
         );
 }

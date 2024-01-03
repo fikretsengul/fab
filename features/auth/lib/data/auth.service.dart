@@ -7,6 +7,8 @@ import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:deps/packages/injectable.dart';
 
+import '../domain/failures/auth.failure.dart';
+
 /// `AuthService` provides authentication-related functionalities,
 /// including login and logout operations.
 @lazySingleton
@@ -32,7 +34,7 @@ class AuthService {
     String email,
     String password,
   ) async {
-    await _client.tokenStorage.setToken(OAuth2Token.empty());
+/*     await _client.tokenStorage.setToken(OAuth2Token.empty());
 
     return Right(
       UserModel(
@@ -42,8 +44,8 @@ class AuthService {
         role: UserRoleEnum.admin,
         avatar: 'https://picsum.photos/200/300',
       ),
-    );
-/*     final response = await _client.invoke<Map<String, dynamic>>(
+    ); */
+    final response = await _client.invoke<Map<String, dynamic>>(
       '/auth/login',
       RequestType.post,
       requestBody: {
@@ -60,12 +62,10 @@ class AuthService {
 
         return Left(failure);
       },
-      (tokens) {
-        logger.log(tokens, 'Tokens:');
-
+      (_) {
         return Right(UserModel.empty());
       },
-    ); */
+    );
   }
 
   /// Handles the logout operation.

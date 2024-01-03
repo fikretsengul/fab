@@ -3,7 +3,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
@@ -25,18 +24,12 @@ void main() async {
   // Initializes the service locator with the determined environment.
   initLocator(env);
 
+  Bloc.observer = $.get<ILogger>().blocTalker;
+
   // Initializes the storage for HydratedBloc, which allows state persistence across app restarts.
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
-  runApp(
-    InfrastructureI18nProvider(
-      child: DesignI18nProvider(
-        child: FeaturesI18nProvider(
-          child: FeaturesApp(),
-        ),
-      ),
-    ),
-  );
+  runApp(FeaturesApp());
 }

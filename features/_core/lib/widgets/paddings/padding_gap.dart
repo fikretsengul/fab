@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../super/super.dart';
+import '../../_core/super/super.dart';
 import '../_core/gap/gap.dart';
 import '../_core/gap/sliver_gap.dart';
 

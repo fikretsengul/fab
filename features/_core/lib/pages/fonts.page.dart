@@ -5,7 +5,7 @@ import 'package:deps/packages/flutter_bloc.dart';
 import 'package:feature_user/presentation/cubits/user.cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../super/super.dart';
+import '../_core/super/super.dart';
 
 @RoutePage()
 class FontsPage extends StatelessWidget {
@@ -26,7 +26,7 @@ class FontsPage extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => $.modal.showModal(
+              onPressed: () => $.alert.showModal(
                 builder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -43,20 +43,20 @@ class FontsPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                final result = await $.modal.showDialog(
+                final result = await $.alert.showDialog(
                   builder: (_) => SimpleDialog(
                     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                     title: const Text('Select assignment'),
                     children: <Widget>[
                       SimpleDialogOption(
                         onPressed: () {
-                          $.modal.popDialog(1);
+                          $.alert.popDialog(1);
                         },
                         child: const Text('Number 1'),
                       ),
                       SimpleDialogOption(
                         onPressed: () {
-                          $.modal.popDialog(2);
+                          $.alert.popDialog(2);
                         },
                         child: const Text('Number 2'),
                       ),
@@ -69,7 +69,7 @@ class FontsPage extends StatelessWidget {
               child: const Text('Dialog'),
             ),
             ElevatedButton(
-              onPressed: () => $.modal.showSheet(
+              onPressed: () => $.alert.showSheet(
                 builder: (_) => Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -82,9 +82,7 @@ class FontsPage extends StatelessWidget {
                     icon: const Icon(Icons.arrow_drop_down),
                     iconSize: 50,
                     color: Colors.white,
-                    onPressed: () {
-                      $.modal.popDialog();
-                    },
+                    onPressed: $.alert.popDialog,
                   ),
                 ),
               ),

@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "failures": {
+      "unknownPermissionRequest": "An error occurred while requesting permission.",
+      "invalidPermissionType": "Invalid permission type: $type"
+    },
+    "dialog": {
+      "denied": {
+        "title": "@:permissions.type Permission Denied",
+        "description": "@:permissions.type is required to proceed. Please consider enabling it in your settings."
+      },
+      "permanentlyDenied": {
+        "title": "@:permissions.type Permission Permanently Denied",
+        "description": "@:permissions.type is required but has been permanently denied. Please enable it from app settings."
+      },
+      "restricted": {
+        "title": "@:permissions.type Permission Restricted",
+        "description": "Access to @:permissions.type is restricted by system policies or parental controls."
+      },
+      "limited": {
+        "title": "@:permissions.type Permission Limited",
+        "description": "You have granted limited @:permissions.type access. If you want to allow full access, please adjust in your settings."
+      },
+      "provisional": {
+        "title": "Provisional @:permissions.type Permission",
+        "description": "The app is provisionally authorized. Some features might be limited."
+      },
+      "buttons": {
+        "openSettings": "Open Settings",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "understood": "Understood",
+        "ok": "OK"
+      }
+    },
+    "type(context=PermissionType)": {
+        "calendar": "Calendar",
+        "camera": "Camera",
+        "contacts": "Contacts",
+        "location": "Location",
+        "locationAlways": "Location Always",
+        "locationWhenInUse": "Location When In Use",
+        "mediaLibrary": "Media Library",
+        "microphone": "Microphone",
+        "phone": "Phone",
+        "photos": "Photos",
+        "photosAddOnly": "Photos Add Only",
+        "reminders": "Reminders",
+        "sensors": "Sensors",
+        "sms": "SMS",
+        "speech": "Speech",
+        "storage": "Storage",
+        "ignoreBatteryOptimizations": "Ignore Battery Optimizations",
+        "notification": "Notification",
+        "accessMediaLocation": "Access Media Location",
+        "activityRecognition": "Activity Recognition",
+        "unknown": "Unknown",
+        "bluetooth": "Bluetooth",
+        "manageExternalStorage": "Manage External Storage",
+        "systemAlertWindow": "System Alert Window",
+        "requestInstallPackages": "Request Install Packages",
+        "appTrackingTransparency": "App Tracking Transparency",
+        "criticalAlerts": "Critical Alerts",
+        "accessNotificationPolicy": "Access Notification Policy",
+        "bluetoothScan": "Bluetooth Scan",
+        "bluetoothAdvertise": "Bluetooth Advertise",
+        "bluetoothConnect": "Bluetooth Connect",
+        "nearbyWifiDevices": "Nearby Wi-Fi Devices",
+        "videos": "Videos",
+        "audio": "Audio",
+        "scheduleExactAlarm": "Schedule Exact Alarm",
+        "sensorsAlways": "Sensors Always",
+        "calendarWriteOnly": "Calendar Write Only",
+        "calendarFullAccess": "Calendar Full Access"
+      }
+  }
+}

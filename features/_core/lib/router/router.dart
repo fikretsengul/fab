@@ -1,8 +1,8 @@
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 
-import '../super/_core/dialog/dialog_builder.dart';
-import '../super/_core/modal/modal_builder.dart';
+import '../_core/super/_core/dialog/dialog_builder.dart';
+import '../_core/super/_core/modal/modal_builder.dart';
 import 'guard.dart';
 import 'router.gr.dart';
 
@@ -20,7 +20,7 @@ class FeaturesRouter extends $FeaturesRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: AppHandler.page,
+          page: SuperHandler.page,
           initial: true,
           children: [
             AutoRoute(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../super/super.dart';
+import '../../_core/super/super.dart';
 
 class RadiusAll extends StatelessWidget {
   factory RadiusAll.none({required Widget child, Key? key}) =>
