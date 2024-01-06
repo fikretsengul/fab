@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                await $.permissions.request(PermissionType.photos);
+                await $.permissions.request(PermissionType.camera);
               },
               child: const Text('Open Image Picker'),
             ),

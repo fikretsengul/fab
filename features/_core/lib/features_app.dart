@@ -31,9 +31,9 @@ class _FeaturesAppState extends State<FeaturesApp> {
       child: BlocListener<NetworkCubit, NetworkState>(
         listener: (_, state) {
           if (state == NetworkState.connected) {
-            $.alert.popDialog();
+            $.dialog.popDialog();
           } else if (state == NetworkState.disconnected) {
-            $.alert.showSheet(
+            $.dialog.showSheet(
               builder: (_) => const SizedBox(
                 height: 50,
                 child: Center(

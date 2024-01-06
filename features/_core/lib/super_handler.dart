@@ -26,8 +26,8 @@ class _SuperHandlerState extends State<SuperHandler> {
   }
 
   bool shouldIntercept() {
-    if ($.alert.hasDialogVisible) {
-      $.alert.popDialog();
+    if ($.dialog.hasDialogVisible) {
+      $.dialog.popDialog();
 
       return true;
     }

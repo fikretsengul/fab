@@ -10,8 +10,8 @@ import '../_core/sheet/sheet_wrapper.dart';
 import 'navigator_context.dart';
 
 @immutable
-final class AlertContext {
-  AlertContext(this._navigator);
+final class DialogContext {
+  DialogContext(this._navigator);
 
   final NavigatorContext _navigator;
 

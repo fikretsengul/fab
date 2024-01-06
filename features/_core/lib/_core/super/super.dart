@@ -9,10 +9,11 @@ import 'constants/paddings.dart';
 import 'constants/platform.dart';
 import 'constants/radiuses.dart';
 import 'constants/timings.dart';
-import 'contexts/alert_context.dart';
 import 'contexts/bloc_context.dart';
+import 'contexts/dialog_context.dart';
 import 'contexts/navigator_context.dart';
 import 'contexts/overlay_context.dart';
+import 'contexts/toast_context.dart';
 import 'permissions/permissions.dart';
 
 @immutable
@@ -21,7 +22,8 @@ final class $ {
 
   $._internal() {
     _navigator = NavigatorContext();
-    _alert = AlertContext(_navigator);
+    _dialog = DialogContext(_navigator);
+    _toast = ToastContext(_navigator);
     _overlay = OverlayContext(_navigator);
     _bloc = BlocContext(_navigator);
     _timings = Timings();
@@ -35,7 +37,8 @@ final class $ {
 
   // Props
   late final NavigatorContext _navigator;
-  late final AlertContext _alert;
+  late final DialogContext _dialog;
+  late final ToastContext _toast;
   late final OverlayContext _overlay;
   late final BlocContext _bloc;
 
@@ -47,7 +50,8 @@ final class $ {
 
   /// Context
   static NavigatorContext navigator = _instance._navigator;
-  static AlertContext alert = _instance._alert;
+  static DialogContext dialog = _instance._dialog;
+  static ToastContext toast = _instance._toast;
   static OverlayContext overlay = _instance._overlay;
   static BlocContext bloc = _instance._bloc;
 

@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../constants/timings.dart';
-import '../super.dart';
 import 'navigator_context.dart';
 
 final class OverlayContext {
@@ -18,8 +16,6 @@ final class OverlayContext {
   /// It can be used many times, without an `overlayId`
   Future<OverlayEntry> showOverlay({Widget Function(BuildContext context)? builder}) async {
     hideOverlay();
-    await $.timings.zero.delay();
-
     final overlayState = Overlay.of(_navigator.context!);
     _overlayEntry = OverlayEntry(builder: builder!);
     overlayState.insert(_overlayEntry!);
@@ -43,8 +39,6 @@ final class OverlayContext {
     OverlayEntry? below,
     OverlayEntry? above,
   }) async {
-    await $.timings.zero.delay();
-
     final overlayState = Overlay.of(_navigator.context!);
     final overlayEntry = OverlayEntry(builder: builder);
     overlayState.insert(overlayEntry, above: above, below: below);

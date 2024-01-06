@@ -1,3 +1,4 @@
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/intl.dart';
 import 'package:deps/packages/talker_flutter.dart';
 
@@ -27,7 +28,7 @@ class FailureLog extends TalkerLog {
     final type = failure.type == FailureType.exception ? 'EXCEPTION' : 'FAILURE';
     final sb = StringBuffer()
       ..writeln('\n« $type on ${_formatTime()} »')
-      ..writeln('• TAG       ─►  ${failure.tag.name}')
+      ..writeln('• TAG       ─►  ${failure.tag.name.capitalize()}')
       ..writeln('• CODE      ─►  ${failure.code}')
       ..writeln('• MESSAGE   ─►  ${failure.message}');
 

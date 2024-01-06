@@ -26,7 +26,7 @@ class FontsPage extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => $.alert.showModal(
+              onPressed: () => $.dialog.showModal(
                 builder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -43,20 +43,20 @@ class FontsPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                final result = await $.alert.showDialog(
+                final result = await $.dialog.showDialog(
                   builder: (_) => SimpleDialog(
                     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                     title: const Text('Select assignment'),
                     children: <Widget>[
                       SimpleDialogOption(
                         onPressed: () {
-                          $.alert.popDialog(1);
+                          $.dialog.popDialog(1);
                         },
                         child: const Text('Number 1'),
                       ),
                       SimpleDialogOption(
                         onPressed: () {
-                          $.alert.popDialog(2);
+                          $.dialog.popDialog(2);
                         },
                         child: const Text('Number 2'),
                       ),
@@ -69,7 +69,7 @@ class FontsPage extends StatelessWidget {
               child: const Text('Dialog'),
             ),
             ElevatedButton(
-              onPressed: () => $.alert.showSheet(
+              onPressed: () => $.dialog.showSheet(
                 builder: (_) => Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -82,7 +82,7 @@ class FontsPage extends StatelessWidget {
                     icon: const Icon(Icons.arrow_drop_down),
                     iconSize: 50,
                     color: Colors.white,
-                    onPressed: $.alert.popDialog,
+                    onPressed: $.dialog.popDialog,
                   ),
                 ),
               ),
@@ -111,6 +111,76 @@ class FontsPage extends StatelessWidget {
               ),
               child: const Text('Overlay'),
             ),
+            FilledButton(
+              onPressed: () {
+                $.toast.showToast(
+                  isClosable: true,
+                  backgroundColor: Colors.yellow,
+                  message: 'This may be dangerous! 👋😎!',
+                  leading: const Icon(Icons.warning),
+                );
+              },
+              child: const Text('Show Message Toast'),
+            ),
+            FilledButton(
+              onPressed: () {
+                $.toast.showWidgetToast(
+                  child: const ListTile(
+                    leading: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Icon(
+                        Icons.celebration,
+                        color: Colors.deepOrange,
+                        size: 30,
+                      ),
+                    ),
+                    title: Text('Hi there!'),
+                    subtitle: Text('This is my beautiful toast'),
+                  ),
+                );
+              },
+              child: const Text('Show Widget Toast'),
+            ),
+            /* FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                $.toast.showSuccessToast(
+                  length: ToastLength.medium,
+                  message: 'This is a success toast 🥂!',
+                );
+              },
+              child: const Text('Show success toast'),
+            ),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                $.toast.showWarningToast(
+                  length: ToastLength.medium,
+                  message: 'This is a warning toast!',
+                );
+              },
+              child: const Text('Show warning toast'),
+            ),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                $.toast.showErrorToast(
+                  length: ToastLength.medium,
+                  message: 'This is an error toast!',
+                );
+              },
+              child: const Text('Show error toast'),
+            ), */
           ],
         ),
       ),
