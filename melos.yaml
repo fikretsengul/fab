@@ -39,13 +39,13 @@ command:
       build_runner: ^2.4.7
       injectable_generator: ^2.4.1
       freezed: ^2.4.6
-      envied_generator: ^0.5.2
+      envied_generator: ^0.5.3
       json_serializable: ^6.7.1
-      flutter_gen_runner: ^5.3.2
+      flutter_gen_runner: ^5.4.0
       pyramid_lint: ^1.2.0
       widgetbook_generator: ^3.7.0
       slang_build_runner: ^3.28.0
-      reactive_forms_generator: ^4.4.0
+      reactive_forms_generator: ^4.5.1
 
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
