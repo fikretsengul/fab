@@ -35,9 +35,45 @@ flutter:
           weight: 400
         - asset: assets/fonts/Nunito/Nunito-Light.ttf
           weight: 300
+    - family: VisueltPro
+      fonts:
+        - asset: assets/fonts/VisueltPro/VisueltPro-Black.ttf
+          weight: 900
+        - asset: assets/fonts/VisueltPro/VisueltPro-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/VisueltPro/VisueltPro-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/VisueltPro/VisueltPro-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/VisueltPro/VisueltPro-Light.ttf
+          weight: 300
+        - asset: assets/fonts/VisueltPro/VisueltPro-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/VisueltPro/VisueltPro-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/VisueltPro/VisueltPro-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/VisueltPro/VisueltPro-Italic.ttf
+          style: italic
 
 flutter_gen:
-  output: lib/constants/
+  output: lib/_core/constants/
   line_length: 120
   integrations:
     flutter_svg: true

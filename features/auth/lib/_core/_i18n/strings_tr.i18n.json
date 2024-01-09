@@ -1,4 +1,7 @@
 {
+  "failures": {
+    "wrongCredentials":"Girdiğiniz kullanıcı adı veya şifre yanlış. Lütfen tekrar deneyin."
+  },
   "loginForm": {
     "email": "E-posta",
     "password": "Şifre",

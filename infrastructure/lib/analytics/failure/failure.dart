@@ -5,6 +5,7 @@
 import 'package:deps/locator/locator.dart';
 
 import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/enums/failure_type_enum.dart';
 import '../observers/i_failure_observer.dart';
 import 'i_failure.dart';
 
@@ -16,7 +17,7 @@ class Failure implements IFailure {
     required this.tag,
     required this.code,
     required this.message,
-    Exception? exception,
+    dynamic exception,
     this.stack,
   })  : _failureObserver = locator<IFailureObserver>(),
         exception = (type == FailureType.exception || type == FailureType.error)
@@ -39,7 +40,7 @@ class Failure implements IFailure {
   final String code;
 
   @override
-  final Exception? exception;
+  final dynamic exception;
 
   @override
   final String message;

@@ -11,6 +11,10 @@ dependencies:
     path: ../../deps
   feature_auth:
     path: ../auth
+  feature_products:
+    path: ../products
+  feature_settings:
+    path: ../settings
   feature_user:
     path: ../user
   flutter:
@@ -23,6 +27,7 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.7
+  freezed: ^2.4.6
   injectable_generator: ^2.4.1
   pyramid_lint: ^1.2.0
   slang_build_runner: ^3.28.0

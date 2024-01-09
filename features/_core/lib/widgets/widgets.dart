@@ -1,4 +1,3 @@
-export 'avatar_image.dart';
 export 'blend_mask.dart';
 export 'nil.dart';
 export 'paddings/padding_all.dart';

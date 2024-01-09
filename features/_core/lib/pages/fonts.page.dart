@@ -1,11 +1,8 @@
 // ignore_for_file: max_lines_for_function, max_lines_for_file
 
 import 'package:deps/packages/auto_route.dart';
-import 'package:deps/packages/flutter_bloc.dart';
-import 'package:feature_user/presentation/cubits/user.cubit.dart';
+import 'package:deps/packages/super_cupertino_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../_core/super/super.dart';
 
 @RoutePage()
 class FontsPage extends StatelessWidget {
@@ -18,7 +15,19 @@ class FontsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SuperScaffold(
+      backgroundColor: Colors.black,
+      appBar: SuperAppBar(
+        backgroundColor: Colors.black,
+        previousPageTitle: 'Home',
+/*         largeTitle: SuperLargeTitle(
+          largeTitle: 'asdasdadasdasdasd',
+        ), */
+        title: const Text('Fonts'),
+      ),
+      body: const [Placeholder()],
+    );
+    /*    return Scaffold(
       appBar: AppBar(
         leading: const AutoLeadingButton(),
       ),
@@ -27,19 +36,21 @@ class FontsPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () => $.dialog.showModal(
+                canPop: true,
+                onPop: () => $.debug('oh yeah!'),
                 builder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ListTile(
                       leading: const Icon(Icons.person),
                       title: const Text('Log user'),
-                      onTap: () => $.debug(context.read<UserCubit>().state.user),
+                      onTap: () => $.debug(context.read<UserCubit>().state),
                     ),
-                    ElevatedButton(onPressed: () => context.router.pop(), child: const Text('pop')),
+                    ElevatedButton(onPressed: () => $.dialog.popDialog(), child: const Text('pop')),
                   ],
                 ),
               ),
-              child: const Text('Modal'),
+              child: Text($.tr.core.permissions.dialog.buttons.openSettings),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -184,6 +195,6 @@ class FontsPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ); */
   }
 }

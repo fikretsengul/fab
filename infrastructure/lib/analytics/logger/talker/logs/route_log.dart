@@ -33,5 +33,6 @@ class RouteLog extends TalkerLog {
   String _formatTime() => DateFormat('HH:mm:ss.SSS').format(DateTime.now());
 
   @override
+  // ignore: avoid_unstable_final_fields
   AnsiPen get pen => AnsiPen()..xterm(153);
 }

@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file.
 
 import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/enums/failure_type_enum.dart';
 import '../../analytics/failure/failure.dart';
 
 class NoNetworkFailure extends Failure {
@@ -44,8 +45,7 @@ class UnauthorizedNetworkFailure extends Failure {
           code: 'unauthorized-network-failure',
           type: FailureType.exception,
           tag: FailureTag.network,
-          message:
-              'Authentication is required and has failed or has not been provided. Please verify your credentials and try again.',
+          message: 'You have attempted to access a restricted resource without proper authorization.',
         );
 }
 

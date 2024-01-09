@@ -1,4 +1,5 @@
 import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/enums/failure_type_enum.dart';
 import '../../analytics/failure/failure.dart';
 
 class UnexpectedNetworkError extends Failure {

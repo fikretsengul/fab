@@ -1,3 +1,7 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: max_lines_for_file, avoid_setters_without_getters
 
 import 'dart:math' as math;
@@ -48,6 +52,20 @@ final class ToastContext {
     _showMaxToast = val;
   }
 
+  ToastDismissDirection _getDefaultDismissDirection(ToastDismissDirection? dismissDirection, ToastAlignment alignment) {
+    if (dismissDirection == null) {
+      if (alignment == ToastAlignment.top) {
+        return ToastDismissDirection.up;
+      } else if (alignment == ToastAlignment.bottom) {
+        return ToastDismissDirection.down;
+      } else {
+        return ToastDismissDirection.horizontal;
+      }
+    } else {
+      return dismissDirection;
+    }
+  }
+
   Future<void> showToast({
     String? message,
     TextStyle? messageStyle,
@@ -60,8 +78,8 @@ final class ToastContext {
     Curve positionCurve = Curves.elasticOut,
     bool useSafeArea = true,
     ToastAlignment alignment = ToastAlignment.top,
-    ToastLength length = ToastLength.medium,
-    ToastDismissDirection dismissDirection = ToastDismissDirection.up,
+    ToastLength length = ToastLength.short,
+    ToastDismissDirection? dismissDirection,
   }) async {
     await _showToast(
       message: message,
@@ -90,8 +108,8 @@ final class ToastContext {
     Curve positionCurve = Curves.elasticOut,
     bool useSafeArea = true,
     ToastAlignment alignment = ToastAlignment.top,
-    ToastLength length = ToastLength.medium,
-    ToastDismissDirection dismissDirection = ToastDismissDirection.up,
+    ToastLength length = ToastLength.short,
+    ToastDismissDirection? dismissDirection,
   }) async {
     await _showToast(
       slideCurve: slideCurve,
@@ -122,7 +140,7 @@ final class ToastContext {
     bool useSafeArea = true,
     ToastAlignment alignment = ToastAlignment.top,
     ToastLength length = ToastLength.medium,
-    ToastDismissDirection dismissDirection = ToastDismissDirection.up,
+    ToastDismissDirection? dismissDirection,
   }) async {
     assert(
       expandedHeight >= 0.0,
@@ -166,7 +184,7 @@ final class ToastContext {
                       0,
                     )),
               positionCurve: positionCurve,
-              dismissDirection: dismissDirection,
+              dismissDirection: dismissDirection ?? _getDefaultDismissDirection(dismissDirection, alignment),
               onDismissed: () {
                 _removeOverlayEntry(toast);
                 _updateOverlayPositions(true, toast);

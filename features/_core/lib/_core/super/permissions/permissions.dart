@@ -1,12 +1,16 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: avoid_setters_without_getters, avoid_returning_this
 
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/permission_handler.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../alerts/permission_alerts.dart';
-import '_core/permission_failures.dart';
-import '_core/permission_type_enum.dart';
+import '_core/permission.failures.dart';
+import '_core/permission_type.enum.dart';
+import 'alerts/permission_alerts.dart';
 
 typedef PermissionCallback = VoidCallback;
 typedef FailureCallback = ValueChanged<Failure>;

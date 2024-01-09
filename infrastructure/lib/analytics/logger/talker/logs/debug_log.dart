@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unstable_final_fields
+
 import 'package:deps/packages/intl.dart';
 import 'package:deps/packages/talker_flutter.dart';
 

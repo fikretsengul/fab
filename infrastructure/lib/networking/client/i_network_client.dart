@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:deps/packages/dio.dart';
+
 import '../../_core/enums/request_type_enum.dart';
 import '../../_core/typedefs/either_typedef.dart';
 import '../../storage/storages/token/token_storage_mixin.dart';
@@ -30,6 +32,8 @@ abstract interface class INetworkClient {
     Map<String, String>? headers,
     dynamic requestBody,
   });
+
+  void setObserver(Interceptor interceptor);
 
   TokenStorageMixin<OAuth2Token> get tokenStorage;
 }

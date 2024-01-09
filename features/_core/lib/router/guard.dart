@@ -1,8 +1,12 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'dart:async';
 
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/auto_route.dart';
-import 'package:feature_auth/_core/routes/router.gm.dart';
+import 'package:feature_auth/auth.dart';
 
 import '../_core/super/super.dart';
 
@@ -27,7 +31,11 @@ class AuthGuard extends AutoRouteGuard {
     if (status == AuthStatus.authenticated) {
       resolver.next();
     } else {
-      await resolver.redirect(LoginRoute(onResult: (didLogin) => resolver.next(didLogin)));
+      await resolver.redirect(
+        LoginRoute(
+          onResult: (didLogin) => resolver.next(didLogin),
+        ),
+      );
     }
   }
 }

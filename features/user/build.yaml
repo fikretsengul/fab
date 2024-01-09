@@ -12,13 +12,13 @@ targets:
           enable_cached_builds: true
         generate_for:
           include:
-            - lib/core/routes/router.dart
+            - lib/_core/router.dart
       auto_route_generator:auto_route_generator:
         options:
           enable_cached_builds: true
         generate_for:
           include:
-            - lib/presentation/**/views/*.page.dart
+            - lib/presentation/**/*.page.dart
       # Freezed
       freezed:
         options:
@@ -47,22 +47,23 @@ targets:
       # Slang
       slang_build_runner:
         options:
+          locale_handling: false
+          translation_class_visibility: public
           fallback_strategy: base_locale
-          input_directory: lib/core/i18n
-          output_directory: lib/core/i18n
+          input_directory: lib/_core/_i18n
+          output_directory: lib/_core/_i18n
           output_file_name: translations.g.dart
-          translate_var: tr
           key_case: camel
           key_map_case: camel
           param_case: camel
           flat_map: false
         generate_for:
           include:
-            - lib/core/i18n/*
+            - lib/_core/_i18n/*
       # Injectable
       injectable_generator:
         generate_for:
           include:
-            - lib/_di/*.dart
-            - lib/presentation/**/cubits/*.cubit.dart
+            - lib/_core/_di/*.dart
             - lib/data/*.service.dart
+            - lib/presentation/**/*.cubit.dart

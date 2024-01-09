@@ -20,6 +20,7 @@ class DioRequestLog extends TalkerLog {
   final TalkerDioLoggerSettings settings;
 
   @override
+  // ignore: avoid_unstable_final_fields
   AnsiPen get pen => settings.requestPen ?? (AnsiPen()..xterm(219));
 
   @override
@@ -68,6 +69,7 @@ class DioResponseLog extends TalkerLog {
   final TalkerDioLoggerSettings settings;
 
   @override
+  // ignore: avoid_unstable_final_fields
   AnsiPen get pen => settings.responsePen ?? (AnsiPen()..xterm(46));
 
   @override
@@ -122,6 +124,7 @@ class DioErrorLog extends TalkerLog {
   final TalkerDioLoggerSettings settings;
 
   @override
+  // ignore: avoid_unstable_final_fields
   AnsiPen get pen => settings.errorPen ?? (AnsiPen()..red());
 
   @override

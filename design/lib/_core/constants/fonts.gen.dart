@@ -12,4 +12,7 @@ class FontFamily {
 
   /// Font family: Nunito
   static const String nunito = 'Nunito';
+
+  /// Font family: VisueltPro
+  static const String visueltPro = 'VisueltPro';
 }

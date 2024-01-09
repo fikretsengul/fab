@@ -1,10 +1,14 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: file_names
 
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:flutter/material.dart';
 
-import '../translations/translations_cubit.dart';
+import '../../cubits/translation/translation_cubit.dart';
 import 'constants/paddings.dart';
 import 'constants/platform.dart';
 import 'constants/radiuses.dart';
@@ -63,7 +67,9 @@ final class $ {
   static Permissions get permissions => _instance._permissions;
 
   /// Aliases
+  static TranslationCubit get tr => locator<TranslationCubit>();
   static T get<T extends Object>() => locator<T>();
   static void debug(dynamic data, [String? message]) => locator<ILogger>().debug(data, message);
-  static TranslationsCubit get tr => locator<TranslationsCubit>();
+  static void afterBuildCallback(ValueChanged<Duration> callback) =>
+      WidgetsBinding.instance.addPostFrameCallback(callback);
 }

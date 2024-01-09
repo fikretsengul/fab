@@ -7,12 +7,6 @@ import 'package:deps/packages/injectable.dart';
 
 import '_di.config.dart';
 
-/// Initializes the authentication feature's dependencies.
-///
-/// This function sets up the dependency injection for the authentication feature
-/// of the application using [GetIt] as the service locator.
-///
-/// [env] is a string representing the current environment (e.g., development, production).
 @InjectableInit(initializerName: 'init')
 void injectAuthFeature(GetIt di, String env) {
   di.init(environment: env);

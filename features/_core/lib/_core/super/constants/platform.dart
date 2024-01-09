@@ -4,8 +4,8 @@
 
 import 'package:flutter/foundation.dart';
 
-import '../../../widgets/_core/platform/platform_web.dart'
-    if (dart.library.io) '../../../widgets/_core/platform/platform_io.dart';
+import '../../../widgets/_core/definitions/platform/platform_web.dart'
+    if (dart.library.io) '../../../widgets/_core/definitions/platform/platform_io.dart';
 
 /// A wrapper class for checking the current platform the app is running on.
 /// This class uses conditional imports to determine platform-specific details.

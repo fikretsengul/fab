@@ -1,0 +1,24 @@
+name: feature_products
+description: The products feature of flutter advanced boilerplate.
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  deps:
+    path: ../../deps
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.7
+  freezed: ^2.4.6
+  injectable_generator: ^2.4.1
+  json_serializable: ^6.7.1
+  pyramid_lint: ^1.2.0
+  reactive_forms_generator: ^4.4.0
+  slang_build_runner: ^3.28.0

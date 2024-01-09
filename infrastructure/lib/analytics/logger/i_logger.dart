@@ -3,9 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import '../failure/i_failure.dart';
-import '../observers/talker/talker_bloc_observer.dart';
-import '../observers/talker/talker_dio_observer.dart';
-import '../observers/talker/talker_route_observer.dart';
 
 /// An abstract class defining the interface for a logging system.
 ///
@@ -13,10 +10,6 @@ import '../observers/talker/talker_route_observer.dart';
 /// logging levels and types, such as general logs, constructive logs,
 /// destructive logs, and exceptions.
 abstract class ILogger {
-  TalkerBlocObserver get blocTalker;
-  TalkerRouteObserver get routerTalker;
-  TalkerDioLogger get dioTalker;
-
   /// Logs general data with an optional message.
   ///
   /// [data]: The data to be logged.

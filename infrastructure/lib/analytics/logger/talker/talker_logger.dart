@@ -3,14 +3,9 @@
 // license that can be found in the LICENSE file.
 
 import 'package:deps/packages/injectable.dart';
-import 'package:deps/packages/talker_bloc_logger.dart' hide TalkerBlocObserver;
-import 'package:deps/packages/talker_dio_logger.dart' hide TalkerDioLogger;
 import 'package:deps/packages/talker_flutter.dart';
 
 import '../../failure/i_failure.dart';
-import '../../observers/talker/talker_bloc_observer.dart';
-import '../../observers/talker/talker_dio_observer.dart';
-import '../../observers/talker/talker_route_observer.dart';
 import '../i_logger.dart';
 import 'logs/debug_log.dart';
 import 'logs/failure_log.dart';
@@ -25,28 +20,6 @@ class TalkerLogger implements ILogger {
   TalkerLogger(this._talker);
 
   final Talker _talker;
-
-  @override
-  TalkerBlocObserver get blocTalker => TalkerBlocObserver(
-        talker: _talker,
-        settings: const TalkerBlocLoggerSettings(
-          printChanges: true,
-          printCreations: true,
-          printClosings: true,
-        ),
-      );
-
-  @override
-  TalkerRouteObserver get routerTalker => TalkerRouteObserver(talker: _talker);
-
-  @override
-  TalkerDioLogger get dioTalker => TalkerDioLogger(
-        talker: _talker,
-        settings: const TalkerDioLoggerSettings(
-          printRequestHeaders: true,
-          printResponseHeaders: true,
-        ),
-      );
 
   /// Logs an exception with an optional stack trace.
   @override

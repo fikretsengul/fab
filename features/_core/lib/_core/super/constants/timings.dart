@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 /// A collection of commonly used timing durations.
@@ -32,14 +30,4 @@ final class Timings {
 
   /// Duration of 2 second.
   final sec2 = const Duration(seconds: 2);
-}
-
-/// Extension on `Duration` to provide a simple delay mechanism.
-extension TimingsExt on Duration {
-  /// Delays the execution of a callback function by the duration.
-  /// If no callback is provided, it simply waits for the duration.
-  Future delay([FutureOr Function()? callback]) async => Future.delayed(
-        this,
-        callback,
-      );
 }

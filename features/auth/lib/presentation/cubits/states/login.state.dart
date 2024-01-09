@@ -4,27 +4,13 @@
 
 part of '../login.cubit.dart';
 
-/// `LoginState` is an immutable class representing the different states of the login process.
-/// It uses the `freezed` package to provide copyable, equatable, and immutable state objects.
 @freezed
 sealed class LoginState with _$LoginState {
-  /// Represents the failed state of the login process.
-  /// This state is emitted when a login attempt fails, along with the failure reason.
-  ///
-  /// [failure]: The `Failure` object containing details about the login failure.
   const factory LoginState.failed(IFailure failure) = LoginStateFailed;
 
-  /// Represents the initial state of the login process.
-  /// This is the default state before any login attempts are made.
   const factory LoginState.initial() = LoginStateInitial;
 
-  /// Represents the loading state of the login process.
-  /// This state is emitted during the ongoing login operation.
   const factory LoginState.loading() = LoginStateLoading;
 
-  /// Represents the succeeded state of the login process.
-  /// This state is emitted when a login attempt is successful, along with the user details.
-  ///
-  /// [user]: The `User` object containing details of the successfully logged-in user.
   const factory LoginState.succeeded(UserModel user) = LoginStateSucceeded;
 }

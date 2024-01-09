@@ -4,6 +4,9 @@
       "unknownPermissionRequest": "İzin istenirken bir hata oluştu.",
       "invalidPermissionType": "Geçersiz izin türü: $type"
     },
+    "bottomNavigation": {
+      "home": "Anasayfa"
+    },
     "dialog": {
       "denied": {
         "title": "@:permissions.type İzni Reddedilmiş",

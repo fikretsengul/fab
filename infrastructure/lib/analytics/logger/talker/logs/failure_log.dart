@@ -2,7 +2,7 @@ import 'package:deps/features/features.dart';
 import 'package:deps/packages/intl.dart';
 import 'package:deps/packages/talker_flutter.dart';
 
-import '../../../../_core/enums/failure_tag_enum.dart';
+import '../../../../_core/enums/failure_type_enum.dart';
 import '../../../failure/i_failure.dart';
 
 class FailureLog extends TalkerLog {
@@ -42,5 +42,6 @@ class FailureLog extends TalkerLog {
   String _formatTime() => DateFormat('HH:mm:ss.SSS').format(DateTime.now());
 
   @override
+  // ignore: avoid_unstable_final_fields
   AnsiPen get pen => AnsiPen()..xterm(failure.type == FailureType.exception ? 208 : 196);
 }

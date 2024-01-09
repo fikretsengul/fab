@@ -4,7 +4,7 @@
 
 import 'package:deps/packages/injectable.dart';
 
-import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/enums/failure_type_enum.dart';
 import '../../flavors/i_env.dart';
 import '../analytics/i_analytics.dart';
 import '../failure/failure.dart';
@@ -32,7 +32,7 @@ class FailureObserver implements IFailureObserver {
   /// [failure]: The [Failure] instance to handle.
   @override
   void onFailure(Failure failure) {
-    if (_env.isDebug) {
+    if (!_env.isDebug) {
       _analytics.send(failure.message);
     }
 

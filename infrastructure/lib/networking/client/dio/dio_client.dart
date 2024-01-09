@@ -6,7 +6,6 @@
 
 import 'dart:io';
 
-import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/dio.dart';
 import 'package:deps/packages/dio_smart_retry.dart';
 import 'package:deps/packages/fpdart.dart';
@@ -60,11 +59,6 @@ class DioClient implements INetworkClient {
           retries: 2,
         ),
       );
-
-    // Additional logging interceptor for debug mode.
-    if (_env.isDebug) {
-      _dio.interceptors.add(locator<ILogger>().dioTalker);
-    }
   }
 
   final Dio _dio;
@@ -143,5 +137,10 @@ class DioClient implements INetworkClient {
         return Left(UnexpectedNetworkError(exception: Exception(e.toString())));
       }
     }
+  }
+
+  @override
+  void setObserver(Interceptor interceptor) {
+    _dio.interceptors.add(interceptor);
   }
 }

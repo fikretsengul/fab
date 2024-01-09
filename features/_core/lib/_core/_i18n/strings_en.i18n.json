@@ -4,6 +4,9 @@
       "unknownPermissionRequest": "An error occurred while requesting permission.",
       "invalidPermissionType": "Invalid permission type: $type"
     },
+    "bottomNavigation": {
+      "home": "Home"
+    },
     "dialog": {
       "denied": {
         "title": "@:permissions.type Permission Denied",

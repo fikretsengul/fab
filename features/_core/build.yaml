@@ -15,7 +15,18 @@ targets:
           include:
             - lib/_core/super/_core/**/*.dart
             - lib/pages/*.dart
-            - lib/super_handler.dart
+            - lib/handlers/super_handler.dart
+      # Freezed
+      freezed:
+        options:
+          map: false
+          when:
+            when: false
+            maybe_when: false
+            when_or_null: true
+        generate_for:
+          include:
+            - lib/widgets/_core/cubits/**/*.state.dart
       # Slang
       slang_build_runner:
         options:

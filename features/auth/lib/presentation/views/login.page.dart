@@ -13,15 +13,17 @@ import '../cubits/login.cubit.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {
-  const LoginPage({required this.onResult, super.key});
+  LoginPage({required this.onResult, super.key});
 
   final Function(bool didLogin) onResult;
 
-  Future<void> login() async {
-    final isSucceeded = await $.get<LoginCubit>().login(
-          email: 'test',
-          password: 'test',
-        );
+  final loginCubit = $.get<LoginCubit>();
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    final isSucceeded = await loginCubit.login(email: email, password: password);
 
     if (isSucceeded) {
       onResult(true);
@@ -30,51 +32,62 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => $.get<LoginCubit>(),
-      child: BlocListener<LoginCubit, LoginState>(
-        listener: (_, state) {
-          state.whenOrNull(
-            //failed: (failure) => showAlertDialog(context, failure),
-            succeeded: (user) => $.get<UserCubit>().loggedIn(user),
-          );
-        },
-        child: Scaffold(
-          body: LoginFormFormBuilder(
-            model: LoginForm.empty(),
-            builder: (_, data, __) {
-              return PaddingAll.md(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FabReactiveTextfield(
-                      formControl: data.emailControl,
-                      keyboardType: TextInputType.emailAddress,
-                      labelText: $.tr.auth.loginForm.email,
-                      textInputAction: TextInputAction.next,
-                      onSubmitted: (_) => data.passwordControl.focus(),
-                    ),
-                    PaddingGap.xs(),
-                    FabReactiveTextfield(
-                      formControl: data.passwordControl,
-                      keyboardType: TextInputType.text,
-                      labelText: $.tr.auth.loginForm.password,
-                      textInputAction: TextInputAction.send,
-                      onSubmitted: (_) => data.form.valid ? login() : null,
-                    ),
-                    ReactiveLoginFormFormConsumer(
-                      builder: (_, __, ___) {
-                        return ElevatedButton(
-                          onPressed: login,
-                          child: Text($.tr.auth.loginForm.loginButton),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+    return BlocListener<LoginCubit, LoginState>(
+      bloc: loginCubit,
+      listener: (_, state) {
+        $.debug(state);
+        state.whenOrNull(
+          loading: () => $.overlay.showLoadingOverlay(),
+          failed: (failure) {
+            $.overlay.hideOverlay();
+            $.toast.showToast(message: failure.message);
+          },
+          succeeded: (user) {
+            $.overlay.hideOverlay();
+            $.get<UserCubit>().loggedIn(user);
+          },
+        );
+      },
+      child: Scaffold(
+        body: LoginFormFormBuilder(
+          model: LoginForm.empty(),
+          builder: (_, data, __) {
+            return PaddingAll.md(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FabReactiveTextfield(
+                    formControl: data.emailControl,
+                    keyboardType: TextInputType.emailAddress,
+                    labelText: $.tr.auth.loginForm.email,
+                    textInputAction: TextInputAction.next,
+                    onSubmitted: (_) => data.passwordControl.focus(),
+                  ),
+                  PaddingGap.xs(),
+                  FabReactiveTextfield(
+                    formControl: data.passwordControl,
+                    keyboardType: TextInputType.text,
+                    labelText: $.tr.auth.loginForm.password,
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: (_) => data.form.valid
+                        ? login(email: data.emailControl.value ?? '', password: data.passwordControl.value ?? '')
+                        : null,
+                  ),
+                  ReactiveLoginFormFormConsumer(
+                    builder: (_, __, ___) {
+                      return ElevatedButton(
+                        onPressed: data.form.valid
+                            ? () =>
+                                login(email: data.emailControl.value ?? '', password: data.passwordControl.value ?? '')
+                            : null,
+                        child: Text($.tr.auth.loginForm.loginButton),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

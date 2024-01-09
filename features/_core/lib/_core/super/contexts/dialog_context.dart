@@ -1,3 +1,7 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: max_lines_for_file
 
 import 'package:flutter/material.dart';
@@ -16,17 +20,16 @@ final class DialogContext {
   final NavigatorContext _navigator;
 
   final ValueNotifier<List<Widget>> _dialogs = ValueNotifier([]);
-
-  ValueNotifier<List<Widget>> get dialogNotifier => _dialogs;
-  bool get hasDialogVisible => _dialogs.value.isNotEmpty;
   BuildContext? get _scaffoldContext => _navigator.scaffoldKey.currentContext;
   ScaffoldState? get _scaffoldState => _navigator.scaffoldKey.currentState;
 
-  void addDialogVisible(Widget widget) {
+  bool get hasDialogVisible => _dialogs.value.isNotEmpty;
+
+  void _addDialogVisible(Widget widget) {
     _dialogs.value.add(widget);
   }
 
-  void removeDialogVisible({Widget? widget}) {
+  void _removeDialogVisible({Widget? widget}) {
     if (widget != null) {
       _dialogs.value.remove(widget);
     } else {
@@ -68,7 +71,7 @@ final class DialogContext {
     }
 
     final dialog = builder(_scaffoldContext!);
-    addDialogVisible(dialog);
+    _addDialogVisible(dialog);
 
     return _navigator
         .push<T>(
@@ -80,7 +83,7 @@ final class DialogContext {
           ),
         )
         .whenComplete(
-          () => removeDialogVisible(widget: dialog),
+          () => _removeDialogVisible(widget: dialog),
         );
   }
 
@@ -95,7 +98,7 @@ final class DialogContext {
     }
 
     final dialog = builder(_scaffoldContext!);
-    addDialogVisible(dialog);
+    _addDialogVisible(dialog);
 
     return _navigator
         .push<T>(
@@ -107,11 +110,11 @@ final class DialogContext {
           ),
         )
         .whenComplete(
-          () => removeDialogVisible(widget: dialog),
+          () => _removeDialogVisible(widget: dialog),
         );
   }
 
-  Future<void> showSheet<T>({
+  Future<void> showSheet({
     required Widget Function(BuildContext context) builder,
     bool canPop = true,
     VoidCallback? onPop,
@@ -122,9 +125,9 @@ final class DialogContext {
     }
 
     final dialog = builder(_scaffoldContext!);
-    addDialogVisible(dialog);
+    _addDialogVisible(dialog);
 
-    final bottomSheetController = _scaffoldState!.showBottomSheet<T>(
+    final bottomSheetController = _scaffoldState!.showBottomSheet(
       backgroundColor: config.backgroundColor,
       elevation: config.elevation,
       shape: config.shape,
@@ -140,7 +143,7 @@ final class DialogContext {
     );
 
     await bottomSheetController.closed;
-    removeDialogVisible(widget: dialog);
+    _removeDialogVisible(widget: dialog);
 
     return;
   }

@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import '../../_core/enums/failure_tag_enum.dart';
+import '../../_core/enums/failure_type_enum.dart';
 
 /// `IFailure` abstract interface class representing a standardized failure or error.
 /// Implements [Exception] and provides detailed information about the failure.
@@ -24,7 +25,7 @@ abstract interface class IFailure implements Exception {
   String get message;
 
   /// The underlying [Exception] if available, providing further details.
-  Exception? get exception;
+  dynamic get exception;
 
   /// The [StackTrace] associated with the failure, if available.
   StackTrace? get stack;

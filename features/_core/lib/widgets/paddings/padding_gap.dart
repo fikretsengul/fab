@@ -1,8 +1,12 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 import '../../_core/super/super.dart';
-import '../_core/gap/gap.dart';
-import '../_core/gap/sliver_gap.dart';
+import '../_core/definitions/gap/gap.dart';
+import '../_core/definitions/gap/sliver_gap.dart';
 
 class PaddingGap extends Gap {
   const PaddingGap(super.mainAxisExtent, {super.key, super.crossAxisExtent, super.color});

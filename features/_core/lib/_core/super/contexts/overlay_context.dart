@@ -1,3 +1,7 @@
+// Copyright 2024 Fikret Şengül. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // ignore_for_file: max_lines_for_file
 
 import 'package:flutter/material.dart';
@@ -14,14 +18,31 @@ final class OverlayContext {
 
   /// Show the overlay widget keeped by this class (it's like a single instance)
   /// It can be used many times, without an `overlayId`
-  Future<OverlayEntry> showOverlay({Widget Function(BuildContext context)? builder}) async {
+  Future<void> showOverlay({Widget Function(BuildContext context)? builder}) async {
     hideOverlay();
     final overlayState = Overlay.of(_navigator.context!);
     _overlayEntry = OverlayEntry(builder: builder!);
     overlayState.insert(_overlayEntry!);
-
-    return _overlayEntry!;
   }
+
+  Future<void> showLoadingOverlay() => showOverlay(
+        builder: (_) => Stack(
+          children: [
+            ModalBarrier(
+              dismissible: false,
+              color: Colors.black45,
+              onDismiss: hideOverlay,
+            ),
+            const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
 
   /// Hide the overlay widget keeped by this class (it's like a single instance)
   /// It can be used many times, without an `overlayId`

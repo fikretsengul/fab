@@ -1,4 +1,4 @@
-// ignore_for_file: max_lines_for_file, avoid_dynamic_calls, require_trailing_commas
+// ignore_for_file: max_lines_for_file, avoid_dynamic_calls, require_trailing_commas, avoid_unstable_final_fields
 
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/intl.dart';
