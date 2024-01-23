@@ -1,9 +1,13 @@
 name: flutter_advanced_boilerplate
+
 repository:
   type: github
   origin: https://github.com/fikretsengul/flutter_advanced_boilerplate
   owner: fikretsengul
   name: flutter_advanced_boilerplate
+
+# To tell melos to use fvm as flutter sdk
+sdkPath: .fvm/flutter_sdk
 
 packages:
   - app
@@ -11,9 +15,6 @@ packages:
   - design
   - features/**
   - infrastructure
-
-# To tell melos to use fvm as flutter sdk
-sdkPath: .fvm/flutter_sdk
 
 command:
   version:
@@ -24,24 +25,24 @@ command:
     # Additionally build a changelog at the root of the workspace.
     workspaceChangelog: true
 
-  # If a dependency from environment, dependencies or dev_dependencies
-  # in the melos.yaml exists in a package, the dependency version in this
-  # package will be updated to match the version defined in the bootstrap
-  # config every time melos bootstrap is run.
-  environment:
-    sdk: ">=3.2.5 <4.0.0"
-    flutter: ">=3.16.8 <4.0.0"
-
   bootstrap:
+    # If a dependency from environment, dependencies or dev_dependencies
+    # in the melos.yaml exists in a package, the dependency version in this
+    # package will be updated to match the version defined in the bootstrap
+    # config every time melos bootstrap is run.
+    environment:
+      sdk: ">=3.2.5 <4.0.0"
+      flutter: ">=3.16.8 <4.0.0"
+
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
     # makes the CI much more stable.
     runPubGetInParallel: false
-    usePubspecOverrides: true
 
     # To run something such as a build runner automatically after melos bootstrap
     hooks:
-      post:
+      pre: fvm flutter pub get
+      post: melos generate
 
 
 # We are setting the concurrency to 1 in some commands because a higher
@@ -50,7 +51,7 @@ command:
 scripts:
   reset:
     description: Clean things very deeply by removing untracked files.
-    run: git clean -x -d -f -q -e .fvm
+    run: fvm flutter clean && git clean -x -d -f -q -e .fvm
 
   clean:pods:
     description: Clean ios pods to fix any pods related issues.
