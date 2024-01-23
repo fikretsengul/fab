@@ -22,6 +22,10 @@ final class NavigatorContext {
     return context;
   }
 
+  NavigatorState? get state {
+    return navigatorKey.currentState;
+  }
+
   StackRouter? get _controller {
     return autoRouterKey.currentState?.controller;
   }

@@ -48,6 +48,10 @@ class FeaturesRouter extends $FeaturesRouter {
                       page: ProductsRoute.page,
                       initial: true,
                     ),
+                    CupertinoRoute(
+                      path: 'product:id',
+                      page: ProductDetailsRoute.page,
+                    ),
                   ],
                 ),
                 CupertinoRoute(

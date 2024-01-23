@@ -57,13 +57,15 @@ class LargeTitleWidget extends StatelessWidget {
                   right: 0,
                   child: Row(
                     children: [
-                      Transform.scale(
-                        scale: scaleTitle,
-                        filterQuality: FilterQuality.high,
-                        alignment: Alignment.bottomLeft,
-                        child: components.largeTitle,
+                      Expanded(
+                        child: Transform.scale(
+                          scale: scaleTitle,
+                          filterQuality: FilterQuality.high,
+                          alignment: Alignment.bottomLeft,
+                          child: components.largeTitle,
+                        ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: 16),
                       components.largeTitleActions!,
                     ],
                   ),

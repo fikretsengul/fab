@@ -121,6 +121,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
       userLargeTitle: Text(
         widget.appBar.largeTitle!.largeTitle,
         style: widget.appBar.largeTitle!.textStyle ?? CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        overflow: TextOverflow.ellipsis,
       ),
       appbarBottom: widget.appBar.bottom!.child,
       padding: null,

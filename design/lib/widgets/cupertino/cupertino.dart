@@ -1,4 +1,5 @@
 export 'card/cupertino_card.dart';
+export 'image/cupertino_image.dart';
 export 'navigation_bar/cupertino_navigation_bar.dart';
 export 'overlays/cupertino_alert.dart';
 export 'overlays/cupertino_loading.dart';

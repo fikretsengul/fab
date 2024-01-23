@@ -103,7 +103,8 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
             widget.editingController.clear();
           },
           cancelButtonText: widget.searchBar.cancelButtonText,
-          cancelButtonTextStyle: widget.searchBar.cancelTextStyle,
+          cancelButtonTextStyle:
+              widget.searchBar.cancelTextStyle.copyWith(color: CupertinoTheme.of(context).primaryColor),
           animationDuration: widget.animationDuration,
           searchBarHasFocus: widget.searchBarHasFocus,
         ),

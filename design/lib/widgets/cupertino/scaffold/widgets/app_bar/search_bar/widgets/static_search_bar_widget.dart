@@ -97,13 +97,17 @@ class StaticSearchBarWidget extends StatelessWidget {
                     child: AnimatedContainer(
                       duration: measures.standartAnimationDuration,
                       width: _store.searchBarHasFocus.value
-                          ? textSize(searchBar.cancelButtonText, searchBar.cancelTextStyle)
+                          ? textSize(
+                              searchBar.cancelButtonText,
+                              searchBar.cancelTextStyle.copyWith(color: CupertinoTheme.of(context).primaryColor),
+                            )
                           : 0,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
                           searchBar.cancelButtonText,
-                          style: searchBar.cancelTextStyle,
+                          style: searchBar.cancelTextStyle
+                              .copyWith(color: CupertinoTheme.of(context).primaryContrastingColor),
                           maxLines: 1,
                         ),
                       ),

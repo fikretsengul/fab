@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:deps/packages/snap_scroll_physics.dart';
@@ -95,8 +96,9 @@ class Body extends StatelessWidget {
                   ),
                 ];
               },
-              body: Padding(
-                padding: margin,
+              body: Container(
+                margin: margin,
+                padding: $.paddings.md.top,
                 child: body,
               ),
             );

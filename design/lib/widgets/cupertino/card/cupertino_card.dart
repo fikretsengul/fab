@@ -1,30 +1,33 @@
 // ignore_for_file: max_lines_for_file
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class CupertinoCard extends StatelessWidget {
   CupertinoCard({
     super.key,
+    this.width,
+    this.height,
     this.child,
-    this.elevation = 2.0,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
     this.color,
-    this.splashColor,
-    this.decoration,
-    this.radius = 24,
+    this.radius = 16,
+    this.image,
     this.onPressed,
+    this.border,
+    this.useCupertinoRounder = false,
   });
 
+  final double? width;
+  final double? height;
   final Widget? child;
   final Color? color;
-  final Decoration? decoration;
-  final double elevation;
   final EdgeInsets margin;
   final VoidCallback? onPressed;
   final EdgeInsets padding;
   final double radius;
-  final Color? splashColor;
+  final DecorationImage? image;
+  final BoxBorder? border;
+  final bool useCupertinoRounder;
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +39,31 @@ class CupertinoCard extends StatelessWidget {
       ),
     );
 
-    return Padding(
-      padding: margin,
-      child: Material(
-        elevation: elevation,
-        shape: shapeborder,
-        child: ClipPath.shape(
-          shape: shapeborder,
-          child: Material(
-            color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-            child: Ink(
-              decoration: decoration,
-              color: color ?? CupertinoColors.tertiarySystemFill,
-              child: InkWell(
-                customBorder: shapeborder,
-                onTap: onPressed,
-                splashColor: splashColor,
-                child: Padding(
-                  padding: padding,
-                  child: child,
-                ),
-              ),
-            ),
-          ),
+    final widget = CupertinoButton(
+      padding: EdgeInsets.zero,
+      minSize: 0,
+      onPressed: onPressed,
+      child: Container(
+        width: width,
+        height: height,
+        margin: margin,
+        padding: padding,
+        decoration: BoxDecoration(
+          borderRadius: !useCupertinoRounder ? BorderRadius.all(Radius.circular(radius)) : null,
+          color: color ?? CupertinoColors.tertiarySystemFill,
+          image: image,
+          border: border,
         ),
+        child: child,
       ),
     );
+
+    return useCupertinoRounder
+        ? ClipPath.shape(
+            shape: shapeborder,
+            child: widget,
+          )
+        : widget;
   }
 }
 

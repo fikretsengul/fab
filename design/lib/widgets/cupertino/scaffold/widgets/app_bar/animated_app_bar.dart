@@ -28,10 +28,11 @@ class AnimatedAppBar extends StatelessWidget {
     required this.isCollapsed,
     required this.shouldTransiteBetweenRoutes,
     required this.refreshListenable,
-    this.brightness,
+    required this.color, this.brightness,
     super.key,
   });
 
+  final Color color;
   final AppBarSettings appBar;
   final Brightness? brightness;
   final NavigationBarStaticComponents components;
@@ -73,9 +74,7 @@ class AnimatedAppBar extends StatelessWidget {
             border: appBar.border,
             brightness: brightness,
             hasBackgroundBlur: appBar.hasBackgroundBlur,
-            backgroundColor: CupertinoDynamicColor.maybeResolve(appBar.backgroundColor, context)
-                    ?.withOpacity(appBar.hasBackgroundBlur ? 0.5 : 1) ??
-                CupertinoTheme.of(context).barBackgroundColor.withOpacity(appBar.hasBackgroundBlur ? 0.5 : 1),
+            backgroundColor: color,
             child: Builder(
               builder: (context) {
                 final Widget appBarWidget = AppBarWidget(
@@ -112,9 +111,7 @@ class AnimatedAppBar extends StatelessWidget {
                   transitionOnUserGestures: true,
                   child: TransitionableNavigationBar(
                     componentsKeys: keys,
-                    backgroundColor: CupertinoDynamicColor.maybeResolve(appBar.backgroundColor, context)
-                            ?.withOpacity(appBar.hasBackgroundBlur ? 0.5 : 1) ??
-                        CupertinoTheme.of(context).barBackgroundColor.withOpacity(appBar.hasBackgroundBlur ? 0.5 : 1),
+                    backgroundColor: color,
                     backButtonTextStyle: CupertinoTheme.of(context).textTheme.navActionTextStyle,
                     titleTextStyle: titleTextStyle(context, appBar),
                     largeTitleTextStyle:

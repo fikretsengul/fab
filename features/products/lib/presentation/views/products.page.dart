@@ -1,3 +1,4 @@
+// ignore_for_file: max_lines_for_function
 // Copyright 2024 Fikret Şengül. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -58,6 +59,34 @@ class ProductsPage extends StatelessWidget {
         searchBar: AppBarSearchBarSettings(
           enabled: true,
         ),
+        bottom: AppBarBottomSettings(
+          enabled: true,
+          child: PaddingSymmetric.md(
+            horizontal: true,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Wrap(
+                spacing: $.paddings.sm,
+                children: ['All', 'Clothes', 'Furniture', 'Shoes', 'Miscellaneous'].map((e) {
+                  return CupertinoCard(
+                    useCupertinoRounder: true,
+                    height: 30,
+                    padding: $.paddings.sm.horizontal,
+                    color: e == 'All' ? context.colorScheme.primary : null,
+                    child: Center(
+                      child: Text(
+                        e,
+                        style: context.textTheme.labelMedium?.copyWith(
+                          color: e == 'All' ? CupertinoTheme.of(context).primaryContrastingColor : null,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        ),
       ),
       onRefresh: productListCubit.refresh,
       body: BlocProvider(
@@ -67,13 +96,18 @@ class ProductsPage extends StatelessWidget {
           onNextPage: (offset) => productListCubit.getProducts(offset: offset),
           itemBuilder: (_, product, __) {
             return CupertinoCard(
+              onPressed: () => $.navigator.push(
+                ProductDetailsRoute(product: product),
+              ),
               child: Column(
                 children: [
                   Expanded(
                     flex: 5,
-                    child: CacheNetworkImagePlus(
-                      boxFit: BoxFit.cover,
-                      imageUrl: product.images.first,
+                    child: Hero(
+                      tag: '${product.id}',
+                      child: CupertinoImage(
+                        uri: product.images.first,
+                      ),
                     ),
                   ),
                   const Expanded(

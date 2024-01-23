@@ -23,6 +23,7 @@ class DashboardRouter extends StatelessWidget {
           const ProductsRouter(),
           SettingsRoute(),
         ],
+        navigatorObservers: () => [HeroController()],
         bottomNavigationBuilder: (_, tabsRouter) {
           return BlocBuilder<TranslationCubit, Locale>(
             builder: (_, __) {
@@ -32,11 +33,13 @@ class DashboardRouter extends StatelessWidget {
                 items: [
                   CupertinoNavigationBarItem(
                     label: $.tr.products.title,
-                    icon: const Icon(CupertinoIcons.home),
+                    icon: const Icon(CupertinoIcons.house),
+                    selectedIcon: const Icon(CupertinoIcons.house_fill),
                   ),
                   CupertinoNavigationBarItem(
                     label: $.tr.settings.title,
                     icon: const Icon(CupertinoIcons.settings),
+                    selectedIcon: const Icon(CupertinoIcons.settings_solid),
                   ),
                 ],
               );

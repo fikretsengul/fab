@@ -1,3 +1,4 @@
+import 'package:deps/packages/fpdart.dart';
 import 'package:flutter/cupertino.dart';
 
 class CupertinoNavigationBar extends StatelessWidget {
@@ -19,13 +20,21 @@ class CupertinoNavigationBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onTap,
       iconSize: 19,
-      items: items.map((item) => BottomNavigationBarItem(icon: item.icon, label: item.label)).toList(),
+      items: items
+          .mapWithIndex(
+            (item, index) => BottomNavigationBarItem(
+              icon: index == currentIndex ? item.selectedIcon : item.icon,
+              label: item.label,
+            ),
+          )
+          .toList(),
     );
   }
 }
 
 class CupertinoNavigationBarItem {
-  CupertinoNavigationBarItem({required this.icon, required this.label});
+  CupertinoNavigationBarItem({required this.icon, required this.selectedIcon, required this.label});
   final Widget icon;
+  final Widget selectedIcon;
   final String label;
 }

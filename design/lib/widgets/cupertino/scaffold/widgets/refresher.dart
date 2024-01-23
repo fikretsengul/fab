@@ -24,7 +24,7 @@ class Refresher extends StatelessWidget {
             return const SizedBox.shrink();
           }
 
-          final color = CupertinoTheme.of(context).primaryContrastingColor;
+          final color = CupertinoTheme.of(context).textTheme.textStyle.color;
           final mode = state.mode;
           final offset = state.offset;
           final actualTriggerOffset = state.actualTriggerOffset;

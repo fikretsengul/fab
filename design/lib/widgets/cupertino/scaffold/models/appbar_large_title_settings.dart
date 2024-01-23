@@ -6,7 +6,7 @@ class AppBarLargeTitleSettings {
     this.actions,
     this.textStyle,
     this.height = 52.0,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.padding = const EdgeInsets.only(left: 14, right: 16),
     this.enabled = true,
   });
 

@@ -16,7 +16,7 @@ TextStyle titleTextStyle(BuildContext context, AppBarSettings appBar) {
 Border defaultBorder() {
   return const Border(
     bottom: BorderSide(
-      color: Color(0x4D000000),
+      color: Color(0x4C000000),
       width: 0,
     ),
   );

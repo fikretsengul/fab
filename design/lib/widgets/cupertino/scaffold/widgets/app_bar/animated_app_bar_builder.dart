@@ -46,17 +46,27 @@ class AnimatedAppBarBuilder extends StatefulWidget {
   State<AnimatedAppBarBuilder> createState() => _AnimatedAppBarBuilderState();
 }
 
-class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> {
+class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with SingleTickerProviderStateMixin {
   late final TextEditingController _editingController;
   late final FocusNode _focusNode;
   bool _isCollapsed = false;
   double _scrollOffset = 0;
+
+  late AnimationController _animationController;
+  late Animation _animation;
+
+  Color _beginColor(BuildContext context) =>
+      CupertinoDynamicColor.maybeResolve(widget.appBar.backgroundColor, context)
+          ?.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1) ??
+      Theme.of(context).scaffoldBackgroundColor.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
+  Color _endColor(BuildContext context) => CupertinoTheme.of(context).barBackgroundColor;
 
   @override
   void dispose() {
     widget.scrollController.removeListener(_scrollListener);
     _editingController.dispose();
     _focusNode.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -65,6 +75,19 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> {
     super.initState();
     _editingController = widget.appBar.searchBar!.searchController ?? TextEditingController();
     _focusNode = widget.appBar.searchBar!.searchFocusNode ?? FocusNode();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
+    _animation = ColorTween(
+      begin: _beginColor(context),
+      end: _endColor(context),
+    ).animate(CurvedAnimation(curve: Curves.linear, parent: _animationController))
+      ..addListener(() {
+        setState(() {});
+      });
+    super.didChangeDependencies();
   }
 
   void _scrollListener() {
@@ -82,9 +105,10 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> {
     var isCollapsed = false;
 
     if (scrollBehavior == SearchBarScrollBehavior.floated) {
-      isCollapsed = _scrollOffset >= widget.measures.largeTitleContainerHeight + widget.measures.searchContainerHeight;
+      isCollapsed =
+          _scrollOffset >= widget.measures.largeTitleContainerHeight + widget.measures.searchContainerHeight - 20;
     } else {
-      isCollapsed = _scrollOffset >= widget.measures.largeTitleContainerHeight;
+      isCollapsed = _scrollOffset >= widget.measures.largeTitleContainerHeight - 20;
     }
 
     if (_isCollapsed != isCollapsed) {
@@ -92,6 +116,12 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> {
         widget.onCollapsed?.call(isCollapsed);
       }
       _isCollapsed = isCollapsed;
+
+      if (_isCollapsed) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
     }
   }
 
@@ -200,6 +230,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> {
               shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
               refreshListenable: widget.refreshListenable,
               brightness: widget.brightness,
+              color: _animation.value,
             );
           },
         );
