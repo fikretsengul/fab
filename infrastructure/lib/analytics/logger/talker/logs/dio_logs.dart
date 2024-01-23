@@ -101,9 +101,15 @@ class DioResponseLog extends TalkerLog {
 
     if (settings.printResponseData && data != null) {
       final prettyData = encoder.convert(data);
-      final Map<String, dynamic> parsedJson = jsonDecode(prettyData);
-      final formattedEntries = parsedJson.entries.map((entry) => '"${entry.key}": "${entry.value}"').join(',\n');
-      sb.writeln('• DATA\t  ─►  $formattedEntries');
+      if (data is Map) {
+        final Map<String, dynamic> parsedJson = jsonDecode(prettyData);
+        final formattedEntries = parsedJson.entries.map((entry) => '"${entry.key}": "${entry.value}"').join(',\n');
+        sb.writeln('• DATA\t  ─►  $formattedEntries');
+      } else if (data is List) {
+        final List<dynamic> parsedJson = jsonDecode(prettyData);
+        final formattedEntries = parsedJson.map((entry) => '- $entry').join('\n');
+        sb.writeln('• DATA\t  ─►  $formattedEntries');
+      }
     }
 
     return sb.toString();

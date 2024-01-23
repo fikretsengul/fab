@@ -38,7 +38,7 @@ targets:
           create_factory: true
           create_to_json: true
           explicit_to_json: true
-          field_rename: snake
+          field_rename: none
           include_if_null: true
         generate_for:
           include:

@@ -1,4 +1,5 @@
 {
+  "title": "Login",
   "failures": {
     "wrongCredentials":"The username or password you entered is incorrect. Please try again."
   },

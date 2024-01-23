@@ -13,8 +13,8 @@ targets:
           enable_cached_builds: true
         generate_for:
           include:
+            - lib/router/*.router.dart
             - lib/_core/super/_core/**/*.dart
-            - lib/pages/*.dart
             - lib/handlers/super_handler.dart
       # Freezed
       freezed:
@@ -41,7 +41,7 @@ targets:
           param_case: camel
           flat_map: false
           imports:
-            - 'package:feature_core/_core/super/permissions/_core/permission_type_enum.dart'
+            - 'package:feature_core/_core/super/permissions/_core/permission_type.enum.dart'
           contexts:
             PermissionType:
               generate_enum: false

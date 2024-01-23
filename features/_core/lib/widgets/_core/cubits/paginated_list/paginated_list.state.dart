@@ -9,13 +9,13 @@ part 'paginated_list.state.freezed.dart';
 
 @freezed
 class PaginatedListState<T> with _$PaginatedListState<T> {
-  const factory PaginatedListState.failed(IFailure failure) = PaginatedListFailed;
+  const factory PaginatedListState.failed(IFailure failure) = PaginatedListStateFailed;
 
-  const factory PaginatedListState.initial() = PaginatedListInitial;
+  const factory PaginatedListState.initial() = PaginatedListStateInitial;
 
-  const factory PaginatedListState.loaded(List<T> items) = PaginatedListLoaded;
+  const factory PaginatedListState.loaded(List<T> items) = PaginatedListStateLoaded;
 
-  const factory PaginatedListState.loading() = PaginatedListLoading;
+  const factory PaginatedListState.loading() = PaginatedListStateLoading;
 
-  const factory PaginatedListState.refresh() = PaginatedListRefresh;
+  const factory PaginatedListState.refresh() = PaginatedListStateRefresh;
 }

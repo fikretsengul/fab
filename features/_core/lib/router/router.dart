@@ -15,6 +15,8 @@ import 'router.gr.dart';
   modules: [
     AuthFeatureRouter,
     ProductsFeatureRouter,
+    SettingsFeatureRouter,
+    UserFeatureRouter,
   ],
 )
 class FeaturesRouter extends $FeaturesRouter {
@@ -30,42 +32,39 @@ class FeaturesRouter extends $FeaturesRouter {
           initial: true,
           children: [
             CupertinoRoute(
-              page: DashboardRoute.page,
+              page: DashboardRouter.page,
               guards: [AuthGuard()],
               initial: true,
               children: [
                 CupertinoRoute(
-                  page: HomeRouter.page,
+                  page: ProductsRouter.page,
                   children: [
                     CupertinoRoute(
-                      title: (_, __) => $.tr.core.permissions.dialog.buttons.openSettings,
-                      path: 'home',
-                      page: HomeRoute.page,
+                      title: (_, __) => $.tr.products.title,
+                      path: 'products',
+                      page: ProductsRoute.page,
                       initial: true,
-                    ),
-                    CupertinoRoute(
-                      title: (_, __) => 'Fonts',
-                      path: 'fonts',
-                      page: FontsRoute.page,
                     ),
                   ],
                 ),
-                CupertinoRoute(title: (_, __) => 'Settings', path: 'settings', page: SettingsRoute.page),
+                CupertinoRoute(
+                  title: (_, __) => $.tr.settings.title,
+                  path: 'settings',
+                  page: SettingsRoute.page,
+                ),
               ],
             ),
             CupertinoRoute(
-              title: (_, __) => 'Login',
+              title: (_, __) => $.tr.auth.title,
               path: 'login',
               page: LoginRoute.page,
             ),
             CustomRoute(
-              path: 'dialog',
               page: DialogWrapperRoute.page,
               transitionsBuilder: TransitionsBuilders.fadeIn,
               customRouteBuilder: modalRouteBuilder,
             ),
             CustomRoute(
-              path: 'modal',
               page: ModalWrapperRoute.page,
               transitionsBuilder: TransitionsBuilders.fadeIn,
               customRouteBuilder: modalRouteBuilder,

@@ -59,7 +59,7 @@ class _ToastWrapperState extends State<ToastWrapper> {
     }
   }
 
-  DismissDirection mapToastDismissToDismissDirection() {
+  DismissDirection _mapToastDismissToDismissDirection() {
     switch (widget.dismissDirection) {
       case ToastDismissDirection.up:
         return DismissDirection.up;
@@ -72,28 +72,28 @@ class _ToastWrapperState extends State<ToastWrapper> {
     }
   }
 
-  double get safeAreaPadding {
+  double get _safeAreaPadding {
     if (widget.useSafeArea) {
-      return isTopAligned ? MediaQuery.paddingOf(context).top : MediaQuery.paddingOf(context).bottom;
+      return _isTopAligned ? MediaQuery.paddingOf(context).top : MediaQuery.paddingOf(context).bottom;
     } else {
       return 0;
     }
   }
 
-  bool get isTopAligned => widget.alignment == ToastAlignment.top;
-  double get mediaQueryHeight => MediaQuery.sizeOf(context).height;
-  Offset get offset => Offset(
+  bool get _isTopAligned => widget.alignment == ToastAlignment.top;
+  double get _mediaQueryHeight => MediaQuery.sizeOf(context).height;
+  Offset get _offset => Offset(
         0,
-        (_widgetHeight + widget.expandedPositionedPadding + safeAreaPadding) /
-            mediaQueryHeight *
-            (isTopAligned ? -1 : 1),
+        (_widgetHeight + widget.expandedPositionedPadding + _safeAreaPadding) /
+            _mediaQueryHeight *
+            (_isTopAligned ? -1 : 1),
       );
-  Tween<Offset> get position => Tween<Offset>(begin: offset, end: Offset.zero);
+  Tween<Offset> get _position => Tween<Offset>(begin: _offset, end: Offset.zero);
 
   Widget _buildDismissibleContent() {
     return Dismissible(
       key: UniqueKey(),
-      direction: mapToastDismissToDismissDirection(),
+      direction: _mapToastDismissToDismissDirection(),
       onDismissed: (_) => widget.onDismissed(),
       child: AnimatedPadding(
         padding: EdgeInsets.symmetric(horizontal: widget.expandedPaddingHorizontal),
@@ -113,7 +113,7 @@ class _ToastWrapperState extends State<ToastWrapper> {
     return Offstage(
       offstage: !_isHeightCalculated,
       child: SlideTransition(
-        position: position.animate(
+        position: _position.animate(
           CurvedAnimation(
             parent: widget.controller,
             curve: widget.positionCurve,
@@ -123,8 +123,8 @@ class _ToastWrapperState extends State<ToastWrapper> {
         child: Stack(
           children: [
             AnimatedPositioned(
-              top: isTopAligned ? widget.expandedPositionedPadding + safeAreaPadding : null,
-              bottom: !isTopAligned ? widget.expandedPositionedPadding + safeAreaPadding : null,
+              top: _isTopAligned ? widget.expandedPositionedPadding + _safeAreaPadding : null,
+              bottom: !_isTopAligned ? widget.expandedPositionedPadding + _safeAreaPadding : null,
               left: 10,
               right: 10,
               duration: const Duration(milliseconds: 500),

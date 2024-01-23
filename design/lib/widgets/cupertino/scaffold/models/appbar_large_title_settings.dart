@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+
+class AppBarLargeTitleSettings {
+  AppBarLargeTitleSettings({
+    this.largeTitle = 'Large Title',
+    this.actions,
+    this.textStyle,
+    this.height = 52.0,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.enabled = true,
+  });
+
+  final List<Widget>? actions;
+  final bool enabled;
+  double height;
+  final String largeTitle;
+  final EdgeInsets padding;
+  final TextStyle? textStyle;
+}

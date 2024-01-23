@@ -25,12 +25,13 @@ abstract interface class INetworkClient {
   /// [requestBody]: Optional body data for the request.
   ///
   /// Returns an `AsyncEither<T>`, which is either a `Failure` or a successful response of type `T`.
-  AsyncEither<T> invoke<T>(
+  AsyncEither<R> invoke<T, R>(
     String path,
     RequestType requestType, {
     Map<String, String>? queryParameters,
     Map<String, String>? headers,
-    dynamic requestBody,
+    Object? requestBody,
+    T Function(Map<String, dynamic> json)? fromJson,
   });
 
   void setObserver(Interceptor interceptor);

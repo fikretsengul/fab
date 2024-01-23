@@ -13,11 +13,11 @@ import 'package:deps/packages/injectable.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../_core/enums/request_type_enum.dart';
+import '../../../_core/failures/unexpected_failures.dart';
 import '../../../_core/typedefs/either_typedef.dart';
 import '../../../analytics/logger/i_logger.dart';
 import '../../../flavors/i_env.dart';
 import '../../../storage/storages/token/token_storage_mixin.dart';
-import '../../failures/network_errors.dart';
 import '../../models/o_auth2_token.model.dart';
 import '../i_network_client.dart';
 import 'dio_failure.dart';
@@ -80,14 +80,21 @@ class DioClient implements INetworkClient {
   ///
   /// Returns an `AsyncEither` with either a `Failure` or the response data.
   @override
-  AsyncEither<T> invoke<T>(
+  AsyncEither<R> invoke<T, R>(
     String path,
     RequestType requestType, {
     Map<String, String>? queryParameters,
     Map<String, String>? headers,
     dynamic requestBody,
+    T Function(Map<String, dynamic> json)? fromJson,
   }) async {
     Response<dynamic> response;
+
+    // Assert to ensure fromJson is provided when R is a list and fromJson is needed.
+    assert(
+      !(R is List<dynamic> && fromJson == null),
+      'fromJson must be provided when R is a list.',
+    );
 
     try {
       // Handling different request types.
@@ -127,15 +134,21 @@ class DioClient implements INetworkClient {
           );
       }
 
-      return Right(response.data as T);
+      if (fromJson != null) {
+        if (response.data is List) {
+          final list = (response.data as List).map((item) => fromJson(item as Map<String, dynamic>)).toList();
+
+          return Right(list as R);
+        } else {
+          return Right(fromJson(response.data as Map<String, dynamic>) as R);
+        }
+      } else {
+        return Right(response.data as R);
+      }
     } on DioFailure catch (e) {
       return Left(e.failure);
     } catch (e) {
-      if (e is Exception) {
-        return Left(UnexpectedNetworkError(exception: e));
-      } else {
-        return Left(UnexpectedNetworkError(exception: Exception(e.toString())));
-      }
+      return Left(UnexpectedError(exception: e));
     }
   }
 

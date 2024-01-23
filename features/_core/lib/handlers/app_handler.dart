@@ -4,7 +4,6 @@
 
 // ignore_for_file: max_lines_for_function, max_lines_for_file
 
-import 'package:deps/design/design.dart';
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/talker_flutter.dart';
@@ -96,7 +95,6 @@ class AppHandler extends StatelessWidget {
                         ),
                   );
                 } */
-
                 return MaterialApp.router(
                   title: appSettings.title,
                   debugShowMaterialGrid: appSettings.debugShowMaterialGrid,
@@ -108,29 +106,20 @@ class AppHandler extends StatelessWidget {
                   //themeMode: state.theme.mode,
                   themeMode: ThemeMode.dark,
                   theme: ThemeData(
-                    fontFamily: FontFamily.visueltPro,
-                    colorScheme: const ColorScheme.dark(
-                      primary: Colors.red,
-                    ),
-                  ).copyWith(
-                    appBarTheme: const AppBarTheme(
-                      elevation: 0,
-                      scrolledUnderElevation: 0,
-                      backgroundColor: Colors.black,
-                      titleTextStyle: TextStyle(fontSize: 20),
-                    ),
-                    iconTheme: const IconThemeData(color: Colors.red),
-                    cupertinoOverrideTheme: const CupertinoThemeData(
+                    useMaterial3: false,
+                    scaffoldBackgroundColor: Colors.black,
+                    cupertinoOverrideTheme: CupertinoThemeData(
                       brightness: Brightness.dark,
-                      primaryColor: Colors.red,
+                      barBackgroundColor: Colors.black,
                       textTheme: CupertinoTextThemeData(
-                        primaryColor: Colors.red,
-                        textStyle: TextStyle(
-                          fontFamily: FontFamily.visueltPro,
-                        ),
+                        textStyle: const CupertinoTextThemeData().textStyle.copyWith(
+                              color: CupertinoColors.white,
+                              inherit: false,
+                            ),
                       ),
                     ),
                   ),
+
                   locale: locale,
                   supportedLocales: AppLocaleUtils.supportedLocales,
                   localizationsDelegates: GlobalMaterialLocalizations.delegates,

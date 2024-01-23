@@ -20,16 +20,16 @@ class _SuperHandlerState extends State<SuperHandler> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add((_, __) => shouldIntercept());
+    BackButtonInterceptor.add((_, __) => _shouldIntercept());
   }
 
   @override
   void dispose() {
-    BackButtonInterceptor.remove((_, __) => shouldIntercept());
+    BackButtonInterceptor.remove((_, __) => _shouldIntercept());
     super.dispose();
   }
 
-  bool shouldIntercept() {
+  bool _shouldIntercept() {
     if ($.dialog.hasDialogVisible) {
       $.dialog.popDialog();
 

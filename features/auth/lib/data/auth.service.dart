@@ -19,7 +19,7 @@ class AuthService {
     String email,
     String password,
   ) async {
-    final response = await _client.invoke<Map<String, dynamic>>(
+    final response = await _client.invoke<void, Map<String, dynamic>>(
       '/auth/login',
       RequestType.post,
       requestBody: {
@@ -47,12 +47,11 @@ class AuthService {
           ),
         );
 
-        final response = await _client.invoke<Map<String, dynamic>>(
+        return _client.invoke<void, UserModel>(
           '/auth/profile',
           RequestType.get,
+          fromJson: UserModel.fromJson,
         );
-
-        return response.fold(Left.new, (user) => Right(UserModel.fromJson(user)));
       },
     );
   }

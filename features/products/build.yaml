@@ -18,6 +18,7 @@ targets:
           enable_cached_builds: true
         generate_for:
           include:
+            - lib/_core/*.router.dart
             - lib/presentation/**/*.page.dart
       # Freezed
       freezed:
@@ -38,7 +39,7 @@ targets:
           create_factory: true
           create_to_json: true
           explicit_to_json: true
-          field_rename: snake
+          field_rename: none
           include_if_null: true
         generate_for:
           include:

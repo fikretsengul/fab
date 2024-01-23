@@ -4,23 +4,26 @@
 
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
-import 'package:flutter/material.dart';
+import 'package:deps/packages/nested_scroll_view_plus.dart';
+import 'package:flutter/cupertino.dart';
 
 import '_core/cubits/paginated_list/paginated_list.state.dart';
 
 class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulWidget {
   const PaginatedList({
-    required this.fetchPage,
+    required this.onNextPage,
     required this.itemBuilder,
     super.key,
-    this.firstPageKey = 0,
-    this.pageSize = 20,
+    this.offset = 0,
+    this.limit = 20,
+    this.scrollController,
   });
 
-  final int firstPageKey;
-  final int pageSize;
-  final ValueChanged<int> fetchPage;
+  final int offset;
+  final int limit;
+  final ValueChanged<int> onNextPage;
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
+  final ScrollController? scrollController;
 
   @override
   State<PaginatedList<T, C>> createState() => _PaginatedListState<T, C>();
@@ -28,13 +31,13 @@ class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulW
 
 class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends State<PaginatedList<T, C>> {
   late final PagingController<int, T> _pagingController = PagingController(
-    firstPageKey: widget.firstPageKey,
+    firstPageKey: widget.offset,
   );
 
   @override
   void initState() {
     super.initState();
-    _pagingController.addPageRequestListener(widget.fetchPage);
+    _pagingController.addPageRequestListener(widget.onNextPage);
   }
 
   @override
@@ -44,27 +47,36 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
         state.whenOrNull(
           refresh: () => _pagingController.refresh(),
           loaded: (items) {
-            final isLastPage = items.length < widget.pageSize;
+            final isLastPage = items.length < widget.limit;
 
             if (isLastPage) {
               _pagingController.appendLastPage(items);
             } else {
-              final nextPageKey = _pagingController.nextPageKey ?? 0 + items.length;
+              final nextPageKey = (_pagingController.nextPageKey ?? 0) + items.length;
               _pagingController.appendPage(items, nextPageKey);
             }
           },
           failed: (failure) => _pagingController.error = failure.message,
         );
       },
-      child: RefreshIndicator(
-        onRefresh: () => Future.sync(_pagingController.refresh),
-        child: PagedListView<int, T>(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<T>(
-            animateTransitions: true,
-            itemBuilder: (_, item, index) => widget.itemBuilder(context, item, index),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          const OverlapInjectorPlus(),
+          PagedSliverGrid<int, T>(
+            pagingController: _pagingController,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 0.8,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              crossAxisCount: 2,
+            ),
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              animateTransitions: true,
+              itemBuilder: (_, item, index) => widget.itemBuilder(context, item, index),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

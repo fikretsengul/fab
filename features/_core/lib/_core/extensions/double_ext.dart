@@ -20,10 +20,9 @@ extension PaddingsDoubleExt on double {
   EdgeInsets get all => EdgeInsets.all(this);
   EdgeInsets get horizontal => EdgeInsets.symmetric(horizontal: this);
   EdgeInsets get vertical => EdgeInsets.symmetric(vertical: this);
-  EdgeInsets get symmetric => EdgeInsets.all(this);
 }
 
-extension RadiusesDoubleExt on double {
+/* extension RadiusesDoubleExt on double {
   BorderRadius only({
     bool tl = false,
     bool tr = false,
@@ -44,4 +43,4 @@ extension RadiusesDoubleExt on double {
   BorderRadius get vertical => BorderRadius.vertical(top: Radius.circular(this), bottom: Radius.circular(this));
   BorderRadius get circularBorder => BorderRadius.all(Radius.circular(this));
   Radius get circularRadius => Radius.circular(this);
-}
+} */

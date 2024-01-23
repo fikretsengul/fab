@@ -90,10 +90,15 @@ final class MainHandler {
           return ErrorPage(details: details);
         };
 
-        FlutterError.onError = (details) => UnexpectedFlutterError(
-              exception: details.exception,
-              stack: details.stack,
-            );
+        FlutterError.onError = (details) {
+          FlutterError.presentError(details);
+          UnexpectedFlutterError(
+            exception: details.exception,
+            stack: details.stack,
+          );
+
+          return;
+        };
 
         PlatformDispatcher.instance.onError = (error, stack) {
           UnexpectedPlatformError(
