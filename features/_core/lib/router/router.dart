@@ -7,7 +7,10 @@ import 'package:deps/packages/auto_route.dart';
 import 'package:feature_auth/_core/router.dart';
 import 'package:feature_products/_core/router.dart';
 
+import '../_core/super/_core/dialog/cupertino/cupertino_dialog_builder.dart';
+import '../_core/super/_core/dialog/material/material_dialog_builder.dart';
 import '../_core/super/_core/modal/modal_builder.dart';
+import '../_core/super/_core/sheet/cupertino/cupertino_sheet_builder.dart';
 import 'guard.dart';
 import 'router.gr.dart';
 
@@ -60,13 +63,19 @@ class FeaturesRouter extends $FeaturesRouter {
               page: LoginRoute.page,
             ),
             CustomRoute(
-              page: DialogWrapperRoute.page,
-              transitionsBuilder: TransitionsBuilders.fadeIn,
-              customRouteBuilder: modalRouteBuilder,
+              page: MaterialDialogWrapperRoute.page,
+              customRouteBuilder: materialDialogRouteBuilder,
+            ),
+            CustomRoute(
+              page: CupertinoDialogWrapperRoute.page,
+              customRouteBuilder: cupertinoDialogRouteBuilder,
+            ),
+            CustomRoute(
+              page: CupertinoSheetWrapperRoute.page,
+              customRouteBuilder: cupertinoSheetRouteBuilder,
             ),
             CustomRoute(
               page: ModalWrapperRoute.page,
-              transitionsBuilder: TransitionsBuilders.fadeIn,
               customRouteBuilder: modalRouteBuilder,
             ),
           ],

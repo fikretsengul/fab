@@ -1,3 +1,4 @@
+// ignore_for_file: max_lines_for_file, max_lines_for_function
 // Copyright 2024 Fikret Şengül. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -7,7 +8,7 @@ import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../domain/forms/login.form.dart';
 import '../cubits/login.cubit.dart';
@@ -31,16 +32,30 @@ class LoginPage extends StatelessWidget {
     }
   }
 
+/*   void _showAlertDialog(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => ,
+    );
+  } */
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       bloc: loginCubit,
       listener: (_, state) {
         state.whenOrNull(
-          loading: () => $.overlay.showLoadingOverlay(),
+          loading: () => $.overlay.showLoadingOverlay(
+            child: Center(
+              child: CupertinoActivityIndicator(
+                radius: 30,
+                color: CupertinoTheme.of(context).primaryContrastingColor,
+              ),
+            ),
+          ),
           failed: (failure) {
             $.overlay.hideOverlay();
-            $.toast.showToast(message: failure.message);
+            $.toast.showAlert(failure: failure);
           },
           succeeded: (user) {
             $.overlay.hideOverlay();
@@ -51,9 +66,7 @@ class LoginPage extends StatelessWidget {
       child: CupertinoScaffold(
         shouldStretch: false,
         appBar: AppBarSettings(
-          searchBar: AppBarSearchBarSettings(
-            enabled: false,
-          ),
+          searchBar: AppBarSearchBarSettings(),
           largeTitle: AppBarLargeTitleSettings(
             largeTitle: 'Login',
           ),
@@ -65,48 +78,47 @@ class LoginPage extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               slivers: [
                 const OverlapInjectorPlus(),
-                SliverToBoxAdapter(
-                  child: ColoredBox(
-                    color: Colors.white,
-                    child: PaddingAll.md(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FabReactiveTextfield(
-                            formControl: data.emailControl,
-                            keyboardType: TextInputType.emailAddress,
-                            labelText: $.tr.auth.loginForm.email,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) => data.passwordControl.focus(),
-                          ),
-                          PaddingGap.xs(),
-                          FabReactiveTextfield(
-                            formControl: data.passwordControl,
-                            keyboardType: TextInputType.text,
-                            labelText: $.tr.auth.loginForm.password,
-                            textInputAction: TextInputAction.send,
-                            onSubmitted: (_) => data.form.valid
-                                ? login(
-                                    email: data.emailControl.value ?? '',
-                                    password: data.passwordControl.value ?? '',
-                                  )
-                                : null,
-                          ),
-                          ReactiveLoginFormFormConsumer(
-                            builder: (_, __, ___) {
-                              return ElevatedButton(
-                                onPressed: data.form.valid
-                                    ? () => login(
-                                          email: data.emailControl.value ?? '',
-                                          password: data.passwordControl.value ?? '',
-                                        )
-                                    : null,
-                                child: Text($.tr.auth.loginForm.loginButton),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                SliverFillRemaining(
+                  child: PaddingAll.md(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CupertinoTextfield(
+                          formControl: data.emailControl,
+                          keyboardType: TextInputType.emailAddress,
+                          labelText: $.tr.auth.loginForm.email,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: () => data.passwordControl.focus(),
+                        ),
+                        PaddingGap.sm(),
+                        CupertinoTextfield(
+                          formControl: data.passwordControl,
+                          keyboardType: TextInputType.text,
+                          labelText: $.tr.auth.loginForm.password,
+                          textInputAction: TextInputAction.send,
+                          obscureText: true,
+                          onSubmitted: () => data.form.valid
+                              ? login(
+                                  email: data.emailControl.value ?? '',
+                                  password: data.passwordControl.value ?? '',
+                                )
+                              : null,
+                        ),
+                        PaddingGap.xl(),
+                        ReactiveLoginFormFormConsumer(
+                          builder: (_, __, ___) {
+                            return CupertinoButton.filled(
+                              onPressed: data.form.valid
+                                  ? () => login(
+                                        email: data.emailControl.value ?? '',
+                                        password: data.passwordControl.value ?? '',
+                                      )
+                                  : null,
+                              child: Text($.tr.auth.loginForm.loginButton),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),

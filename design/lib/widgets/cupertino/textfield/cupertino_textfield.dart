@@ -2,16 +2,13 @@
 
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/reactive_forms.dart';
-import 'package:deps/packages/styled_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../others/fab_styled_text.dart';
+import '../../reactives/reactive_cupertino_textfield.dart';
 
-part '_atoms/counter.dart';
-
-class FabReactiveTextfield extends StatelessWidget {
-  const FabReactiveTextfield({
+class CupertinoTextfield extends StatelessWidget {
+  const CupertinoTextfield({
     required this.formControl,
     required this.labelText,
     this.autofocus = false,
@@ -28,13 +25,12 @@ class FabReactiveTextfield extends StatelessWidget {
     this.suffixIcon,
     this.onTap,
     this.readOnly = false,
-    this.staticValue,
     this.showErrors = true,
     this.reverseFocusColor = false,
     this.floatingLabelBehavior,
-    this.onChanged,
     this.onSubmitted,
     this.textInputAction,
+    this.obscureText = false,
     super.key,
   });
 
@@ -51,16 +47,15 @@ class FabReactiveTextfield extends StatelessWidget {
   final String labelText;
   final int maxLines;
   final int? minLines;
+  final VoidCallback? onSubmitted;
   final VoidCallback? onTap;
   final bool readOnly;
+  final bool reverseFocusColor;
   final bool showErrors;
-  final String? staticValue;
   final Widget? suffixIcon;
   final TextCapitalization textCapitalization;
-  final ValueChanged<FormControl<Object?>>? onChanged;
-  final bool reverseFocusColor;
-  final ValueChanged<FormControl<Object?>>? onSubmitted;
   final TextInputAction? textInputAction;
+  final bool obscureText;
 
   Map<String, String Function(Object messages)>? get _validationMessages => {
         ValidationMessage.minLength: (error) => $.tr.design.widgets.reactives.fabReactiveTextfield.minLength(
@@ -86,38 +81,27 @@ class FabReactiveTextfield extends StatelessWidget {
       builder: (context, _, __) {
         //final isValid = formControl.valid;
         //final isRequired = formControl.validators.any((v) => v is RequiredValidator);
-        final minLength = formControl.validators.whereType<MinLengthValidator>().map((v) => v.minLength).firstOrNull;
+        //final minLength = formControl.validators.whereType<MinLengthValidator>().map((v) => v.minLength).firstOrNull;
         final maxLength = formControl.validators.whereType<MaxLengthValidator>().map((v) => v.maxLength).firstOrNull;
 
         return Column(
           children: [
-            ReactiveTextField(
+            ReactiveCupertinoTextField(
+              padding: const EdgeInsets.all(12),
               onSubmitted: onSubmitted,
               textInputAction: textInputAction,
-              onChanged: onChanged,
               autofocus: autofocus,
-              controller: staticValue != null ? TextEditingController(text: staticValue) : null,
               readOnly: readOnly,
-              onTap: (_) => onTap?.call(),
+              onTap: onTap,
               maxLength: maxLength,
               maxLines: maxLines,
               minLines: minLines,
+              obscureText: obscureText,
               keyboardType: keyboardType,
               textCapitalization: textCapitalization,
               inputFormatters: inputFormatters,
               formControl: formControl,
-              decoration: InputDecoration(
-                labelText: labelText,
-                hintText: hintText,
-              ),
-              buildCounter: (
-                _, {
-                required currentLength,
-                required isFocused,
-                maxLength,
-              }) {
-                return Counter(hasCounter, currentLength, minLength, maxLength);
-              },
+              placeholder: labelText,
               validationMessages: _validationMessages,
               showErrors:
                   showErrors ? (control) => control.invalid && (control.touched || control.dirty) : (_) => false,

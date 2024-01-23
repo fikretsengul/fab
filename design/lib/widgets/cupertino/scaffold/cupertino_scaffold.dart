@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import 'models/appbar_settings.dart';
 import 'utils/helpers.dart';
@@ -130,8 +129,8 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
 
     return PopScope(
       canPop: !_store.searchBarHasFocus.value,
-      child: Scaffold(
-        body: Stack(
+      child: CupertinoPageScaffold(
+        child: Stack(
           alignment: Alignment.center,
           children: [
             Body(

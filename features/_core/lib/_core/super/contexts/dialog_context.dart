@@ -7,10 +7,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../router/router.gr.dart';
-import '../_core/dialog/dialog_config.dart';
+import '../_core/dialog/cupertino/cupertino_dialog_config.dart';
+import '../_core/dialog/material/material_dialog_config.dart';
 import '../_core/modal/modal_config.dart';
-import '../_core/sheet/sheet_config.dart';
-import '../_core/sheet/sheet_wrapper.dart';
+import '../_core/sheet/cupertino/cupertino_sheet_config.dart';
+import '../_core/sheet/material/material_sheet_config.dart';
+import '../_core/sheet/material/material_sheet_wrapper.dart';
 import 'navigator_context.dart';
 
 @immutable
@@ -60,25 +62,36 @@ final class DialogContext {
     _dialogs.value.clear();
   }
 
-  Future<T?> showDialog<T>({
+  Future<T?> showMaterialDialog<T>({
     required Widget Function(BuildContext context) builder,
-    bool canPop = true,
-    VoidCallback? onPop,
-    DialogConfig config = const DialogConfig(),
+    MaterialDialogConfig config = const MaterialDialogConfig(),
   }) async {
-    if (!(_scaffoldContext?.mounted ?? true)) {
-      return null;
-    }
-
-    final dialog = builder(_scaffoldContext!);
+    final dialog = builder(_navigator.context!);
     _addDialogVisible(dialog);
 
     return _navigator
         .push<T>(
-          DialogWrapperRoute(
+          MaterialDialogWrapperRoute(
             builder: (_) => dialog,
-            canPop: canPop,
-            onPop: onPop,
+            dialogConfig: config,
+          ),
+        )
+        .whenComplete(
+          () => _removeDialogVisible(widget: dialog),
+        );
+  }
+
+  Future<T?> showCupertinoDialog<T>({
+    required Widget Function(BuildContext context) builder,
+    CupertinoDialogConfig config = const CupertinoDialogConfig(),
+  }) async {
+    final dialog = builder(_navigator.context!);
+    _addDialogVisible(dialog);
+
+    return _navigator
+        .push<T>(
+          CupertinoDialogWrapperRoute(
+            builder: (_) => dialog,
             dialogConfig: config,
           ),
         )
@@ -93,11 +106,7 @@ final class DialogContext {
     VoidCallback? onPop,
     ModalConfig config = const ModalConfig(),
   }) async {
-    if (!(_scaffoldContext?.mounted ?? true)) {
-      return null;
-    }
-
-    final dialog = builder(_scaffoldContext!);
+    final dialog = builder(_navigator.context!);
     _addDialogVisible(dialog);
 
     return _navigator
@@ -114,11 +123,9 @@ final class DialogContext {
         );
   }
 
-  Future<void> showSheet({
+  Future<void> showMaterialSheet({
     required Widget Function(BuildContext context) builder,
-    bool canPop = true,
-    VoidCallback? onPop,
-    SheetConfig config = const SheetConfig(),
+    MaterialSheetConfig config = const MaterialSheetConfig(),
   }) async {
     if (!(_scaffoldContext?.mounted ?? true)) {
       return;
@@ -133,12 +140,10 @@ final class DialogContext {
       shape: config.shape,
       clipBehavior: config.clipBehavior,
       constraints: config.constraints,
-      enableDrag: canPop && config.enableDrag,
+      enableDrag: config.enableDrag,
       transitionAnimationController: config.transitionAnimationController,
-      (_) => SheetWrapper(
+      (_) => MaterialSheetWrapper(
         builder: (_) => dialog,
-        canPop: canPop,
-        onPop: onPop,
       ),
     );
 
@@ -146,5 +151,24 @@ final class DialogContext {
     _removeDialogVisible(widget: dialog);
 
     return;
+  }
+
+  Future<T?> showCupertinoSheet<T>({
+    required Widget Function(BuildContext context) builder,
+    CupertinoSheetConfig config = const CupertinoSheetConfig(),
+  }) async {
+    final dialog = builder(_navigator.context!);
+    _addDialogVisible(dialog);
+
+    return _navigator
+        .push<T>(
+          CupertinoSheetWrapperRoute(
+            builder: (_) => dialog,
+            dialogConfig: config,
+          ),
+        )
+        .whenComplete(
+          () => _removeDialogVisible(widget: dialog),
+        );
   }
 }

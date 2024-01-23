@@ -47,7 +47,7 @@ class CupertinoCard extends StatelessWidget {
             color: CupertinoTheme.of(context).scaffoldBackgroundColor,
             child: Ink(
               decoration: decoration,
-              color: CupertinoColors.tertiarySystemFill,
+              color: color ?? CupertinoColors.tertiarySystemFill,
               child: InkWell(
                 customBorder: shapeborder,
                 onTap: onPressed,

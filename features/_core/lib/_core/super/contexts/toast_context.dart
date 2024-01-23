@@ -6,7 +6,9 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
+import 'package:deps/design/design.dart';
+import 'package:deps/infrastructure/infrastructure.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../_core/toast/toast.dart';
 import '../_core/toast/toast_wrapper.dart';
@@ -64,6 +66,51 @@ final class ToastContext {
     } else {
       return dismissDirection;
     }
+  }
+
+  Future<void> showAlert({
+    required IFailure failure,
+    bool isClosable = false,
+    double expandedHeight = 150,
+    Color? backgroundColor,
+    Color? shadowColor,
+    Curve? slideCurve,
+    Curve positionCurve = Curves.fastLinearToSlowEaseIn,
+    bool useSafeArea = true,
+    ToastAlignment alignment = ToastAlignment.top,
+    ToastLength length = ToastLength.medium,
+    ToastDismissDirection? dismissDirection,
+  }) async {
+    if (failure.type == FailureType.empty) {
+      return;
+    }
+
+    final child = switch (failure.type) {
+      FailureType.constructive => CupertinoAlert(
+          color: const Color(0xFF40DBA3),
+          icon: CupertinoIcons.checkmark_circle_fill,
+          message: failure.message,
+        ),
+      _ => CupertinoAlert(
+          color: const Color(0xFFE4756D),
+          icon: CupertinoIcons.clear_circled_solid,
+          message: failure.message,
+        ),
+    };
+
+    await _showToast(
+      slideCurve: slideCurve,
+      isClosable: isClosable,
+      expandedHeight: expandedHeight,
+      backgroundColor: backgroundColor,
+      shadowColor: shadowColor,
+      positionCurve: positionCurve,
+      useSafeArea: useSafeArea,
+      alignment: alignment,
+      length: length,
+      dismissDirection: dismissDirection,
+      child: child,
+    );
   }
 
   Future<void> showToast({

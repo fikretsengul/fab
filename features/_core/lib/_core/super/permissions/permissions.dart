@@ -10,13 +10,13 @@ import 'package:flutter/widgets.dart';
 
 import '_core/permission.failures.dart';
 import '_core/permission_type.enum.dart';
-import 'alerts/permission_alerts.dart';
+import 'alerts/permission_cupertino_alerts.dart';
 
 typedef PermissionCallback = VoidCallback;
 typedef FailureCallback = ValueChanged<Failure>;
 
 final class Permissions {
-  final PermissionAlerts _permissionAlerts = PermissionAlerts();
+  final _permissionAlerts = PermissionCupertinoAlerts();
 
   /// The user denied access to the requested feature, permission needs to be
   /// asked first.

@@ -59,7 +59,7 @@ class AppHandler extends StatelessWidget {
           if (state == NetworkState.connected) {
             $.dialog.popDialog();
           } else if (state == NetworkState.disconnected) {
-            $.dialog.showSheet(
+            $.dialog.showMaterialSheet(
               builder: (_) => const SizedBox(
                 height: 50,
                 child: Center(
@@ -108,6 +108,7 @@ class AppHandler extends StatelessWidget {
                   theme: ThemeData(
                     useMaterial3: false,
                     scaffoldBackgroundColor: Colors.black,
+                    textTheme: Typography.blackCupertino,
                     cupertinoOverrideTheme: CupertinoThemeData(
                       brightness: Brightness.dark,
                       barBackgroundColor: Colors.black,

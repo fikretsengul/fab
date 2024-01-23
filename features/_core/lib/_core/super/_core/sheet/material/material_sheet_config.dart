@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-class SheetConfig {
-  const SheetConfig({
+class MaterialSheetConfig {
+  const MaterialSheetConfig({
     this.backgroundColor,
     this.elevation,
     this.shape,

@@ -4,7 +4,7 @@
 
 // ignore_for_file: max_lines_for_file
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'navigator_context.dart';
 
@@ -25,21 +25,15 @@ final class OverlayContext {
     overlayState.insert(_overlayEntry!);
   }
 
-  Future<void> showLoadingOverlay() => showOverlay(
+  Future<void> showLoadingOverlay({required Widget child}) => showOverlay(
         builder: (_) => Stack(
           children: [
             ModalBarrier(
               dismissible: false,
-              color: Colors.black45,
+              color: CupertinoTheme.of(_navigator.context!).scaffoldBackgroundColor.withOpacity(0.5),
               onDismiss: hideOverlay,
             ),
-            const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Colors.white,
-                ),
-              ),
-            ),
+            child,
           ],
         ),
       );

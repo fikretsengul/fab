@@ -5,6 +5,7 @@ export 'package:feature_user/user.dart';
 
 export '_core/_di/_di.dart';
 export '_core/extensions/extensions.dart';
+export '_core/super/permissions/_core/permission_type.enum.dart';
 export '_core/super/super.dart';
 export '_core/validators/validators.dart';
 export 'handlers/app_handler.dart';

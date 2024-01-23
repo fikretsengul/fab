@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-class DialogConfig {
-  const DialogConfig({
+class MaterialDialogConfig {
+  const MaterialDialogConfig({
     this.themes,
     this.barrierColor = Colors.black54,
     this.barrierDismissible = true,

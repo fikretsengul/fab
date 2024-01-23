@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 /// This widget is mainly a modification for StyledText
 /// widget. It translates with the translation key and escapes some
 /// characters that create problems for StyledText.
-class FabStyledText extends StatelessWidget {
-  const FabStyledText({
+class TextStyled extends StatelessWidget {
+  const TextStyled({
     required this.text,
     this.tags,
     this.style,

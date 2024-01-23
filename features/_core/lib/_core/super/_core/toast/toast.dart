@@ -47,49 +47,29 @@ class _ToastState extends State<Toast> {
         children: [
           InkWell(
             onTap: widget.onTap,
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-            child: Container(
-              width: MediaQuery.sizeOf(context).width,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                color: widget.backgroundColor ?? Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: widget.isInFront ? 0.5 : 0.0,
-                    offset: const Offset(0, -1),
-                    color: widget.shadowColor ?? Colors.grey.shade400,
-                  ),
-                  BoxShadow(
-                    blurRadius: widget.isInFront ? 12 : 3,
-                    offset: const Offset(0, 7),
-                    color: widget.shadowColor ?? Colors.grey.shade400,
-                  ),
-                ],
-              ),
-              child: (widget.child != null)
-                  ? widget.child
-                  : Row(
-                      children: [
-                        if (widget.leading != null) ...[
-                          widget.leading!,
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                        if (widget.message != null)
-                          Expanded(
-                            child: Text(
-                              widget.message!,
-                              style: widget.messageStyle,
-                            ),
-                          ),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            child: widget.child ??
+                Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      if (widget.leading != null) ...[
+                        widget.leading!,
+                        const SizedBox(
+                          width: 10,
+                        ),
                       ],
-                    ),
-            ),
+                      if (widget.message != null)
+                        Expanded(
+                          child: Text(
+                            widget.message!,
+                            style: widget.messageStyle,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
           ),
           if (widget.isClosable ?? false)
             Positioned(

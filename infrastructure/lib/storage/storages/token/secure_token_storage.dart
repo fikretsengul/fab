@@ -40,13 +40,17 @@ class SecureTokenStorage extends IStorage<OAuth2Token> {
   /// Returns `null` if no token is found.
   @override
   Future<OAuth2Token?> read() async {
-    final token = await _secureStorage.read(key: _key);
+    try {
+      final token = await _secureStorage.read(key: _key);
 
-    if (token != null) {
-      return OAuth2Token.fromJson(jsonDecode(token));
+      if (token != null) {
+        return OAuth2Token.fromJson(jsonDecode(token));
+      }
+
+      return null;
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   /// Writes the OAuth2 token to secure storage.
