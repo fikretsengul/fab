@@ -58,6 +58,7 @@ class ProductsPage extends StatelessWidget {
         ),
         searchBar: AppBarSearchBarSettings(
           enabled: true,
+          scrollBehavior: SearchBarScrollBehavior.pinned,
         ),
         bottom: AppBarBottomSettings(
           enabled: true,

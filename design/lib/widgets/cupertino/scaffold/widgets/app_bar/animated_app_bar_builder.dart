@@ -182,7 +182,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
                         (widget.measures.appbarHeightExceptPrimaryToolbar - widget.appBar.bottom!.height - 20)
                     ? 1.0
                     : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0))
-                : (_scrollOffset >= (widget.measures.largeTitleContainerHeight)
+                : (_scrollOffset >= (widget.measures.largeTitleContainerHeight - 20)
                     ? 1.0
                     : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0));
 

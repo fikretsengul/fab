@@ -1380,7 +1380,7 @@ class _NavigationBarComponentsTransition {
     final topBackLabel = topComponents.backLabelKey.currentWidget as KeyedSubtree?;
     final topLeading = topComponents.leadingKey.currentWidget as KeyedSubtree?;
 
-    if (bottomSearchBar == null || !bottomLargeExpanded) {
+    if (bottomSearchBar == null) {
       return null;
     }
 
