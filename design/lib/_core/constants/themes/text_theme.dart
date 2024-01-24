@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String fontName = 'Nunito';
+const String fontName = 'VisueltPro';
 
 const TextTheme textTheme = TextTheme(
   displayLarge: TextStyle(

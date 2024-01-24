@@ -4,8 +4,9 @@ import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+import '../../../_core/constants/app_theme.dart';
 import 'models/appbar_settings.dart';
 import 'utils/helpers.dart';
 import 'utils/measures.dart';
@@ -20,14 +21,12 @@ class CupertinoScaffold extends StatefulWidget {
   CupertinoScaffold({
     required this.body,
     required this.appBar,
-    this.brightness,
     super.key,
     this.shouldStretch = true,
     this.onCollapsed,
     this.scrollController,
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
-    this.shouldScroll = true,
     this.forceScroll = false,
     this.margin = EdgeInsets.zero,
   }) : measures = Measures(
@@ -41,15 +40,13 @@ class CupertinoScaffold extends StatefulWidget {
   final FutureOr<dynamic> Function()? onRefresh;
   final AppBarSettings appBar;
   final Widget body;
-  final Brightness? brightness;
+  final bool forceScroll;
+  final EdgeInsets margin;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
   late final ScrollController? scrollController;
-  final bool shouldScroll;
   final bool shouldStretch;
   final bool shouldTransiteBetweenRoutes;
-  final bool forceScroll;
-  final EdgeInsets margin;
 
   @override
   State<CupertinoScaffold> createState() => _SuperScaffoldState();
@@ -95,7 +92,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
     if (widget.appBar.title is Text) {
       return Text(
         '${(widget.appBar.title! as Text).data}',
-        style: titleTextStyle(context, widget.appBar),
+        style: defaultTitleTextStyle(context, widget.appBar),
       );
     } else {
       return widget.appBar.title;
@@ -117,10 +114,14 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
         mainAxisSize: MainAxisSize.min,
         children: [...widget.appBar.actions],
       ),
-      largeTitleActions: Row(children: [...?widget.appBar.largeTitle!.actions]),
+      largeTitleActions: Row(
+        children: [
+          ...?widget.appBar.largeTitle!.actions,
+        ],
+      ),
       userLargeTitle: Text(
         widget.appBar.largeTitle!.largeTitle,
-        style: widget.appBar.largeTitle!.textStyle ?? CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        style: context.appTheme.appBarLargeTitle.copyWith(inherit: false),
         overflow: TextOverflow.ellipsis,
       ),
       appbarBottom: widget.appBar.bottom!.child,
@@ -130,8 +131,9 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
 
     return PopScope(
       canPop: !_store.searchBarHasFocus.value,
-      child: CupertinoPageScaffold(
-        child: Stack(
+      child: Scaffold(
+        backgroundColor: context.appTheme.background,
+        body: Stack(
           alignment: Alignment.center,
           children: [
             Body(
@@ -163,7 +165,6 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
               shouldStretch: widget.shouldStretch,
               shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
               onCollapsed: widget.onCollapsed,
-              brightness: widget.brightness,
               isScrollEnabled: _isContentScrollable,
             ),
             Refresher(

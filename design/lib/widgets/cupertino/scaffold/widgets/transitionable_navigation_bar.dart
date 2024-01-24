@@ -421,7 +421,6 @@ Widget navBarHeroFlightShuttleBuilder(
   }
 }
 
-@immutable
 class NavigationBarStaticComponentsKeys {
   NavigationBarStaticComponentsKeys()
       : navBarBoxKey = GlobalKey(debugLabel: 'Navigation bar render box'),
@@ -513,6 +512,7 @@ class BackChevron extends StatelessWidget {
 
 class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
   const SuperCupertinoNavigationBarBackButton({
+    required this.actionTextStyle,
     super.key,
     this.color,
     this.previousPageTitle,
@@ -522,12 +522,14 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
 
   const SuperCupertinoNavigationBarBackButton.assemble(
     this.backChevron,
+    this.actionTextStyle,
     this.backLabel, {
     super.key,
   })  : previousPageTitle = null,
         color = null,
         onPressed = null;
 
+  final TextStyle actionTextStyle;
   final Widget? backChevron;
   final Widget? backLabel;
   final Color? color;
@@ -541,13 +543,6 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
       assert(
         currentRoute?.canPop ?? false,
         'CupertinoNavigationBarBackButton should only be used in routes that can be popped',
-      );
-    }
-
-    var actionTextStyle = CupertinoTheme.of(context).textTheme.navActionTextStyle;
-    if (color != null) {
-      actionTextStyle = actionTextStyle.copyWith(
-        color: CupertinoDynamicColor.maybeResolve(color, context),
       );
     }
 
@@ -570,7 +565,7 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
                 const Padding(padding: EdgeInsetsDirectional.only(start: 6)),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 1.5),
+                    padding: const EdgeInsets.only(bottom: 1),
                     child: backLabel ??
                         BackLabel(
                           specifiedPreviousTitle: previousPageTitle,

@@ -9,6 +9,7 @@ class Store {
     return _instance!;
   }
 
+  final ValueNotifier<bool> isInHero = ValueNotifier<bool>(false);
   final ValueNotifier<double> scrollOffset = ValueNotifier<double>(0);
   final ValueNotifier<SearchBarAnimationStatus> searchBarAnimationStatus =
       ValueNotifier(SearchBarAnimationStatus.paused);

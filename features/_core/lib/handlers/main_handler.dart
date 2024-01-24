@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
+import 'package:deps/packages/adaptive_theme.dart';
 import 'package:deps/packages/hydrated_bloc.dart';
 import 'package:deps/packages/path_provider.dart';
 import 'package:deps/packages/talker_bloc_logger.dart';
@@ -117,17 +118,22 @@ final class MainHandler {
         // Call additional setup
         await mainCallback?.call(binding);
 
+        // Get saved theme
+        final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
         // Run the app
         runApp(
           appWrapper != null
               ? appWrapper(
                   AppHandler(
                     appSettings: appSettings!,
+                    savedThemeMode: savedThemeMode,
                     routerObserverEnabled: observerSettings!.routerObserverEnabled,
                   ),
                 )
               : AppHandler(
                   appSettings: appSettings!,
+                  savedThemeMode: savedThemeMode,
                   routerObserverEnabled: observerSettings!.routerObserverEnabled,
                 ),
         );

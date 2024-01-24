@@ -4,10 +4,11 @@
 
 // ignore_for_file: max_lines_for_function, max_lines_for_file
 
+import 'package:deps/design/design.dart';
 import 'package:deps/infrastructure/infrastructure.dart';
+import 'package:deps/packages/adaptive_theme.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/talker_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -40,10 +41,12 @@ class AppHandler extends StatelessWidget {
   const AppHandler({
     required this.appSettings,
     required this.routerObserverEnabled,
+    this.savedThemeMode,
     super.key,
   });
 
   final AppSettings appSettings;
+  final AdaptiveThemeMode? savedThemeMode;
   final bool routerObserverEnabled;
 
   @override
@@ -52,7 +55,6 @@ class AppHandler extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => $.get<NetworkCubit>()),
         BlocProvider(create: (_) => $.get<TranslationCubit>()),
-        BlocProvider(create: (_) => $.get<ThemeCubit>()),
       ],
       child: BlocListener<NetworkCubit, NetworkState>(
         listener: (_, state) {
@@ -71,30 +73,11 @@ class AppHandler extends StatelessWidget {
         },
         child: BlocBuilder<TranslationCubit, Locale>(
           builder: (_, locale) {
-            return BlocBuilder<ThemeCubit, ThemeState>(
-              builder: (_, __) {
-/*                 if ($.platform.isIOS) {
-                  return CupertinoApp.router(
-                    title: appSettings.title,
-                    showPerformanceOverlay: appSettings.showPerformanceOverlay,
-                    checkerboardRasterCacheImages: appSettings.checkerboardRasterCacheImages,
-                    checkerboardOffscreenLayers: appSettings.checkerboardOffscreenLayers,
-                    showSemanticsDebugger: appSettings.showSemanticsDebugger,
-                    debugShowCheckedModeBanner: appSettings.debugShowCheckedModeBanner,
-                    //theme: state.theme.data,
-                    locale: locale,
-                    supportedLocales: AppLocaleUtils.supportedLocales,
-                    localizationsDelegates: GlobalMaterialLocalizations.delegates,
-                    routerConfig: $.get<FeaturesRouter>().config(
-                          navigatorObservers: () => routerObserverEnabled
-                              ? [
-                                  RouterTalkerObserver(talker: $.get<Talker>()),
-                                  HeroController(),
-                                ]
-                              : [],
-                        ),
-                  );
-                } */
+            return AdaptiveTheme(
+              light: ThemeData(extensions: [AppTheme.light]),
+              dark: ThemeData(extensions: [AppTheme.dark]),
+              initial: savedThemeMode ?? AdaptiveThemeMode.light,
+              builder: (light, dark) {
                 return MaterialApp.router(
                   title: appSettings.title,
                   debugShowMaterialGrid: appSettings.debugShowMaterialGrid,
@@ -103,41 +86,13 @@ class AppHandler extends StatelessWidget {
                   checkerboardOffscreenLayers: appSettings.checkerboardOffscreenLayers,
                   showSemanticsDebugger: appSettings.showSemanticsDebugger,
                   debugShowCheckedModeBanner: appSettings.debugShowCheckedModeBanner,
-                  //themeMode: state.theme.mode,
-                  themeMode: ThemeMode.dark,
-                  theme: ThemeData(
-                    useMaterial3: false,
-                    scaffoldBackgroundColor: Colors.black,
-                    colorScheme: const ColorScheme.dark(
-                      primary: Colors.yellow,
-                    ),
-                    textTheme: Typography.whiteCupertino,
-                    iconTheme: const IconThemeData(
-                      color: Colors.yellow,
-                    ),
-                    buttonTheme: const ButtonThemeData(
-                      buttonColor: Colors.yellow,
-                      textTheme: ButtonTextTheme.primary,
-                    ),
-                    textButtonTheme: TextButtonThemeData(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.yellow,
-                      ),
-                    ),
-                    cupertinoOverrideTheme: CupertinoThemeData(
-                      brightness: Brightness.dark,
-                      barBackgroundColor: const Color.fromARGB(255, 14, 14, 14),
-                      primaryColor: Colors.yellow,
-                      textTheme: CupertinoTextThemeData(
-                        primaryColor: Colors.yellow,
-                        textStyle: const CupertinoTextThemeData().textStyle.copyWith(
-                              color: CupertinoColors.white,
-                              inherit: false,
-                            ),
-                      ),
-                    ),
-                  ),
-
+                  builder: (_, child) {
+                    return MediaQuery.withNoTextScaling(
+                      child: child!,
+                    );
+                  },
+                  theme: light,
+                  darkTheme: dark,
                   locale: locale,
                   supportedLocales: AppLocaleUtils.supportedLocales,
                   localizationsDelegates: GlobalMaterialLocalizations.delegates,

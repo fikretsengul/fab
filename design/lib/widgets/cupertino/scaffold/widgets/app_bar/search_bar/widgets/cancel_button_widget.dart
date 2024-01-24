@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/* import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/helpers.dart';
@@ -26,9 +26,9 @@ class CancelButtonWidget extends StatelessWidget {
       padding: EdgeInsets.zero,
       color: Colors.transparent,
       onPressed: onCancel,
-      child: AnimatedContainer(
-        duration: animationDuration,
-        width: searchBarHasFocus ? textSize(cancelButtonText, cancelButtonTextStyle) : 0,
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 300),
+        opacity: searchBarHasFocus ? 1 : 0,
         child: Align(
           alignment: Alignment.centerRight,
           child: Text(
@@ -41,3 +41,4 @@ class CancelButtonWidget extends StatelessWidget {
     );
   }
 }
+ */

@@ -7,8 +7,8 @@ class AppBarSearchBarSettings {
   AppBarSearchBarSettings({
     this.resultColor,
     this.backgroundColor = CupertinoColors.tertiarySystemFill,
-    this.cancelButtonText = 'Cancel',
-    this.placeholderText = 'Search',
+    this.cancelButtonText = 'cancel',
+    this.placeholderText = 'search',
     this.enabled = false,
     this.scrollBehavior = SearchBarScrollBehavior.floated,
     this.animationBehavior = SearchBarAnimationBehavior.top,
@@ -17,7 +17,6 @@ class AppBarSearchBarSettings {
     this.placeholderTextStyle = const TextStyle(
       color: CupertinoColors.systemGrey,
     ),
-    this.cancelTextStyle = const TextStyle(color: CupertinoColors.systemBlue),
     this.prefixIcon = const Icon(
       CupertinoIcons.search,
       color: CupertinoColors.systemGrey,
@@ -44,7 +43,6 @@ class AppBarSearchBarSettings {
   final Duration animationDuration;
   final Color backgroundColor;
   final String cancelButtonText;
-  final TextStyle cancelTextStyle;
   final bool enabled;
   double height;
   final ValueChanged<String>? onChanged;

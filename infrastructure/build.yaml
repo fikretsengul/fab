@@ -17,8 +17,6 @@ targets:
         generate_for:
           include:
             - lib/networking/**/*.model.dart
-            - lib/theming/**/*.model.dart
-            - lib/theming/**/*.cubit.dart
       # Json Serializable
       json_serializable:
         options:
@@ -30,7 +28,6 @@ targets:
         generate_for:
           include:
             - lib/networking/**/*.model.dart
-            - lib/theming/**/*.model.dart
       # Injectable
       injectable_generator:
         generate_for:
@@ -39,4 +36,3 @@ targets:
             - lib/analytics/**/*.dart
             - lib/networking/**/*.dart
             - lib/storage/**/*.dart
-            - lib/theming/**/*.dart

@@ -24,9 +24,9 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoScaffold(
       forceScroll: true,
-      margin: $.paddings.md.horizontal,
+      margin: $.paddings.md.all,
       appBar: AppBarSettings(
-        title: const Text('Products'),
+        title: const Text('products.'),
         actions: [
           CupertinoButton(
             padding: EdgeInsets.zero,
@@ -41,7 +41,7 @@ class ProductsPage extends StatelessWidget {
           PaddingGap.xs(),
         ],
         largeTitle: AppBarLargeTitleSettings(
-          largeTitle: $.tr.products.title,
+          largeTitle: 'products.',
           actions: [
             CupertinoButton(
               padding: EdgeInsets.zero,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../../_core/constants/app_theme.dart';
 import '../../../../models/appbar_action_settings.dart';
 import '../../../../models/appbar_search_bar_settings.dart';
 import '../../../../utils/helpers.dart';
@@ -35,84 +36,92 @@ class StaticSearchBarWidget extends StatelessWidget {
     return KeyedSubtree(
       key: keys.searchBarKey,
       child: IgnorePointer(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Flexible(
-              child: CupertinoSearchTextField(
-                padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
-                prefixIcon: Opacity(
-                  opacity: _store.searchBarHasFocus.value ? 0 : opacity,
-                  child: searchBar.prefixIcon,
+            Align(
+              alignment: Alignment.centerRight,
+              child: CupertinoButton(
+                minSize: 0,
+                padding: const EdgeInsets.only(left: 8),
+                color: Colors.transparent,
+                onPressed: () {
+                  searchBarFocusThings(false);
+                  focusNode.unfocus();
+                  editingController.clear();
+                },
+                child: AnimatedOpacity(
+                  duration: measures.scrollAnimationDuration,
+                  opacity: _store.searchBarHasFocus.value ? 1 : 0,
+                  child: Text(
+                    searchBar.cancelButtonText,
+                    style: context.appTheme.appBarTitleNActions
+                        .copyWith(color: CupertinoTheme.of(context).primaryContrastingColor),
+                    maxLines: 1,
+                  ),
                 ),
-                placeholder: _store.searchBarHasFocus.value ? '' : searchBar.placeholderText,
-                placeholderStyle: searchBar.placeholderTextStyle.copyWith(
-                  color: searchBar.placeholderTextStyle.color!.withOpacity(opacity),
-                ),
-                style: searchBar.textStyle.copyWith(
-                  color: searchBar.textStyle.color ?? CupertinoTheme.of(context).textTheme.textStyle.color,
-                ),
-                backgroundColor: searchBar.backgroundColor,
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (final AppBarActionSettings searchAction in searchBar.actions)
-                  searchAction.behavior == AppBarActionSettingsBehavior.alwaysVisible ? searchAction : const SizedBox(),
-                AnimatedCrossFade(
-                  firstChild: Center(
-                    child: Row(
-                      children: searchBar.actions
-                          .where((e) => e.behavior == AppBarActionSettingsBehavior.visibleOnFocus)
-                          .toList(),
+                Flexible(
+                  child: CupertinoSearchTextField(
+                    padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
+                    prefixIcon: Opacity(
+                      opacity: _store.searchBarHasFocus.value ? 0 : opacity,
+                      child: searchBar.prefixIcon,
                     ),
-                  ),
-                  secondChild: const SizedBox(),
-                  crossFadeState: _store.searchBarHasFocus.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                  duration: measures.standartAnimationDuration,
-                ),
-                AnimatedCrossFade(
-                  firstChild: Center(
-                    child: Row(
-                      children: searchBar.actions
-                          .where((e) => e.behavior == AppBarActionSettingsBehavior.visibleOnUnFocus)
-                          .toList(),
+                    placeholder: searchBar.placeholderText,
+                    placeholderStyle: context.appTheme.body.copyWith(
+                      color: CupertinoColors.systemGrey.withOpacity(opacity),
                     ),
+                    style: context.appTheme.body,
+                    backgroundColor: context.appTheme.surface,
                   ),
-                  secondChild: const SizedBox(),
-                  crossFadeState: _store.searchBarHasFocus.value ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                  duration: measures.standartAnimationDuration,
                 ),
-                Center(
-                  child: CupertinoButton(
-                    minSize: 0,
-                    padding: EdgeInsets.zero,
-                    color: Colors.transparent,
-                    onPressed: () {
-                      searchBarFocusThings(false);
-                      focusNode.unfocus();
-                      editingController.clear();
-                    },
-                    child: AnimatedContainer(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (final AppBarActionSettings searchAction in searchBar.actions)
+                      searchAction.behavior == AppBarActionSettingsBehavior.alwaysVisible
+                          ? searchAction
+                          : const SizedBox(),
+                    AnimatedCrossFade(
+                      firstChild: Center(
+                        child: Row(
+                          children: searchBar.actions
+                              .where((e) => e.behavior == AppBarActionSettingsBehavior.visibleOnFocus)
+                              .toList(),
+                        ),
+                      ),
+                      secondChild: const SizedBox(),
+                      crossFadeState:
+                          _store.searchBarHasFocus.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      duration: measures.standartAnimationDuration,
+                    ),
+                    AnimatedCrossFade(
+                      firstChild: Center(
+                        child: Row(
+                          children: searchBar.actions
+                              .where((e) => e.behavior == AppBarActionSettingsBehavior.visibleOnUnFocus)
+                              .toList(),
+                        ),
+                      ),
+                      secondChild: const SizedBox(),
+                      crossFadeState:
+                          _store.searchBarHasFocus.value ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                      duration: measures.standartAnimationDuration,
+                    ),
+                    AnimatedContainer(
                       duration: measures.standartAnimationDuration,
                       width: _store.searchBarHasFocus.value
                           ? textSize(
                               searchBar.cancelButtonText,
-                              searchBar.cancelTextStyle.copyWith(color: CupertinoTheme.of(context).primaryColor),
+                              context.appTheme.appBarTitleNActions,
                             )
                           : 0,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          searchBar.cancelButtonText,
-                          style: searchBar.cancelTextStyle
-                              .copyWith(color: CupertinoTheme.of(context).primaryContrastingColor),
-                          maxLines: 1,
-                        ),
-                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

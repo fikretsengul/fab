@@ -5,6 +5,7 @@ import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../_core/constants/app_theme.dart';
 import '../../models/appbar_search_bar_settings.dart';
 import '../../models/appbar_settings.dart';
 import '../../utils/measures.dart';
@@ -46,7 +47,7 @@ class AnimatedAppBarBuilder extends StatefulWidget {
   State<AnimatedAppBarBuilder> createState() => _AnimatedAppBarBuilderState();
 }
 
-class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with SingleTickerProviderStateMixin {
+class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with TickerProviderStateMixin {
   late final TextEditingController _editingController;
   late final FocusNode _focusNode;
   bool _isCollapsed = false;
@@ -55,11 +56,9 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Sing
   late AnimationController _animationController;
   late Animation _animation;
 
-  Color _beginColor(BuildContext context) =>
-      CupertinoDynamicColor.maybeResolve(widget.appBar.backgroundColor, context)
-          ?.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1) ??
-      Theme.of(context).scaffoldBackgroundColor.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
-  Color _endColor(BuildContext context) => CupertinoTheme.of(context).barBackgroundColor;
+  Color _expandedColor(BuildContext context) => context.appTheme.appBarExpanded;
+  Color _collapsedColor(BuildContext context) =>
+      context.appTheme.appBarCollapsed.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
 
   @override
   void dispose() {
@@ -81,8 +80,8 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Sing
   void didChangeDependencies() {
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
     _animation = ColorTween(
-      begin: _beginColor(context),
-      end: _endColor(context),
+      begin: _expandedColor(context),
+      end: _collapsedColor(context),
     ).animate(CurvedAnimation(curve: Curves.linear, parent: _animationController))
       ..addListener(() {
         setState(() {});

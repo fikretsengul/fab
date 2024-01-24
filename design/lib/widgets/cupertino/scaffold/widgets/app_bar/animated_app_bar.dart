@@ -1,6 +1,7 @@
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../../../_core/constants/app_theme.dart';
 import '../../models/appbar_search_bar_settings.dart';
 import '../../models/appbar_settings.dart';
 import '../../utils/helpers.dart';
@@ -28,7 +29,8 @@ class AnimatedAppBar extends StatelessWidget {
     required this.isCollapsed,
     required this.shouldTransiteBetweenRoutes,
     required this.refreshListenable,
-    required this.color, this.brightness,
+    required this.color,
+    this.brightness,
     super.key,
   });
 
@@ -100,22 +102,33 @@ class AnimatedAppBar extends StatelessWidget {
                 return Hero(
                   tag: HeroTag(Navigator.of(context)),
                   createRectTween: linearTranslateWithLargestRectSizeTween,
-                  flightShuttleBuilder: (_, animation, flightDirection, fromHeroContext, toHeroContext) =>
-                      navBarHeroFlightShuttleBuilder(
-                    animation,
-                    flightDirection,
-                    fromHeroContext,
-                    toHeroContext,
-                  ),
-                  placeholderBuilder: (_, __, child) => navBarHeroLaunchPadBuilder(child),
+                  flightShuttleBuilder: (_, animation, flightDirection, fromHeroContext, toHeroContext) {
+                    animation.addStatusListener((status) {
+                      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+                        _store.isInHero.value = false;
+                      } else {
+                        _store.isInHero.value = true;
+                      }
+                    });
+
+                    return navBarHeroFlightShuttleBuilder(
+                      animation,
+                      flightDirection,
+                      fromHeroContext,
+                      toHeroContext,
+                    );
+                  },
+                  placeholderBuilder: (_, __, child) {
+                    return navBarHeroLaunchPadBuilder(child);
+                  },
                   transitionOnUserGestures: true,
                   child: TransitionableNavigationBar(
                     componentsKeys: keys,
                     backgroundColor: color,
-                    backButtonTextStyle: CupertinoTheme.of(context).textTheme.navActionTextStyle,
-                    titleTextStyle: titleTextStyle(context, appBar),
+                    backButtonTextStyle: context.appTheme.appBarTitleNActions.copyWith(inherit: false),
+                    titleTextStyle: defaultTitleTextStyle(context, appBar),
                     largeTitleTextStyle:
-                        appBar.largeTitle!.textStyle ?? CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+                        appBar.largeTitle!.textStyle ?? context.appTheme.appBarLargeTitle.copyWith(inherit: false),
                     border: appBar.border,
                     hasUserMiddle: isCollapsed,
                     largeExpanded: !isCollapsed && appBar.largeTitle!.enabled,

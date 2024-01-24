@@ -1,15 +1,13 @@
+import 'package:deps/design/design.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../models/appbar_action_settings.dart';
-import '../../../../models/appbar_search_bar_settings.dart';
+import '../../../../utils/helpers.dart';
 import '../../../../utils/store.dart';
-import 'cancel_button_widget.dart';
 import 'search_actions_widget.dart';
 
 class DynamicSearchBarWidget extends StatefulWidget {
   const DynamicSearchBarWidget({
-    required this.actions,
     required this.searchBar,
     required this.editingController,
     required this.focusNode,
@@ -20,7 +18,6 @@ class DynamicSearchBarWidget extends StatefulWidget {
     super.key,
   });
 
-  final List<AppBarActionSettings> actions;
   final Duration animationDuration;
   final TextEditingController editingController;
   final FocusNode focusNode;
@@ -40,73 +37,96 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
       children: [
-        Flexible(
-          child: Focus(
-            onFocusChange: (hasFocus) {
-              if (_isSubmitted) {
-                _isSubmitted = false;
-
-                return;
-              }
-              widget.searchBarFocusThings(hasFocus);
-              // ignore: avoid_empty_blocks
-              setState(() {});
+        Align(
+          alignment: Alignment.centerRight,
+          child: CupertinoButton(
+            minSize: 0,
+            padding: EdgeInsets.zero,
+            color: Colors.transparent,
+            onPressed: () {
+              widget.searchBarFocusThings(false);
+              widget.focusNode.unfocus();
+              widget.editingController.clear();
             },
-            child: CupertinoSearchTextField(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
-              onSubmitted: (s) {
-                _isSubmitted = true;
-                widget.searchBar.onSubmitted?.call(s);
-              },
-              onChanged: (v) {
-                if (v.isNotEmpty) {
-                  if (widget.searchBar.resultBehavior == SearchBarResultBehavior.visibleOnInput) {
-                    _store.searchBarResultVisible.value = true;
-                  }
-                } else {
-                  if (widget.searchBar.resultBehavior == SearchBarResultBehavior.visibleOnInput) {
-                    _store.searchBarResultVisible.value = false;
-                  }
-                }
-                widget.searchBar.onChanged?.call(v);
-              },
-              prefixIcon: Opacity(
-                opacity: widget.opacity,
-                child: widget.searchBar.prefixIcon,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: widget.searchBarHasFocus ? 1 : 0,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  widget.searchBar.cancelButtonText,
+                  style: context.appTheme.appBarTitleNActions,
+                  maxLines: 1,
+                ),
               ),
-              placeholder: widget.searchBar.placeholderText,
-              placeholderStyle: widget.searchBar.placeholderTextStyle.copyWith(
-                color: widget.searchBar.placeholderTextStyle.color!.withOpacity(widget.opacity),
-              ),
-              style: widget.searchBar.textStyle.copyWith(
-                color: widget.searchBar.textStyle.color ?? CupertinoTheme.of(context).textTheme.textStyle.color,
-              ),
-              controller: widget.editingController,
-              focusNode: widget.focusNode,
-              backgroundColor: Colors.transparent,
-              autocorrect: false,
             ),
           ),
         ),
-        SearchActionsWidget(
-          actions: widget.actions,
-          animationDuration: widget.animationDuration,
-          searchBarHasFocus: widget.searchBarHasFocus,
-        ),
-        CancelButtonWidget(
-          onCancel: () {
-            widget.searchBarFocusThings(false);
-            widget.focusNode.unfocus();
-            widget.editingController.clear();
-          },
-          cancelButtonText: widget.searchBar.cancelButtonText,
-          cancelButtonTextStyle:
-              widget.searchBar.cancelTextStyle.copyWith(color: CupertinoTheme.of(context).primaryColor),
-          animationDuration: widget.animationDuration,
-          searchBarHasFocus: widget.searchBarHasFocus,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Flexible(
+              child: Focus(
+                onFocusChange: (hasFocus) {
+                  if (_isSubmitted) {
+                    _isSubmitted = false;
+
+                    return;
+                  }
+                  widget.searchBarFocusThings(hasFocus);
+                  setState(() {});
+                },
+                child: CupertinoSearchTextField(
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
+                  onSubmitted: (s) {
+                    _isSubmitted = true;
+                    widget.searchBar.onSubmitted?.call(s);
+                  },
+                  onChanged: (v) {
+                    if (v.isNotEmpty) {
+                      if (widget.searchBar.resultBehavior == SearchBarResultBehavior.visibleOnInput) {
+                        _store.searchBarResultVisible.value = true;
+                      }
+                    } else {
+                      if (widget.searchBar.resultBehavior == SearchBarResultBehavior.visibleOnInput) {
+                        _store.searchBarResultVisible.value = false;
+                      }
+                    }
+                    widget.searchBar.onChanged?.call(v);
+                  },
+                  prefixIcon: Opacity(
+                    opacity: widget.opacity,
+                    child: widget.searchBar.prefixIcon,
+                  ),
+                  placeholder: widget.searchBar.placeholderText,
+                  placeholderStyle: context.appTheme.body.copyWith(
+                    color: CupertinoColors.systemGrey.withOpacity(widget.opacity),
+                  ),
+                  style: context.appTheme.body,
+                  controller: widget.editingController,
+                  focusNode: widget.focusNode,
+                  backgroundColor: context.appTheme.surface,
+                  autocorrect: false,
+                ),
+              ),
+            ),
+            SearchActionsWidget(
+              actions: widget.searchBar.actions,
+              animationDuration: widget.animationDuration,
+              searchBarHasFocus: widget.searchBarHasFocus,
+            ),
+            AnimatedContainer(
+              duration: widget.animationDuration,
+              width: widget.searchBarHasFocus
+                  ? textSize(
+                      widget.searchBar.cancelButtonText,
+                      context.appTheme.appBarTitleNActions,
+                    )
+                  : 0,
+            ),
+          ],
         ),
       ],
     );

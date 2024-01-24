@@ -4,9 +4,10 @@ publish_to: none
 version: 0.0.1
 
 environment:
-  sdk: ">=3.2.3 <4.0.0"
+  sdk: ">=3.2.5 <4.0.0"
 
 dependencies:
+  adaptive_theme: ^3.5.0
   auto_route: ^7.8.4
   back_button_interceptor: ^7.0.0
   cached_network_image_plus: ^0.0.3
@@ -20,7 +21,6 @@ dependencies:
   fading_edge_scrollview: ^4.0.0
   feature_core:
     path: ../features/_core
-  flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
@@ -53,6 +53,7 @@ dependencies:
   talker_bloc_logger: ^2.4.0
   talker_dio_logger: ^2.4.0
   talker_flutter: ^3.6.0
+  theme_tailor_annotation: ^2.0.2
   widgetbook: ^3.7.1
   widgetbook_annotation: ^3.1.0
 

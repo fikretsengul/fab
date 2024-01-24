@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../../_core/constants/app_theme.dart';
 import '../models/appbar_settings.dart';
 
-TextStyle titleTextStyle(BuildContext context, AppBarSettings appBar) {
+TextStyle defaultTitleTextStyle(BuildContext context, AppBarSettings appBar) {
   if (appBar.title is Text && (appBar.title! as Text).style != null) {
-    return (appBar.title! as Text)
-        .style!
-        .merge(CupertinoTheme.of(context).textTheme.navTitleTextStyle)
-        .copyWith(letterSpacing: 0, inherit: false);
+    return (appBar.title! as Text).style!.copyWith(inherit: false);
   } else {
-    return CupertinoTheme.of(context).textTheme.navTitleTextStyle.copyWith(letterSpacing: 0, inherit: false);
+    return context.appTheme.appBarTitleNActions.copyWith(inherit: false);
   }
 }
 
@@ -29,5 +27,5 @@ double textSize(String text, TextStyle style) {
     textDirection: TextDirection.ltr,
   )..layout();
 
-  return textPainter.size.width * 1.4;
+  return textPainter.size.width * 1.1;
 }

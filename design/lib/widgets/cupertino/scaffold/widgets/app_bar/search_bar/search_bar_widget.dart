@@ -71,7 +71,6 @@ class SearchBarWidget extends StatelessWidget {
                 searchBarFocusThings: searchBarFocusThings,
               ),
               DynamicSearchBarWidget(
-                actions: searchBar.actions,
                 searchBar: searchBar,
                 editingController: editingController,
                 focusNode: focusNode,

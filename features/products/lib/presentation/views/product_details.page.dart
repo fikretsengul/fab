@@ -28,12 +28,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
-      margin: $.paddings.md.horizontal,
+      margin: $.paddings.md.all,
       appBar: AppBarSettings(
         title: const Text(
-          'Product Details',
+          'details.',
         ),
-        previousPageTitle: $.tr.products.title,
+        previousPageTitle: 'products.',
         actions: [
           CupertinoButton(
             padding: EdgeInsets.zero,
@@ -43,7 +43,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           PaddingGap.xs(),
         ],
         largeTitle: AppBarLargeTitleSettings(
-          largeTitle: 'Product Details',
+          largeTitle: 'details.',
         ),
       ),
       body: CustomScrollView(
@@ -87,9 +87,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             return CupertinoButton(
                               padding: EdgeInsets.zero,
                               minSize: 0,
-                              onPressed: () => setState(() {
-                                _selectedImage = image;
-                              }),
+                              onPressed: _selectedImage != image
+                                  ? () => setState(() {
+                                        _selectedImage = image;
+                                      })
+                                  : null,
                               child: CupertinoImage(
                                 uri: image,
                                 height: (300 - ((widget.product.images.length - 1) * $.paddings.md)) /
