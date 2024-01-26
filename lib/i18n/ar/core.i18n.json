@@ -1,0 +1,49 @@
+{
+  "general": {
+    "ok": "موافق",
+    "cancel": "الغاء",
+    "succeded": "تم بنجاح",
+    "wrong_code": "الكود خطأ",
+    "retry": "اعادة المحاولة"
+  },
+  "navigation": {
+    "bottom": {
+      "features": "الميزات",
+      "informations": "معلومات"
+    }
+  },
+  "form": {
+    "username": {
+      "label": "اسم المستخدم",
+      "hint": "أدخل اسم المستخدم الخاص بك"
+    },
+    "password": {
+      "label": "كلمة السر",
+      "hint": "أدخل كلمة السر الخاصة بك"
+    }
+  },
+  "errors": {
+    "form": {
+      "maxLength": "$field لا يمكن أن يكون أكثر من $count حرفًا.",
+      "minLength": "$field لا يمكن أن يكون أقل من $count حرفًا.",
+      "required": "$field مطلوب.",
+      "email": "لقد أدخلت عنوان بريد إلكتروني غير صالح."
+    },
+    "others": {
+      "no_item_found": "لا توجد بيانات للعرض.",
+      "something_went_wrong": "حدث خطأ ما ولم يتم تحميل البيانات.",
+      "an_unknown_error": "حدث خطأ غير معروف.",
+      "no_internet_connection": "الاتصال بالإنترنت غير متوفر.",
+      "server_failure": "واجهت فشل الخادم.",
+      "communication_error": "كان هناك خطأ في تواصلنا مع الخوادم."
+    }
+  },
+  "file_picker": {
+    "size_warning": "لا يمكن أن يكون حجم الملف أكثر من $maxSize ميغابايت.",
+    "no_permission": "ليس لدينا إذن لفتح معرض الصور الخاص بك."
+  },
+  "test": {
+    "succeded": "الاختبار ناجح.",
+    "failed": "الاختبار فشل."
+  }
+}

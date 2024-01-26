@@ -1,0 +1,88 @@
+{
+    "use_turkish": "استخدم التركية",
+    "try_now": "ما يمكنك تجربته",
+    "others": "الآخرين",
+    "api": {
+        "title": "API والمصادقة",
+        "explanation": "دعم API لـ Rest و graphql مع تجديد الرمز المميز ودعم المقبس باستخدام Dio و GraphQL و Fresh."
+    },
+    "performance": {
+        "title": "الأداء",
+        "explanation": "الأداء مُحسّن للتأخير الناجم عن البناء، مثل تبديل الصفحات أو التمرير السريع للقوائم المعقدة، من خلال التقسيم الإطاري للتقديم عبر keframe."
+    },
+    "state": {
+        "title": "الحالة والهندسة المعمارية",
+        "explanation": "BLoC و Hydrated Bloc يساعدان على فصل منطق الأعمال عن واجهة المستخدم من خلال إنشاء إدارة حالة قوية ومستمرة."
+    },
+    "linting": {
+        "title": "Linting متقدم",
+        "explanation": "قواعد Linting مع إعدادات مفصلة للحفاظ على صحة الكود جيدة وتتوافق مع معايير dart."
+    },
+    "type_safety": {
+        "title": "الأمان النوعي",
+        "explanation": "يستخدم القالب نهج الأمان النوعي أولاً (اللغات، الأصول، إلخ) لمساعدتك على تجنب المشكلات عن طريق اكتشاف الأخطاء الفارغة أثناء التطوير بدلاً من وقت التشغيل."
+    },
+    "forms": {
+        "title": "النماذج",
+        "explanation": "إنشاء وإدارة النماذج لم يكن بهذه السهولة والمتعة من قبل. النماذج الاستجابة هي نهج مدفوع بالنموذج للتعامل مع إدخالات النماذج والتحقق من صحتها."
+    },
+    "testing": {
+        "title": "الاختبار",
+        "explanation": "كلما كانت الميزات التي يحتوي عليها التطبيق أكثر، كلما كان من الأصعب اختبارها يدويًا. تساعد الاختبارات التلقائية على ضمان أداء التطبيق بشكل صحيح قبل نشره مع Bloc Test و Golden Tookit و Mocktail."
+    },
+    "di_locator": {
+        "title": "DI و Locator",
+        "explanation": "تقليل الربط الضيق بين الفئات وبالتالي تحقيق قابلية إعادة الاستخدام أكبر للكود الخاص بك مع Injectable و GetIt."
+    },
+    "code_generation": {
+        "title": "توليد الكود",
+        "explanation": "زيادة الإنتاجية وتحسين جودة الكود عن طريق توليد فئات البيانات مع Freezed و Artemis و Build Runner."
+    },
+    "ci_cd": {
+        "title": "تكامل CI و CD",
+        "explanation": "يتم استخدام CI/CD لتقديم الكود بشكل مستمر في الإنتاج، وضمان تدفق مستمر للميزات الجديدة وإصلاحات الأخطاء عبر أكثر الطرق فعالية للتسليم باستخدام Codemagic."
+    },
+    "routing": {
+        "title": "التوجيه",
+        "explanation": "يتيح AutoRouter تمرير الوسائط المطبوعة بشكل قوي، والربط العميق بدون جهد، وتوليد الكود لتبسيط الطرق تقليل القالب القائم على الكود."
+    },
+    "pattern": {
+        "title": "نمط التصميم",
+        "explanation": "يقلل نمط التصميم المستودع من تعقيد طبقة البيانات، ويعزل البيانات غير المنظمة عن بقية التطبيق، وينظم هيكل المشروع."
+    },
+    "exceptions": {
+        "title": "الاستثناءات",
+        "explanation": "ليس من الحلول المثالية التعامل مع الاستثناءات باستخدام try و catch في كل وظيفة، يوفر Data Channel أداة للتعامل مع الاستثناءات وتوجيه البيانات."
+    },
+    "storage": {
+        "title": "التخزين المشفر",
+        "explanation": "يتيح التخزين المشفر، باستخدام حزمة Secure Storage، تخزين الرمز المميز ومعلومات المستخدم بأمان في سلسلة مفاتيح النظام."
+    },
+    "dynamic_theme": {
+        "title": "الموضوع الديناميكي",
+        "explanation": "مع Android 12 و Material You، يمكن استخراج ألوان الخلفية لإنشاء ColorScheme يمكن استخدامها لتلوين التطبيق."
+    },
+    "localization": {
+        "title": "التعريب",
+        "explanation": "تعريب التطبيق بسهولة إلى لغات أخرى مع دعم مولد اللغة 'slang' المنظم والآمن من الناحية النوعية,"},
+    "permission": {
+        "title": "Permission",
+        "explanation": "The boilerplate also provides a cross-platform (iOS, Android) example to request permissions and check their status with permission_handler."
+    },
+    "env_variables": {
+        "title": "Env Variables",
+        "explanation": "Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such."
+    },
+    "logging": {
+        "title": "Logging & Tracking",
+        "explanation": "A detailed logging and error tracking mechanism to monitor every action taking place in the application in real-time with Logging and Sentry."
+    },
+    "native_splash": {
+        "title": "Native Splash",
+        "explanation": "Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image."
+    },
+    "refresh_rate": {
+        "title": "Refresh Rate",
+        "explanation": "Support for high refresh rate displays with the flutter_displaymode package."
+    }
+}

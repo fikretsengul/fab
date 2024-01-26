@@ -6,7 +6,7 @@ import 'package:flutter_advanced_boilerplate/features/auth/login/networking/auth
 import 'package:flutter_advanced_boilerplate/modules/token_refresh/dio_token_refresh.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fresh_graphql/fresh_graphql.dart';
+import 'package:fresh_dio/fresh_dio.dart'; 
 import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 

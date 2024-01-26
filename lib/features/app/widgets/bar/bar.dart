@@ -405,7 +405,7 @@ class _BarState<K extends Object?> extends State<Bar<K>> with TickerProviderStat
               }
 
               return ClipRRect(
-                borderRadius: widget.borderRadius,
+                borderRadius: widget.borderRadius!,
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
                     sigmaX: widget.barBlur,
