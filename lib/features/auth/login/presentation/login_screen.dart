@@ -61,13 +61,15 @@ class _LoginScreenState extends State<LoginScreen> {
     if (hasPermission && mounted) {
       await selectPhoto();
     } else {
-      BarHelper.showAlert(
+      if(mounted) {
+        BarHelper.showAlert(
         context,
         alert: AlertModel(
           message: context.t.core.file_picker.no_permission,
           type: AlertType.destructive,
         ),
       );
+      }
     }
   }
 
