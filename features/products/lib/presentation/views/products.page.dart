@@ -18,13 +18,11 @@ class ProductsPage extends StatelessWidget {
   ProductsPage({super.key});
 
   final productListCubit = $.get<ProductListCubit>();
-  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
       forceScroll: true,
-      margin: $.paddings.md.all,
       appBar: AppBarSettings(
         title: const Text('products.'),
         actions: [
@@ -68,7 +66,7 @@ class ProductsPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Wrap(
                 spacing: $.paddings.sm,
-                children: ['All', 'Clothes', 'Furniture', 'Shoes', 'Miscellaneous'].map((e) {
+                children: ['asddsassks', 'Clothesss', 'Furniture', 'Shoes', 'Miscellaneous'].map((e) {
                   return CupertinoCard(
                     useCupertinoRounder: true,
                     height: 30,
@@ -93,8 +91,8 @@ class ProductsPage extends StatelessWidget {
       body: BlocProvider(
         create: (_) => productListCubit,
         child: PaginatedList<ProductModel, ProductListCubit>(
-          scrollController: scrollController,
           onNextPage: (offset) => productListCubit.getProducts(offset: offset),
+          localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
           itemBuilder: (_, product, __) {
             return CupertinoCard(
               onPressed: () => $.navigator.push(

@@ -15,7 +15,9 @@ dependencies:
     path: ../design
   dio: ^5.4.0
   dio_smart_retry: ^6.0.0
-  easy_refresh: ^3.3.4
+  easy_refresh:
+    git:
+      url: https://github.com/xuelongqy/flutter_easy_refresh.git
   envied: ^0.5.3
   extended_nested_scroll_view: ^6.2.1
   fading_edge_scrollview: ^4.0.0

@@ -1,6 +1,5 @@
 // ignore_for_file: max_lines_for_function, max_lines_for_file
 import 'package:deps/design/design.dart';
-import 'package:deps/features/features.dart';
 import 'package:deps/packages/adaptive_theme.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
@@ -24,7 +23,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
-      margin: $.paddings.md.horizontal,
       forceScroll: true,
       appBar: AppBarSettings(
         title: const Text(

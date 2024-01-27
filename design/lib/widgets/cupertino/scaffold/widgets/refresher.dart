@@ -4,19 +4,14 @@ import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 
 class Refresher extends StatelessWidget {
-  Refresher({
-    required this.topPadding,
-    required this.refreshListenable,
-    super.key,
-  });
+  Refresher({required this.refreshListenable, super.key});
 
   final IndicatorStateListenable refreshListenable;
-  final double topPadding;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: topPadding + 52.0,
+      top: MediaQuery.paddingOf(context).top + 52.0,
       child: ValueListenableBuilder<IndicatorState?>(
         valueListenable: refreshListenable,
         builder: (_, state, __) {

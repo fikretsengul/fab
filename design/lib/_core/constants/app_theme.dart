@@ -23,7 +23,7 @@ class _$AppTheme {
   static const List<Color> surface = [Color.fromARGB(255, 229, 229, 234), Color.fromARGB(255, 44, 44, 46)];
   static const List<Color> placeholder = [Color.fromARGB(255, 242, 242, 247), Color.fromARGB(255, 28, 28, 30)];
   static const List<Color> appBarExpanded = [Colors.white, Colors.black];
-  static const List<Color> appBarCollapsed = [Color.fromARGB(255, 241, 241, 241), Color.fromARGB(255, 14, 14, 14)];
+  static const List<Color> appBarCollapsed = [Colors.white, Colors.black];
 
   /// Components
   static final List<TextStyle> appBarTitleNActions = [

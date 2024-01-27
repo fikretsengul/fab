@@ -1,7 +1,6 @@
 // ignore_for_file: max_lines_for_file, max_lines_for_function
 import 'dart:ui';
 
-import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +18,9 @@ class AnimatedAppBarBuilder extends StatefulWidget {
     required this.appBar,
     required this.components,
     required this.keys,
-    required this.topPadding,
     required this.shouldStretch,
     required this.shouldTransiteBetweenRoutes,
     required this.scrollController,
-    required this.refreshListenable,
     required this.isScrollEnabled,
     this.onCollapsed,
     this.brightness,
@@ -37,11 +34,9 @@ class AnimatedAppBarBuilder extends StatefulWidget {
   final NavigationBarStaticComponentsKeys keys;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
-  final IndicatorStateListenable refreshListenable;
   final ScrollController scrollController;
   final bool shouldStretch;
   final bool shouldTransiteBetweenRoutes;
-  final double topPadding;
 
   @override
   State<AnimatedAppBarBuilder> createState() => _AnimatedAppBarBuilderState();
@@ -136,16 +131,18 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
         return ValueListenableBuilder(
           valueListenable: _store.scrollOffset,
           builder: (_, __, ___) {
+            final topPadding = MediaQuery.paddingOf(context).top;
+
             var fullAppBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
                 ? clampDouble(
-                    widget.topPadding + widget.measures.appbarHeight - _scrollOffset,
-                    widget.topPadding + widget.measures.primaryToolbarHeight + widget.appBar.bottom!.height,
-                    widget.shouldStretch ? 3000 : widget.topPadding + widget.measures.appbarHeight,
+                    topPadding + widget.measures.appbarHeight - _scrollOffset,
+                    topPadding + widget.measures.primaryToolbarHeight + widget.appBar.bottom!.height,
+                    widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
                   )
                 : clampDouble(
-                    widget.topPadding + widget.measures.appbarHeight - _scrollOffset,
-                    widget.topPadding + widget.measures.appbarHeight - widget.measures.largeTitleContainerHeight,
-                    widget.shouldStretch ? 3000 : widget.topPadding + widget.measures.appbarHeight,
+                    topPadding + widget.measures.appbarHeight - _scrollOffset,
+                    topPadding + widget.measures.appbarHeight - widget.measures.largeTitleContainerHeight,
+                    widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
                   );
 
             var largeTitleHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
@@ -186,14 +183,13 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
                     ? 1.0
                     : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0));
 
-            final focussedToolbar =
-                widget.topPadding + widget.measures.searchContainerHeight + widget.appBar.bottom!.height;
+            final focussedToolbar = topPadding + widget.measures.searchContainerHeight + widget.appBar.bottom!.height;
 
             var scaleTitle = _scrollOffset < 0 ? clampDouble(1 - _scrollOffset / 1500, 1, 1.12) : 1.0;
 
             if (widget.appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.steady &&
                 _store.searchBarHasFocus.value) {
-              fullAppBarHeight = widget.topPadding + widget.measures.appbarHeight;
+              fullAppBarHeight = topPadding + widget.measures.appbarHeight;
               largeTitleHeight = widget.measures.appbarHeightExceptPrimaryToolbar;
               largeTitleHeight = widget.measures.largeTitleContainerHeight;
               scaleTitle = 1;
@@ -211,6 +207,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
             }
 
             return AnimatedAppBar(
+              animationController: _animationController,
               measures: widget.measures,
               appBar: widget.appBar,
               largeTitleHeight: largeTitleHeight,
@@ -225,9 +222,8 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
               fullAppBarHeight: fullAppBarHeight,
               focussedToolbar: focussedToolbar,
               isCollapsed: _isCollapsed,
-              topPadding: widget.topPadding,
+              topPadding: topPadding,
               shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
-              refreshListenable: widget.refreshListenable,
               brightness: widget.brightness,
               color: _animation.value,
             );

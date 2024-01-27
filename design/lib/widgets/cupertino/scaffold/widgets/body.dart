@@ -13,14 +13,12 @@ class Body extends StatelessWidget {
   const Body({
     required this.scrollController,
     required this.body,
-    required this.topPadding,
     required this.measures,
     required this.animationBehavior,
     required this.scrollBehavior,
     required this.refreshListenable,
     required this.isScrollEnabled,
     required this.nestedScrollViewKey,
-    required this.margin,
     this.onRefresh,
     super.key,
   });
@@ -29,13 +27,12 @@ class Body extends StatelessWidget {
   final SearchBarAnimationBehavior animationBehavior;
   final Widget body;
   final ValueNotifier<bool> isScrollEnabled;
-  final EdgeInsets margin;
   final Measures measures;
   final GlobalKey<NestedScrollViewStatePlus> nestedScrollViewKey;
   final IndicatorStateListenable refreshListenable;
   final SearchBarScrollBehavior scrollBehavior;
   final ScrollController scrollController;
-  final double topPadding;
+  //final double topPadding;
 
   Store get _store => Store.instance();
 
@@ -80,7 +77,7 @@ class Body extends StatelessWidget {
                   ValueListenableBuilder(
                     valueListenable: _store.searchBarAnimationStatus,
                     builder: (_, __, ___) {
-                      final height = topPadding + measures.appbarHeight;
+                      final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
 
                       return OverlapAbsorberPlus(
                         sliver: SliverPersistentHeader(
@@ -100,10 +97,7 @@ class Body extends StatelessWidget {
                 builder: (_, isInHero, __) {
                   return IgnorePointer(
                     ignoring: isInHero,
-                    child: Padding(
-                      padding: margin,
-                      child: body,
-                    ),
+                    child: body,
                   );
                 },
               ),

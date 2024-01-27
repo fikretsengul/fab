@@ -564,14 +564,11 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
                 backChevron ?? const BackChevron(),
                 const Padding(padding: EdgeInsetsDirectional.only(start: 6)),
                 Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 1),
-                    child: backLabel ??
-                        BackLabel(
-                          specifiedPreviousTitle: previousPageTitle,
-                          route: currentRoute,
-                        ),
-                  ),
+                  child: backLabel ??
+                      BackLabel(
+                        specifiedPreviousTitle: previousPageTitle,
+                        route: currentRoute,
+                      ),
                 ),
               ],
             ),
@@ -1394,7 +1391,7 @@ class _NavigationBarComponentsTransition {
         begin: from,
         end: from.shift(
           Offset(
-            -4.65 * forwardDirection * bottomNavBarBox.size.width,
+            -2.5 * forwardDirection * bottomNavBarBox.size.width,
             0,
           ),
         ),
@@ -1403,7 +1400,7 @@ class _NavigationBarComponentsTransition {
       return PositionedTransition(
         rect: animation.drive(positionTween),
         child: FadeTransition(
-          opacity: fadeOutBy(0.1),
+          opacity: fadeOutBy(0.3),
           child: bottomSearchBar.child,
         ),
       );
@@ -1506,7 +1503,7 @@ class _NavigationBarComponentsTransition {
         begin: from,
         end: from.shift(
           Offset(
-            -4.65 * forwardDirection * bottomNavBarBox.size.width,
+            -2.5 * forwardDirection * bottomNavBarBox.size.width,
             0,
           ),
         ),
@@ -1515,7 +1512,7 @@ class _NavigationBarComponentsTransition {
       return PositionedTransition(
         rect: animation.drive(positionTween),
         child: FadeTransition(
-          opacity: fadeOutBy(0.7),
+          opacity: fadeOutBy(0.3),
           child: Material(
             color: Colors.transparent,
             child: bottomAppbarBottom.child,

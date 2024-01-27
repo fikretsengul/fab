@@ -1,5 +1,5 @@
-import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../_core/constants/app_theme.dart';
 import '../../models/appbar_search_bar_settings.dart';
@@ -12,6 +12,7 @@ import 'app_bar_widget.dart';
 
 class AnimatedAppBar extends StatelessWidget {
   const AnimatedAppBar({
+    required this.animationController,
     required this.measures,
     required this.appBar,
     required this.largeTitleHeight,
@@ -28,12 +29,12 @@ class AnimatedAppBar extends StatelessWidget {
     required this.focussedToolbar,
     required this.isCollapsed,
     required this.shouldTransiteBetweenRoutes,
-    required this.refreshListenable,
     required this.color,
     this.brightness,
     super.key,
   });
 
+  final AnimationController animationController;
   final Color color;
   final AppBarSettings appBar;
   final Brightness? brightness;
@@ -47,7 +48,6 @@ class AnimatedAppBar extends StatelessWidget {
   final double largeTitleHeight;
   final Measures measures;
   final double opacity;
-  final IndicatorStateListenable refreshListenable;
   final double scaleTitle;
   final double searchBarHeight;
   final bool shouldTransiteBetweenRoutes;
@@ -72,72 +72,78 @@ class AnimatedAppBar extends StatelessWidget {
                   ? focussedToolbar
                   : fullAppBarHeight)
               : fullAppBarHeight,
-          child: wrapWithBackground(
-            border: appBar.border,
-            brightness: brightness,
-            hasBackgroundBlur: appBar.hasBackgroundBlur,
-            backgroundColor: color,
-            child: Builder(
-              builder: (context) {
-                final Widget appBarWidget = AppBarWidget(
-                  animationStatus: animationStatus,
-                  measures: measures,
-                  appBar: appBar,
-                  largeTitleHeight: largeTitleHeight,
-                  scaleTitle: scaleTitle,
-                  components: components,
-                  searchBarHeight: searchBarHeight,
-                  opacity: opacity,
-                  titleOpacity: titleOpacity,
-                  editingController: editingController,
-                  focusNode: focusNode,
-                  keys: keys,
-                  refreshListenable: refreshListenable,
-                );
+          child: AnimatedBuilder(
+            animation: animationController,
+            builder: (context, child) {
+              return DecoratedBox(
+                decoration: defaultBorder(animationController.value),
+                child: wrapWithBackground(
+                  brightness: brightness,
+                  hasBackgroundBlur: appBar.hasBackgroundBlur,
+                  backgroundColor: color,
+                  child: Builder(
+                    builder: (context) {
+                      final Widget appBarWidget = AppBarWidget(
+                        animationStatus: animationStatus,
+                        measures: measures,
+                        appBar: appBar,
+                        largeTitleHeight: largeTitleHeight,
+                        scaleTitle: scaleTitle,
+                        components: components,
+                        searchBarHeight: searchBarHeight,
+                        opacity: opacity,
+                        titleOpacity: titleOpacity,
+                        editingController: editingController,
+                        focusNode: focusNode,
+                        keys: keys,
+                      );
 
-                if (!shouldTransiteBetweenRoutes || !isTransitionable(context)) {
-                  return appBarWidget;
-                }
-
-                return Hero(
-                  tag: HeroTag(Navigator.of(context)),
-                  createRectTween: linearTranslateWithLargestRectSizeTween,
-                  flightShuttleBuilder: (_, animation, flightDirection, fromHeroContext, toHeroContext) {
-                    animation.addStatusListener((status) {
-                      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
-                        _store.isInHero.value = false;
-                      } else {
-                        _store.isInHero.value = true;
+                      if (!shouldTransiteBetweenRoutes || !isTransitionable(context)) {
+                        return appBarWidget;
                       }
-                    });
 
-                    return navBarHeroFlightShuttleBuilder(
-                      animation,
-                      flightDirection,
-                      fromHeroContext,
-                      toHeroContext,
-                    );
-                  },
-                  placeholderBuilder: (_, __, child) {
-                    return navBarHeroLaunchPadBuilder(child);
-                  },
-                  transitionOnUserGestures: true,
-                  child: TransitionableNavigationBar(
-                    componentsKeys: keys,
-                    backgroundColor: color,
-                    backButtonTextStyle: context.appTheme.appBarTitleNActions.copyWith(inherit: false),
-                    titleTextStyle: defaultTitleTextStyle(context, appBar),
-                    largeTitleTextStyle:
-                        appBar.largeTitle!.textStyle ?? context.appTheme.appBarLargeTitle.copyWith(inherit: false),
-                    border: appBar.border,
-                    hasUserMiddle: isCollapsed,
-                    largeExpanded: !isCollapsed && appBar.largeTitle!.enabled,
-                    searchBarHasFocus: _store.searchBarHasFocus.value,
-                    child: appBarWidget,
+                      return Hero(
+                        tag: HeroTag(Navigator.of(context)),
+                        createRectTween: linearTranslateWithLargestRectSizeTween,
+                        flightShuttleBuilder: (_, animation, flightDirection, fromHeroContext, toHeroContext) {
+                          animation.addStatusListener((status) {
+                            if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+                              _store.isInHero.value = false;
+                            } else {
+                              _store.isInHero.value = true;
+                            }
+                          });
+
+                          return navBarHeroFlightShuttleBuilder(
+                            animation,
+                            flightDirection,
+                            fromHeroContext,
+                            toHeroContext,
+                          );
+                        },
+                        placeholderBuilder: (_, __, child) {
+                          return navBarHeroLaunchPadBuilder(child);
+                        },
+                        transitionOnUserGestures: true,
+                        child: TransitionableNavigationBar(
+                          componentsKeys: keys,
+                          backgroundColor: color,
+                          backButtonTextStyle: context.appTheme.appBarTitleNActions.copyWith(inherit: false),
+                          titleTextStyle: defaultTitleTextStyle(context, appBar),
+                          largeTitleTextStyle: appBar.largeTitle!.textStyle ??
+                              context.appTheme.appBarLargeTitle.copyWith(inherit: false),
+                          border: null,
+                          hasUserMiddle: isCollapsed,
+                          largeExpanded: !isCollapsed && appBar.largeTitle!.enabled,
+                          searchBarHasFocus: _store.searchBarHasFocus.value,
+                          child: appBarWidget,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         );
       },

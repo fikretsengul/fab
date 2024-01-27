@@ -7,7 +7,6 @@ import '../../../utils/store.dart';
 
 class SearchBarResult extends StatelessWidget {
   const SearchBarResult({
-    required this.topPadding,
     required this.measures,
     required this.searchBar,
     super.key,
@@ -15,7 +14,6 @@ class SearchBarResult extends StatelessWidget {
 
   final Measures measures;
   final AppBarSearchBarSettings searchBar;
-  final double topPadding;
 
   Store get _store => Store.instance();
 
@@ -40,7 +38,7 @@ class SearchBarResult extends StatelessWidget {
                   ) ??
                   CupertinoTheme.of(context).scaffoldBackgroundColor,
               padding: EdgeInsets.only(
-                top: topPadding + measures.searchContainerHeight + measures.bottomToolbarHeight,
+                top: MediaQuery.paddingOf(context).top + measures.searchContainerHeight + measures.bottomToolbarHeight,
               ),
               child: Stack(
                 children: [

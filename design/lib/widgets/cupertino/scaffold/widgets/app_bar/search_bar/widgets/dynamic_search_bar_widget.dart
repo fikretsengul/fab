@@ -120,7 +120,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
             AnimatedContainer(
               duration: widget.animationDuration,
               width: widget.searchBarHasFocus
-                  ? textSize(
+                  ? defaultTextSize(
                       widget.searchBar.cancelButtonText,
                       context.appTheme.appBarTitleNActions,
                     )

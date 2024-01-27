@@ -2,12 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/cupertino.dart';
-
-import '_core/cubits/paginated_list/paginated_list.state.dart';
 
 class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulWidget {
   const PaginatedList({
@@ -16,14 +15,14 @@ class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulW
     super.key,
     this.offset = 0,
     this.limit = 20,
-    this.scrollController,
+    this.localFilter,
   });
 
   final int offset;
   final int limit;
   final ValueChanged<int> onNextPage;
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
-  final ScrollController? scrollController;
+  final bool Function(T)? localFilter;
 
   @override
   State<PaginatedList<T, C>> createState() => _PaginatedListState<T, C>();
@@ -47,13 +46,14 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
         state.whenOrNull(
           refresh: () => _pagingController.refresh(),
           loaded: (items) {
-            final isLastPage = items.length < widget.limit;
+            final newItems = widget.localFilter != null ? (items.toList()..removeWhere(widget.localFilter!)) : items;
+            final isLastPage = newItems.length < widget.limit;
 
             if (isLastPage) {
-              _pagingController.appendLastPage(items);
+              _pagingController.appendLastPage(newItems);
             } else {
-              final nextPageKey = (_pagingController.nextPageKey ?? 0) + items.length;
-              _pagingController.appendPage(items, nextPageKey);
+              final nextPageKey = (_pagingController.nextPageKey ?? 0) + newItems.length;
+              _pagingController.appendPage(newItems, nextPageKey);
             }
           },
           failed: (failure) => _pagingController.error = failure.message,
@@ -63,17 +63,20 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           const OverlapInjectorPlus(),
-          PagedSliverGrid<int, T>(
-            pagingController: _pagingController,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              crossAxisCount: 2,
-            ),
-            builderDelegate: PagedChildBuilderDelegate<T>(
-              animateTransitions: true,
-              itemBuilder: (_, item, index) => widget.itemBuilder(context, item, index),
+          SliverPadding(
+            padding: $.paddings.md.all,
+            sliver: PagedSliverGrid<int, T>(
+              pagingController: _pagingController,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                crossAxisCount: 2,
+              ),
+              builderDelegate: PagedChildBuilderDelegate<T>(
+                animateTransitions: true,
+                itemBuilder: (_, item, index) => widget.itemBuilder(context, item, index),
+              ),
             ),
           ),
         ],

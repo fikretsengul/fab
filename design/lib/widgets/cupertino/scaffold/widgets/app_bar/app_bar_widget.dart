@@ -1,4 +1,3 @@
-import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +25,6 @@ class AppBarWidget extends StatelessWidget {
     required this.editingController,
     required this.focusNode,
     required this.keys,
-    required this.refreshListenable,
     super.key,
   });
 
@@ -39,7 +37,6 @@ class AppBarWidget extends StatelessWidget {
   final double largeTitleHeight;
   final Measures measures;
   final double opacity;
-  final IndicatorStateListenable refreshListenable;
   final double scaleTitle;
   final double searchBarHeight;
   final double titleOpacity;

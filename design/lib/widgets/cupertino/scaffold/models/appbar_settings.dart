@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../utils/helpers.dart';
 import 'appbar_bottom_settings.dart';
 import 'appbar_large_title_settings.dart';
 import 'appbar_search_bar_settings.dart';
@@ -27,7 +26,6 @@ class AppBarSettings {
     searchBar = searchBar ?? AppBarSearchBarSettings();
     largeTitle = largeTitle ?? AppBarLargeTitleSettings();
     bottom = bottom ?? AppBarBottomSettings();
-    border = border ?? defaultBorder();
 
     if (!searchBar!.enabled) {
       searchBar!.height = 0;

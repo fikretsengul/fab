@@ -40,9 +40,9 @@ command:
     runPubGetInParallel: false
 
     # To run something such as a build runner automatically after melos bootstrap
-    hooks:
-      pre: fvm flutter pub get
-      post: melos generate
+    #hooks:
+      #pre: fvm flutter pub get
+      #post: melos generate
 
 
 # We are setting the concurrency to 1 in some commands because a higher

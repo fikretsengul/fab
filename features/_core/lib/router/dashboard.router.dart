@@ -19,8 +19,8 @@ class DashboardRouter extends StatelessWidget {
     return BlocProvider(
       create: (_) => $.get<UserCubit>(),
       child: AutoTabsScaffold(
-        routes: [
-          const ProductsRouter(),
+        routes: const [
+          ProductsRouter(),
           SettingsRoute(),
         ],
         navigatorObservers: () => [HeroController()],

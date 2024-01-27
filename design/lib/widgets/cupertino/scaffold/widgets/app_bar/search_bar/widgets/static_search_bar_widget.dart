@@ -115,7 +115,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                     AnimatedContainer(
                       duration: measures.standartAnimationDuration,
                       width: _store.searchBarHasFocus.value
-                          ? textSize(
+                          ? defaultTextSize(
                               searchBar.cancelButtonText,
                               context.appTheme.appBarTitleNActions,
                             )

@@ -28,7 +28,6 @@ class CupertinoScaffold extends StatefulWidget {
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
     this.forceScroll = false,
-    this.margin = EdgeInsets.zero,
   }) : measures = Measures(
           searchTextFieldHeight: appBar.searchBar!.height,
           largeTitleContainerHeight: appBar.largeTitle!.height,
@@ -41,7 +40,6 @@ class CupertinoScaffold extends StatefulWidget {
   final AppBarSettings appBar;
   final Widget body;
   final bool forceScroll;
-  final EdgeInsets margin;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
   late final ScrollController? scrollController;
@@ -101,7 +99,6 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final topPadding = MediaQuery.paddingOf(context).top;
     final components = NavigationBarStaticComponents(
       keys: _keys,
       route: ModalRoute.of(context),
@@ -138,7 +135,6 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
           children: [
             Body(
               scrollController: _scrollController,
-              topPadding: topPadding,
               measures: widget.measures,
               scrollBehavior: widget.appBar.searchBar!.scrollBehavior,
               animationBehavior: widget.appBar.searchBar!.animationBehavior,
@@ -147,30 +143,23 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
               refreshListenable: _refreshListenable,
               isScrollEnabled: _isContentScrollable,
               nestedScrollViewKey: _nestedScrollViewKey,
-              margin: widget.margin,
             ),
             SearchBarResult(
-              topPadding: topPadding,
               measures: widget.measures,
               searchBar: widget.appBar.searchBar!,
             ),
             AnimatedAppBarBuilder(
-              refreshListenable: _refreshListenable,
               scrollController: _scrollController,
               measures: widget.measures,
               appBar: widget.appBar,
               components: components,
               keys: _keys,
-              topPadding: topPadding,
               shouldStretch: widget.shouldStretch,
               shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
               onCollapsed: widget.onCollapsed,
               isScrollEnabled: _isContentScrollable,
             ),
-            Refresher(
-              topPadding: topPadding,
-              refreshListenable: _refreshListenable,
-            ),
+            Refresher(refreshListenable: _refreshListenable),
           ],
         ),
       ),
