@@ -19,6 +19,7 @@ class Body extends StatelessWidget {
     required this.refreshListenable,
     required this.isScrollEnabled,
     required this.nestedScrollViewKey,
+    required this.hasScrollView,
     this.onRefresh,
     super.key,
   });
@@ -32,7 +33,7 @@ class Body extends StatelessWidget {
   final IndicatorStateListenable refreshListenable;
   final SearchBarScrollBehavior scrollBehavior;
   final ScrollController scrollController;
-  //final double topPadding;
+  final bool hasScrollView;
 
   Store get _store => Store.instance();
 
@@ -55,7 +56,7 @@ class Body extends StatelessWidget {
             return NestedScrollViewPlus(
               key: nestedScrollViewKey,
               controller: scrollController,
-              physics: SnapScrollPhysics(
+              physics: RawSnapScrollPhysics(
                 parent: isContentScrollable ? physics : const NeverScrollableScrollPhysics(),
                 snaps: [
                   if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
@@ -97,7 +98,17 @@ class Body extends StatelessWidget {
                 builder: (_, isInHero, __) {
                   return IgnorePointer(
                     ignoring: isInHero,
-                    child: body,
+                    child: hasScrollView
+                        ? body
+                        : CustomScrollView(
+                            physics: isContentScrollable
+                                ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+                                : const NeverScrollableScrollPhysics(),
+                            slivers: [
+                              const OverlapInjectorPlus(),
+                              SliverToBoxAdapter(child: body),
+                            ],
+                          ),
                   );
                 },
               ),

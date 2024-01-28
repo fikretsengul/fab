@@ -1,5 +1,5 @@
 import 'package:deps/design/design.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' hide CupertinoNavigationBarBackButton;
 
 import '../../../utils/measures.dart';
 import '../../transitionable_navigation_bar.dart';
@@ -7,13 +7,17 @@ import '../../transitionable_navigation_bar.dart';
 class PersistentNavigationBar extends StatelessWidget {
   const PersistentNavigationBar({
     required this.components,
+    required this.keys,
     super.key,
+    this.backIcon,
     this.padding,
     this.middleVisible,
   });
 
+  final NavigationBarStaticComponentsKeys keys;
   final NavigationBarStaticComponents components;
   final bool? middleVisible;
+  final Widget? backIcon;
   final EdgeInsetsDirectional? padding;
 
   @override
@@ -36,11 +40,16 @@ class PersistentNavigationBar extends StatelessWidget {
     }
 
     Widget? leading = components.leading;
-    final Widget? backChevron = components.backChevron;
+    final backChevron = backIcon != null
+        ? KeyedSubtree(
+            key: keys.backChevronKey,
+            child: backIcon!,
+          )
+        : components.backChevron;
     final Widget? backLabel = components.backLabel;
 
     if (leading == null && backChevron != null && backLabel != null) {
-      leading = SuperCupertinoNavigationBarBackButton.assemble(
+      leading = CupertinoNavigationBarBackButton.assemble(
         backChevron,
         context.appTheme.appBarTitleNActions.copyWith(inherit: false),
         backLabel,

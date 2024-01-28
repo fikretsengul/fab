@@ -40,7 +40,9 @@ dependencies:
   intl: ^0.18.1
   json_annotation: ^4.8.1
   json_theme: ^6.4.0
-  nested_scroll_view_plus: ^1.0.2
+  nested_scroll_view_plus:
+    git:
+      url: https://github.com/idootop/nested_scroll_view_plus.git
   path_provider: ^2.1.2
   permission_handler: ^11.2.0
   reactive_forms: ^16.1.1
@@ -56,6 +58,7 @@ dependencies:
   talker_dio_logger: ^2.4.0
   talker_flutter: ^3.6.0
   theme_tailor_annotation: ^2.0.2
+  uicons: ^1.0.1
   widgetbook: ^3.7.1
   widgetbook_annotation: ^3.1.0
 

@@ -28,6 +28,7 @@ class CupertinoScaffold extends StatefulWidget {
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
     this.forceScroll = false,
+    this.hasScrollView = false,
   }) : measures = Measures(
           searchTextFieldHeight: appBar.searchBar!.height,
           largeTitleContainerHeight: appBar.largeTitle!.height,
@@ -44,6 +45,7 @@ class CupertinoScaffold extends StatefulWidget {
   final ValueChanged<bool>? onCollapsed;
   late final ScrollController? scrollController;
   final bool shouldStretch;
+  final bool hasScrollView;
   final bool shouldTransiteBetweenRoutes;
 
   @override
@@ -107,9 +109,12 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
       automaticallyImplyTitle: true,
       previousPageTitle: widget.appBar.previousPageTitle,
       userMiddle: _getTitle(),
-      userTrailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [...widget.appBar.actions],
+      userTrailing: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [...widget.appBar.actions],
+        ),
       ),
       largeTitleActions: Row(
         children: [
@@ -143,6 +148,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
               refreshListenable: _refreshListenable,
               isScrollEnabled: _isContentScrollable,
               nestedScrollViewKey: _nestedScrollViewKey,
+              hasScrollView: widget.hasScrollView,
             ),
             SearchBarResult(
               measures: widget.measures,

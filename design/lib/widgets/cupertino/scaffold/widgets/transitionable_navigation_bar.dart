@@ -510,8 +510,8 @@ class BackChevron extends StatelessWidget {
   }
 }
 
-class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
-  const SuperCupertinoNavigationBarBackButton({
+class CupertinoNavigationBarBackButton extends StatelessWidget {
+  const CupertinoNavigationBarBackButton({
     required this.actionTextStyle,
     super.key,
     this.color,
@@ -520,7 +520,7 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
   })  : backChevron = null,
         backLabel = null;
 
-  const SuperCupertinoNavigationBarBackButton.assemble(
+  const CupertinoNavigationBarBackButton.assemble(
     this.backChevron,
     this.actionTextStyle,
     this.backLabel, {
@@ -562,7 +562,6 @@ class SuperCupertinoNavigationBarBackButton extends StatelessWidget {
               children: <Widget>[
                 const Padding(padding: EdgeInsetsDirectional.only(start: 8)),
                 backChevron ?? const BackChevron(),
-                const Padding(padding: EdgeInsetsDirectional.only(start: 6)),
                 Flexible(
                   child: backLabel ??
                       BackLabel(

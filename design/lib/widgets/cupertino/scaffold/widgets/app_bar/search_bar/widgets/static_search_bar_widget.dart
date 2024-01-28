@@ -67,13 +67,16 @@ class StaticSearchBarWidget extends StatelessWidget {
                 Flexible(
                   child: CupertinoSearchTextField(
                     padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
+                    prefixInsets: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 2),
+                    suffixInsets: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                    borderRadius: searchBar.borderRadius,
                     prefixIcon: Opacity(
                       opacity: _store.searchBarHasFocus.value ? 0 : opacity,
                       child: searchBar.prefixIcon,
                     ),
                     placeholder: searchBar.placeholderText,
                     placeholderStyle: context.appTheme.body.copyWith(
-                      color: CupertinoColors.systemGrey.withOpacity(opacity),
+                      color: context.appTheme.placeholder.withOpacity(opacity),
                     ),
                     style: context.appTheme.body,
                     backgroundColor: context.appTheme.surface,

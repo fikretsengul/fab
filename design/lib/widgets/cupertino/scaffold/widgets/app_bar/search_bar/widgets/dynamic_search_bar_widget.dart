@@ -80,6 +80,9 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                 },
                 child: CupertinoSearchTextField(
                   padding: const EdgeInsetsDirectional.fromSTEB(5.5, 0, 5.5, 0),
+                  prefixInsets: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 2),
+                  suffixInsets: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                  borderRadius: widget.searchBar.borderRadius,
                   onSubmitted: (s) {
                     _isSubmitted = true;
                     widget.searchBar.onSubmitted?.call(s);
@@ -102,7 +105,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                   ),
                   placeholder: widget.searchBar.placeholderText,
                   placeholderStyle: context.appTheme.body.copyWith(
-                    color: CupertinoColors.systemGrey.withOpacity(widget.opacity),
+                    color: context.appTheme.placeholder.withOpacity(widget.opacity),
                   ),
                   style: context.appTheme.body,
                   controller: widget.editingController,

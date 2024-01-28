@@ -1,3 +1,4 @@
+import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class AppBarSearchBarSettings {
   AppBarSearchBarSettings({
     this.resultColor,
     this.backgroundColor = CupertinoColors.tertiarySystemFill,
+    this.prefixIcon,
     this.cancelButtonText = 'cancel',
     this.placeholderText = 'search',
     this.enabled = false,
@@ -14,16 +16,11 @@ class AppBarSearchBarSettings {
     this.animationBehavior = SearchBarAnimationBehavior.top,
     this.resultBehavior = SearchBarResultBehavior.visibleOnFocus,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.placeholderTextStyle = const TextStyle(
-      color: CupertinoColors.systemGrey,
-    ),
-    this.prefixIcon = const Icon(
-      CupertinoIcons.search,
-      color: CupertinoColors.systemGrey,
-    ),
+    this.placeholderTextStyle,
     this.actions = const <AppBarActionSettings>[],
     this.height = 36,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.searchResult = const Text(
       '.',
       style: TextStyle(
@@ -36,8 +33,17 @@ class AppBarSearchBarSettings {
     this.onFocused,
     this.searchController,
     this.searchFocusNode,
-  });
+  }) {
+    prefixIcon = prefixIcon ??
+        Icon(
+          UIcons.boldRounded.search,
+          color: CupertinoColors.systemGrey,
+          size: 16,
+        );
+  }
 
+  final BorderRadius borderRadius;
+  Widget? prefixIcon;
   final List<AppBarActionSettings> actions;
   final SearchBarAnimationBehavior animationBehavior;
   final Duration animationDuration;
@@ -50,8 +56,7 @@ class AppBarSearchBarSettings {
   final ValueChanged<String>? onSubmitted;
   final EdgeInsets padding;
   final String placeholderText;
-  final TextStyle placeholderTextStyle;
-  final Icon prefixIcon;
+  final TextStyle? placeholderTextStyle;
   final SearchBarResultBehavior resultBehavior;
   final Color? resultColor;
   final SearchBarScrollBehavior scrollBehavior;

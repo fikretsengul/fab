@@ -7,7 +7,7 @@ import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/cached_network_image_plus.dart';
-import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../domain/models/product.model.dart';
@@ -27,14 +27,25 @@ class ProductsPage extends StatelessWidget {
         title: const Text('products.'),
         actions: [
           CupertinoButton(
+            minSize: 0,
             padding: EdgeInsets.zero,
             onPressed: () {},
-            child: const Icon(CupertinoIcons.heart),
+            child: Icon(
+              UIcons.boldRounded.heart,
+              size: 22,
+              color: context.appTheme.primary,
+            ),
           ),
+          PaddingGap.md(),
           CupertinoButton(
+            minSize: 0,
             padding: EdgeInsets.zero,
             onPressed: () {},
-            child: const Icon(CupertinoIcons.cart),
+            child: Icon(
+              UIcons.boldRounded.shopping_bag,
+              size: 20,
+              color: context.appTheme.primary,
+            ),
           ),
           PaddingGap.xs(),
         ],
@@ -56,7 +67,6 @@ class ProductsPage extends StatelessWidget {
         ),
         searchBar: AppBarSearchBarSettings(
           enabled: true,
-          scrollBehavior: SearchBarScrollBehavior.pinned,
         ),
         bottom: AppBarBottomSettings(
           enabled: true,
@@ -87,37 +97,36 @@ class ProductsPage extends StatelessWidget {
           ),
         ),
       ),
+      hasScrollView: true,
       onRefresh: productListCubit.refresh,
-      body: BlocProvider(
-        create: (_) => productListCubit,
-        child: PaginatedList<ProductModel, ProductListCubit>(
-          onNextPage: (offset) => productListCubit.getProducts(offset: offset),
-          localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
-          itemBuilder: (_, product, __) {
-            return CupertinoCard(
-              onPressed: () => $.navigator.push(
-                ProductDetailsRoute(product: product),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Hero(
-                      tag: '${product.id}',
-                      child: CupertinoImage(
-                        uri: product.images.first,
-                      ),
+      body: PaginatedList<ProductModel, ProductListCubit>(
+        bloc: (_) => productListCubit,
+        onNextPage: (offset) => productListCubit.getProducts(offset: offset),
+        localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+        itemBuilder: (_, product, __) {
+          return CupertinoCard(
+            onPressed: () => $.navigator.push(
+              ProductDetailsRoute(product: product),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 7,
+                  child: Hero(
+                    tag: '${product.id}',
+                    child: CupertinoImage(
+                      uri: product.images.first,
                     ),
                   ),
-                  const Expanded(
-                    flex: 5,
-                    child: SizedBox(),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+                const Expanded(
+                  flex: 3,
+                  child: SizedBox(),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -17,11 +17,11 @@ const String fontName = 'VisueltPro';
 )
 class _$AppTheme {
   /// Colors
-  static const List<Color> primary = [Colors.yellow, Colors.yellow];
+  static const List<Color> primary = [Colors.black, Colors.white];
   static const List<Color> background = [Colors.white, Colors.black];
   static const List<Color> onBackground = [Colors.black, Colors.white];
   static const List<Color> surface = [Color.fromARGB(255, 229, 229, 234), Color.fromARGB(255, 44, 44, 46)];
-  static const List<Color> placeholder = [Color.fromARGB(255, 242, 242, 247), Color.fromARGB(255, 28, 28, 30)];
+  static const List<Color> placeholder = [Color.fromARGB(255, 142, 142, 147), Color.fromARGB(255, 142, 142, 147)];
   static const List<Color> appBarExpanded = [Colors.white, Colors.black];
   static const List<Color> appBarCollapsed = [Colors.white, Colors.black];
 

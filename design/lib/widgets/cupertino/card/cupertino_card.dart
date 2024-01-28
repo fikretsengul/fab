@@ -1,6 +1,8 @@
 // ignore_for_file: max_lines_for_file
 import 'package:flutter/cupertino.dart';
 
+import '../../../_core/constants/app_theme.dart';
+
 class CupertinoCard extends StatelessWidget {
   CupertinoCard({
     super.key,
@@ -50,7 +52,7 @@ class CupertinoCard extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: !useCupertinoRounder ? BorderRadius.all(Radius.circular(radius)) : null,
-          color: color ?? CupertinoColors.tertiarySystemFill,
+          color: color ?? context.appTheme.surface,
           image: image,
           border: border,
         ),

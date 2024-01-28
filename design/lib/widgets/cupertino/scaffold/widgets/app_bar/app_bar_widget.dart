@@ -64,7 +64,9 @@ class AppBarWidget extends StatelessWidget {
                 ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : 1)
                 : 1,
             child: PersistentNavigationBar(
+              keys: keys,
               components: components,
+              backIcon: appBar.backIcon,
               middleVisible: appBar.alwaysShowTitle ? null : titleOpacity != 0,
             ),
           ),
