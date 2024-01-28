@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../../overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../models/appbar_search_bar_settings.dart';
 import '../../../utils/measures.dart';
 import '../../../utils/store.dart';
-import '../../transitionable_navigation_bar.dart';
 import 'widgets/dynamic_search_bar_widget.dart';
 import 'widgets/static_search_bar_widget.dart';
 

@@ -15,6 +15,7 @@ dependencies:
     path: ../design
   dio: ^5.4.0
   dio_smart_retry: ^6.0.0
+  dynamic_tabbar: ^1.0.5
   easy_refresh:
     git:
       url: https://github.com/xuelongqy/flutter_easy_refresh.git

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../widgets/transitionable_navigation_bar.dart';
+import '../../overridens/overriden_transitionable_navigation_bar.dart';
 
 class Measures {
   Measures({

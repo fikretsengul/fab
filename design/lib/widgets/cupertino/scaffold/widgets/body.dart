@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/snap_scroll_physics.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-import '../models/appbar_search_bar_settings.dart';
+import '../../../../design.dart';
+import '../../overridens/overriden_cupertino_scrollbar.dart';
 import '../utils/measures.dart';
 import '../utils/store.dart';
 
@@ -50,42 +51,48 @@ class Body extends StatelessWidget {
               hapticFeedback: true,
             ),
             childBuilder: (_, physics) {
-              return CustomScrollView(
+              return OverridenCupertinoScrollbar(
                 controller: scrollController,
-                physics: SnapScrollPhysics(
-                  parent: isScrollable ? physics : const NeverScrollableScrollPhysics(),
-                  snaps: [
-                    if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
-                      Snap.avoidZone(0, measures.searchContainerHeight),
-                    },
-                    if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
-                      Snap.avoidZone(
-                        measures.searchContainerHeight,
-                        measures.largeTitleContainerHeight + measures.searchContainerHeight,
-                      ),
-                    },
-                    if (scrollBehavior == SearchBarScrollBehavior.pinned) ...{
-                      Snap.avoidZone(0, measures.largeTitleContainerHeight),
-                    },
+                padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + measures.appbarHeight + 8),
+                thumbVisibility: true,
+                thicknessWhileDragging: 6,
+                child: CustomScrollView(
+                  controller: scrollController,
+                  physics: SnapScrollPhysics(
+                    parent: isScrollable ? physics : const NeverScrollableScrollPhysics(),
+                    snaps: [
+                      if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
+                        Snap.avoidZone(0, measures.searchContainerHeight),
+                      },
+                      if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
+                        Snap.avoidZone(
+                          measures.searchContainerHeight,
+                          measures.largeTitleContainerHeight + measures.searchContainerHeight,
+                        ),
+                      },
+                      if (scrollBehavior == SearchBarScrollBehavior.pinned) ...{
+                        Snap.avoidZone(0, measures.largeTitleContainerHeight),
+                      },
+                    ],
+                  ),
+                  slivers: [
+                    ValueListenableBuilder(
+                      valueListenable: _store.searchBarAnimationStatus,
+                      builder: (_, __, ___) {
+                        final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
+
+                        return SliverPersistentHeader(
+                          pinned: true,
+                          delegate: MyDelegate(
+                            minHeight: isScrollable ? 0 : height - 0.000001,
+                            maxHeight: height,
+                          ),
+                        );
+                      },
+                    ),
+                    body,
                   ],
                 ),
-                slivers: [
-                  ValueListenableBuilder(
-                    valueListenable: _store.searchBarAnimationStatus,
-                    builder: (_, __, ___) {
-                      final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
-
-                      return SliverPersistentHeader(
-                        pinned: true,
-                        delegate: MyDelegate(
-                          minHeight: isScrollable ? 0 : height - 0.000001,
-                          maxHeight: height,
-                        ),
-                      );
-                    },
-                  ),
-                  body,
-                ],
               );
             },
           ),

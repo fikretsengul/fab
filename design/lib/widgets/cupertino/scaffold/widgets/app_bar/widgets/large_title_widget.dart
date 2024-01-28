@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../../overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../models/appbar_search_bar_settings.dart';
 import '../../../models/appbar_settings.dart';
 import '../../../utils/measures.dart';
 import '../../../utils/store.dart';
-import '../../transitionable_navigation_bar.dart';
 
 class LargeTitleWidget extends StatelessWidget {
   const LargeTitleWidget({

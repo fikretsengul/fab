@@ -9,16 +9,32 @@ import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/cached_network_image_plus.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../domain/models/product.model.dart';
 import '../cubits/product_list.cubit.dart';
 
 @RoutePage()
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends StatefulWidget {
   ProductsPage({super.key});
 
-  final productListCubit = $.get<ProductListCubit>();
+  @override
+  State<ProductsPage> createState() => _ProductsPageState();
+}
 
+class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderStateMixin {
+  late final TabController _tabController = TabController(length: 3, vsync: this);
+  final List<Tab> _tabs = [
+    const Tab(
+      text: 'All',
+    ),
+    const Tab(
+      text: 'Clothes',
+    ),
+    const Tab(
+      text: 'Furniture',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
@@ -70,35 +86,68 @@ class ProductsPage extends StatelessWidget {
         ),
         bottom: AppBarBottomSettings(
           enabled: true,
-          child: PaddingSymmetric.md(
+          child: PaddingSymmetric.sm(
             horizontal: true,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Wrap(
-                spacing: $.paddings.sm,
-                children: ['asddsassks', 'Clothesss', 'Furniture', 'Shoes', 'Miscellaneous'].map((e) {
-                  return CupertinoCard(
-                    useCupertinoRounder: true,
-                    height: 30,
-                    padding: $.paddings.sm.horizontal,
-                    color: e == 'All' ? context.colorScheme.primary : null,
-                    child: Center(
-                      child: Text(
-                        e,
-                        style: context.textTheme.labelMedium?.copyWith(
-                          color: e == 'All' ? CupertinoTheme.of(context).primaryContrastingColor : null,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
+            child: TabBar(
+              controller: _tabController,
+              isScrollable: true,
+              tabAlignment: TabAlignment.start,
+              padding: EdgeInsets.zero,
+              tabs: _tabs,
             ),
           ),
         ),
       ),
-      onRefresh: productListCubit.refresh,
-      body: PaginatedList<ProductModel, ProductListCubit>(
+      onRefresh: () {},
+      body: SliverFillRemaining(
+        child: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _tabController,
+          children: [
+            // First tab
+            PaginatedList<ProductModel, ProductListCubit>(
+              onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
+              localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+              itemBuilder: (_, product, __) {
+                return CupertinoCard(
+                  onPressed: () => $.navigator.push(
+                    ProductDetailsRoute(product: product),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 7,
+                        child: Hero(
+                          tag: '${product.id}',
+                          child: CupertinoImage(
+                            uri: product.images.first,
+                          ),
+                        ),
+                      ),
+                      const Expanded(
+                        flex: 3,
+                        child: SizedBox(),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+
+            // Second tab
+            const Center(
+              child: Text('Tab 2'),
+            ),
+
+            // Third tab
+            const Center(
+              child: Text('Tab 3'),
+            ),
+          ],
+        ),
+      ),
+
+/*       PaginatedList<ProductModel, ProductListCubit>(
         bloc: (_) => productListCubit,
         onNextPage: (offset) => productListCubit.getProducts(offset: offset),
         localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
@@ -126,7 +175,7 @@ class ProductsPage extends StatelessWidget {
             ),
           );
         },
-      ),
+      ), */
     );
   }
 }

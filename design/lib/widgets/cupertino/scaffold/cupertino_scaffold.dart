@@ -6,6 +6,7 @@ import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_core/constants/app_theme.dart';
+import '../overridens/overriden_transitionable_navigation_bar.dart';
 import 'models/appbar_settings.dart';
 import 'utils/helpers.dart';
 import 'utils/measures.dart';
@@ -14,7 +15,6 @@ import 'widgets/app_bar/animated_app_bar_builder.dart';
 import 'widgets/app_bar/search_bar/search_bar_result.dart';
 import 'widgets/body.dart';
 import 'widgets/refresher.dart';
-import 'widgets/transitionable_navigation_bar.dart';
 
 class CupertinoScaffold extends StatefulWidget {
   CupertinoScaffold({

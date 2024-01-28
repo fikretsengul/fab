@@ -1,8 +1,8 @@
 import 'package:deps/design/design.dart';
 import 'package:flutter/cupertino.dart' hide CupertinoNavigationBarBackButton;
 
+import '../../../../overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../utils/measures.dart';
-import '../../transitionable_navigation_bar.dart';
 
 class PersistentNavigationBar extends StatelessWidget {
   const PersistentNavigationBar({

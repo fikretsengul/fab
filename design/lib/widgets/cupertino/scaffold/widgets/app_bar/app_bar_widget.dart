@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../overridens/overriden_transitionable_navigation_bar.dart';
 import '../../models/appbar_search_bar_settings.dart';
 import '../../models/appbar_settings.dart';
 import '../../utils/measures.dart';
 import '../../utils/store.dart';
-import '../transitionable_navigation_bar.dart';
 import 'search_bar/search_bar_widget.dart';
 import 'widgets/bottom_toolbar_widget.dart';
 import 'widgets/large_title_widget.dart';

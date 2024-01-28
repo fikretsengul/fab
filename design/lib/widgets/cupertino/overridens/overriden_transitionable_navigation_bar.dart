@@ -367,7 +367,7 @@ RectTween linearTranslateWithLargestRectSizeTween(Rect? begin, Rect? end) {
 }
 
 Widget navBarHeroLaunchPadBuilder(Widget child) {
-  assert(child is TransitionableNavigationBar);
+  assert(child is OverridenTransitionableNavigationBar);
 
   return Visibility(
     maintainSize: true,
@@ -390,11 +390,11 @@ Widget navBarHeroFlightShuttleBuilder(
   final fromHeroWidget = fromHeroContext.widget as Hero;
   final toHeroWidget = toHeroContext.widget as Hero;
 
-  assert(fromHeroWidget.child is TransitionableNavigationBar);
-  assert(toHeroWidget.child is TransitionableNavigationBar);
+  assert(fromHeroWidget.child is OverridenTransitionableNavigationBar);
+  assert(toHeroWidget.child is OverridenTransitionableNavigationBar);
 
-  final fromNavBar = fromHeroWidget.child as TransitionableNavigationBar;
-  final toNavBar = toHeroWidget.child as TransitionableNavigationBar;
+  final fromNavBar = fromHeroWidget.child as OverridenTransitionableNavigationBar;
+  final toNavBar = toHeroWidget.child as OverridenTransitionableNavigationBar;
 
   assert(
     fromNavBar.componentsKeys.navBarBoxKey.currentContext!.owner != null,
@@ -634,8 +634,8 @@ class BackLabel extends StatelessWidget {
   }
 }
 
-class TransitionableNavigationBar extends StatelessWidget {
-  TransitionableNavigationBar({
+class OverridenTransitionableNavigationBar extends StatelessWidget {
+  OverridenTransitionableNavigationBar({
     required this.componentsKeys,
     required this.backgroundColor,
     required this.backButtonTextStyle,
@@ -680,8 +680,8 @@ class TransitionableNavigationBar extends StatelessWidget {
         if (ancestor is ComponentElement) {
           assert(
             ancestor.widget.runtimeType != NavigationBarTransition,
-            'TransitionableNavigationBar should never re-appear inside '
-            'NavigationBarTransition. Keyed TransitionableNavigationBar should '
+            'OverridenTransitionableNavigationBar should never re-appear inside '
+            'NavigationBarTransition. Keyed OverridenTransitionableNavigationBar should '
             'only serve as anchor points in routes rather than appearing inside '
             'Hero flights themselves.',
           );
@@ -727,9 +727,9 @@ class NavigationBarTransition extends StatelessWidget {
   final Animation<double> animation;
   final ColorTween backgroundTween;
   final BorderTween borderTween;
-  final TransitionableNavigationBar bottomNavBar;
+  final OverridenTransitionableNavigationBar bottomNavBar;
   final Tween<double> heightTween;
-  final TransitionableNavigationBar topNavBar;
+  final OverridenTransitionableNavigationBar topNavBar;
 
   @override
   Widget build(BuildContext context) {
@@ -791,8 +791,8 @@ class NavigationBarTransition extends StatelessWidget {
 class _NavigationBarComponentsTransition {
   _NavigationBarComponentsTransition({
     required this.animation,
-    required TransitionableNavigationBar bottomNavBar,
-    required TransitionableNavigationBar topNavBar,
+    required OverridenTransitionableNavigationBar bottomNavBar,
+    required OverridenTransitionableNavigationBar topNavBar,
     required TextDirection directionality,
   })  : bottomComponents = bottomNavBar.componentsKeys,
         topComponents = topNavBar.componentsKeys,
