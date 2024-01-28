@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:deps/packages/snap_scroll_physics.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +16,7 @@ class Body extends StatelessWidget {
     required this.animationBehavior,
     required this.scrollBehavior,
     required this.refreshListenable,
-    required this.isScrollEnabled,
-    required this.nestedScrollViewKey,
-    required this.hasScrollView,
+    required this.isScrollable,
     this.onRefresh,
     super.key,
   });
@@ -27,95 +24,94 @@ class Body extends StatelessWidget {
   final FutureOr<dynamic> Function()? onRefresh;
   final SearchBarAnimationBehavior animationBehavior;
   final Widget body;
-  final ValueNotifier<bool> isScrollEnabled;
+  final bool isScrollable;
   final Measures measures;
-  final GlobalKey<NestedScrollViewStatePlus> nestedScrollViewKey;
   final IndicatorStateListenable refreshListenable;
   final SearchBarScrollBehavior scrollBehavior;
   final ScrollController scrollController;
-  final bool hasScrollView;
 
   Store get _store => Store.instance();
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh.builder(
-      onRefresh: onRefresh,
-      header: ListenerHeader(
-        processedDuration: Duration.zero,
-        triggerOffset: 160,
-        listenable: refreshListenable,
-        clamping: false,
-        hitOver: true,
-        hapticFeedback: true,
-      ),
-      childBuilder: (_, physics) {
-        return ValueListenableBuilder<bool>(
-          valueListenable: isScrollEnabled,
-          builder: (_, isContentScrollable, __) {
-            return NestedScrollViewPlus(
-              key: nestedScrollViewKey,
-              controller: scrollController,
-              physics: RawSnapScrollPhysics(
-                parent: isContentScrollable ? physics : const NeverScrollableScrollPhysics(),
-                snaps: [
-                  if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
-                    Snap.avoidZone(0, measures.searchContainerHeight),
-                  },
-                  if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
-                    Snap.avoidZone(
-                      measures.searchContainerHeight,
-                      measures.largeTitleContainerHeight + measures.searchContainerHeight,
-                    ),
-                  },
-                  if (scrollBehavior == SearchBarScrollBehavior.pinned) ...{
-                    Snap.avoidZone(0, measures.largeTitleContainerHeight),
-                  },
-                ],
-              ),
-              headerSliverBuilder: (_, __) {
-                return [
+    return ValueListenableBuilder(
+      valueListenable: _store.isInHero,
+      builder: (_, isInHero, __) {
+        return IgnorePointer(
+          ignoring: isInHero,
+          child: EasyRefresh.builder(
+            onRefresh: onRefresh,
+            header: ListenerHeader(
+              processedDuration: Duration.zero,
+              triggerOffset: 160,
+              listenable: refreshListenable,
+              clamping: false,
+              hitOver: true,
+              hapticFeedback: true,
+            ),
+            childBuilder: (_, physics) {
+              return CustomScrollView(
+                controller: scrollController,
+                physics: SnapScrollPhysics(
+                  parent: isScrollable ? physics : const NeverScrollableScrollPhysics(),
+                  snaps: [
+                    if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
+                      Snap.avoidZone(0, measures.searchContainerHeight),
+                    },
+                    if (scrollBehavior == SearchBarScrollBehavior.floated) ...{
+                      Snap.avoidZone(
+                        measures.searchContainerHeight,
+                        measures.largeTitleContainerHeight + measures.searchContainerHeight,
+                      ),
+                    },
+                    if (scrollBehavior == SearchBarScrollBehavior.pinned) ...{
+                      Snap.avoidZone(0, measures.largeTitleContainerHeight),
+                    },
+                  ],
+                ),
+                slivers: [
                   ValueListenableBuilder(
                     valueListenable: _store.searchBarAnimationStatus,
                     builder: (_, __, ___) {
                       final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
 
-                      return OverlapAbsorberPlus(
-                        sliver: SliverPersistentHeader(
-                          pinned: true,
-                          delegate: MyDelegate(
-                            minHeight: isContentScrollable ? 0 : height - 0.000001,
-                            maxHeight: height,
-                          ),
+                      return SliverPersistentHeader(
+                        pinned: true,
+                        delegate: MyDelegate(
+                          minHeight: isScrollable ? 0 : height - 0.000001,
+                          maxHeight: height,
                         ),
                       );
                     },
                   ),
-                ];
-              },
-              body: ValueListenableBuilder(
-                valueListenable: _store.isInHero,
-                builder: (_, isInHero, __) {
-                  return IgnorePointer(
-                    ignoring: isInHero,
-                    child: hasScrollView
-                        ? body
-                        : CustomScrollView(
-                            physics: isContentScrollable
-                                ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-                                : const NeverScrollableScrollPhysics(),
-                            slivers: [
-                              const OverlapInjectorPlus(),
-                              SliverToBoxAdapter(child: body),
-                            ],
-                          ),
-                  );
-                },
-              ),
-            );
-          },
+                  body,
+                ],
+              );
+            },
+          ),
         );
       },
+      /*               body: ValueListenableBuilder(
+                    valueListenable: _store.isInHero,
+                    builder: (_, isInHero, __) {
+                      return IgnorePointer(
+                        ignoring: isInHero,
+                        child: hasScrollView
+                            ? body
+                            : CustomScrollView(
+                                physics: isContentScrollable
+                                    ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+                                    : const NeverScrollableScrollPhysics(),
+                                slivers: [
+                                  const OverlapInjectorPlus(),
+                                  SliverToBoxAdapter(child: body),
+                                ],
+                              ),
+                      );
+                    },
+                  ),
+                );
+              },*/
     );
   }
 }

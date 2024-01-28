@@ -21,7 +21,7 @@ class AnimatedAppBarBuilder extends StatefulWidget {
     required this.shouldStretch,
     required this.shouldTransiteBetweenRoutes,
     required this.scrollController,
-    required this.isScrollEnabled,
+    required this.isScrollable,
     this.onCollapsed,
     this.brightness,
     super.key,
@@ -30,7 +30,7 @@ class AnimatedAppBarBuilder extends StatefulWidget {
   final AppBarSettings appBar;
   final Brightness? brightness;
   final NavigationBarStaticComponents components;
-  final ValueNotifier<bool> isScrollEnabled;
+  final bool isScrollable;
   final NavigationBarStaticComponentsKeys keys;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
@@ -81,6 +81,10 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
       ..addListener(() {
         setState(() {});
       });
+    if (widget.isScrollable) {
+      print('amk');
+      widget.scrollController.addListener(_scrollListener);
+    }
     super.didChangeDependencies();
   }
 
@@ -109,6 +113,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
       if (widget.onCollapsed != null) {
         widget.onCollapsed?.call(isCollapsed);
       }
+
       _isCollapsed = isCollapsed;
 
       if (_isCollapsed) {
@@ -122,112 +127,101 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: widget.isScrollEnabled,
-      builder: (_, isContentScrollable, __) {
-        if (isContentScrollable) {
-          widget.scrollController.addListener(_scrollListener);
-        }
+      valueListenable: _store.scrollOffset,
+      builder: (_, __, ___) {
+        final topPadding = MediaQuery.paddingOf(context).top;
 
-        return ValueListenableBuilder(
-          valueListenable: _store.scrollOffset,
-          builder: (_, __, ___) {
-            final topPadding = MediaQuery.paddingOf(context).top;
+        var fullAppBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+            ? clampDouble(
+                topPadding + widget.measures.appbarHeight - _scrollOffset,
+                topPadding + widget.measures.primaryToolbarHeight + widget.appBar.bottom!.height,
+                widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
+              )
+            : clampDouble(
+                topPadding + widget.measures.appbarHeight - _scrollOffset,
+                topPadding + widget.measures.appbarHeight - widget.measures.largeTitleContainerHeight,
+                widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
+              );
 
-            var fullAppBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+        var largeTitleHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+            ? (_scrollOffset > widget.measures.searchContainerHeight
                 ? clampDouble(
-                    topPadding + widget.measures.appbarHeight - _scrollOffset,
-                    topPadding + widget.measures.primaryToolbarHeight + widget.appBar.bottom!.height,
-                    widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
-                  )
-                : clampDouble(
-                    topPadding + widget.measures.appbarHeight - _scrollOffset,
-                    topPadding + widget.measures.appbarHeight - widget.measures.largeTitleContainerHeight,
-                    widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
-                  );
-
-            var largeTitleHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-                ? (_scrollOffset > widget.measures.searchContainerHeight
-                    ? clampDouble(
-                        widget.measures.largeTitleContainerHeight -
-                            (_scrollOffset - widget.measures.searchContainerHeight),
-                        0,
-                        widget.measures.largeTitleContainerHeight,
-                      )
-                    : widget.measures.largeTitleContainerHeight)
-                : clampDouble(
-                    widget.measures.largeTitleContainerHeight - _scrollOffset,
+                    widget.measures.largeTitleContainerHeight - (_scrollOffset - widget.measures.searchContainerHeight),
                     0,
                     widget.measures.largeTitleContainerHeight,
-                  );
+                  )
+                : widget.measures.largeTitleContainerHeight)
+            : clampDouble(
+                widget.measures.largeTitleContainerHeight - _scrollOffset,
+                0,
+                widget.measures.largeTitleContainerHeight,
+              );
 
-            final searchBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-                ? (_store.searchBarHasFocus.value
-                    ? widget.measures.searchContainerHeight
-                    : clampDouble(
-                        widget.measures.searchContainerHeight - _scrollOffset,
-                        0,
-                        widget.measures.searchContainerHeight,
-                      ))
-                : widget.measures.searchContainerHeight;
+        final searchBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+            ? (_store.searchBarHasFocus.value
+                ? widget.measures.searchContainerHeight
+                : clampDouble(
+                    widget.measures.searchContainerHeight - _scrollOffset,
+                    0,
+                    widget.measures.searchContainerHeight,
+                  ))
+            : widget.measures.searchContainerHeight;
 
-            var opacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-                ? (_store.searchBarHasFocus.value ? 1.0 : clampDouble(1 - _scrollOffset / 10.0, 0, 1))
-                : 1.0;
+        var opacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+            ? (_store.searchBarHasFocus.value ? 1.0 : clampDouble(1 - _scrollOffset / 10.0, 0, 1))
+            : 1.0;
 
-            var titleOpacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-                ? (_scrollOffset >=
-                        (widget.measures.appbarHeightExceptPrimaryToolbar - widget.appBar.bottom!.height - 20)
-                    ? 1.0
-                    : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0))
-                : (_scrollOffset >= (widget.measures.largeTitleContainerHeight - 20)
-                    ? 1.0
-                    : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0));
+        var titleOpacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
+            ? (_scrollOffset >= (widget.measures.appbarHeightExceptPrimaryToolbar - widget.appBar.bottom!.height - 20)
+                ? 1.0
+                : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0))
+            : (_scrollOffset >= (widget.measures.largeTitleContainerHeight - 20)
+                ? 1.0
+                : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0));
 
-            final focussedToolbar = topPadding + widget.measures.searchContainerHeight + widget.appBar.bottom!.height;
+        final focussedToolbar = topPadding + widget.measures.searchContainerHeight + widget.appBar.bottom!.height;
 
-            var scaleTitle = _scrollOffset < 0 ? clampDouble(1 - _scrollOffset / 1500, 1, 1.12) : 1.0;
+        var scaleTitle = _scrollOffset < 0 ? clampDouble(1 - _scrollOffset / 1500, 1, 1.12) : 1.0;
 
-            if (widget.appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.steady &&
-                _store.searchBarHasFocus.value) {
-              fullAppBarHeight = topPadding + widget.measures.appbarHeight;
-              largeTitleHeight = widget.measures.appbarHeightExceptPrimaryToolbar;
-              largeTitleHeight = widget.measures.largeTitleContainerHeight;
-              scaleTitle = 1;
-              titleOpacity = 0;
-            }
+        if (widget.appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.steady &&
+            _store.searchBarHasFocus.value) {
+          fullAppBarHeight = topPadding + widget.measures.appbarHeight;
+          largeTitleHeight = widget.measures.appbarHeightExceptPrimaryToolbar;
+          largeTitleHeight = widget.measures.largeTitleContainerHeight;
+          scaleTitle = 1;
+          titleOpacity = 0;
+        }
 
-            if (!widget.shouldStretch) {
-              scaleTitle = 1;
-            }
-            if (widget.appBar.alwaysShowTitle) {
-              titleOpacity = 1;
-            }
-            if (!widget.appBar.searchBar!.enabled) {
-              opacity = 0;
-            }
+        if (!widget.shouldStretch) {
+          scaleTitle = 1;
+        }
+        if (widget.appBar.alwaysShowTitle) {
+          titleOpacity = 1;
+        }
+        if (!widget.appBar.searchBar!.enabled) {
+          opacity = 0;
+        }
 
-            return AnimatedAppBar(
-              animationController: _animationController,
-              measures: widget.measures,
-              appBar: widget.appBar,
-              largeTitleHeight: largeTitleHeight,
-              scaleTitle: scaleTitle,
-              components: widget.components,
-              searchBarHeight: searchBarHeight,
-              opacity: opacity,
-              titleOpacity: titleOpacity,
-              editingController: _editingController,
-              focusNode: _focusNode,
-              keys: widget.keys,
-              fullAppBarHeight: fullAppBarHeight,
-              focussedToolbar: focussedToolbar,
-              isCollapsed: _isCollapsed,
-              topPadding: topPadding,
-              shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
-              brightness: widget.brightness,
-              color: _animation.value,
-            );
-          },
+        return AnimatedAppBar(
+          animationController: _animationController,
+          measures: widget.measures,
+          appBar: widget.appBar,
+          largeTitleHeight: largeTitleHeight,
+          scaleTitle: scaleTitle,
+          components: widget.components,
+          searchBarHeight: searchBarHeight,
+          opacity: opacity,
+          titleOpacity: titleOpacity,
+          editingController: _editingController,
+          focusNode: _focusNode,
+          keys: widget.keys,
+          fullAppBarHeight: fullAppBarHeight,
+          focussedToolbar: focussedToolbar,
+          isCollapsed: _isCollapsed,
+          topPadding: topPadding,
+          shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
+          brightness: widget.brightness,
+          color: _animation.value,
         );
       },
     );

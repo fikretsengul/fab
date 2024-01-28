@@ -7,7 +7,6 @@ import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../domain/forms/login.form.dart';
@@ -74,55 +73,49 @@ class LoginPage extends StatelessWidget {
         body: LoginFormFormBuilder(
           model: LoginForm.empty(),
           builder: (_, data, __) {
-            return CustomScrollView(
-              physics: const NeverScrollableScrollPhysics(),
-              slivers: [
-                const OverlapInjectorPlus(),
-                SliverFillRemaining(
-                  child: PaddingAll.md(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CupertinoTextfield(
-                          formControl: data.emailControl,
-                          keyboardType: TextInputType.emailAddress,
-                          labelText: $.tr.auth.loginForm.email,
-                          textInputAction: TextInputAction.next,
-                          onSubmitted: () => data.passwordControl.focus(),
-                        ),
-                        PaddingGap.sm(),
-                        CupertinoTextfield(
-                          formControl: data.passwordControl,
-                          keyboardType: TextInputType.text,
-                          labelText: $.tr.auth.loginForm.password,
-                          textInputAction: TextInputAction.send,
-                          obscureText: true,
-                          onSubmitted: () => data.form.valid
-                              ? login(
-                                  email: data.emailControl.value ?? '',
-                                  password: data.passwordControl.value ?? '',
-                                )
-                              : null,
-                        ),
-                        PaddingGap.xl(),
-                        ReactiveLoginFormFormConsumer(
-                          builder: (_, __, ___) {
-                            return CupertinoButton.filled(
-                              onPressed: data.form.valid
-                                  ? () => login(
-                                        email: data.emailControl.value ?? '',
-                                        password: data.passwordControl.value ?? '',
-                                      )
-                                  : null,
-                              child: Text($.tr.auth.loginForm.loginButton),
-                            );
-                          },
-                        ),
-                      ],
+            return SliverFillRemaining(
+              child: PaddingAll.md(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CupertinoTextfield(
+                      formControl: data.emailControl,
+                      keyboardType: TextInputType.emailAddress,
+                      labelText: $.tr.auth.loginForm.email,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: () => data.passwordControl.focus(),
                     ),
-                  ),
+                    PaddingGap.sm(),
+                    CupertinoTextfield(
+                      formControl: data.passwordControl,
+                      keyboardType: TextInputType.text,
+                      labelText: $.tr.auth.loginForm.password,
+                      textInputAction: TextInputAction.send,
+                      obscureText: true,
+                      onSubmitted: () => data.form.valid
+                          ? login(
+                              email: data.emailControl.value ?? '',
+                              password: data.passwordControl.value ?? '',
+                            )
+                          : null,
+                    ),
+                    PaddingGap.xl(),
+                    ReactiveLoginFormFormConsumer(
+                      builder: (_, __, ___) {
+                        return CupertinoButton.filled(
+                          onPressed: data.form.valid
+                              ? () => login(
+                                    email: data.emailControl.value ?? '',
+                                    password: data.passwordControl.value ?? '',
+                                  )
+                              : null,
+                          child: Text($.tr.auth.loginForm.loginButton),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             );
           },
         ),

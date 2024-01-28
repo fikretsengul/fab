@@ -3,7 +3,6 @@
 import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_core/constants/app_theme.dart';
@@ -28,7 +27,6 @@ class CupertinoScaffold extends StatefulWidget {
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
     this.forceScroll = false,
-    this.hasScrollView = false,
   }) : measures = Measures(
           searchTextFieldHeight: appBar.searchBar!.height,
           largeTitleContainerHeight: appBar.largeTitle!.height,
@@ -45,7 +43,6 @@ class CupertinoScaffold extends StatefulWidget {
   final ValueChanged<bool>? onCollapsed;
   late final ScrollController? scrollController;
   final bool shouldStretch;
-  final bool hasScrollView;
   final bool shouldTransiteBetweenRoutes;
 
   @override
@@ -53,16 +50,32 @@ class CupertinoScaffold extends StatefulWidget {
 }
 
 class _SuperScaffoldState extends State<CupertinoScaffold> {
-  final _isContentScrollable = ValueNotifier<bool>(false);
+  bool _isContentScrollable = false;
   late final NavigationBarStaticComponentsKeys _keys;
-  final _nestedScrollViewKey = GlobalKey<NestedScrollViewStatePlus>();
   late final IndicatorStateListenable _refreshListenable;
   late final ScrollController _scrollController;
 
   @override
+  void didChangeDependencies() {
+    setState(() {
+      if (widget.forceScroll) {
+        _isContentScrollable = true;
+      } else {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_scrollController.position.maxScrollExtent > 0) {
+            _isContentScrollable = true;
+          } else {
+            _isContentScrollable = false;
+          }
+        });
+      }
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
-    _isContentScrollable.dispose();
     super.dispose();
   }
 
@@ -72,18 +85,6 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
     _keys = NavigationBarStaticComponentsKeys();
     _scrollController = widget.scrollController ?? ScrollController();
     _refreshListenable = IndicatorStateListenable();
-
-    if (widget.forceScroll) {
-      _isContentScrollable.value = true;
-    } else {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (_nestedScrollViewKey.currentState!.innerController.position.maxScrollExtent > 0) {
-          _isContentScrollable.value = true;
-        } else {
-          _isContentScrollable.value = false;
-        }
-      });
-    }
   }
 
   Store get _store => Store.instance();
@@ -146,9 +147,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
               body: widget.body,
               onRefresh: widget.onRefresh,
               refreshListenable: _refreshListenable,
-              isScrollEnabled: _isContentScrollable,
-              nestedScrollViewKey: _nestedScrollViewKey,
-              hasScrollView: widget.hasScrollView,
+              isScrollable: _isContentScrollable,
             ),
             SearchBarResult(
               measures: widget.measures,
@@ -163,7 +162,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
               shouldStretch: widget.shouldStretch,
               shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
               onCollapsed: widget.onCollapsed,
-              isScrollEnabled: _isContentScrollable,
+              isScrollable: _isContentScrollable,
             ),
             Refresher(refreshListenable: _refreshListenable),
           ],

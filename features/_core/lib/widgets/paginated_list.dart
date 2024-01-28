@@ -5,7 +5,6 @@
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/material.dart';
 
 class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulWidget {
@@ -47,58 +46,56 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
     _pagingController.addPageRequestListener(widget.onNextPage);
   }
 
+/*   padding: EdgeInsets.symmetric(
+          horizontal: $.paddings.sm,
+          vertical: $.paddings.xs,
+        ), */
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      key: PageStorageKey(UniqueKey()),
-      slivers: [
-        const OverlapInjectorPlus(),
-        SliverPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: $.paddings.sm,
-            vertical: $.paddings.xs,
-          ),
-          sliver: BlocProvider(
-            create: widget.bloc ?? (_) => $.get<C>(),
-            child: BlocListener<C, PaginatedListState<T>>(
-              listener: (_, state) {
-                state.whenOrNull(
-                  refresh: () => _pagingController.refresh(),
-                  loaded: (items) {
-                    final newItems =
-                        widget.localFilter != null ? (items.toList()..removeWhere(widget.localFilter!)) : items;
-                    final isLastPage = newItems.length < widget.limit;
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(
+        horizontal: $.paddings.sm,
+        vertical: $.paddings.xs,
+      ),
+      sliver: BlocProvider(
+        create: widget.bloc ?? (_) => $.get<C>(),
+        child: BlocListener<C, PaginatedListState<T>>(
+          listener: (_, state) {
+            state.whenOrNull(
+              refresh: () => _pagingController.refresh(),
+              loaded: (items) {
+                final newItems =
+                    widget.localFilter != null ? (items.toList()..removeWhere(widget.localFilter!)) : items;
+                final isLastPage = newItems.length < widget.limit;
 
-                    if (isLastPage) {
-                      _pagingController.appendLastPage(newItems);
-                    } else {
-                      final nextPageKey = (_pagingController.nextPageKey ?? 0) + newItems.length;
-                      _pagingController.appendPage(newItems, nextPageKey);
-                    }
-                  },
-                  failed: (failure) => _pagingController.error = failure.message,
-                );
+                if (isLastPage) {
+                  _pagingController.appendLastPage(newItems);
+                } else {
+                  final nextPageKey = (_pagingController.nextPageKey ?? 0) + newItems.length;
+                  _pagingController.appendPage(newItems, nextPageKey);
+                }
               },
-              child: PagedSliverGrid<int, T>(
-                pagingController: _pagingController,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.8,
-                  crossAxisSpacing: $.paddings.sm,
-                  mainAxisSpacing: $.paddings.sm,
-                  crossAxisCount: 2,
-                ),
-                builderDelegate: PagedChildBuilderDelegate<T>(
-                  animateTransitions: true,
-                  itemBuilder: (context, item, index) {
-                    return widget.itemBuilder(context, item, index);
-                  },
-                ),
-              ),
+              failed: (failure) => _pagingController.error = failure.message,
+            );
+          },
+          child: PagedSliverGrid<int, T>(
+            pagingController: _pagingController,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 0.8,
+              crossAxisSpacing: $.paddings.sm,
+              mainAxisSpacing: $.paddings.sm,
+              crossAxisCount: 2,
+            ),
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              animateTransitions: true,
+              itemBuilder: (context, item, index) {
+                return widget.itemBuilder(context, item, index);
+              },
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

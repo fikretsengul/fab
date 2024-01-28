@@ -97,7 +97,6 @@ class ProductsPage extends StatelessWidget {
           ),
         ),
       ),
-      hasScrollView: true,
       onRefresh: productListCubit.refresh,
       body: PaginatedList<ProductModel, ProductListCubit>(
         bloc: (_) => productListCubit,
