@@ -5,8 +5,10 @@
 
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
+import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/cached_network_image_plus.dart';
+import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +37,11 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
       text: 'Furniture',
     ),
   ];
+  final cubit = locator<ProductListCubit>();
+
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
-      forceScroll: true,
       appBar: AppBarSettings(
         title: const Text('products.'),
         actions: [
@@ -98,84 +101,58 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
           ),
         ),
       ),
-      onRefresh: () {},
-      body: SliverFillRemaining(
-        child: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: [
-            // First tab
-            PaginatedList<ProductModel, ProductListCubit>(
-              onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
-              localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
-              itemBuilder: (_, product, __) {
-                return CupertinoCard(
-                  onPressed: () => $.navigator.push(
-                    ProductDetailsRoute(product: product),
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 7,
-                        child: Hero(
-                          tag: '${product.id}',
-                          child: CupertinoImage(
-                            uri: product.images.first,
+      onRefresh: cubit.refresh,
+      forceScroll: true,
+      isCustomScrollView: true,
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          CustomScrollView(
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              const OverlapInjectorPlus(),
+              PaginatedList<ProductModel, ProductListCubit>(
+                bloc: cubit,
+                onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
+                localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+                itemBuilder: (_, product, __) {
+                  return CupertinoCard(
+                    onPressed: () => $.navigator.push(
+                      ProductDetailsRoute(product: product),
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child: Hero(
+                            tag: '${product.id}',
+                            child: CupertinoImage(
+                              uri: product.images.first,
+                            ),
                           ),
                         ),
-                      ),
-                      const Expanded(
-                        flex: 3,
-                        child: SizedBox(),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-
-            // Second tab
-            const Center(
-              child: Text('Tab 2'),
-            ),
-
-            // Third tab
-            const Center(
-              child: Text('Tab 3'),
-            ),
-          ],
-        ),
-      ),
-
-/*       PaginatedList<ProductModel, ProductListCubit>(
-        bloc: (_) => productListCubit,
-        onNextPage: (offset) => productListCubit.getProducts(offset: offset),
-        localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
-        itemBuilder: (_, product, __) {
-          return CupertinoCard(
-            onPressed: () => $.navigator.push(
-              ProductDetailsRoute(product: product),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: Hero(
-                    tag: '${product.id}',
-                    child: CupertinoImage(
-                      uri: product.images.first,
+                        const Expanded(
+                          flex: 3,
+                          child: SizedBox(),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-                const Expanded(
-                  flex: 3,
-                  child: SizedBox(),
-                ),
-              ],
-            ),
-          );
-        },
-      ), */
+                  );
+                },
+              ),
+            ],
+          ),
+          // Second tab
+          const Center(
+            child: Text('Tab 2'),
+          ),
+
+          // Third tab
+          const Center(
+            child: Text('Tab 3'),
+          ),
+        ],
+      ),
     );
   }
 }

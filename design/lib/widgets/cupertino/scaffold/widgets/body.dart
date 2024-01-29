@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
+import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:deps/packages/snap_scroll_physics.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../design.dart';
 import '../../overridens/overriden_cupertino_scrollbar.dart';
+import '../models/appbar_search_bar_settings.dart';
 import '../utils/measures.dart';
 import '../utils/store.dart';
 
@@ -18,6 +19,8 @@ class Body extends StatelessWidget {
     required this.scrollBehavior,
     required this.refreshListenable,
     required this.isScrollable,
+    required this.nestedScrollViewKey,
+    required this.isCustomScrollView,
     this.onRefresh,
     super.key,
   });
@@ -30,6 +33,8 @@ class Body extends StatelessWidget {
   final IndicatorStateListenable refreshListenable;
   final SearchBarScrollBehavior scrollBehavior;
   final ScrollController scrollController;
+  final GlobalKey<NestedScrollViewStatePlus> nestedScrollViewKey;
+  final bool isCustomScrollView;
 
   Store get _store => Store.instance();
 
@@ -53,10 +58,11 @@ class Body extends StatelessWidget {
             childBuilder: (_, physics) {
               return OverridenCupertinoScrollbar(
                 controller: scrollController,
-                padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + measures.appbarHeight + 8),
+                padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + measures.appbarHeight),
                 thumbVisibility: true,
                 thicknessWhileDragging: 6,
-                child: CustomScrollView(
+                child: NestedScrollViewPlus(
+                  key: nestedScrollViewKey,
                   controller: scrollController,
                   physics: SnapScrollPhysics(
                     parent: isScrollable ? physics : const NeverScrollableScrollPhysics(),
@@ -75,50 +81,43 @@ class Body extends StatelessWidget {
                       },
                     ],
                   ),
-                  slivers: [
-                    ValueListenableBuilder(
-                      valueListenable: _store.searchBarAnimationStatus,
-                      builder: (_, __, ___) {
-                        final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
+                  headerSliverBuilder: (context, _) {
+                    return [
+                      OverlapAbsorberPlus(
+                        sliver: ValueListenableBuilder(
+                          valueListenable: _store.searchBarAnimationStatus,
+                          builder: (_, __, ___) {
+                            final height = MediaQuery.paddingOf(context).top + measures.appbarHeight;
 
-                        return SliverPersistentHeader(
-                          pinned: true,
-                          delegate: MyDelegate(
-                            minHeight: isScrollable ? 0 : height - 0.000001,
-                            maxHeight: height,
-                          ),
-                        );
-                      },
-                    ),
-                    body,
-                  ],
+                            return SliverPersistentHeader(
+                              pinned: true,
+                              delegate: MyDelegate(
+                                minHeight: isScrollable ? 0 : height - 0.000001,
+                                maxHeight: height,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ];
+                  },
+                  body: isCustomScrollView
+                      ? body
+                      : CustomScrollView(
+                          physics: isScrollable
+                              ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+                              : const NeverScrollableScrollPhysics(),
+                          slivers: [
+                            const OverlapInjectorPlus(),
+                            body,
+                          ],
+                        ),
                 ),
               );
             },
           ),
         );
       },
-      /*               body: ValueListenableBuilder(
-                    valueListenable: _store.isInHero,
-                    builder: (_, isInHero, __) {
-                      return IgnorePointer(
-                        ignoring: isInHero,
-                        child: hasScrollView
-                            ? body
-                            : CustomScrollView(
-                                physics: isContentScrollable
-                                    ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-                                    : const NeverScrollableScrollPhysics(),
-                                slivers: [
-                                  const OverlapInjectorPlus(),
-                                  SliverToBoxAdapter(child: body),
-                                ],
-                              ),
-                      );
-                    },
-                  ),
-                );
-              },*/
     );
   }
 }

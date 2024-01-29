@@ -71,7 +71,7 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
           failed: (failure) => _pagingController.error = failure.message,
         );
       },
-      child: PagedGridView<int, T>(
+      child: PagedSliverGrid<int, T>(
         pagingController: _pagingController,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 0.8,
