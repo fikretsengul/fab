@@ -8,7 +8,7 @@ import 'package:deps/features/features.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/cached_network_image_plus.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
+import 'package:deps/packages/extended_tabs.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +28,13 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
   late final TabController _tabController = TabController(length: 3, vsync: this);
   final List<Tab> _tabs = [
     const Tab(
-      text: 'All',
+      text: 'all',
     ),
     const Tab(
-      text: 'Clothes',
+      text: 'clothes',
     ),
     const Tab(
-      text: 'Furniture',
+      text: 'furniture',
     ),
   ];
   final cubit = locator<ProductListCubit>();
@@ -89,70 +89,92 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
         ),
         bottom: AppBarBottomSettings(
           enabled: true,
-          child: PaddingSymmetric.sm(
-            horizontal: true,
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              tabAlignment: TabAlignment.start,
-              padding: EdgeInsets.zero,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ExtendedTabBar(
               tabs: _tabs,
+              controller: _tabController,
+              labelStyle: context.appTheme.body.bold,
+              unselectedLabelStyle: context.appTheme.body.bold,
+              labelPadding: const EdgeInsets.only(right: 16),
+              labelColor: context.appTheme.onBackground,
+              isScrollable: _tabController.length > 5,
+              indicatorSize: TabBarIndicatorSize.label,
+              mainAxisAlignment: MainAxisAlignment.start,
+              indicator: CustomUnderlineTabIndicator(
+                color: context.appTheme.onBackground,
+                radius: 16,
+              ),
             ),
           ),
         ),
       ),
       onRefresh: cubit.refresh,
-      forceScroll: true,
-      isCustomScrollView: true,
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          CustomScrollView(
-            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            slivers: [
-              const OverlapInjectorPlus(),
-              PaginatedList<ProductModel, ProductListCubit>(
-                bloc: cubit,
-                onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
-                localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
-                itemBuilder: (_, product, __) {
-                  return CupertinoCard(
-                    onPressed: () => $.navigator.push(
-                      ProductDetailsRoute(product: product),
+      tabController: _tabController,
+      children: [
+        PaginatedList<ProductModel, ProductListCubit>(
+          bloc: cubit,
+          onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
+          localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+          itemBuilder: (_, product, __) {
+            return CupertinoCard(
+              onPressed: () => $.navigator.push(
+                ProductDetailsRoute(product: product),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: Hero(
+                      tag: '${product.id}',
+                      child: CupertinoImage(
+                        uri: product.images.first,
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 7,
-                          child: Hero(
-                            tag: '${product.id}',
-                            child: CupertinoImage(
-                              uri: product.images.first,
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 3,
-                          child: SizedBox(),
-                        ),
-                      ],
+                  ),
+                  const Expanded(
+                    flex: 3,
+                    child: SizedBox(),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        CustomScrollView(
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          slivers: [
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final number = index + 1;
+
+                  return Container(
+                    height: 50,
+                    color:
+                        index.isEven ? CupertinoColors.lightBackgroundGray : CupertinoColors.extraLightBackgroundGray,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$number',
+                      style: CupertinoTheme.of(context).textTheme.textStyle,
                     ),
                   );
                 },
+                childCount: 20,
               ),
-            ],
-          ),
-          // Second tab
-          const Center(
-            child: Text('Tab 2'),
-          ),
+            ),
+          ],
+        ),
 
-          // Third tab
-          const Center(
-            child: Text('Tab 3'),
-          ),
-        ],
-      ),
+        // Third tab
+        Column(
+          children: [
+            Container(height: 200, color: Colors.red),
+            Container(height: 200, color: Colors.green),
+            Container(height: 200, color: Colors.yellow),
+          ],
+        ),
+      ],
     );
   }
 }

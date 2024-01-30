@@ -71,20 +71,25 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
           failed: (failure) => _pagingController.error = failure.message,
         );
       },
-      child: PagedSliverGrid<int, T>(
-        pagingController: _pagingController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.8,
-          crossAxisSpacing: $.paddings.sm,
-          mainAxisSpacing: $.paddings.sm,
-          crossAxisCount: 2,
-        ),
-        builderDelegate: PagedChildBuilderDelegate<T>(
-          animateTransitions: true,
-          itemBuilder: (context, item, index) {
-            return widget.itemBuilder(context, item, index);
-          },
-        ),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          PagedSliverGrid<int, T>(
+            pagingController: _pagingController,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 0.8,
+              crossAxisSpacing: $.paddings.sm,
+              mainAxisSpacing: $.paddings.sm,
+              crossAxisCount: 2,
+            ),
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              animateTransitions: true,
+              itemBuilder: (context, item, index) {
+                return widget.itemBuilder(context, item, index);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

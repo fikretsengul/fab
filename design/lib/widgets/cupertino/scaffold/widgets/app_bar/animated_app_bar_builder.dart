@@ -1,4 +1,4 @@
-// ignore_for_file: max_lines_for_file, max_lines_for_function
+// ignore_for_file: max_lines_for_file, max_lines_for_function, invalid_use_of_protected_member
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -81,9 +81,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
       ..addListener(() {
         setState(() {});
       });
-    if (widget.isScrollable) {
-      widget.scrollController.addListener(_scrollListener);
-    }
+
     super.didChangeDependencies();
   }
 
@@ -125,6 +123,10 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isScrollable && !widget.scrollController.hasListeners) {
+      widget.scrollController.addListener(_scrollListener);
+    }
+
     return ValueListenableBuilder(
       valueListenable: _store.scrollOffset,
       builder: (_, __, ___) {

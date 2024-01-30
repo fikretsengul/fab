@@ -19,12 +19,13 @@ import 'widgets/refresher.dart';
 
 class CupertinoScaffold extends StatefulWidget {
   CupertinoScaffold({
-    required this.body,
     required this.appBar,
+    this.child,
+    this.children,
+    this.tabController,
     super.key,
     this.shouldStretch = true,
     this.onCollapsed,
-    this.scrollController,
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
     this.forceScroll = false,
@@ -39,14 +40,15 @@ class CupertinoScaffold extends StatefulWidget {
 
   final FutureOr<dynamic> Function()? onRefresh;
   final AppBarSettings appBar;
-  final Widget body;
+  final Widget? child;
+  final List<Widget>? children;
   final bool forceScroll;
+  final bool isCustomScrollView;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
-  late final ScrollController? scrollController;
   final bool shouldStretch;
-  final bool isCustomScrollView;
   final bool shouldTransiteBetweenRoutes;
+  final TabController? tabController;
 
   @override
   State<CupertinoScaffold> createState() => _SuperScaffoldState();
@@ -61,19 +63,22 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
 
   @override
   void didChangeDependencies() {
-    setState(() {
-      if (widget.forceScroll) {
+    if (widget.forceScroll || widget.tabController != null) {
+      setState(() {
         _isScrollable = true;
-      } else {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+      });
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
           if (_nestedScrollViewKey.currentState!.innerController.position.maxScrollExtent > 0) {
             _isScrollable = true;
           } else {
             _isScrollable = false;
           }
         });
-      }
-    });
+      });
+    }
+
     super.didChangeDependencies();
   }
 
@@ -87,7 +92,7 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
   void initState() {
     super.initState();
     _keys = NavigationBarStaticComponentsKeys();
-    _scrollController = widget.scrollController ?? ScrollController();
+    _scrollController = ScrollController();
     _refreshListenable = IndicatorStateListenable();
     _nestedScrollViewKey = GlobalKey<NestedScrollViewStatePlus>();
   }
@@ -145,11 +150,14 @@ class _SuperScaffoldState extends State<CupertinoScaffold> {
           alignment: Alignment.center,
           children: [
             Body(
+              searchBar: widget.appBar.searchBar!,
               scrollController: _scrollController,
               measures: widget.measures,
               scrollBehavior: widget.appBar.searchBar!.scrollBehavior,
               animationBehavior: widget.appBar.searchBar!.animationBehavior,
-              body: widget.body,
+              tabController: widget.tabController,
+              child: widget.child,
+              children: widget.children,
               onRefresh: widget.onRefresh,
               refreshListenable: _refreshListenable,
               isScrollable: _isScrollable,
