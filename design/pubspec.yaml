@@ -67,4 +67,4 @@ flutter_gen:
   output: lib/_core/constants/
   line_length: 120
   integrations:
-    flutter_svg: true
+    flutter_svg: false

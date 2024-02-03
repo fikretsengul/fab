@@ -1,1 +1,1 @@
-export 'package:fpdart/fpdart.dart';
+export 'package:fpdart/fpdart.dart' hide State;

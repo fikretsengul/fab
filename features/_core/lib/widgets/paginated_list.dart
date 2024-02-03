@@ -7,10 +7,10 @@ import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
 import 'package:flutter/material.dart';
 
-class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulWidget {
+class PaginatedList<T, C extends PaginatedListCubit<T>> extends StatefulWidget {
   const PaginatedList({
-    required this.onNextPage,
     required this.itemBuilder,
+    this.onNextPage,
     this.bloc,
     super.key,
     this.offset = 0,
@@ -23,13 +23,13 @@ class PaginatedList<T, C extends Cubit<PaginatedListState<T>>> extends StatefulW
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
   final int limit;
   final int offset;
-  final void Function(C bloc, int offset) onNextPage;
+  final void Function(C bloc, int offset)? onNextPage;
 
   @override
   State<PaginatedList<T, C>> createState() => _PaginatedListState<T, C>();
 }
 
-class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends State<PaginatedList<T, C>> {
+class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<PaginatedList<T, C>> {
   late final C _bloc = widget.bloc ?? $.get<C>();
   late final PagingController<int, T> _pagingController = PagingController(
     firstPageKey: widget.offset,
@@ -46,7 +46,11 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
     super.initState();
 
     _pagingController.addPageRequestListener((offset) {
-      return widget.onNextPage(_bloc, offset);
+      if (widget.onNextPage != null) {
+        widget.onNextPage!.call(_bloc, offset);
+      }
+
+      _bloc.fetch(offset: offset, limit: widget.limit);
     });
   }
 
@@ -74,19 +78,22 @@ class _PaginatedListState<T, C extends Cubit<PaginatedListState<T>>> extends Sta
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
-          PagedSliverGrid<int, T>(
-            pagingController: _pagingController,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.8,
-              crossAxisSpacing: $.paddings.sm,
-              mainAxisSpacing: $.paddings.sm,
-              crossAxisCount: 2,
-            ),
-            builderDelegate: PagedChildBuilderDelegate<T>(
-              animateTransitions: true,
-              itemBuilder: (context, item, index) {
-                return widget.itemBuilder(context, item, index);
-              },
+          SliverPadding(
+            padding: $.paddings.sm.all,
+            sliver: PagedSliverGrid<int, T>(
+              pagingController: _pagingController,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.8,
+                crossAxisSpacing: $.paddings.sm,
+                mainAxisSpacing: $.paddings.sm,
+                crossAxisCount: 2,
+              ),
+              builderDelegate: PagedChildBuilderDelegate<T>(
+                animateTransitions: true,
+                itemBuilder: (context, item, index) {
+                  return widget.itemBuilder(context, item, index);
+                },
+              ),
             ),
           ),
         ],

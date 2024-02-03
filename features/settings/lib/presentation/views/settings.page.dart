@@ -21,13 +21,13 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoScaffold(
+    return FabScaffold(
       forceScroll: true,
-      appBar: AppBarSettings(
+      appBar: FabAppBarSettings(
         title: const Text(
           'Settings',
         ),
-        largeTitle: AppBarLargeTitleSettings(
+        largeTitle: FabAppBarLargeTitleSettings(
           largeTitle: 'Settings',
         ),
       ),

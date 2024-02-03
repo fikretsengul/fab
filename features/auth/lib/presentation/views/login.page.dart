@@ -62,11 +62,11 @@ class LoginPage extends StatelessWidget {
           },
         );
       },
-      child: CupertinoScaffold(
+      child: FabScaffold(
         shouldStretch: false,
-        appBar: AppBarSettings(
-          searchBar: AppBarSearchBarSettings(),
-          largeTitle: AppBarLargeTitleSettings(
+        appBar: FabAppBarSettings(
+          searchBar: FabAppBarSearchBarSettings(),
+          largeTitle: FabAppBarLargeTitleSettings(
             largeTitle: 'Login',
           ),
         ),

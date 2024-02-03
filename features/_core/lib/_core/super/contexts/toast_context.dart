@@ -86,12 +86,12 @@ final class ToastContext {
     }
 
     final child = switch (failure.type) {
-      FailureType.constructive => CupertinoAlert(
+      FailureType.constructive => FabAlert(
           color: const Color(0xFF40DBA3),
           icon: CupertinoIcons.checkmark_circle_fill,
           message: failure.message,
         ),
-      _ => CupertinoAlert(
+      _ => FabAlert(
           color: const Color(0xFFE4756D),
           icon: CupertinoIcons.clear_circled_solid,
           message: failure.message,

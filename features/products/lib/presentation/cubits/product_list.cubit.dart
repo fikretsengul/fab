@@ -6,12 +6,13 @@ import '../../data/products.service.dart';
 import '../../domain/models/product.model.dart';
 
 @injectable
-class ProductListCubit extends Cubit<PaginatedListState<ProductModel>> {
+class ProductListCubit extends Cubit<PaginatedListState<ProductModel>> implements PaginatedListCubit<ProductModel> {
   ProductListCubit(this._service) : super(const PaginatedListState.initial());
 
   final ProductsService _service;
 
-  Future<void> getProducts({
+  @override
+  Future<void> fetch({
     int offset = 0,
     int limit = 20,
   }) async {

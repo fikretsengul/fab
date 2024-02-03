@@ -6,6 +6,7 @@ import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:feature_auth/_core/router.dart';
 import 'package:feature_products/_core/router.dart';
+import 'package:flutter/material.dart';
 
 import '../_core/super/_core/dialog/cupertino/cupertino_dialog_builder.dart';
 import '../_core/super/_core/dialog/material/material_dialog_builder.dart';
@@ -13,6 +14,13 @@ import '../_core/super/_core/modal/modal_builder.dart';
 import '../_core/super/_core/sheet/cupertino/cupertino_sheet_builder.dart';
 import 'guard.dart';
 import 'router.gr.dart';
+
+class CustomPageRoute<T> extends MaterialPageRoute<T> {
+  CustomPageRoute({required super.builder, required super.settings});
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 500);
+}
 
 @AutoRouterConfig(
   modules: [
@@ -26,42 +34,57 @@ class FeaturesRouter extends $FeaturesRouter {
   FeaturesRouter();
 
   @override
-  RouteType get defaultRouteType => const RouteType.cupertino();
+  RouteType get defaultRouteType => RouteType.custom(
+        customRouteBuilder: <T>(
+          context,
+          child,
+          page,
+        ) {
+          return CustomPageRoute<T>(
+            settings: page,
+            builder: (context) {
+              return child;
+            },
+          );
+        },
+        durationInMilliseconds: 2500,
+        reverseDurationInMilliseconds: 2500,
+      );
 
   @override
   List<AutoRoute> get routes => [
-        CupertinoRoute(
+        AutoRoute(
           page: SuperHandler.page,
           initial: true,
           children: [
-            CupertinoRoute(
+            AutoRoute(
               page: DashboardRouter.page,
               guards: [AuthGuard()],
               initial: true,
               children: [
-                CupertinoRoute(
+                AutoRoute(
                   page: ProductsRouter.page,
                   children: [
-                    CupertinoRoute(
+                    AutoRoute(
                       title: (_, __) => $.tr.products.title,
                       path: 'products',
                       page: ProductsRoute.page,
                       initial: true,
                     ),
-                    CupertinoRoute(
+                    AutoRoute(
                       path: 'product:id',
                       page: ProductDetailsRoute.page,
                     ),
                   ],
                 ),
-                CupertinoRoute(
+                AutoRoute(
                   title: (_, __) => $.tr.settings.title,
                   path: 'settings',
                   page: SettingsRoute.page,
                 ),
               ],
             ),
-            CupertinoRoute(
+            AutoRoute(
               title: (_, __) => $.tr.auth.title,
               path: 'login',
               page: LoginRoute.page,

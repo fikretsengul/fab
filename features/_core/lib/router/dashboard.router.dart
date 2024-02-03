@@ -27,7 +27,7 @@ class DashboardRouter extends StatelessWidget {
         bottomNavigationBuilder: (_, tabsRouter) {
           return BlocBuilder<TranslationCubit, Locale>(
             builder: (_, __) {
-              return CupertinoNavigationBar(
+              return FabNavigationBar(
                 currentIndex: tabsRouter.activeIndex,
                 onTap: tabsRouter.setActiveIndex,
                 items: [

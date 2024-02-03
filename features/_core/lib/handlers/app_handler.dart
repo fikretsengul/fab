@@ -74,8 +74,22 @@ class AppHandler extends StatelessWidget {
         child: BlocBuilder<TranslationCubit, Locale>(
           builder: (_, locale) {
             return AdaptiveTheme(
-              light: ThemeData(extensions: [AppTheme.light]),
-              dark: ThemeData(extensions: [AppTheme.dark]),
+              light: ThemeData(extensions: [AppTheme.light]).copyWith(
+                pageTransitionsTheme: const PageTransitionsTheme(
+                  builders: {
+                    TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                    TargetPlatform.iOS: PopScopeAwareCupertinoPageTransitionBuilder(),
+                  },
+                ),
+              ),
+              dark: ThemeData(extensions: [AppTheme.dark]).copyWith(
+                pageTransitionsTheme: const PageTransitionsTheme(
+                  builders: {
+                    TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                    TargetPlatform.iOS: PopScopeAwareCupertinoPageTransitionBuilder(),
+                  },
+                ),
+              ),
               initial: savedThemeMode ?? AdaptiveThemeMode.light,
               builder: (light, dark) {
                 return MaterialApp.router(

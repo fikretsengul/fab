@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/models/product.model.dart';
 import '../cubits/product_list.cubit.dart';
+import 'widgets/product_listing_card.dart';
 
 @RoutePage()
 class ProductsPage extends StatefulWidget {
@@ -41,8 +42,8 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoScaffold(
-      appBar: AppBarSettings(
+    return FabScaffold(
+      appBar: FabAppBarSettings(
         title: const Text('products.'),
         actions: [
           CupertinoButton(
@@ -52,7 +53,7 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             child: Icon(
               UIcons.boldRounded.heart,
               size: 22,
-              color: context.appTheme.primary,
+              color: context.appTheme.primaryColor,
             ),
           ),
           PaddingGap.md(),
@@ -63,12 +64,12 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             child: Icon(
               UIcons.boldRounded.shopping_bag,
               size: 20,
-              color: context.appTheme.primary,
+              color: context.appTheme.primaryColor,
             ),
           ),
           PaddingGap.xs(),
         ],
-        largeTitle: AppBarLargeTitleSettings(
+        largeTitle: FabAppBarLargeTitleSettings(
           largeTitle: 'products.',
           actions: [
             CupertinoButton(
@@ -84,26 +85,26 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             ),
           ],
         ),
-        searchBar: AppBarSearchBarSettings(
+        searchBar: FabAppBarSearchBarSettings(
           enabled: true,
         ),
-        bottom: AppBarBottomSettings(
+        bottom: FabAppBarBottomSettings(
           enabled: true,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ExtendedTabBar(
               tabs: _tabs,
               controller: _tabController,
-              labelStyle: context.appTheme.body.bold,
-              unselectedLabelStyle: context.appTheme.body.bold,
+              labelStyle: context.appTheme.bodyStyle.bold,
+              unselectedLabelStyle: context.appTheme.bodyStyle.bold,
               labelPadding: const EdgeInsets.only(right: 16),
-              labelColor: context.appTheme.onBackground,
+              labelColor: context.appTheme.onBackgroundColor,
               isScrollable: _tabController.length > 5,
               indicatorSize: TabBarIndicatorSize.label,
               mainAxisAlignment: MainAxisAlignment.start,
-              indicator: CustomUnderlineTabIndicator(
-                color: context.appTheme.onBackground,
-                radius: 16,
+              indicator: CircleTabIndicator(
+                color: context.appTheme.onBackgroundColor,
+                radius: 2.8,
               ),
             ),
           ),
@@ -114,31 +115,9 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
       children: [
         PaginatedList<ProductModel, ProductListCubit>(
           bloc: cubit,
-          onNextPage: (bloc, offset) => bloc.getProducts(offset: offset),
           localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
           itemBuilder: (_, product, __) {
-            return CupertinoCard(
-              onPressed: () => $.navigator.push(
-                ProductDetailsRoute(product: product),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: Hero(
-                      tag: '${product.id}',
-                      child: CupertinoImage(
-                        uri: product.images.first,
-                      ),
-                    ),
-                  ),
-                  const Expanded(
-                    flex: 3,
-                    child: SizedBox(),
-                  ),
-                ],
-              ),
-            );
+            return ProductListingCard(product: product);
           },
         ),
         CustomScrollView(
