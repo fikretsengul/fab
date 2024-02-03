@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../_core/constants/app_theme.dart';
+import '../../../../../../_core/constants/fab_theme.dart';
 import '../../../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../../models/fab_appbar_action_settings.dart';
 import '../../../../models/fab_appbar_search_bar_settings.dart';
@@ -54,7 +54,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                   opacity: _store.searchBarHasFocus.value ? 1 : 0,
                   child: Text(
                     searchBar.cancelButtonText,
-                    style: context.appTheme.appBarTitleNActionsStyle
+                    style: context.fabTheme.appBarTitleNActionsStyle
                         .copyWith(color: CupertinoTheme.of(context).primaryContrastingColor),
                     maxLines: 1,
                   ),
@@ -75,11 +75,11 @@ class StaticSearchBarWidget extends StatelessWidget {
                       child: searchBar.prefixIcon,
                     ),
                     placeholder: searchBar.placeholderText,
-                    placeholderStyle: context.appTheme.bodyStyle.copyWith(
-                      color: context.appTheme.placeholderColor.withOpacity(opacity),
+                    placeholderStyle: context.fabTheme.bodyStyle.copyWith(
+                      color: context.fabTheme.placeholderColor.withOpacity(opacity),
                     ),
-                    style: context.appTheme.bodyStyle,
-                    backgroundColor: context.appTheme.surfaceColor,
+                    style: context.fabTheme.bodyStyle,
+                    backgroundColor: context.fabTheme.surfaceColor,
                   ),
                 ),
                 Row(
@@ -120,7 +120,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                       width: _store.searchBarHasFocus.value
                           ? defaultTextSize(
                               searchBar.cancelButtonText,
-                              context.appTheme.appBarTitleNActionsStyle,
+                              context.fabTheme.appBarTitleNActionsStyle,
                             )
                           : 0,
                     ),

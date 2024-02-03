@@ -1,7 +1,7 @@
 import 'package:deps/features/features.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../_core/constants/app_theme.dart';
+import '../../_core/constants/fab_theme.dart';
 import '../card/fab_card.dart';
 
 class FabAlert extends StatelessWidget {
@@ -27,13 +27,13 @@ class FabAlert extends StatelessWidget {
           Icon(
             icon,
             size: 36,
-            color: context.appTheme.onBackgroundColor,
+            color: context.fabTheme.onBackgroundColor,
           ),
           PaddingGap.md(),
           Expanded(
             child: Text(
               message,
-              style: context.appTheme.bodyStyle,
+              style: context.fabTheme.bodyStyle,
             ),
           ),
         ],

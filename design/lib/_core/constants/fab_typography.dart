@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const String fontName = 'VisueltPro';
 
-final class AppTypography {
+final class FabTypography {
   static const largeTitle = TextStyle(
     fontFamily: fontName,
     fontStyle: FontStyle.normal,

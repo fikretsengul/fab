@@ -72,7 +72,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: Icon(
                 UIcons.boldRounded.plus,
                 size: 20,
-                color: context.appTheme.primaryColor,
+                color: context.fabTheme.primaryColor,
               ),
             ),
           ],

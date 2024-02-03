@@ -9,7 +9,7 @@ abstract class TalkerModule {
   Talker get talker => TalkerFlutter.init(
         logger: TalkerLogger(
           formatter: FancyTalkerLogFormatter(),
-          settings: const TalkerLoggerSettings(
+          settings: TalkerLoggerSettings(
             maxLineWidth: 100,
           ),
         ),

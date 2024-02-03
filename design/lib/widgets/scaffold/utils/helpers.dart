@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../_core/constants/app_theme.dart';
+import '../../../_core/constants/fab_theme.dart';
 import '../models/fab_appbar_settings.dart';
 
 // SpecialColor to remove CupertinoSliverNavigationBar blur effect
@@ -15,7 +15,7 @@ TextStyle defaultTitleTextStyle(BuildContext context, FabAppBarSettings appBar) 
   if (appBar.title is Text && (appBar.title! as Text).style != null) {
     return (appBar.title! as Text).style!.copyWith(inherit: false);
   } else {
-    return context.appTheme.appBarTitleNActionsStyle.copyWith(inherit: false);
+    return context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false);
   }
 }
 

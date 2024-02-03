@@ -35,7 +35,7 @@ class FabButton extends StatelessWidget {
       color: color,
       pressedOpacity: pressedOpacity,
       borderRadius: borderRadius,
-      disabledColor: disabledColor ?? context.appTheme.placeholderColor,
+      disabledColor: disabledColor ?? context.fabTheme.placeholderColor,
       alignment: alignment,
       child: child,
     );

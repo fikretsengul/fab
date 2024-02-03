@@ -4,10 +4,10 @@ publish_to: none
 version: 0.0.1
 
 environment:
-  sdk: ">=3.2.5 <4.0.0"
+  sdk: ">=3.2.6 <4.0.0"
 
 dependencies:
-  adaptive_theme: ^3.5.0
+  adaptive_theme: ^3.6.0
   auto_route: ^7.8.4
   back_button_interceptor: ^7.0.1
   cached_network_image_plus: ^0.0.3
@@ -15,9 +15,7 @@ dependencies:
     path: ../design
   dio: ^5.4.0
   dio_smart_retry: ^6.0.0
-  easy_refresh:
-    git:
-      url: https://github.com/xuelongqy/flutter_easy_refresh.git
+  easy_refresh: ^3.3.4
   envied: ^0.5.3
   extended_tabs: ^4.1.0
   feature_core:
@@ -42,15 +40,15 @@ dependencies:
   reactive_forms: ^16.1.1
   reactive_forms_annotations: ^4.3.0
   rxdart: ^0.27.7
-  sentry_flutter: ^7.15.0
+  sentry_flutter: ^7.16.0
   slang: ^3.29.0
   slang_flutter: ^3.29.0
-  smooth_sheets: ^0.1.0
+  smooth_sheets: ^0.2.0
   styled_text: ^8.1.0
-  talker_bloc_logger: ^2.4.0
-  talker_dio_logger: ^2.4.0
-  talker_flutter: ^3.6.0
-  theme_tailor_annotation: ^2.0.2
+  talker_bloc_logger: ^4.0.0
+  talker_dio_logger: ^4.0.0
+  talker_flutter: ^4.0.0
+  theme_tailor_annotation: ^2.1.0
   uicons: ^1.0.1
   widgetbook: ^3.7.1
   widgetbook_annotation: ^3.1.0

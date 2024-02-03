@@ -6,7 +6,7 @@ import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/material.dart';
 
-import '../../_core/constants/app_theme.dart';
+import '../../_core/constants/fab_theme.dart';
 import '../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import 'models/fab_appbar_settings.dart';
 import 'utils/helpers.dart';
@@ -134,7 +134,7 @@ class _SuperScaffoldState extends State<FabScaffold> {
       ),
       userLargeTitle: Text(
         widget.appBar.largeTitle!.largeTitle,
-        style: context.appTheme.appBarLargeTitleStyle.copyWith(inherit: false),
+        style: context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
         overflow: TextOverflow.ellipsis,
       ),
       appbarBottom: widget.appBar.bottom!.child,
@@ -145,7 +145,7 @@ class _SuperScaffoldState extends State<FabScaffold> {
     return PopScope(
       canPop: !_store.searchBarHasFocus.value,
       child: Scaffold(
-        backgroundColor: context.appTheme.backgroundColor,
+        backgroundColor: context.fabTheme.backgroundColor,
         body: Stack(
           alignment: Alignment.center,
           children: [

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../_core/constants/app_theme.dart';
+import '../../../../_core/constants/fab_theme.dart';
 import '../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../models/fab_appbar_search_bar_settings.dart';
 import '../../models/fab_appbar_settings.dart';
@@ -128,10 +128,10 @@ class AnimatedAppBar extends StatelessWidget {
                         child: OverridenTransitionableNavigationBar(
                           componentsKeys: keys,
                           backgroundColor: color,
-                          backButtonTextStyle: context.appTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
+                          backButtonTextStyle: context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
                           titleTextStyle: defaultTitleTextStyle(context, appBar),
                           largeTitleTextStyle: appBar.largeTitle!.textStyle ??
-                              context.appTheme.appBarLargeTitleStyle.copyWith(inherit: false),
+                              context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
                           border: null,
                           hasUserMiddle: isCollapsed,
                           largeExpanded: !isCollapsed && appBar.largeTitle!.enabled,

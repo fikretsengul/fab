@@ -2,7 +2,7 @@ import 'package:deps/features/features.dart';
 import 'package:deps/packages/fpdart.dart';
 import 'package:flutter/material.dart';
 
-import '../../_core/constants/app_theme.dart';
+import '../../_core/constants/fab_theme.dart';
 import '../image/fab_image.dart';
 import '../shadow/fab_shadow_overlay.dart';
 
@@ -91,7 +91,7 @@ class _ImageSliderState extends State<ImageSlider> {
             child: Container(
               padding: $.paddings.xxs.all,
               decoration: BoxDecoration(
-                color: context.appTheme.placeholderColor.withOpacity(0.5),
+                color: context.fabTheme.placeholderColor.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(
@@ -104,7 +104,7 @@ class _ImageSliderState extends State<ImageSlider> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color:
-                          _selectedItemIndex == index ? context.appTheme.primaryColor : context.appTheme.surfaceColor,
+                          _selectedItemIndex == index ? context.fabTheme.primaryColor : context.fabTheme.surfaceColor,
                     ),
                   );
                 }).toList(),

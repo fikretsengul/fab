@@ -53,7 +53,7 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             child: Icon(
               UIcons.boldRounded.heart,
               size: 22,
-              color: context.appTheme.primaryColor,
+              color: context.fabTheme.primaryColor,
             ),
           ),
           PaddingGap.md(),
@@ -64,7 +64,7 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             child: Icon(
               UIcons.boldRounded.shopping_bag,
               size: 20,
-              color: context.appTheme.primaryColor,
+              color: context.fabTheme.primaryColor,
             ),
           ),
           PaddingGap.xs(),
@@ -95,15 +95,15 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
             child: ExtendedTabBar(
               tabs: _tabs,
               controller: _tabController,
-              labelStyle: context.appTheme.bodyStyle.bold,
-              unselectedLabelStyle: context.appTheme.bodyStyle.bold,
+              labelStyle: context.fabTheme.bodyStyle.bold,
+              unselectedLabelStyle: context.fabTheme.bodyStyle.bold,
               labelPadding: const EdgeInsets.only(right: 16),
-              labelColor: context.appTheme.onBackgroundColor,
+              labelColor: context.fabTheme.onBackgroundColor,
               isScrollable: _tabController.length > 5,
               indicatorSize: TabBarIndicatorSize.label,
               mainAxisAlignment: MainAxisAlignment.start,
               indicator: CircleTabIndicator(
-                color: context.appTheme.onBackgroundColor,
+                color: context.fabTheme.onBackgroundColor,
                 radius: 2.8,
               ),
             ),

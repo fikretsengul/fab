@@ -62,7 +62,7 @@ class _ProductListingCardState extends State<ProductListingCard> {
               child: PaddingAll.xs(
                 child: Column(
                   children: [
-                    Text(widget.product.title, style: context.appTheme.footnoteStyle),
+                    Text(widget.product.title, style: context.fabTheme.footnoteStyle),
                   ],
                 ),
               ),

@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../_core/constants/app_theme.dart';
+import '../../../../_core/constants/fab_theme.dart';
 import '../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../models/fab_appbar_search_bar_settings.dart';
 import '../../models/fab_appbar_settings.dart';
@@ -51,9 +51,9 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
   late AnimationController _animationController;
   late Animation _animation;
 
-  Color _expandedColor(BuildContext context) => context.appTheme.appBarExpandedColor;
+  Color _expandedColor(BuildContext context) => context.fabTheme.appBarExpandedColor;
   Color _collapsedColor(BuildContext context) =>
-      context.appTheme.appBarCollapsedColor.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
+      context.fabTheme.appBarCollapsedColor.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
 
   @override
   void dispose() {

@@ -57,7 +57,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   widget.searchBar.cancelButtonText,
-                  style: context.appTheme.appBarTitleNActionsStyle,
+                  style: context.fabTheme.appBarTitleNActionsStyle,
                   maxLines: 1,
                 ),
               ),
@@ -104,13 +104,13 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                     child: widget.searchBar.prefixIcon,
                   ),
                   placeholder: widget.searchBar.placeholderText,
-                  placeholderStyle: context.appTheme.bodyStyle.copyWith(
-                    color: context.appTheme.placeholderColor.withOpacity(widget.opacity),
+                  placeholderStyle: context.fabTheme.bodyStyle.copyWith(
+                    color: context.fabTheme.placeholderColor.withOpacity(widget.opacity),
                   ),
-                  style: context.appTheme.bodyStyle,
+                  style: context.fabTheme.bodyStyle,
                   controller: widget.editingController,
                   focusNode: widget.focusNode,
-                  backgroundColor: context.appTheme.surfaceColor,
+                  backgroundColor: context.fabTheme.surfaceColor,
                   autocorrect: false,
                 ),
               ),
@@ -125,7 +125,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
               width: widget.searchBarHasFocus
                   ? defaultTextSize(
                       widget.searchBar.cancelButtonText,
-                      context.appTheme.appBarTitleNActionsStyle,
+                      context.fabTheme.appBarTitleNActionsStyle,
                     )
                   : 0,
             ),

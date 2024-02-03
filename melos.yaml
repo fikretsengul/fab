@@ -31,8 +31,8 @@ command:
     # package will be updated to match the version defined in the bootstrap
     # config every time melos bootstrap is run.
     environment:
-      sdk: ">=3.2.5 <4.0.0"
-      flutter: ">=3.16.8 <4.0.0"
+      sdk: ">=3.2.6 <4.0.0"
+      flutter: ">=3.16.9 <4.0.0"
 
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature

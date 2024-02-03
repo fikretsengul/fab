@@ -1,7 +1,7 @@
 import 'package:deps/features/features.dart';
 import 'package:flutter/material.dart';
 
-import '../../_core/constants/app_theme.dart';
+import '../../_core/constants/fab_theme.dart';
 
 class FabGradientShadow extends StatelessWidget {
   const FabGradientShadow({
@@ -21,7 +21,7 @@ class FabGradientShadow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = shadowColor ?? context.appTheme.surfaceColor;
+    final color = shadowColor ?? context.fabTheme.surfaceColor;
 
     return Stack(
       children: [

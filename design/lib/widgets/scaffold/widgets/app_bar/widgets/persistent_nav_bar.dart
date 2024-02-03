@@ -26,7 +26,7 @@ class PersistentNavigationBar extends StatelessWidget {
 
     if (middle != null) {
       middle = DefaultTextStyle(
-        style: context.appTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
+        style: context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
         child: Semantics(header: true, child: middle),
       );
 
@@ -51,7 +51,7 @@ class PersistentNavigationBar extends StatelessWidget {
     if (leading == null && backChevron != null && backLabel != null) {
       leading = CupertinoNavigationBarBackButton.assemble(
         backChevron,
-        context.appTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
+        context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
         backLabel,
       );
     }

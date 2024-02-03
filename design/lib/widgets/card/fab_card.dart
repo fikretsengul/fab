@@ -1,7 +1,7 @@
 // ignore_for_file: max_lines_for_file
 import 'package:flutter/cupertino.dart';
 
-import '../../_core/constants/app_theme.dart';
+import '../../_core/constants/fab_theme.dart';
 
 class FabCard extends StatelessWidget {
   FabCard({
@@ -55,7 +55,7 @@ class FabCard extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           borderRadius: !useCupertinoRounder ? BorderRadius.all(Radius.circular(radius)) : null,
-          color: color ?? context.appTheme.surfaceColor,
+          color: color ?? context.fabTheme.surfaceColor,
           image: image,
           border: border,
         ),
