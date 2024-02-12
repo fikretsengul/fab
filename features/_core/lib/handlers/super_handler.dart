@@ -48,6 +48,7 @@ class _SuperHandlerState extends State<SuperHandler> {
         return Scaffold(
           key: $.navigator.scaffoldKey,
           resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
           body: child,
         );
       },

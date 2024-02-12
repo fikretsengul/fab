@@ -2,12 +2,9 @@
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
-import 'package:deps/packages/cached_network_image_plus.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../domain/models/product.model.dart';
 
 @RoutePage()
 class ProductDetailsPage extends StatefulWidget {
@@ -20,7 +17,7 @@ class ProductDetailsPage extends StatefulWidget {
 
   final ProductModel product;
   final int selectedItemIndex;
-  final void Function(int index)? onSelectedItemChanged;
+  final ValueChanged<int>? onSelectedItemChanged;
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -63,7 +60,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           title: const Text(
             'details.',
           ),
-          previousPageTitle: 'back',
           actions: [
             CupertinoButton(
               minSize: 0,
@@ -80,104 +76,98 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             largeTitle: 'details.',
           ),
         ),
-        children: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: $.paddings.md,
-                vertical: $.paddings.sm,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 300,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 8,
-                          child: Hero(
-                            tag: _selectedImage,
-                            transitionOnUserGestures: true,
-                            child: AnimatedSwitcher(
-                              duration: $.timings.mil200,
-                              transitionBuilder: (child, animation) {
-                                return FadeTransition(opacity: animation, child: child);
-                              },
-                              child: CacheNetworkImagePlus(
-                                key: ValueKey<String>(_selectedImage),
-                                boxFit: BoxFit.cover,
-                                borderRadius: 16,
-                                width: context.width,
-                                imageUrl: _selectedImage,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: $.paddings.md,
+            vertical: $.paddings.sm,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 300,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: Hero(
+                        tag: _selectedImage + widget.product.id.toString(),
+                        transitionOnUserGestures: true,
+                        child: AnimatedSwitcher(
+                          duration: $.timings.mil200,
+                          transitionBuilder: (child, animation) {
+                            return FadeTransition(opacity: animation, child: child);
+                          },
+                          child: FabImage(
+                            key: ValueKey<String>(_selectedImage),
+                            uri: _selectedImage,
+                            width: context.width,
+                          ),
+                        ),
+                      ),
+                    ),
+                    PaddingGap.md(),
+                    Expanded(
+                      flex: 2,
+                      child: Wrap(
+                        runSpacing: $.paddings.md,
+                        children: widget.product.images.map((image) {
+                          return FabButton(
+                            onPressed: _selectedImage != image
+                                ? () {
+                                    widget.onSelectedItemChanged?.call(widget.product.images.indexOf(image));
+                                    setState(() {
+                                      _selectedImage = image;
+                                    });
+                                  }
+                                : null,
+                            child: FabImage(
+                              uri: image,
+                              height: (300 - ((widget.product.images.length - 1) * $.paddings.md)) /
+                                  (widget.product.images.length),
+                              border: Border.fromBorderSide(
+                                BorderSide(
+                                  color: _selectedImage == image
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        PaddingGap.md(),
-                        Expanded(
-                          flex: 2,
-                          child: Wrap(
-                            runSpacing: $.paddings.md,
-                            children: widget.product.images.map((image) {
-                              return FabButton(
-                                onPressed: _selectedImage != image
-                                    ? () {
-                                        widget.onSelectedItemChanged?.call(widget.product.images.indexOf(image));
-                                        setState(() {
-                                          _selectedImage = image;
-                                        });
-                                      }
-                                    : null,
-                                child: FabImage(
-                                  uri: image,
-                                  height: (300 - ((widget.product.images.length - 1) * $.paddings.md)) /
-                                      (widget.product.images.length),
-                                  border: Border.fromBorderSide(
-                                    BorderSide(
-                                      color: _selectedImage == image
-                                          ? CupertinoTheme.of(context).primaryColor
-                                          : Colors.transparent,
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                  PaddingGap.md(),
-                  //TODO:
-                  FabCard(
-                    padding: $.paddings.sm.all,
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.product.title,
-                          style: context.textTheme.titleLarge,
-                        ),
-                        PaddingGap.sm(),
-                        Text(
-                          widget.product.description,
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: context.textTheme.bodyMedium?.color?.withOpacity(0.8),
-                          ),
-                          textAlign: TextAlign.justify,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              PaddingGap.md(),
+              //TODO:
+              FabCard(
+                padding: $.paddings.sm.all,
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.product.title,
+                      style: context.textTheme.titleLarge,
+                    ),
+                    PaddingGap.sm(),
+                    Text(
+                      widget.product.description,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: context.textTheme.bodyMedium?.color?.withOpacity(0.8),
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

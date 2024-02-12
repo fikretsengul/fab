@@ -1,4 +1,5 @@
 // ignore_for_file: max_lines_for_file
+import 'package:deps/packages/skeletonizer.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../_core/constants/fab_theme.dart';
@@ -8,23 +9,33 @@ class FabCard extends StatelessWidget {
     super.key,
     this.width,
     this.height,
+    this.minWidth,
+    this.minHeight,
     this.child,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
     this.color,
     this.radius = 16,
     this.image,
+    this.isContentCentered = false,
+    this.isLoading = false,
+    this.hasShadow = false,
     this.onPressed,
     this.border,
     this.pressedOpacity = 0.4,
     this.useCupertinoRounder = false,
   });
 
+  final bool isContentCentered;
+  final bool isLoading;
   final double pressedOpacity;
   final double? width;
   final double? height;
+  final double? minWidth;
+  final double? minHeight;
   final Widget? child;
   final Color? color;
+  final bool hasShadow;
   final EdgeInsets margin;
   final VoidCallback? onPressed;
   final EdgeInsets padding;
@@ -53,22 +64,38 @@ class FabCard extends StatelessWidget {
         height: height,
         margin: margin,
         padding: padding,
+        constraints: BoxConstraints(
+          minWidth: minWidth ?? 0,
+          minHeight: minHeight ?? 0,
+        ),
         decoration: BoxDecoration(
           borderRadius: !useCupertinoRounder ? BorderRadius.all(Radius.circular(radius)) : null,
           color: color ?? context.fabTheme.surfaceColor,
           image: image,
           border: border,
+          boxShadow: hasShadow
+              ? [
+                  BoxShadow(
+                    color: context.fabTheme.softInactiveColor,
+                    offset: const Offset(0, 1),
+                    blurRadius: 10,
+                  ),
+                ]
+              : null,
         ),
-        child: child,
+        child: isContentCentered ? Center(child: child) : child,
       ),
     );
 
-    return useCupertinoRounder
-        ? ClipPath.shape(
-            shape: shapeborder,
-            child: widget,
-          )
-        : widget;
+    return Skeleton.leaf(
+      enabled: isLoading,
+      child: useCupertinoRounder
+          ? ClipPath.shape(
+              shape: shapeborder,
+              child: widget,
+            )
+          : widget,
+    );
   }
 }
 

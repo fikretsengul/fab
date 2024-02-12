@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../design.dart';
+
 class Refresher extends StatelessWidget {
   Refresher({required this.refreshListenable, super.key});
 
@@ -19,7 +21,7 @@ class Refresher extends StatelessWidget {
             return const SizedBox.shrink();
           }
 
-          final color = CupertinoTheme.of(context).textTheme.textStyle.color;
+          final color = context.fabTheme.onBackgroundColor;
           final mode = state.mode;
           final offset = state.offset;
           final actualTriggerOffset = state.actualTriggerOffset;

@@ -15,15 +15,15 @@ TextStyle defaultTitleTextStyle(BuildContext context, FabAppBarSettings appBar) 
   if (appBar.title is Text && (appBar.title! as Text).style != null) {
     return (appBar.title! as Text).style!.copyWith(inherit: false);
   } else {
-    return context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false);
+    return context.fabTheme.appBarTitleStyle.copyWith(inherit: false);
   }
 }
 
-BoxDecoration defaultBorder(double value) {
+BoxDecoration defaultBorder(BuildContext context, double value) {
   return BoxDecoration(
     border: Border(
       bottom: BorderSide(
-        color: const Color(0x4C000000).withOpacity(value),
+        color: context.fabTheme.borderColor.withOpacity(value),
         width: 0,
       ),
     ),

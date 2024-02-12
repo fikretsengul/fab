@@ -16,15 +16,17 @@ sealed class ProductModel with _$ProductModel {
     required String creationAt,
     required String updatedAt,
     required CategoryModel category,
+    @Default(0) int discountRate,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
   factory ProductModel.empty() => ProductModel(
         id: 0,
-        title: '',
-        price: 0,
-        description: '',
+        title: 'Lorem ipsum dolor',
+        price: 100,
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac ullamcorper ligula. Quisque leo est, pellentesque vel hendrerit sit amet, varius vitae tortor.',
         images: [],
         creationAt: '',
         updatedAt: '',
@@ -34,4 +36,5 @@ sealed class ProductModel with _$ProductModel {
   ProductModel._();
 
   bool get isEmpty => this == ProductModel.empty();
+  double get discountPrice => price * (1 - discountRate / 100.0);
 }

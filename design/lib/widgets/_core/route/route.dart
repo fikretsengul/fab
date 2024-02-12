@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_file, prefer_library_prefixes, avoid_returning_widgets, prefer_new_line_before_return, boolean_prefix, avoid_unused_parameters, prefer_underscore_for_unused_callback_parameters
+
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.

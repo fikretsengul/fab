@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_widgets
+
 import 'package:flutter/material.dart';
 
 import 'route.dart';

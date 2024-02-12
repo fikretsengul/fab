@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_function
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +56,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                   opacity: _store.searchBarHasFocus.value ? 1 : 0,
                   child: Text(
                     searchBar.cancelButtonText,
-                    style: context.fabTheme.appBarTitleNActionsStyle
+                    style: context.fabTheme.appBarActionsStyle
                         .copyWith(color: CupertinoTheme.of(context).primaryContrastingColor),
                     maxLines: 1,
                   ),
@@ -76,7 +78,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                     ),
                     placeholder: searchBar.placeholderText,
                     placeholderStyle: context.fabTheme.bodyStyle.copyWith(
-                      color: context.fabTheme.placeholderColor.withOpacity(opacity),
+                      color: context.fabTheme.inactiveColor.withOpacity(opacity),
                     ),
                     style: context.fabTheme.bodyStyle,
                     backgroundColor: context.fabTheme.surfaceColor,
@@ -120,7 +122,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                       width: _store.searchBarHasFocus.value
                           ? defaultTextSize(
                               searchBar.cancelButtonText,
-                              context.fabTheme.appBarTitleNActionsStyle,
+                              context.fabTheme.appBarActionsStyle,
                             )
                           : 0,
                     ),

@@ -6,8 +6,8 @@ import 'package:flutter/widgets.dart';
 /// widget. It translates with the translation key and escapes some
 /// characters that create problems for StyledText.
 class FabTextStyled extends StatelessWidget {
-  const FabTextStyled({
-    required this.text,
+  const FabTextStyled(
+    this.text, {
     this.tags,
     this.style,
     this.overflow = TextOverflow.clip,
@@ -31,6 +31,9 @@ class FabTextStyled extends StatelessWidget {
     return {
       'b': StyledTextTag(
         style: style?.bold,
+      ),
+      'lt': StyledTextTag(
+        style: style?.copyWith(decoration: TextDecoration.lineThrough),
       ),
       'i': StyledTextTag(
         style: style?.italic,

@@ -16,7 +16,7 @@ class FabAppBarSettings {
     this.automaticallyImplyLeading = true,
     this.titleSpacing = 16,
     this.backIcon,
-    this.previousPageTitle = 'Back',
+    this.previousPageTitle = 'back',
     this.alwaysShowTitle = false,
     this.searchBar,
     this.largeTitle,

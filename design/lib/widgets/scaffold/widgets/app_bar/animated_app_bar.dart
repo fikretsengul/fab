@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_file,
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -74,9 +76,9 @@ class AnimatedAppBar extends StatelessWidget {
               : fullAppBarHeight,
           child: AnimatedBuilder(
             animation: animationController,
-            builder: (context, child) {
-              return DecoratedBox(
-                decoration: defaultBorder(animationController.value),
+            builder: (_, __) {
+              return Container(
+                decoration: defaultBorder(context, animationController.value),
                 child: wrapWithBackground(
                   brightness: brightness,
                   hasBackgroundBlur: appBar.hasBackgroundBlur,
@@ -128,7 +130,7 @@ class AnimatedAppBar extends StatelessWidget {
                         child: OverridenTransitionableNavigationBar(
                           componentsKeys: keys,
                           backgroundColor: color,
-                          backButtonTextStyle: context.fabTheme.appBarTitleNActionsStyle.copyWith(inherit: false),
+                          backButtonTextStyle: context.fabTheme.appBarActionsStyle.copyWith(inherit: false),
                           titleTextStyle: defaultTitleTextStyle(context, appBar),
                           largeTitleTextStyle: appBar.largeTitle!.textStyle ??
                               context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),

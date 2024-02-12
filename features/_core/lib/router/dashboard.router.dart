@@ -6,6 +6,7 @@ import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/uicons.dart';
 import 'package:flutter/cupertino.dart' hide CupertinoNavigationBar;
 
 import '../cubits/translation/translation_cubit.dart';
@@ -16,8 +17,11 @@ class DashboardRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => $.get<UserCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => $.get<UserCubit>()),
+        BlocProvider(create: (_) => $.get<CartCubit>()),
+      ],
       child: AutoTabsScaffold(
         routes: const [
           ProductsRouter(),
@@ -33,13 +37,13 @@ class DashboardRouter extends StatelessWidget {
                 items: [
                   CupertinoNavigationBarItem(
                     label: $.tr.products.title,
-                    icon: const Icon(CupertinoIcons.house),
-                    selectedIcon: const Icon(CupertinoIcons.house_fill),
+                    icon: Icon(UIcons.regularRounded.bags_shopping),
+                    selectedIcon: Icon(UIcons.solidRounded.bags_shopping),
                   ),
                   CupertinoNavigationBarItem(
                     label: $.tr.settings.title,
-                    icon: const Icon(CupertinoIcons.settings),
-                    selectedIcon: const Icon(CupertinoIcons.settings_solid),
+                    icon: Icon(UIcons.regularRounded.settings),
+                    selectedIcon: Icon(UIcons.solidRounded.settings),
                   ),
                 ],
               );

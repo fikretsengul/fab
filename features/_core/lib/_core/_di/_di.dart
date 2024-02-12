@@ -5,6 +5,7 @@
 import 'package:deps/packages/get_it.dart';
 import 'package:deps/packages/injectable.dart';
 import 'package:feature_auth/_core/_di/_di.dart';
+import 'package:feature_cart/_core/_di/_di.dart';
 import 'package:feature_products/_core/_di/_di.dart';
 import 'package:feature_settings/_core/_di/_di.dart';
 import 'package:feature_user/_core/_di/_di.dart';
@@ -22,4 +23,5 @@ void injectAllFeatures(GetIt di, String env) {
   injectProductsFeature(di, env);
   injectSettingsFeature(di, env);
   injectUserFeature(di, env);
+  injectCartFeature(di, env);
 }

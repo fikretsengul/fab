@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 
 import '../_core/reactives/reactive_cupertino_textfield.dart';
 
-class CupertinoTextfield extends StatelessWidget {
-  const CupertinoTextfield({
+class FabTextfield extends StatelessWidget {
+  const FabTextfield({
     required this.formControl,
     required this.labelText,
     this.autofocus = false,

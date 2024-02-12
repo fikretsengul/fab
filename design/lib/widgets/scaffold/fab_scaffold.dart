@@ -20,15 +20,12 @@ import 'widgets/refresher.dart';
 class FabScaffold extends StatefulWidget {
   FabScaffold({
     required this.appBar,
-    this.child,
-    this.children,
-    this.tabController,
+    required this.child,
     super.key,
     this.shouldStretch = true,
     this.onCollapsed,
     this.shouldTransiteBetweenRoutes = true,
     this.onRefresh,
-    this.forceScroll = false,
     this.isCustomScrollView = false,
   }) : measures = Measures(
           searchTextFieldHeight: appBar.searchBar!.height,
@@ -40,15 +37,12 @@ class FabScaffold extends StatefulWidget {
 
   final FutureOr<dynamic> Function()? onRefresh;
   final FabAppBarSettings appBar;
-  final Widget? child;
-  final List<Widget>? children;
-  final bool forceScroll;
+  final Widget child;
   final bool isCustomScrollView;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
   final bool shouldStretch;
   final bool shouldTransiteBetweenRoutes;
-  final TabController? tabController;
 
   @override
   State<FabScaffold> createState() => _SuperScaffoldState();
@@ -63,18 +57,14 @@ class _SuperScaffoldState extends State<FabScaffold> {
 
   @override
   void didChangeDependencies() {
-    if (widget.forceScroll || widget.tabController != null) {
+    if (widget.isCustomScrollView) {
       setState(() {
         _isScrollable = true;
       });
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
-          if (_nestedScrollViewKey.currentState!.innerController.position.maxScrollExtent > 0) {
-            _isScrollable = true;
-          } else {
-            _isScrollable = false;
-          }
+          _isScrollable = _nestedScrollViewKey.currentState!.innerController.position.maxScrollExtent > 0;
         });
       });
     }
@@ -155,14 +145,12 @@ class _SuperScaffoldState extends State<FabScaffold> {
               measures: widget.measures,
               scrollBehavior: widget.appBar.searchBar!.scrollBehavior,
               animationBehavior: widget.appBar.searchBar!.animationBehavior,
-              tabController: widget.tabController,
-              child: widget.child,
-              children: widget.children,
               onRefresh: widget.onRefresh,
               refreshListenable: _refreshListenable,
               isScrollable: _isScrollable,
               nestedScrollViewKey: _nestedScrollViewKey,
               isCustomScrollView: widget.isCustomScrollView,
+              child: widget.child,
             ),
             SearchBarResult(
               measures: widget.measures,

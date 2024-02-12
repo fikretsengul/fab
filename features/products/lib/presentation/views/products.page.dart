@@ -7,14 +7,11 @@ import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
-import 'package:deps/packages/cached_network_image_plus.dart';
-import 'package:deps/packages/extended_tabs.dart';
-import 'package:deps/packages/uicons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/models/product.model.dart';
 import '../cubits/product_list.cubit.dart';
+import 'test.dart';
+import 'widgets/product_appbar_actions.dart';
 import 'widgets/product_listing_card.dart';
 
 @RoutePage()
@@ -38,122 +35,72 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
       text: 'furniture',
     ),
   ];
-  final cubit = locator<ProductListCubit>();
+  final _cubit = locator<ProductListCubit>();
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return FabScaffold(
       appBar: FabAppBarSettings(
         title: const Text('products.'),
-        actions: [
-          CupertinoButton(
-            minSize: 0,
-            padding: EdgeInsets.zero,
-            onPressed: () {},
-            child: Icon(
-              UIcons.boldRounded.heart,
-              size: 22,
-              color: context.fabTheme.primaryColor,
-            ),
-          ),
-          PaddingGap.md(),
-          CupertinoButton(
-            minSize: 0,
-            padding: EdgeInsets.zero,
-            onPressed: () {},
-            child: Icon(
-              UIcons.boldRounded.shopping_bag,
-              size: 20,
-              color: context.fabTheme.primaryColor,
-            ),
-          ),
-          PaddingGap.xs(),
-        ],
+        actions: [const ProductAppBarActions()],
         largeTitle: FabAppBarLargeTitleSettings(
+          enabled: true,
           largeTitle: 'products.',
           actions: [
-            CupertinoButton(
-              padding: EdgeInsets.zero,
-              minSize: 0,
-              onPressed: () => $.get<UserCubit>().logout(),
-              child: CacheNetworkImagePlus(
-                borderRadius: 16,
-                imageUrl: $.get<UserCubit>().state.avatar,
-                width: 30,
-                height: 30,
-              ),
+            FabImage(
+              width: 30,
+              height: 30,
+              uri: $.get<UserCubit>().state.avatar,
+              onPressed: $.get<UserCubit>().logout,
             ),
           ],
-        ),
-        searchBar: FabAppBarSearchBarSettings(
-          enabled: true,
         ),
         bottom: FabAppBarBottomSettings(
           enabled: true,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ExtendedTabBar(
-              tabs: _tabs,
-              controller: _tabController,
-              labelStyle: context.fabTheme.bodyStyle.bold,
-              unselectedLabelStyle: context.fabTheme.bodyStyle.bold,
-              labelPadding: const EdgeInsets.only(right: 16),
-              labelColor: context.fabTheme.onBackgroundColor,
-              isScrollable: _tabController.length > 5,
-              indicatorSize: TabBarIndicatorSize.label,
-              mainAxisAlignment: MainAxisAlignment.start,
-              indicator: CircleTabIndicator(
-                color: context.fabTheme.onBackgroundColor,
-                radius: 2.8,
-              ),
-            ),
+          height: 36,
+          child: FabTabBar(
+            tabs: _tabs,
+            controller: _tabController,
           ),
         ),
       ),
-      onRefresh: cubit.refresh,
-      tabController: _tabController,
-      children: [
-        PaginatedList<ProductModel, ProductListCubit>(
-          bloc: cubit,
-          localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
-          itemBuilder: (_, product, __) {
-            return ProductListingCard(product: product);
-          },
-        ),
-        CustomScrollView(
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          slivers: [
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final number = index + 1;
-
-                  return Container(
-                    height: 50,
-                    color:
-                        index.isEven ? CupertinoColors.lightBackgroundGray : CupertinoColors.extraLightBackgroundGray,
-                    alignment: Alignment.center,
-                    child: Text(
-                      '$number',
-                      style: CupertinoTheme.of(context).textTheme.textStyle,
-                    ),
-                  );
-                },
-                childCount: 20,
-              ),
+      onRefresh: _cubit.refresh,
+      isCustomScrollView: true,
+      child: FabTabBarView(
+        tabController: _tabController,
+        children: [
+          FabKeepChildAlive(
+            child: PaginatedGridList<ProductModel, ProductListCubit>(
+              index: 0,
+              bloc: _cubit,
+              localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+              itemHeight: 275,
+              skeletonBuilder: (_) {
+                return ProductListingCard(product: ProductModel.empty());
+              },
+              itemBuilder: (_, product, __) {
+                return ProductListingCard(product: product);
+              },
             ),
-          ],
-        ),
-
-        // Third tab
-        Column(
-          children: [
-            Container(height: 200, color: Colors.red),
-            Container(height: 200, color: Colors.green),
-            Container(height: 200, color: Colors.yellow),
-          ],
-        ),
-      ],
+          ),
+          const FabKeepChildAlive(
+            child: Test(index: 1),
+          ),
+          Column(
+            children: [
+              Container(height: 200, color: Colors.red),
+              Container(height: 200, color: Colors.green),
+              Container(height: 200, color: Colors.yellow),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_file, max_lines_for_function, boolean_prefix
+
 // Source: https://github.com/Kavantix/sliver_tools
 // Last updated at https://github.com/Kavantix/sliver_tools/commit/ee06da0f026bbba09cf314f1877e7fe5c312c971
 
@@ -82,6 +84,7 @@ class RenderMultiSliver extends RenderSliver
   void performLayout() {
     if (firstChild == null) {
       geometry = SliverGeometry.zero;
+
       return;
     }
 
@@ -100,6 +103,7 @@ class RenderMultiSliver extends RenderSliver
 
     if (correction != null) {
       geometry = SliverGeometry(scrollOffsetCorrection: correction);
+
       return;
     }
   }
@@ -126,7 +130,7 @@ class RenderMultiSliver extends RenderSliver
       growthDirection,
     );
     var layoutOffset = initialLayoutOffset;
-    double maxPaintOffset = min(0, overlap);
+    double maxPaintOffset = math.min(0, overlap);
     var maxPaintExtent = 0.0;
     var maxHitTestExtent = 0.0;
     var scrollExtent = 0.0;
@@ -141,7 +145,7 @@ class RenderMultiSliver extends RenderSliver
       // If the scrollOffset is too small we adjust the paddedOrigin because it
       // doesn't make sense to ask a sliver for content before its scroll
       // offset.
-      final double correctedCacheOrigin = max(cacheOrigin, -sliverScrollOffset);
+      final double correctedCacheOrigin = math.max(cacheOrigin, -sliverScrollOffset);
       final cacheExtentCorrection = cacheOrigin - correctedCacheOrigin;
 
       assert(sliverScrollOffset >= correctedCacheOrigin.abs());
@@ -156,15 +160,15 @@ class RenderMultiSliver extends RenderSliver
           userScrollDirection: adjustedUserScrollDirection,
           scrollOffset: sliverScrollOffset,
           precedingScrollExtent: precedingScrollExtent,
-          overlap: max(overlap, maxPaintOffset) - layoutOffset,
-          remainingPaintExtent: max(
+          overlap: math.max(overlap, maxPaintOffset) - layoutOffset,
+          remainingPaintExtent: math.max(
             0,
             remainingPaintExtent - layoutOffset + initialLayoutOffset,
           ),
           crossAxisExtent: crossAxisExtent,
           crossAxisDirection: constraints.crossAxisDirection,
           viewportMainAxisExtent: mainAxisExtent,
-          remainingCacheExtent: max(0, remainingCacheExtent + cacheExtentCorrection),
+          remainingCacheExtent: math.max(0, remainingCacheExtent + cacheExtentCorrection),
           cacheOrigin: correctedCacheOrigin,
         ),
         child,
@@ -191,22 +195,22 @@ class RenderMultiSliver extends RenderSliver
         _updateChildPaintOffset(child, -scrollOffset + initialLayoutOffset);
       }
 
-      minPaintOrigin = min(
+      minPaintOrigin = math.min(
         minPaintOrigin ?? double.infinity,
         childParentData.geometry.paintOrigin,
       );
-      maxPaintOffset = max(
+      maxPaintOffset = math.max(
         effectiveLayoutOffset + childParentData.geometry.paintExtent,
         maxPaintOffset,
       );
-      maxPaintExtent = max(
+      maxPaintExtent = math.max(
         maxPaintExtent,
         effectiveLayoutOffset +
             childParentData.geometry.maxPaintExtent +
             constraints.scrollOffset -
             childParentData.constraints.scrollOffset,
       );
-      maxHitTestExtent = max(
+      maxHitTestExtent = math.max(
         maxHitTestExtent,
         layoutOffset + childParentData.geometry.hitTestExtent,
       );
@@ -219,7 +223,7 @@ class RenderMultiSliver extends RenderSliver
       visible = visible || childParentData.geometry.visible;
       if (childParentData.geometry.cacheExtent != 0.0) {
         remainingCacheExtent -= childParentData.geometry.cacheExtent - cacheExtentCorrection;
-        cacheOrigin = min(
+        cacheOrigin = math.min(
           correctedCacheOrigin + childParentData.geometry.cacheExtent,
           0,
         );
@@ -240,19 +244,19 @@ class RenderMultiSliver extends RenderSliver
     }
 
     if (containing) {
-      final double allowedBounds = max(0, scrollExtent - constraints.scrollOffset);
+      final double allowedBounds = math.max(0, scrollExtent - constraints.scrollOffset);
       if (maxPaintOffset > allowedBounds) {
         _containPinnedSlivers(maxPaintOffset, allowedBounds, constraints.axis);
         maxPaintOffset = allowedBounds;
         layoutOffset = allowedBounds;
-        maxScrollObstructionExtent = min(allowedBounds, maxScrollObstructionExtent);
+        maxScrollObstructionExtent = math.min(allowedBounds, maxScrollObstructionExtent);
       }
       hasVisualOverflow = true;
     }
     minPaintOrigin ??= 0;
-    final paintExtent = max(
+    final paintExtent = math.max(
       0,
-      min(
+      math.min(
         maxPaintOffset - minPaintOrigin,
         constraints.remainingPaintExtent - minPaintOrigin,
       ),
@@ -263,9 +267,10 @@ class RenderMultiSliver extends RenderSliver
       // Round the remainingPaintExtent to prevent the warning that is otherwise possible
       final remainingPaintExtent = (constraints.remainingPaintExtent / fraction).floorToDouble() * fraction;
       totalPaintExtent = totalPaintExtent.clamp(0.0, remainingPaintExtent);
+
       return true;
     }());
-    final double layoutExtent = max(0, min(layoutOffset, totalPaintExtent - minPaintOrigin));
+    final double layoutExtent = math.max(0, math.min(layoutOffset, totalPaintExtent - minPaintOrigin));
     geometry = SliverGeometry(
       paintOrigin: minPaintOrigin,
       scrollExtent: scrollExtent,
@@ -326,6 +331,7 @@ class RenderMultiSliver extends RenderSliver
         'MultiSliver can only handle RenderSliver and RenderBox children',
       );
     }
+
     return childParentData;
   }
 
@@ -434,6 +440,7 @@ class RenderMultiSliver extends RenderSliver
         }
       }
     }
+
     return false;
   }
 

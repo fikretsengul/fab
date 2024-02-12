@@ -1,4 +1,4 @@
-// ignore_for_file: matching_super_parameters, deprecated_consistency
+// ignore_for_file: matching_super_parameters, deprecated_consistency, max_lines_for_file
 
 part of 'nested_scroll_view.dart';
 
@@ -29,6 +29,7 @@ class NestedScrollViewOuter extends OriginalNestedScrollView {
       target != null,
       'OriginalNestedScrollView.sliverOverlapAbsorberHandleFor must be called with a context that contains a OriginalNestedScrollView.',
     );
+
     return target!.state._absorberHandle;
   }
 
@@ -39,6 +40,7 @@ class NestedScrollViewOuter extends OriginalNestedScrollView {
     bool bodyIsScrolled,
   ) {
     final headerSlivers = headerSliverBuilder(context, bodyIsScrolled);
+
     return <Widget>[
       // ignore: deprecated_member_use_from_same_package
       OverlapAbsorberPlus(
@@ -87,6 +89,7 @@ class NestedScrollViewPlusOuterState extends NestedScrollViewStatePlus {
       child: Builder(
         builder: (context) {
           _lastHasScrolledBody = _coordinator!.hasScrolledBody;
+
           return _OriginalNestedScrollViewCustomScrollView(
             dragStartBehavior: widget.dragStartBehavior,
             scrollDirection: widget.scrollDirection,
@@ -190,6 +193,7 @@ class _NestedScrollCoordinatorOuter extends _OriginalNestedScrollCoordinator {
         innerPosition = position;
       }
     }
+
     return innerPosition;
   }
 
@@ -232,6 +236,7 @@ class _NestedScrollCoordinatorOuter extends _OriginalNestedScrollCoordinator {
     // inner is scrolling
     // coordinator offset = outer.max + inner offset
     final offset = value - source.minScrollExtent;
+
     return _outerPosition!.maxScrollExtent + offset.clamp(0, double.infinity);
   }
 
@@ -245,6 +250,7 @@ class _NestedScrollCoordinatorOuter extends _OriginalNestedScrollCoordinator {
       );
     }
     final offset = value - _outerPosition!.maxScrollExtent;
+
     return target.minScrollExtent + offset.clamp(0, double.infinity);
   }
 
@@ -255,6 +261,7 @@ class _NestedScrollCoordinatorOuter extends _OriginalNestedScrollCoordinator {
     // Check for the presence of inner positions
     if (_innerPositions.isEmpty) {
       _outerPosition!.applyFullDragUpdate(delta);
+
       return;
     }
 
@@ -304,6 +311,7 @@ class _NestedScrollCoordinatorOuter extends _OriginalNestedScrollCoordinator {
   void pointerScroll(double delta) {
     if (delta == 0.0) {
       goBallistic(0);
+
       return;
     }
     goIdle();
@@ -492,6 +500,7 @@ class RenderSliverOverlapAbsorberOuter extends OriginalRenderSliverOverlapAbsorb
     );
     if (child == null) {
       geometry = SliverGeometry.zero;
+
       return;
     }
     child!.layout(constraints, parentUsesSize: true);

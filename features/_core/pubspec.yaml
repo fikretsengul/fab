@@ -11,6 +11,8 @@ dependencies:
     path: ../../deps
   feature_auth:
     path: ../auth
+  feature_cart:
+    path: ../cart
   feature_products:
     path: ../products
   feature_settings:

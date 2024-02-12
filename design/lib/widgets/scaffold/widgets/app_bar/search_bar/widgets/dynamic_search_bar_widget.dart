@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_empty_blocks
+
 import 'package:deps/design/design.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +59,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   widget.searchBar.cancelButtonText,
-                  style: context.fabTheme.appBarTitleNActionsStyle,
+                  style: context.fabTheme.appBarActionsStyle,
                   maxLines: 1,
                 ),
               ),
@@ -105,7 +107,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
                   ),
                   placeholder: widget.searchBar.placeholderText,
                   placeholderStyle: context.fabTheme.bodyStyle.copyWith(
-                    color: context.fabTheme.placeholderColor.withOpacity(widget.opacity),
+                    color: context.fabTheme.inactiveColor.withOpacity(widget.opacity),
                   ),
                   style: context.fabTheme.bodyStyle,
                   controller: widget.editingController,
@@ -125,7 +127,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
               width: widget.searchBarHasFocus
                   ? defaultTextSize(
                       widget.searchBar.cancelButtonText,
-                      context.fabTheme.appBarTitleNActionsStyle,
+                      context.fabTheme.appBarActionsStyle,
                     )
                   : 0,
             ),

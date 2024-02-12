@@ -1,4 +1,4 @@
-// ignore_for_file: max_lines_for_file, max_lines_for_function, invalid_use_of_protected_member
+// ignore_for_file: max_lines_for_file, max_lines_for_function, invalid_use_of_protected_member, avoid_empty_blocks
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';

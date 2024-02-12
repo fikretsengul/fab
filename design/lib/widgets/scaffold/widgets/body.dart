@@ -1,7 +1,8 @@
+// ignore_for_file: max_lines_for_file, avoid_returning_widgets
+
 import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
-import 'package:deps/packages/extended_tabs.dart';
 import 'package:deps/packages/nested_scroll_view_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,7 @@ class Body extends StatelessWidget {
     required this.nestedScrollViewKey,
     required this.isCustomScrollView,
     required this.searchBar,
-    this.child,
-    this.children,
-    this.tabController,
+    required this.child,
     this.otherScrollController,
     this.onRefresh,
     super.key,
@@ -34,9 +33,7 @@ class Body extends StatelessWidget {
   final ScrollController? otherScrollController;
   final FutureOr<dynamic> Function()? onRefresh;
   final SearchBarAnimationBehavior animationBehavior;
-  final TabController? tabController;
-  final Widget? child;
-  final List<Widget>? children;
+  final Widget child;
   final bool isScrollable;
   final Measures measures;
   final IndicatorStateListenable refreshListenable;
@@ -100,19 +97,18 @@ class Body extends StatelessWidget {
                         ),
                       ];
                     },
-                    body: tabController != null
-                        ? ExtendedTabBarView(
-                            controller: tabController,
-                            children: children!,
-                          )
-                        : isCustomScrollView
-                            ? child!
-                            : CustomScrollView(
-                                physics: isScrollable
-                                    ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-                                    : const NeverScrollableScrollPhysics(),
-                                slivers: children!,
+                    body: isCustomScrollView
+                        ? child
+                        : CustomScrollView(
+                            physics: isScrollable
+                                ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
+                                : const NeverScrollableScrollPhysics(),
+                            slivers: [
+                              SliverToBoxAdapter(
+                                child: child,
                               ),
+                            ],
+                          ),
                   ),
                 ),
               );
@@ -124,7 +120,7 @@ class Body extends StatelessWidget {
   }
 
   Widget shouldWrapWithScrollbar(BuildContext context, {required Widget child}) {
-    if (tabController != null || isCustomScrollView) {
+    if (isCustomScrollView) {
       return child;
     } else {
       return OverridenCupertinoScrollbar(

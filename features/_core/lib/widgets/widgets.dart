@@ -10,7 +10,7 @@ export 'paddings/padding_only.dart';
 export 'paddings/padding_right.dart';
 export 'paddings/padding_symmetric.dart';
 export 'paddings/padding_top.dart';
-export 'paginated_list.dart';
+export 'paginated_grid_list.dart';
 export 'radiuses/radius_all.dart';
 export 'radiuses/radius_horizontal.dart';
 export 'radiuses/radius_only.dart';

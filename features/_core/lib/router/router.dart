@@ -5,12 +5,15 @@
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:feature_auth/_core/router.dart';
+import 'package:feature_cart/_core/router.dart';
 import 'package:feature_products/_core/router.dart';
 import 'package:flutter/material.dart';
 
 import '../_core/super/_core/dialog/cupertino/cupertino_dialog_builder.dart';
 import '../_core/super/_core/dialog/material/material_dialog_builder.dart';
-import '../_core/super/_core/modal/modal_builder.dart';
+import '../_core/super/_core/modal/cupertino/cupertino_modal_builder.dart';
+import '../_core/super/_core/modal/cupertino/cupertino_modal_sheet_route.dart';
+import '../_core/super/_core/modal/material/material_modal_builder.dart';
 import '../_core/super/_core/sheet/cupertino/cupertino_sheet_builder.dart';
 import 'guard.dart';
 import 'router.gr.dart';
@@ -28,6 +31,7 @@ class CustomPageRoute<T> extends MaterialPageRoute<T> {
     ProductsFeatureRouter,
     SettingsFeatureRouter,
     UserFeatureRouter,
+    CartFeatureRouter,
   ],
 )
 class FeaturesRouter extends $FeaturesRouter {
@@ -36,14 +40,17 @@ class FeaturesRouter extends $FeaturesRouter {
   @override
   RouteType get defaultRouteType => RouteType.custom(
         customRouteBuilder: <T>(
-          context,
+          _,
           child,
           page,
         ) {
           return CustomPageRoute<T>(
             settings: page,
-            builder: (context) {
-              return child;
+            builder: (_) {
+              return CupertinoStackedTransition(
+                cornerRadius: Tween(begin: 0, end: 16),
+                child: child,
+              );
             },
           );
         },
@@ -98,12 +105,16 @@ class FeaturesRouter extends $FeaturesRouter {
               customRouteBuilder: cupertinoDialogRouteBuilder,
             ),
             CustomRoute(
-              page: CupertinoSheetWrapperRoute.page,
-              customRouteBuilder: cupertinoSheetRouteBuilder,
+              page: MaterialModalWrapperRoute.page,
+              customRouteBuilder: materialModalRouteBuilder,
             ),
             CustomRoute(
-              page: ModalWrapperRoute.page,
-              customRouteBuilder: modalRouteBuilder,
+              page: CupertinoModalWrapperRoute.page,
+              customRouteBuilder: cupertinoModalRouteBuilder,
+            ),
+            CustomRoute(
+              page: CupertinoSheetWrapperRoute.page,
+              customRouteBuilder: cupertinoSheetRouteBuilder,
             ),
           ],
         ),

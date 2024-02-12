@@ -10,14 +10,19 @@ part 'fab_theme.tailor.dart';
 @TailorMixin(themeGetter: ThemeGetter.onBuildContext)
 class FabTheme extends ThemeExtension<FabTheme> with _$FabThemeTailorMixin {
   FabTheme({
+    required this.borderColor,
     required this.primaryColor,
+    required this.onPrimaryColor,
+    required this.errorColor,
     required this.backgroundColor,
     required this.onBackgroundColor,
     required this.surfaceColor,
-    required this.placeholderColor,
+    required this.inactiveColor,
+    required this.softInactiveColor,
     required this.appBarExpandedColor,
     required this.appBarCollapsedColor,
-    required this.appBarTitleNActionsStyle,
+    required this.appBarTitleStyle,
+    required this.appBarActionsStyle,
     required this.appBarLargeTitleStyle,
     required this.largeTitleStyle,
     required this.title1Style,
@@ -33,44 +38,77 @@ class FabTheme extends ThemeExtension<FabTheme> with _$FabThemeTailorMixin {
   });
 
   @override
-  final Color primaryColor;
-  @override
-  final Color backgroundColor;
-  @override
-  final Color onBackgroundColor;
-  @override
-  final Color surfaceColor;
-  @override
-  final Color placeholderColor;
-  @override
-  final Color appBarExpandedColor;
-  @override
   final Color appBarCollapsedColor;
 
   @override
-  final TextStyle appBarTitleNActionsStyle;
+  final Color appBarExpandedColor;
+
   @override
   final TextStyle appBarLargeTitleStyle;
+
   @override
-  final TextStyle largeTitleStyle;
+  final TextStyle appBarTitleStyle;
+
   @override
-  final TextStyle title1Style;
+  final TextStyle appBarActionsStyle;
+
   @override
-  final TextStyle title2Style;
-  @override
-  final TextStyle title3Style;
-  @override
-  final TextStyle headlineStyle;
+  final Color backgroundColor;
+
   @override
   final TextStyle bodyStyle;
+
+  @override
+  final Color borderColor;
+
   @override
   final TextStyle calloutStyle;
-  @override
-  final TextStyle subheadStyle;
-  @override
-  final TextStyle footnoteStyle;
+
   @override
   final TextStyle caption1Style;
+
   @override
   final TextStyle caption2Style;
+
+  @override
+  final Color errorColor;
+
+  @override
+  final TextStyle footnoteStyle;
+
+  @override
+  final TextStyle headlineStyle;
+
+  @override
+  final TextStyle largeTitleStyle;
+
+  @override
+  final Color onBackgroundColor;
+
+  @override
+  final Color onPrimaryColor;
+
+  @override
+  final Color inactiveColor;
+
+  @override
+  final Color softInactiveColor;
+
+  @override
+  final Color primaryColor;
+
+  @override
+  final TextStyle subheadStyle;
+
+  @override
+  final Color surfaceColor;
+
+  @override
+  final TextStyle title1Style;
+
+  @override
+  final TextStyle title2Style;
+
+  @override
+  final TextStyle title3Style;
 }

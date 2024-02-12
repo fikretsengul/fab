@@ -2,14 +2,20 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
+import 'package:deps/packages/nested_scroll_view_plus/others/custom_scroll_provider.dart';
+import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
-class PaginatedList<T, C extends PaginatedListCubit<T>> extends StatefulWidget {
-  const PaginatedList({
+class PaginatedGridList<T, C extends PaginatedListCubit<T>> extends StatefulWidget {
+  const PaginatedGridList({
+    required this.itemHeight,
     required this.itemBuilder,
+    required this.skeletonBuilder,
+    required this.index,
     this.onNextPage,
     this.bloc,
     super.key,
@@ -18,18 +24,21 @@ class PaginatedList<T, C extends PaginatedListCubit<T>> extends StatefulWidget {
     this.localFilter,
   });
 
-  final C? bloc;
+  final int index;
+  final double itemHeight;
   final bool Function(T)? localFilter;
+  final void Function(C bloc, int offset)? onNextPage;
+  final C? bloc;
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
   final int limit;
   final int offset;
-  final void Function(C bloc, int offset)? onNextPage;
+  final Widget Function(BuildContext context) skeletonBuilder;
 
   @override
-  State<PaginatedList<T, C>> createState() => _PaginatedListState<T, C>();
+  State<PaginatedGridList<T, C>> createState() => _PaginatedGridListState<T, C>();
 }
 
-class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<PaginatedList<T, C>> {
+class _PaginatedGridListState<T, C extends PaginatedListCubit<T>> extends State<PaginatedGridList<T, C>> {
   late final C _bloc = widget.bloc ?? $.get<C>();
   late final PagingController<int, T> _pagingController = PagingController(
     firstPageKey: widget.offset,
@@ -56,9 +65,12 @@ class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<Pagi
 
   @override
   Widget build(BuildContext context) {
+    final scrollProvider = CustomScrollProviderData.of(context);
+
     return BlocListener<C, PaginatedListState<T>>(
       bloc: _bloc,
       listener: (_, state) {
+        $.debug(state);
         state.whenOrNull(
           refresh: () => _pagingController.refresh(),
           loaded: (items) {
@@ -76,6 +88,7 @@ class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<Pagi
         );
       },
       child: CustomScrollView(
+        controller: scrollProvider.scrollControllers[widget.index],
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           SliverPadding(
@@ -83,7 +96,7 @@ class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<Pagi
             sliver: PagedSliverGrid<int, T>(
               pagingController: _pagingController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.8,
+                childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
                 crossAxisSpacing: $.paddings.sm,
                 mainAxisSpacing: $.paddings.sm,
                 crossAxisCount: 2,
@@ -92,6 +105,34 @@ class _PaginatedListState<T, C extends PaginatedListCubit<T>> extends State<Pagi
                 animateTransitions: true,
                 itemBuilder: (context, item, index) {
                   return widget.itemBuilder(context, item, index);
+                },
+                noItemsFoundIndicatorBuilder: (_) {
+                  return FabEmptyList(
+                    icon: UIcons.solidRounded.bags_shopping,
+                    title: 'no product found.',
+                    subtitle: 'the product list is currently empty.',
+                  );
+                },
+                firstPageProgressIndicatorBuilder: (_) {
+                  return SizedBox(
+                    height: context.height,
+                    child: GridView.builder(
+                      itemCount: 8,
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: $.paddings.sm,
+                        crossAxisSpacing: $.paddings.sm,
+                        childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
+                      ),
+                      itemBuilder: (context, index) {
+                        return widget.skeletonBuilder(context);
+                      },
+                    ),
+                  );
+                },
+                newPageProgressIndicatorBuilder: (_) {
+                  return widget.skeletonBuilder(context);
                 },
               ),
             ),

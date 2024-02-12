@@ -1,0 +1,69 @@
+targets:
+  $default:
+    builders:
+      # Reactive Forms
+      reactive_forms_generator:
+        generate_for:
+          include:
+            - lib/domain/forms/*.form.dart
+      # Auto Route
+      auto_route_generator:auto_router_generator:
+        options:
+          enable_cached_builds: true
+        generate_for:
+          include:
+            - lib/_core/router.dart
+      auto_route_generator:auto_route_generator:
+        options:
+          enable_cached_builds: true
+        generate_for:
+          include:
+            - lib/presentation/**/*.page.dart
+      # Freezed
+      freezed:
+        options:
+          map: false
+          when:
+            when: false
+            maybe_when: false
+            when_or_null: true
+        generate_for:
+          include:
+            - lib/domain/forms/*.form.dart
+            - lib/domain/models/*.model.dart
+            - lib/presentation/**/*.cubit.dart
+      # Json Serializable
+      json_serializable:
+        options:
+          create_factory: true
+          create_to_json: true
+          explicit_to_json: true
+          field_rename: none
+          include_if_null: true
+        generate_for:
+          include:
+            - lib/domain/forms/*.form.dart
+            - lib/domain/models/*.model.dart
+      # Slang
+      slang_build_runner:
+        options:
+          locale_handling: false
+          translation_class_visibility: public
+          fallback_strategy: base_locale
+          input_directory: lib/_core/_i18n
+          output_directory: lib/_core/_i18n
+          output_file_name: translations.g.dart
+          key_case: camel
+          key_map_case: camel
+          param_case: camel
+          flat_map: false
+        generate_for:
+          include:
+            - lib/_core/_i18n/*
+      # Injectable
+      injectable_generator:
+        generate_for:
+          include:
+            - lib/_core/_di/*.dart
+            - lib/data/*.service.dart
+            - lib/presentation/**/*.cubit.dart

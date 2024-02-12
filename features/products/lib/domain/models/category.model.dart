@@ -23,6 +23,14 @@ sealed class CategoryModel with _$CategoryModel {
         updatedAt: '',
       );
 
+  factory CategoryModel.skeleton() => CategoryModel(
+        id: 0,
+        name: 'Lorem ipsum',
+        image: '',
+        creationAt: '',
+        updatedAt: '',
+      );
+
   CategoryModel._();
 
   bool get isEmpty => this == CategoryModel.empty();

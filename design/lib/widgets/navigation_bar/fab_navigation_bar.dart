@@ -1,6 +1,8 @@
 import 'package:deps/packages/fpdart.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../design.dart';
+
 class FabNavigationBar extends StatelessWidget {
   const FabNavigationBar({
     required this.currentIndex,
@@ -15,19 +17,31 @@ class FabNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabBar(
-      backgroundColor: CupertinoTheme.of(context).scaffoldBackgroundColor,
-      currentIndex: currentIndex,
-      onTap: onTap,
-      iconSize: 19,
-      items: items
-          .mapWithIndex(
-            (item, index) => BottomNavigationBarItem(
-              icon: index == currentIndex ? item.selectedIcon : item.icon,
-              label: item.label,
-            ),
-          )
-          .toList(),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: context.fabTheme.borderColor.withOpacity(1),
+            width: 0,
+          ),
+        ),
+      ),
+      child: CupertinoTabBar(
+        backgroundColor: context.fabTheme.backgroundColor,
+        activeColor: context.fabTheme.primaryColor,
+        inactiveColor: context.fabTheme.inactiveColor,
+        currentIndex: currentIndex,
+        onTap: onTap,
+        iconSize: 20,
+        items: items
+            .mapWithIndex(
+              (item, index) => BottomNavigationBarItem(
+                icon: index == currentIndex ? item.selectedIcon : item.icon,
+                label: item.label,
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

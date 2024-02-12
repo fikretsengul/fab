@@ -1,7 +1,7 @@
 // Source: https://github.com/Kavantix/sliver_tools
 // Last updated at https://github.com/Kavantix/sliver_tools/commit/ee06da0f026bbba09cf314f1877e7fe5c312c971
 
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';

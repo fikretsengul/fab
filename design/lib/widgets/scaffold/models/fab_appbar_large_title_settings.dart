@@ -7,7 +7,7 @@ class FabAppBarLargeTitleSettings {
     this.textStyle,
     this.height = 52.0,
     this.padding = const EdgeInsets.only(left: 14, right: 16),
-    this.enabled = true,
+    this.enabled = false,
   });
 
   final List<Widget>? actions;

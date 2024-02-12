@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_consistency
+// ignore_for_file: deprecated_consistency, max_lines_for_file
 
 part of 'nested_scroll_view.dart';
 
@@ -113,6 +113,7 @@ class NestedScrollViewPlus extends StatelessWidget {
       target != null,
       'OriginalNestedScrollView.sliverOverlapAbsorberHandleFor must be called with a context that contains a OriginalNestedScrollView.',
     );
+
     return target!.state._absorberHandle;
   }
 }

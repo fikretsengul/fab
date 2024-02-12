@@ -7,17 +7,17 @@
 import 'package:deps/packages/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'modal_wrapper.dart';
+import 'material_modal_wrapper.dart';
 
-Route<T> modalRouteBuilder<T>(BuildContext context, Widget child, AutoRoutePage<T> page) {
-  if (page.child is! ModalWrapperRoute) {
-    throw ArgumentError('Child page must be of type ModalWrapperRoute to use modalSheetBuilder.');
+Route<T> materialModalRouteBuilder<T>(BuildContext context, Widget child, AutoRoutePage<T> page) {
+  if (page.child is! MaterialModalWrapperRoute) {
+    throw ArgumentError('Child page must be of type MaterialModalWrapperRoute to use materialModalRouteBuilder.');
   }
 
-  final dialogWrapperRoute = page.child as ModalWrapperRoute;
+  final dialogWrapperRoute = page.child as MaterialModalWrapperRoute;
   final config = dialogWrapperRoute.modalConfig;
 
-  final isDismissible = dialogWrapperRoute.canPop && config.isDismissible;
+  final isDismissible = config.isDismissible;
   final enableDrag = isDismissible && config.enableDrag;
 
   return ModalBottomSheetRoute<T>(

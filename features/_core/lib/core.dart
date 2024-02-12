@@ -1,4 +1,5 @@
 export 'package:feature_auth/auth.dart';
+export 'package:feature_cart/cart.dart';
 export 'package:feature_products/products.dart';
 export 'package:feature_settings/settings.dart';
 export 'package:feature_user/user.dart';

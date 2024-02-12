@@ -1,3 +1,5 @@
+// ignore_for_file: max_lines_for_file, avoid_empty_blocks, avoid_widget_state_public_members, avoid_returning_widgets, boolean_prefix
+
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -328,6 +330,7 @@ class OriginalNestedScrollView extends StatefulWidget {
       target != null,
       'OriginalNestedScrollView.sliverOverlapAbsorberHandleFor must be called with a context that contains a OriginalNestedScrollView.',
     );
+
     return target!.state._absorberHandle;
   }
 
@@ -478,6 +481,7 @@ class NestedScrollViewStatePlus extends State<OriginalNestedScrollView> {
       child: Builder(
         builder: (context) {
           _lastHasScrolledBody = _coordinator!.hasScrolledBody;
+
           return _OriginalNestedScrollViewCustomScrollView(
             dragStartBehavior: widget.dragStartBehavior,
             scrollDirection: widget.scrollDirection,
@@ -524,6 +528,7 @@ class _OriginalNestedScrollViewCustomScrollView extends CustomScrollView {
     List<Widget> slivers,
   ) {
     assert(!shrinkWrap);
+
     return OriginalNestedScrollViewViewport(
       axisDirection: axisDirection,
       offset: offset,
@@ -631,6 +636,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     if (!_outerController.hasClients) {
       return null;
     }
+
     return _outerController.nestedPositions.single;
   }
 
@@ -643,6 +649,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     if (outer == null) {
       return true;
     }
+
     return outer.haveDimensions && outer.extentAfter == 0.0;
   }
 
@@ -658,6 +665,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
         return true;
       }
     }
+
     return false;
   }
 
@@ -683,7 +691,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
 
   void beginActivity(
     ScrollActivity newOuterActivity,
-    ScrollActivity Function(_OriginalNestedScrollPosition) innerActivityGetter,
+    ScrollActivity Function(_OriginalNestedScrollPosition position) innerActivityGetter,
   ) {
     _outerPosition!.beginActivity(newOuterActivity);
     var scrolling = newOuterActivity.isScrolling;
@@ -858,6 +866,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
         correctionOffset = 0.0;
       }
     }
+
     return _OriginalNestedScrollMetrics(
       minScrollExtent: _outerPosition!.minScrollExtent,
       maxScrollExtent:
@@ -883,6 +892,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     if (value < source.minScrollExtent) {
       return value - source.minScrollExtent + _outerPosition!.minScrollExtent;
     }
+
     return value - source.minScrollExtent + _outerPosition!.maxScrollExtent;
   }
 
@@ -900,6 +910,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     if (value > _outerPosition!.maxScrollExtent) {
       return value - _outerPosition!.maxScrollExtent + target.minScrollExtent;
     }
+
     return target.minScrollExtent;
   }
 
@@ -943,6 +954,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
           curve,
         );
         resultFutures.add(innerActivity.done);
+
         return innerActivity;
       },
     );
@@ -964,6 +976,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     // ScrollPositionWithSingleContext.pointerScroll.
     if (delta == 0.0) {
       goBallistic(0);
+
       return;
     }
 
@@ -1043,6 +1056,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
   @override
   double setPixels(double newPixels) {
     assert(false);
+
     return 0;
   }
 
@@ -1054,6 +1068,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
       ),
       (position) => HoldScrollActivity(delegate: position),
     );
+
     return this;
   }
 
@@ -1074,6 +1089,7 @@ class _OriginalNestedScrollCoordinator implements ScrollActivityDelegate, Scroll
     );
     assert(_currentDrag == null);
     _currentDrag = drag;
+
     return drag;
   }
 
@@ -1224,7 +1240,7 @@ class _OriginalNestedScrollController extends ScrollController {
     // during a frame, at a time where it's too late to call setState. Since the
     // result is usually animated, the lag incurred is no big deal.
     SchedulerBinding.instance.addPostFrameCallback(
-      (timeStamp) {
+      (_) {
         coordinator.updateShadow();
       },
       // debugLabel: 'NestedScrollController.updateShadow',
@@ -1335,6 +1351,7 @@ class _OriginalNestedScrollPosition extends ScrollPosition implements ScrollActi
       forcePixels(actualNewPixels);
       didUpdateScrollPositionBy(offset);
     }
+
     return delta + offset;
   }
 
@@ -1361,8 +1378,10 @@ class _OriginalNestedScrollPosition extends ScrollPosition implements ScrollActi
     }
     if (overscroll != 0.0) {
       didOverscrollBy(overscroll);
+
       return overscroll;
     }
+
     return 0;
   }
 
@@ -1385,6 +1404,7 @@ class _OriginalNestedScrollPosition extends ScrollPosition implements ScrollActi
     }
     forcePixels(newPixels);
     didUpdateScrollPositionBy(clampedDelta);
+
     return delta - clampedDelta;
   }
 
@@ -1409,6 +1429,7 @@ class _OriginalNestedScrollPosition extends ScrollPosition implements ScrollActi
   @override
   double applyUserOffset(double delta) {
     assert(false);
+
     return 0;
   }
 
@@ -1644,6 +1665,7 @@ class _OriginalNestedOuterBallisticScrollActivity extends BallisticScrollActivit
     assert(
       result,
     ); // since we tried to pass an in-range value, it shouldn't ever overflow
+
     return !done;
   }
 
@@ -1743,6 +1765,7 @@ class OriginalOverlapAbsorberHandle extends ChangeNotifier {
         extra = ', $_writers WRITERS ASSIGNED';
         break;
     }
+
     return '${objectRuntimeType(this, 'OriginalOverlapAbsorberHandle')}($layoutExtent$extra)';
   }
 }
@@ -1856,6 +1879,7 @@ class OriginalRenderSliverOverlapAbsorber extends RenderSliver with RenderObject
     );
     if (child == null) {
       geometry = SliverGeometry.zero;
+
       return;
     }
     child!.layout(constraints, parentUsesSize: true);
@@ -1891,6 +1915,7 @@ class OriginalRenderSliverOverlapAbsorber extends RenderSliver with RenderObject
         crossAxisPosition: crossAxisPosition,
       );
     }
+
     return false;
   }
 
@@ -2071,6 +2096,7 @@ class OriginalRenderSliverOverlapInjector extends RenderSliver {
           );
         }
       }
+
       return true;
     }());
   }

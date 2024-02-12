@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-class ModalConfig {
-  const ModalConfig({
+class MaterialModalConfig {
+  const MaterialModalConfig({
     this.isScrollControlled = true,
     this.modalBarrierColor = Colors.black54,
     this.showDragHandle = true,
@@ -23,7 +23,7 @@ class ModalConfig {
     this.settings,
     this.transitionAnimationController,
     this.anchorPoint,
-    this.useSafeArea = false,
+    this.useSafeArea = true,
   });
 
   final bool isScrollControlled;

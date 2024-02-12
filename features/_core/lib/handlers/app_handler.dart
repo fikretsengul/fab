@@ -8,6 +8,7 @@ import 'package:deps/design/design.dart';
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/packages/adaptive_theme.dart';
 import 'package:deps/packages/flutter_bloc.dart';
+import 'package:deps/packages/skeletonizer.dart';
 import 'package:deps/packages/talker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -86,9 +87,18 @@ class AppHandler extends StatelessWidget {
                   checkerboardOffscreenLayers: appSettings.checkerboardOffscreenLayers,
                   showSemanticsDebugger: appSettings.showSemanticsDebugger,
                   debugShowCheckedModeBanner: appSettings.debugShowCheckedModeBanner,
-                  builder: (_, child) {
+                  builder: (context, child) {
                     return MediaQuery.withNoTextScaling(
-                      child: child!,
+                      child: SkeletonizerConfig(
+                        data: SkeletonizerConfigData(
+                          effect: PulseEffect(
+                            from: context.fabTheme.inactiveColor.withOpacity(0.2),
+                            to: context.fabTheme.inactiveColor.withOpacity(0.5),
+                            duration: const Duration(milliseconds: 500),
+                          ),
+                        ),
+                        child: child!,
+                      ),
                     );
                   },
                   theme: light,
