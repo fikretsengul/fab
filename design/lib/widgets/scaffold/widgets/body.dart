@@ -10,7 +10,7 @@ import '../../_core/overridens/overriden_cupertino_scrollbar.dart';
 import '../models/fab_appbar_search_bar_settings.dart';
 import '../utils/measures.dart';
 import '../utils/store.dart';
-import 'snap_scroll_listener.dart';
+import 'snapping.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -64,11 +64,11 @@ class Body extends StatelessWidget {
             childBuilder: (_, physics) {
               return shouldWrapWithScrollbar(
                 context,
-                child: SnappingScrollListener(
+                child: Snapping(
                   scrollController: scrollController,
-                  scrollBehavior: scrollBehavior,
-                  collapsedHeight: measures.searchContainerHeight,
-                  expandedHeight: measures.largeTitleContainerHeight,
+                  //scrollBehavior: scrollBehavior,
+                  collapsedBarHeight: 50,
+                  expandedContentHeight: 100,
                   child: NestedScrollViewPlus(
                     key: nestedScrollViewKey,
                     controller: scrollController,

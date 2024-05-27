@@ -49,6 +49,9 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
       appBar: FabAppBarSettings(
         title: const Text('products.'),
         actions: [const ProductAppBarActions()],
+        searchBar: FabAppBarSearchBarSettings(
+          enabled: true,
+        ),
         largeTitle: FabAppBarLargeTitleSettings(
           enabled: true,
           largeTitle: 'products.',

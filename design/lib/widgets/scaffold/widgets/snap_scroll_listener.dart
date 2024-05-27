@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_nested_if
 import 'package:flutter/material.dart';
 
 import '../models/fab_appbar_search_bar_settings.dart';
@@ -31,7 +32,7 @@ class _SnappingScrollListenerState extends State<SnappingScrollListener> {
       onNotification: (notification) {
         final currentScrollingPosition = widget.scrollController!.offset;
 
-/*         if (widget.scrollBehavior == SearchBarScrollBehavior.floated) {
+        if (widget.scrollBehavior == SearchBarScrollBehavior.floated) {
           final snapPoint1 = widget.collapsedHeight / 2;
           final snapPoint2 = widget.collapsedHeight + widget.expandedHeight / 2;
 
@@ -57,7 +58,7 @@ class _SnappingScrollListenerState extends State<SnappingScrollListener> {
               _snapTo(widget.expandedHeight);
             }
           }
-        } */
+        }
 
         return false;
       },

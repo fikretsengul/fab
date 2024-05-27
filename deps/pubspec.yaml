@@ -27,6 +27,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
+  flutter_hooks: ^0.18.6
   flutter_secure_storage: ^9.0.0
   flutter_staggered_grid_view: ^0.7.0
   fpdart: ^1.1.0
@@ -49,6 +50,7 @@ dependencies:
   skeletonizer: ^1.0.1
   slang: ^3.29.0
   slang_flutter: ^3.29.0
+  sliver_snap: ^1.2.0
   smooth_sheets:
     git:
       url: https://github.com/fujidaiti/smooth_sheets.git
