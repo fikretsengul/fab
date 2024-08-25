@@ -4,7 +4,9 @@ import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> initializeSentry() async {
-  final dsn = env.env == 'dev' ? 'WRONG_DSN_DISABLES_SENTRY_INITILIZATION' : 'ENTER_YOUR_SENTRY_URL';
+  final dsn = env.env == 'dev'
+      ? 'WRONG_DSN_DISABLES_SENTRY_INITILIZATION'
+      : 'ENTER_YOUR_SENTRY_URL';
 
   await SentryFlutter.init(
     (options) {

@@ -6,5 +6,6 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class DioInjection {
-  Dio dio(EnvModel env, DioTokenRefresh dioTokenRefresh) => initDioClient(env, dioTokenRefresh);
+  Dio dio(EnvModel env, DioTokenRefresh dioTokenRefresh) =>
+      initDioClient(env, dioTokenRefresh);
 }

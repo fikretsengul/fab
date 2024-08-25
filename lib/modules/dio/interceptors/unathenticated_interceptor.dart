@@ -7,7 +7,9 @@ class UnauthenticatedInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    if (err.response != null && err.response!.statusCode != null && err.response!.statusCode! == 401) {
+    if (err.response != null &&
+        err.response!.statusCode != null &&
+        err.response!.statusCode! == 401) {
       return handler.reject(
         UnauthenticatedException(requestOptions: err.requestOptions),
       );

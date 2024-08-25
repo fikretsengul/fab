@@ -14,7 +14,9 @@ abstract class BarHelper {
     bool isTest = false,
   }) {
     Bar<void> bar;
-    final message = alert.translatable ? (context.t[alert.message] as String) : alert.message;
+    final message = alert.translatable
+        ? (context.t[alert.message] as String)
+        : alert.message;
 
     if (alert.type == AlertType.constructive) {
       bar = _createAlertModal(
@@ -104,7 +106,9 @@ abstract class BarHelper {
       shouldIconPulse: false,
       isDismissible: false,
       duration: isTest ? const Duration(seconds: 1) : duration,
-      animationDuration: isTest ? const Duration(milliseconds: 250) : const Duration(seconds: 1),
+      animationDuration: isTest
+          ? const Duration(milliseconds: 250)
+          : const Duration(seconds: 1),
     );
   }
 }

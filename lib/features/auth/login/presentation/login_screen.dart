@@ -61,14 +61,14 @@ class _LoginScreenState extends State<LoginScreen> {
     if (hasPermission && mounted) {
       await selectPhoto();
     } else {
-      if(mounted) {
+      if (mounted) {
         BarHelper.showAlert(
-        context,
-        alert: AlertModel(
-          message: context.t.core.file_picker.no_permission,
-          type: AlertType.destructive,
-        ),
-      );
+          context,
+          alert: AlertModel(
+            message: context.t.core.file_picker.no_permission,
+            type: AlertType.destructive,
+          ),
+        );
       }
     }
   }
@@ -76,7 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> selectPhoto() async {
     const maxPhotoSizeInByte = 2000000;
 
-    final photo = await picker.pickImage(source: ImageSource.gallery, imageQuality: 25);
+    final photo =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 25);
 
     if (photo == null) {
       return;
@@ -99,7 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
       BarHelper.showAlert(
         context,
         alert: AlertModel(
-          message: context.t.core.file_picker.size_warning(maxSize: maxPhotoSizeInByte / 1000000),
+          message: context.t.core.file_picker
+              .size_warning(maxSize: maxPhotoSizeInByte / 1000000),
           type: AlertType.destructive,
         ),
       );
@@ -160,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) ...{
+                  if (UniversalPlatform.isAndroid ||
+                      UniversalPlatform.isIOS) ...{
                     ReactiveFormConsumer(
                       builder: (context, formGroup, child) {
                         return MaterialSplashTappable(
@@ -168,7 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: checkPermission,
                           child: CircleAvatar(
                             radius: 50,
-                            backgroundColor: getCustomOnPrimaryColor(context).withOpacity(0.05),
+                            backgroundColor: getCustomOnPrimaryColor(context)
+                                .withOpacity(0.05),
                             backgroundImage: photo != null
                                 ? Image.file(
                                     photo!,

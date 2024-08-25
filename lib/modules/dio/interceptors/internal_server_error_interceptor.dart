@@ -8,7 +8,9 @@ class InternalServerErrorInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     if (err.response != null) {
-      if (err.response!.statusCode != null && err.response!.statusCode! >= 500 && err.response!.statusCode! < 600) {
+      if (err.response!.statusCode != null &&
+          err.response!.statusCode! >= 500 &&
+          err.response!.statusCode! < 600) {
         return handler.reject(
           InternalServerException(
             requestOptions: err.requestOptions,

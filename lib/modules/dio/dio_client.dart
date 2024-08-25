@@ -18,7 +18,8 @@ Dio initDioClient(
   final dio = Dio();
 
   dio.options.baseUrl = env.restApiUrl;
-  dio.options.headers['Accept-Language'] = UniversalPlatform.isWeb ? 'en-US' : Platform.localeName.substring(0, 2);
+  dio.options.headers['Accept-Language'] =
+      UniversalPlatform.isWeb ? 'en-US' : Platform.localeName.substring(0, 2);
   dio.options.connectTimeout = const Duration(seconds: 10);
   dio.options.receiveTimeout = const Duration(seconds: 10);
   dio.interceptors.add(dioTokenRefresh.fresh);

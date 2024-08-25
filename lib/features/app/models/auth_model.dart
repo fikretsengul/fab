@@ -13,7 +13,8 @@ class AuthModel with _$AuthModel {
     required UserModel user,
   }) = _AuthModel;
 
-  factory AuthModel.fromJson(Map<String, dynamic> json) => _$AuthModelFromJson(json);
+  factory AuthModel.fromJson(Map<String, dynamic> json) =>
+      _$AuthModelFromJson(json);
 
   factory AuthModel.initial() => AuthModel(
         tokenType: '',

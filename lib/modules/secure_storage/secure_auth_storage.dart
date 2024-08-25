@@ -29,6 +29,7 @@ class SecureAuthStorage extends TokenStorage<AuthModel> {
 
   @override
   Future<void> write(AuthModel token) async {
-    await _secureStorage.write(key: 'auth_storage', value: jsonEncode(token.toJson()));
+    await _secureStorage.write(
+        key: 'auth_storage', value: jsonEncode(token.toJson()));
   }
 }

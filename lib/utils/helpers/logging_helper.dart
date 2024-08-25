@@ -21,7 +21,7 @@ class LoggingHelper {
       return;
     }
 
-    logIt.t(message, error:error, stackTrace:stackTrace);
+    logIt.t(message, error: error, stackTrace: stackTrace);
   }
 
   /// Log a message at level [Level.debug].

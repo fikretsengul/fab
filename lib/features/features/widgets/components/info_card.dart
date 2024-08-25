@@ -28,7 +28,9 @@ class InfoCard extends StatelessWidget {
     return SizedBox(
       height: 275,
       child: Card(
-        color: widget != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
+        color: widget != null
+            ? getCustomOnPrimaryColor(context)
+            : getPrimaryColor(context),
         child: Padding(
           padding: EdgeInsets.all($constants.insets.sm),
           child: SkeletonLoader(
@@ -75,7 +77,9 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = widget != null ? Theme.of(context).primaryTextTheme : Theme.of(context).textTheme;
+    final textTheme = widget != null
+        ? Theme.of(context).primaryTextTheme
+        : Theme.of(context).textTheme;
 
     return CustomContainerTransform(
       openWidget: widget,
@@ -83,7 +87,9 @@ class InfoCard extends StatelessWidget {
         return isPlaceholder
             ? _buildSkeleton(context)
             : Card(
-                color: widget != null ? getCustomOnPrimaryColor(context) : getPrimaryColor(context),
+                color: widget != null
+                    ? getCustomOnPrimaryColor(context)
+                    : getPrimaryColor(context),
                 child: Padding(
                   padding: EdgeInsets.all($constants.insets.sm),
                   child: Column(

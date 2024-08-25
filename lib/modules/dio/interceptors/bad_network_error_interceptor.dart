@@ -9,7 +9,8 @@ class BadNetworkErrorInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    if (err.response == null && !await getIt<InternetConnection>().hasInternetAccess) {
+    if (err.response == null &&
+        !await getIt<InternetConnection>().hasInternetAccess) {
       return handler.reject(
         BadNetworkException(
           requestOptions: err.requestOptions,

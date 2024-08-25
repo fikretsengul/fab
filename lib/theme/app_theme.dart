@@ -19,8 +19,10 @@ Future<ThemeData> createTheme({
     brightness: brightness,
   );
 
-  final appTypography = AppTypography.create(fontFamily: $constants.theme.defaultFontFamily);
-  final textTheme = _getTextTheme(appTypography: appTypography, brightness: brightness);
+  final appTypography =
+      AppTypography.create(fontFamily: $constants.theme.defaultFontFamily);
+  final textTheme =
+      _getTextTheme(appTypography: appTypography, brightness: brightness);
 
   final primaryColor = ElevationOverlay.colorWithOverlay(
     appColorScheme.surface,
@@ -119,7 +121,8 @@ SystemUiOverlayStyle createOverlayStyle({
     systemNavigationBarColor: primaryColor,
     systemNavigationBarContrastEnforced: false,
     systemStatusBarContrastEnforced: false,
-    systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+    systemNavigationBarIconBrightness:
+        isDark ? Brightness.light : Brightness.dark,
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
@@ -169,5 +172,7 @@ AppTextTheme _getTextTheme({
   required AppTypography appTypography,
   required Brightness brightness,
 }) {
-  return brightness == Brightness.dark ? appTypography.white : appTypography.black;
+  return brightness == Brightness.dark
+      ? appTypography.white
+      : appTypography.black;
 }

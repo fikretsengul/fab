@@ -80,10 +80,15 @@ class AppCubit extends HydratedCubit<AppState> {
   }
 
   void updateSystemOverlay(BuildContext context) {
-    final systemModeIsDark = View.of(context).platformDispatcher.platformBrightness == Brightness.dark;
+    final systemModeIsDark =
+        View.of(context).platformDispatcher.platformBrightness ==
+            Brightness.dark;
 
-    final isDark = state.theme.mode == ThemeMode.system ? systemModeIsDark : state.theme.mode == ThemeMode.dark;
-    final colorScheme = isDark ? state.theme.dark.colorScheme : state.theme.light.colorScheme;
+    final isDark = state.theme.mode == ThemeMode.system
+        ? systemModeIsDark
+        : state.theme.mode == ThemeMode.dark;
+    final colorScheme =
+        isDark ? state.theme.dark.colorScheme : state.theme.light.colorScheme;
     final primaryColor = ElevationOverlay.colorWithOverlay(
       colorScheme.surface,
       colorScheme.primary,

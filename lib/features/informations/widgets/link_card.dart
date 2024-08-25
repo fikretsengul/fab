@@ -15,8 +15,9 @@ class LinkCard extends StatelessWidget {
   final String title;
   final Uri url;
 
-  Future<bool> _launchUrl() async =>
-      await canLaunchUrl(url) ? await launchUrl(url) : throw Exception('Could not launch $url');
+  Future<bool> _launchUrl() async => await canLaunchUrl(url)
+      ? await launchUrl(url)
+      : throw Exception('Could not launch $url');
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,8 @@ class LinkCard extends StatelessWidget {
             const SizedBox(width: 16),
             Text(
               title,
-              style: getTextTheme(context).titleMedium!.apply(fontWeightDelta: 2),
+              style:
+                  getTextTheme(context).titleMedium!.apply(fontWeightDelta: 2),
             ),
           ],
         ),

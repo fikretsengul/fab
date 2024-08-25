@@ -12,7 +12,8 @@ part 'get_posts_rest_state.dart';
 
 @injectable
 class GetPoststRestCubit extends Cubit<GetPostsRestState> {
-  GetPoststRestCubit(this._postsRestRepository) : super(const GetPostsRestState.initial());
+  GetPoststRestCubit(this._postsRestRepository)
+      : super(const GetPostsRestState.initial());
 
   final PostsRestRepository _postsRestRepository;
 

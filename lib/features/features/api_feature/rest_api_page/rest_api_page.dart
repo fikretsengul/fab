@@ -17,7 +17,8 @@ class RestApiPage extends StatefulWidget {
 
 class _RestApiPageState extends State<RestApiPage> {
   final GetPoststRestCubit _cubit = getIt<GetPoststRestCubit>();
-  final PagingController<int, PostRestModel> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, PostRestModel> _pagingController =
+      PagingController(firstPageKey: 1);
 
   @override
   void initState() {

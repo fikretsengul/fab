@@ -26,7 +26,9 @@ class FeaturesScreen extends StatelessWidget {
                 const SizedBox(width: 16),
                 Text(
                   context.t.features.use_turkish,
-                  style: getTextTheme(context).titleSmall!.apply(fontWeightDelta: 2),
+                  style: getTextTheme(context)
+                      .titleSmall!
+                      .apply(fontWeightDelta: 2),
                 ),
               ],
             ),
