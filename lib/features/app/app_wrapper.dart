@@ -19,12 +19,6 @@ class _AppWrapperState extends State<AppWrapper> with WidgetsBindingObserver {
   final GlobalKey _key = GlobalKey();
 
   @override
-  Future<void> didChangePlatformBrightness() async {
-    getIt<AppCubit>().updateSystemOverlay(context);
-    super.didChangePlatformBrightness();
-  }
-
-  @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();

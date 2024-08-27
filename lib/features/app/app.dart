@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/aliases.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:statsfl/statsfl.dart';
 
@@ -19,68 +20,79 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-        // ignore: avoid_redundant_argument_values
-        enabled: kDebugMode,
-        backgroundColor: Colors.yellow,
-        builder: (context) => ScreenUtilInit(
-            designSize: const Size(360, 690),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            useInheritedMediaQuery: true,
-            builder: (context, child) {
-              ScreenUtil.configure(
-                data: MediaQuery.of(context),
-              );
-              return StatsFl(
-                maxFps: 120,
-                align: Alignment.bottomRight,
-                isEnabled: env.debug,
-                child: BlocProvider(
-                  create: (context) {
-                    return getIt<AppCubit>();
-                  },
-                  child: BlocBuilder<AppCubit, AppState>(
-                    buildWhen: (p, c) => p.theme != c.theme,
-                    builder: (context, state) {
-                      return MaterialApp.router(
-                        /// Theme configuration.
-                        ///
-                        builder: (context, child) {
-                          return DevicePreview.appBuilder(context, child!);
-                        },
-                        theme: state.theme.light,
-                        darkTheme: state.theme.dark,
-                        themeMode: state.theme.mode,
+      // ignore: avoid_redundant_argument_values
+      enabled: kDebugMode,
+      backgroundColor: Colors.yellow,
+      builder: (context) => ScreenUtilInit(
+        minTextAdapt: true,
+        splitScreenMode: true,
+        useInheritedMediaQuery: true,
+        builder: (context, child) {
+          ScreenUtil.configure(
+            data: MediaQuery.of(context),
+          );
+          return StatsFl(
+            maxFps: 120,
+            align: Alignment.bottomRight,
+            isEnabled: env.debug,
+            child: BlocProvider(
+              create: (context) {
+                return getIt<AppCubit>();
+              },
+              child: BlocBuilder<AppCubit, AppState>(
+                buildWhen: (p, c) => p.themePath != c.themePath,
+                builder: (context, state) {
+                  return FutureBuilder(
+                    future: loadThemeData(state.themePath),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return MaterialApp.router(
+                          /// Theme configuration.
+                          ///
+                          builder: DevicePreview.appBuilder,
+                          theme: snapshot.data,
+                          // darkTheme: state.theme.dark,
+                          // themeMode: state.theme.mode,
 
-                        /// Environment configuration.
-                        title: $constants.appTitle,
-                        debugShowCheckedModeBanner:
-                            env.debugShowCheckedModeBanner,
-                        debugShowMaterialGrid: env.debugShowMaterialGrid,
+                          /// Environment configuration.
+                          title: $constants.appTitle,
+                          debugShowCheckedModeBanner:
+                              env.debugShowCheckedModeBanner,
+                          debugShowMaterialGrid: env.debugShowMaterialGrid,
 
-                        /// AutoRouter configuration.
-                        routerDelegate: AutoRouterDelegate(
-                          appRouter,
-                          // Sentrie's tracking navigation events with the usage of autorouter.
-                          navigatorObservers: () => [
-                            SentryNavigatorObserver(),
+                          /// AutoRouter configuration.
+                          routerDelegate: AutoRouterDelegate(
+                            appRouter,
+                            // Sentrie's tracking navigation events with the usage of autorouter.
+                            navigatorObservers: () => [
+                              SentryNavigatorObserver(),
+                            ],
+                          ),
+                          routeInformationParser:
+                              appRouter.defaultRouteParser(),
+
+                          /// EasyLocalization configuration.
+                          locale: TranslationProvider.of(context).flutterLocale,
+                          supportedLocales: AppLocaleUtils.supportedLocales,
+                          localizationsDelegates: const [
+                            GlobalMaterialLocalizations.delegate,
+                            GlobalWidgetsLocalizations.delegate,
+                            GlobalCupertinoLocalizations.delegate,
                           ],
-                        ),
-                        routeInformationParser: appRouter.defaultRouteParser(),
-
-                        /// EasyLocalization configuration.
-                        locale: TranslationProvider.of(context).flutterLocale,
-                        supportedLocales: AppLocaleUtils.supportedLocales,
-                        localizationsDelegates: const [
-                          GlobalMaterialLocalizations.delegate,
-                          GlobalWidgetsLocalizations.delegate,
-                          GlobalCupertinoLocalizations.delegate,
-                        ],
-                      );
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                     },
-                  ),
-                ),
-              );
-            }));
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

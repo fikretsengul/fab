@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:json_theme/json_theme.dart';
 
 Size getSize(BuildContext context) {
   return MediaQuery.of(context).size;
@@ -37,7 +42,8 @@ TextTheme getTextTheme(BuildContext context) {
 }
 
 Color getPrimaryColor(BuildContext context) {
-  return ElevationOverlay.colorWithOverlay(getTheme(context).surface, getTheme(context).primary, 3);
+  return ElevationOverlay.colorWithOverlay(
+      getTheme(context).surface, getTheme(context).primary, 3);
 }
 
 Color getCustomOnPrimaryColor(BuildContext context) {
@@ -63,4 +69,66 @@ LinearGradient colorsToGradient(List<Color> colors, {double opacity = 1}) {
     end: Alignment.bottomCenter,
     colors: colors.map((c) => c.withOpacity(opacity)).toList(),
   );
+}
+
+/// Generate app theme data with default values
+ThemeData _generateThemeData(ThemeData theme) {
+  final buttonStyle = ButtonStyle(
+    elevation: WidgetStateProperty.all(0),
+    shape: WidgetStatePropertyAll(
+      theme.buttonTheme.shape as RoundedRectangleBorder,
+    ),
+    padding: WidgetStateProperty.all<EdgeInsets>(
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    ),
+  );
+
+  return theme.copyWith(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: theme.elevatedButtonTheme.style?.copyWith(
+            shape: WidgetStatePropertyAll(
+              theme.buttonTheme.shape as RoundedRectangleBorder,
+            ),
+            padding: WidgetStateProperty.all<EdgeInsets>(
+              const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+            ),
+          ) ??
+          buttonStyle,
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: theme.outlinedButtonTheme.style?.copyWith(
+            shape: WidgetStatePropertyAll(
+              theme.buttonTheme.shape as RoundedRectangleBorder,
+            ),
+            elevation: WidgetStateProperty.all<double>(0),
+            padding: WidgetStateProperty.all<EdgeInsets>(
+              const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+            ),
+          ) ??
+          buttonStyle,
+    ),
+    appBarTheme: theme.appBarTheme,
+  );
+}
+
+Future<ThemeData?> loadThemeData(String themePath) async {
+  try {
+    final themeStr = await rootBundle.loadString(themePath);
+    final themeJson = json.decode(themeStr);
+    final theme = ThemeDecoder.decodeThemeData(
+      themeJson,
+      validate: false,
+    )!;
+    return _generateThemeData(
+      theme.copyWith(textTheme: theme.textTheme),
+    );
+  } catch (e) {
+    return null;
+  }
 }

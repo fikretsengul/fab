@@ -4,11 +4,13 @@ part of 'app_cubit.dart';
 class AppState with _$AppState {
   const factory AppState({
     required int pageIndex,
-    required ThemeModel theme,
+    required bool introViewed,
+    required String themePath,
   }) = _AppState;
 
-  factory AppState.initial() => _AppState(
+  factory AppState.initial() => const _AppState(
         pageIndex: 0,
-        theme: getIt<ThemeModel>(),
+        introViewed: false,
+        themePath: Assets.defaultTheme,
       );
 }
