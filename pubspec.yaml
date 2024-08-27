@@ -36,6 +36,7 @@ dependencies:
   animations: ^2.0.11
   auto_route: ^7.8.4
   auto_size_text: 3.0.0
+  cached_network_image: ^3.4.1
   custom_sliding_segmented_control: ^1.8.1
   data_channel: 2.0.0+1
   device_preview: ^1.2.0
@@ -51,6 +52,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_secure_storage: ^9.0.0
   flutter_staggered_grid_view: ^0.7.0
+  flutter_svg: ^2.0.10+1
   freezed_annotation: 2.4.1
   fresh_dio: ^0.4.1
   get_it: ^7.6.7
