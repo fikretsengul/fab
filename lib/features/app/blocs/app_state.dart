@@ -11,6 +11,6 @@ class AppState with _$AppState {
   factory AppState.initial() => const _AppState(
         pageIndex: 0,
         introViewed: false,
-        themePath: Assets.defaultTheme,
+        themePath: Assets.rMTheme,
       );
 }

@@ -2,13 +2,18 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_advanced_boilerplate/assets.dart';
+import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_button.dart';
+import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_image_view.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_textfield.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/utils/keyboard_dismisser.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/utils/material_splash_tappable.dart';
 import 'package:flutter_advanced_boilerplate/features/auth/login/blocs/auth_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/auth/login/form/login_form.dart';
+import 'package:flutter_advanced_boilerplate/features/auth/login/presentation/components/intro_widget.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/helpers/bar_helper.dart';
@@ -153,7 +158,23 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         );
       },
-      child: KeyboardDismisserWidget(
+      child: BlocBuilder<AppCubit, AppState>(
+        builder: (context, s) {
+          if (!s.introViewed) {
+            return const IntroWidget();
+          }
+          return _buildFormWidget(context);
+        },
+      ),
+    );
+  }
+
+  Widget _buildFormWidget(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('تسجيل دخول'),
+      ),
+      body: KeyboardDismisserWidget(
         child: ReactiveForm(
           formGroup: _form,
           child: Scaffold(
@@ -161,38 +182,10 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.symmetric(horizontal: $constants.insets.md),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (UniversalPlatform.isAndroid ||
-                      UniversalPlatform.isIOS) ...{
-                    ReactiveFormConsumer(
-                      builder: (context, formGroup, child) {
-                        return MaterialSplashTappable(
-                          radius: 50,
-                          onTap: checkPermission,
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundColor: getCustomOnPrimaryColor(context)
-                                .withOpacity(0.05),
-                            backgroundImage: photo != null
-                                ? Image.file(
-                                    photo!,
-                                    fit: BoxFit.cover,
-                                  ).image
-                                : null,
-                            child: photo == null
-                                ? Icon(
-                                    MdiIcons.image,
-                                    color: getTheme(context).onBackground,
-                                  )
-                                : null,
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(height: $constants.insets.md),
-                  },
+                  Spacer(),
                   CustomTextField(
-                    key: const Key('username'),
                     formControlName: 'username',
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
@@ -201,10 +194,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     minLength: 4,
                     isRequired: true,
                   ),
+                  10.verticalSpace,
                   ReactiveFormConsumer(
                     builder: (context, formGroup, child) {
                       return CustomTextField(
-                        key: const Key('password'),
                         formControlName: 'password',
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.send,
@@ -222,6 +215,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                   ),
+                  TextButton(
+                      onPressed: () {}, child: Text('نسيت كلمة المرور؟')),
                   SizedBox(height: $constants.insets.sm),
                   ReactiveFormConsumer(
                     builder: (context, formGroup, child) => CustomButton(
@@ -236,6 +231,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           : null,
                     ),
                   ),
+                  Spacer(),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 50),
+                      child: CustomImageView(image: Images.logoMain),
+                    ),
+                  )
                 ],
               ),
             ),

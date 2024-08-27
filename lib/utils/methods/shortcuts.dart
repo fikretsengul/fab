@@ -41,9 +41,12 @@ TextTheme getTextTheme(BuildContext context) {
   return Theme.of(context).textTheme;
 }
 
+ThemeData getCurrentTheme(BuildContext context) {
+  return Theme.of(context);
+}
+
 Color getPrimaryColor(BuildContext context) {
-  return ElevationOverlay.colorWithOverlay(
-      getTheme(context).surface, getTheme(context).primary, 3);
+  return getTheme(context).primary;
 }
 
 Color getCustomOnPrimaryColor(BuildContext context) {
@@ -73,47 +76,33 @@ LinearGradient colorsToGradient(List<Color> colors, {double opacity = 1}) {
 
 /// Generate app theme data with default values
 ThemeData _generateThemeData(ThemeData theme) {
-  final buttonStyle = ButtonStyle(
-    elevation: WidgetStateProperty.all(0),
-    shape: WidgetStatePropertyAll(
-      theme.buttonTheme.shape as RoundedRectangleBorder,
-    ),
-    padding: WidgetStateProperty.all<EdgeInsets>(
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-    ),
-  );
-
   return theme.copyWith(
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: theme.elevatedButtonTheme.style?.copyWith(
-            shape: WidgetStatePropertyAll(
-              theme.buttonTheme.shape as RoundedRectangleBorder,
-            ),
-            padding: WidgetStateProperty.all<EdgeInsets>(
-              const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 15,
-              ),
-            ),
-          ) ??
-          buttonStyle,
+    appBarTheme: theme.appBarTheme.copyWith(
+      titleTextStyle:
+          theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w700),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 25),
+        ),
+        textStyle: WidgetStatePropertyAll(
+          theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: theme.outlinedButtonTheme.style?.copyWith(
-            shape: WidgetStatePropertyAll(
-              theme.buttonTheme.shape as RoundedRectangleBorder,
-            ),
-            elevation: WidgetStateProperty.all<double>(0),
-            padding: WidgetStateProperty.all<EdgeInsets>(
-              const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 15,
-              ),
-            ),
-          ) ??
-          buttonStyle,
+        minimumSize: const WidgetStatePropertyAll(Size(200, 40)),
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 25),
+        ),
+        textStyle: WidgetStatePropertyAll(
+          theme.textTheme.titleMedium!
+              .copyWith(fontWeight: FontWeight.w800, fontSize: 15),
+        ),
+      ),
     ),
-    appBarTheme: theme.appBarTheme,
   );
 }
 

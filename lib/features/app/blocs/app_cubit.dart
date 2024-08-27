@@ -30,6 +30,11 @@ class AppCubit extends HydratedCubit<AppState> {
     };
   }
 
+  void setIntroViewed({required bool introViewed}) => emit(
+        state.copyWith(
+          introViewed: introViewed,
+        ),
+      );
   void changePageIndex({required int index}) => emit(
         state.copyWith(
           pageIndex: index,

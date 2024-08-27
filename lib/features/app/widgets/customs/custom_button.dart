@@ -6,22 +6,24 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class CustomButton extends StatefulWidget {
   const CustomButton({
-    required this.controller,
     required this.text,
+    this.controller,
     super.key,
     this.onPressed,
     this.resetAfterDuration = false,
     this.animateOnTap = false,
     this.width = 300,
     this.height = 60,
+    this.color,
   });
 
   final void Function()? onPressed;
   final bool animateOnTap;
-  final RoundedLoadingButtonController controller;
+  final RoundedLoadingButtonController? controller;
   final double height;
   final bool resetAfterDuration;
   final String text;
+  final Color? color;
   final double width;
 
   @override
@@ -32,18 +34,19 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return RoundedLoadingButton(
+      borderRadius: $constants.theme.defaultBorderRadius,
       elevation: $constants.theme.defaultElevation,
       width: widget.width,
       height: widget.height,
       color: widget.onPressed != null
-          ? getCustomOnPrimaryColor(context)
-          : getPrimaryColor(context),
-      controller: widget.controller,
+          ? widget.color ?? getPrimaryColor(context)
+          : widget.color?.withOpacity(0.8) ?? getCustomOnPrimaryColor(context),
+      controller: widget.controller ?? RoundedLoadingButtonController(),
       onPressed: widget.onPressed,
-      valueColor: getTheme(context).primary,
+      valueColor: widget.color ?? getTheme(context).primary,
       resetAfterDuration: widget.resetAfterDuration,
       animateOnTap: widget.animateOnTap,
-      child: AutoSizeText(
+      child: Text(
         widget.text,
         style: getTextTheme(context).titleMedium!.apply(color: Colors.white),
       ),

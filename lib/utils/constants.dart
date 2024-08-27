@@ -118,7 +118,7 @@ class _Palette {
 
 @immutable
 class _Theme {
-  final double defaultBorderRadius = 24;
+  final double defaultBorderRadius = 12;
   final double defaultElevation = 0;
   final defaultFontFamily = 'Nunito';
   final defaultThemeColor = const Color(0xFF0000FF);

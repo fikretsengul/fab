@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_advanced_boilerplate/features/app/app.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/bloc_observer/observer.dart';
@@ -18,13 +20,15 @@ import 'package:url_strategy/url_strategy.dart';
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(
     () async {
+      Animate.restartOnHotReload = kDebugMode;
       // Preserve splash screen until authentication complete.
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
       FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
       // Use device locale.
-      LocaleSettings.useDeviceLocale();
+      //LocaleSettings.useDeviceLocale();
 
+      LocaleSettings.setLocale(AppLocale.ar);
       // Removes leading # from the url running on web.
       setPathUrlStrategy();
 
