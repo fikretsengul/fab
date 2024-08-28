@@ -6,21 +6,42 @@ import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class AppNavigator extends StatelessWidget {
+@RoutePage()
+class AppNavigator extends StatefulWidget {
   const AppNavigator({super.key});
 
   @override
+  State<AppNavigator> createState() => _AppNavigatorState();
+}
+
+class _AppNavigatorState extends State<AppNavigator>
+    with TickerProviderStateMixin {
+  late TabController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(
+      length: $constants.navigation.bottomNavigationScreens().length,
+      vsync: this,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        controller.animateTo(state.pageIndex);
+      },
       builder: (context, state) {
         return Scaffold(
           appBar:
               $constants.navigation.appbars(context).elementAt(state.pageIndex),
-          body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: $constants.navigation
-                .bottomNavigationScreens()
-                .elementAt(state.pageIndex),
+          body: TabBarView(
+            controller: controller,
+            key: const ValueKey('acam'),
+            physics: const NeverScrollableScrollPhysics(),
+            children: $constants.navigation.bottomNavigationScreens(),
           ),
           bottomNavigationBar: BottomNavigation(
             destinations: $constants.navigation.bottomNavigationItems(context),
