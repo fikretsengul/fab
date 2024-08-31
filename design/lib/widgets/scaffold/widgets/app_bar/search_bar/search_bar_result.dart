@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:deps/design/design.dart';
+import 'package:deps/features/features.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/fab_appbar_search_bar_settings.dart';
 import '../../../utils/measures.dart';
 import '../../../utils/store.dart';
 
@@ -19,26 +19,20 @@ class SearchBarResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizes = MediaQuery.sizeOf(context);
-
     return ValueListenableBuilder(
       valueListenable: _store.searchBarResultVisible,
       builder: (context, searchBarResultVisible, _) {
         return IgnorePointer(
           ignoring: !searchBarResultVisible,
           child: AnimatedOpacity(
-            duration: measures.searchBarAnimationDuration,
+            duration: measures.getSearchBarFocusAnimDur,
             opacity: searchBarResultVisible ? 1 : 0,
             child: Container(
-              width: sizes.width,
-              height: sizes.height,
-              color: CupertinoDynamicColor.maybeResolve(
-                    searchBar.resultColor,
-                    context,
-                  ) ??
-                  CupertinoTheme.of(context).scaffoldBackgroundColor,
+              width: $.context.mqSize.width,
+              height: $.context.mqSize.height,
+              color: context.fabTheme.backgroundColor,
               padding: EdgeInsets.only(
-                top: MediaQuery.paddingOf(context).top + measures.searchContainerHeight + measures.bottomToolbarHeight,
+                top: measures.getSafeZoneTopPadding + measures.getSearchBarHeight + measures.bottomToolbarHeight,
               ),
               child: Stack(
                 children: [

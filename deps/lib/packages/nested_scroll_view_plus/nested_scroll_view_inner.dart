@@ -1,5 +1,3 @@
-// ignore_for_file: matching_super_parameters, deprecated_consistency, max_lines_for_file
-
 part of 'nested_scroll_view.dart';
 
 class NestedScrollViewInner extends OriginalNestedScrollView {
@@ -29,7 +27,6 @@ class NestedScrollViewInner extends OriginalNestedScrollView {
       target != null,
       'OriginalNestedScrollView.sliverOverlapAbsorberHandleFor must be called with a context that contains a OriginalNestedScrollView.',
     );
-
     return target!.state._absorberHandle;
   }
 
@@ -40,7 +37,6 @@ class NestedScrollViewInner extends OriginalNestedScrollView {
     bool bodyIsScrolled,
   ) {
     final headerSlivers = headerSliverBuilder(context, bodyIsScrolled);
-
     return <Widget>[
       // ignore: deprecated_member_use_from_same_package
       OverlapAbsorberPlus(
@@ -90,7 +86,6 @@ class NestedScrollViewInnerState extends NestedScrollViewStatePlus {
       child: Builder(
         builder: (context) {
           _lastHasScrolledBody = _coordinator!.hasScrolledBody;
-
           return _OriginalNestedScrollViewCustomScrollView(
             dragStartBehavior: widget.dragStartBehavior,
             scrollDirection: widget.scrollDirection,
@@ -174,27 +169,20 @@ class _NestedScrollCoordinatorInner extends _OriginalNestedScrollCoordinator {
 
   // ignore: unused_element
   _OriginalNestedScrollPosition? get _innerPosition {
-    if (!_innerController.hasClients || _innerController.nestedPositions.isEmpty) {
-      return null;
-    }
+    if (!_innerController.hasClients || _innerController.nestedPositions.isEmpty) return null;
     _OriginalNestedScrollPosition? innerPosition;
     if (userScrollDirection != ScrollDirection.idle) {
       for (final position in _innerPositions) {
         if (innerPosition != null) {
           if (userScrollDirection == ScrollDirection.reverse) {
-            if (innerPosition.pixels < position.pixels) {
-              continue;
-            }
+            if (innerPosition.pixels < position.pixels) continue;
           } else {
-            if (innerPosition.pixels > position.pixels) {
-              continue;
-            }
+            if (innerPosition.pixels > position.pixels) continue;
           }
         }
         innerPosition = position;
       }
     }
-
     return innerPosition;
   }
 
@@ -239,13 +227,11 @@ class _NestedScrollCoordinatorInner extends _OriginalNestedScrollCoordinator {
     if (value < source.minScrollExtent) {
       // coordinator offset = inner.min - top overscroll
       final overscroll = source.minScrollExtent - value;
-
       return _outerPosition!.minScrollExtent - overscroll;
     }
     // inner is scrolling
     // coordinator offset = outer.max + inner offset
     final offset = value - source.minScrollExtent;
-
     return _outerPosition!.maxScrollExtent + offset;
   }
 
@@ -263,11 +249,9 @@ class _NestedScrollCoordinatorInner extends _OriginalNestedScrollCoordinator {
     if (value < _outerPosition!.minScrollExtent) {
       // inner offset = inner.min - top overflow
       final overflow = _outerPosition!.minScrollExtent - value;
-
       return target.minScrollExtent - overflow;
     }
     final offset = value - _outerPosition!.maxScrollExtent;
-
     return target.minScrollExtent + offset.clamp(0, double.infinity);
   }
 
@@ -329,7 +313,6 @@ class _NestedScrollCoordinatorInner extends _OriginalNestedScrollCoordinator {
   void pointerScroll(double delta) {
     if (delta == 0.0) {
       goBallistic(0);
-
       return;
     }
     goIdle();
@@ -364,9 +347,7 @@ class _NestedScrollPositionInner extends _OriginalNestedScrollPosition {
     required _OriginalNestedBallisticScrollActivityMode mode,
     _OriginalNestedScrollMetrics? metrics,
   }) {
-    if (simulation == null) {
-      return IdleScrollActivity(this);
-    }
+    if (simulation == null) return IdleScrollActivity(this);
     switch (mode) {
       case _OriginalNestedBallisticScrollActivityMode.outer:
         return _NestedOuterBallisticScrollActivityInner(
@@ -516,7 +497,6 @@ class RenderSliverOverlapAbsorberInner extends OriginalRenderSliverOverlapAbsorb
     );
     if (child == null) {
       geometry = SliverGeometry.zero;
-
       return;
     }
     child!.layout(constraints, parentUsesSize: true);

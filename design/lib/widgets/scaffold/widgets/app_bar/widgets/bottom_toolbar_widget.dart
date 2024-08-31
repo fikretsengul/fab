@@ -1,23 +1,24 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../utils/measures.dart';
 
 class BottomToolbarWidget extends StatelessWidget {
   const BottomToolbarWidget({
     required this.measures,
-    required this.appbarBottom,
+    required this.toolbar,
     required this.color,
     super.key,
   });
 
-  final KeyedSubtree appbarBottom;
-  final Color color;
   final Measures measures;
+  final KeyedSubtree toolbar;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: measures.searchBarAnimationDuration,
+      duration: measures.getSearchBarFocusAnimDur,
       height: measures.bottomToolbarHeight,
       color: color,
       child: Stack(
@@ -28,7 +29,7 @@ class BottomToolbarWidget extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: appbarBottom,
+            child: toolbar,
           ),
         ],
       ),

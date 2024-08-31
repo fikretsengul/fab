@@ -1,47 +1,47 @@
+import 'package:deps/features/features.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 
 class Measures {
   Measures({
-    this.searchTextFieldHeight = 35.0,
-    this.largeTitleContainerHeight = 52.0,
-    this.primaryToolbarHeight = kMinInteractiveDimensionCupertino,
-    this.bottomToolbarHeight = 40.0,
-    this.searchBarAnimationDurationx = const Duration(milliseconds: 250),
+    required this.searchBarHeight,
+    required this.largeTitleHeight,
+    required this.topToolbarHeight,
+    required this.bottomToolbarHeight,
   });
 
   factory Measures.instance() {
-    _instance ??= Measures();
+    _instance ??= Measures(
+      searchBarHeight: 35,
+      largeTitleHeight: 50,
+      topToolbarHeight: kMinInteractiveDimensionCupertino,
+      bottomToolbarHeight: 40,
+    );
 
     return _instance!;
   }
 
-  static const HeroTag defaultHeroTag = HeroTag(null);
-
-  double bottomToolbarHeight;
-  double largeTitleContainerHeight;
-  double primaryToolbarHeight;
-  Duration searchBarAnimationDurationx;
-  double searchTextFieldHeight;
-
   static Measures? _instance;
 
-  Duration get titleOpacityAnimationDuration => const Duration(milliseconds: 100);
+  double largeTitleHeight;
+  double topToolbarHeight;
+  double searchBarHeight;
+  double bottomToolbarHeight;
 
-  Duration get standartAnimationDuration => const Duration(milliseconds: 200);
+  static const HeroTag defaultHeroTag = HeroTag(null);
 
-  Duration get scrollAnimationDuration => const Duration(milliseconds: 300);
+  Duration get getLargeTitleOpacityAnimDur => const Duration(milliseconds: 100);
+  Duration get getStandartAnimDur => const Duration(milliseconds: 200);
+  Duration get getScrollAnimDur => const Duration(milliseconds: 300);
+  Duration get getSearchBarFocusAnimDur => const Duration(milliseconds: 250);
 
-  Duration get searchBarAnimationDuration => searchBarAnimationDurationx;
-
-  double get appbarHeight =>
-      primaryToolbarHeight + searchContainerHeight + largeTitleContainerHeight + bottomToolbarHeight;
-
-  double get appbarHeightExceptPrimaryToolbar =>
-      searchContainerHeight + largeTitleContainerHeight + bottomToolbarHeight;
-
-  double get searchBarBottomPadding => 14;
-
-  double get searchContainerHeight => searchTextFieldHeight == 0 ? 0 : searchTextFieldHeight + searchBarBottomPadding;
+  double get getSafeZoneTopPadding => $.context.mqPadding.top;
+  double get getTopToolbarHeightWSafeZone => getSafeZoneTopPadding + topToolbarHeight;
+  double get getSearchBarBottomPadding => 8;
+  double get getSearchBarHeight => searchBarHeight == 0 ? 0 : searchBarHeight + getSearchBarBottomPadding;
+  double get getAppBarHeightWSafeZone =>
+      getTopToolbarHeightWSafeZone + largeTitleHeight + getSearchBarHeight + bottomToolbarHeight;
+  double get getAppBarFocusedHeightWSafeZone => getSafeZoneTopPadding + getSearchBarHeight + bottomToolbarHeight;
+  double get getAppBarHeightWoTopToolbar => largeTitleHeight + getSearchBarHeight + bottomToolbarHeight;
 }

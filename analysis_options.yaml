@@ -18,6 +18,7 @@ analyzer:
     - "**.gr.dart"
     - "**.gform.dart"
     - "**/generated_plugin_registrant.dart"
+    - "**overriden_**.dart"
 
 custom_lint:
   rules:

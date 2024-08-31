@@ -1,6 +1,7 @@
-import 'package:deps/packages/flutter_hooks.dart';
-import 'package:deps/packages/sliver_snap.dart';
+/* import 'package:deps/packages/flutter_hooks.dart';
 import 'package:flutter/material.dart';
+
+import 'snap.dart';
 
 typedef CollapsingStateCallback = void Function(
   bool isCollapsed,
@@ -54,3 +55,4 @@ class Snapping extends HookWidget {
     );
   }
 }
+ */

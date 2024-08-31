@@ -8,47 +8,43 @@ import '../../../utils/store.dart';
 
 class LargeTitleWidget extends StatelessWidget {
   const LargeTitleWidget({
-    required this.animationStatus,
     required this.measures,
-    required this.appBar,
-    required this.largeTitleHeight,
-    required this.scaleTitle,
+    required this.animationStatus,
+    required this.appBarSettings,
     required this.components,
-    required this.titleOpacity,
     super.key,
   });
 
-  final SearchBarAnimationStatus animationStatus;
-  final FabAppBarSettings appBar;
-  final NavigationBarStaticComponents components;
-  final double largeTitleHeight;
   final Measures measures;
-  final double scaleTitle;
-  final double titleOpacity;
+  final SearchBarAnimationStatus animationStatus;
+  final FabAppBarSettings appBarSettings;
+  final NavigationBarStaticComponents components;
 
   Store get _store => Store.instance();
 
-  double get _opacity => titleOpacity == 0 ? 1 : 0;
+  double get _largeTitleOpacity => _store.largeTitleOpacity.value == 0 ? 1 : 0;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: appBar.largeTitle!.padding,
+      padding: appBarSettings.largeTitle.padding,
       child: AnimatedOpacity(
         duration: animationStatus == SearchBarAnimationStatus.paused
             ? const Duration(milliseconds: 250)
-            : measures.titleOpacityAnimationDuration,
+            : measures.getLargeTitleOpacityAnimDur,
         opacity: _store.searchBarHasFocus.value
-            ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : _opacity)
-            : _opacity,
+            ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top ? 0 : _largeTitleOpacity)
+            : _largeTitleOpacity,
         child: AnimatedContainer(
           height: _store.searchBarHasFocus.value
-              ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : largeTitleHeight)
-              : largeTitleHeight,
+              ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+                  ? 0
+                  : _store.largeTitleHeight.value)
+              : _store.largeTitleHeight.value,
           duration:
-              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.searchBarAnimationDuration,
+              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
           child: Padding(
-            padding: EdgeInsets.only(bottom: measures.largeTitleContainerHeight > 0 ? 8.0 : 0),
+            padding: EdgeInsets.only(bottom: measures.largeTitleHeight > 0 ? 4.0 : 0),
             child: Stack(
               children: [
                 Positioned(
@@ -59,7 +55,7 @@ class LargeTitleWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Transform.scale(
-                          scale: scaleTitle,
+                          scale: _store.largeTitleScale.value,
                           filterQuality: FilterQuality.high,
                           alignment: Alignment.bottomLeft,
                           child: components.largeTitle,

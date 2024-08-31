@@ -1,4 +1,3 @@
-import 'package:deps/packages/nested_scroll_view_plus/others/custom_scroll_provider.dart';
 import 'package:flutter/cupertino.dart';
 
 class Test extends StatelessWidget {
@@ -11,12 +10,9 @@ class Test extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollProvider = CustomScrollProviderData.of(context);
-
     return CustomScrollView(
       physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      key: PageStorageKey<int>(index),
-      controller: scrollProvider.scrollControllers[index],
+      key: const PageStorageKey<String>('asd'),
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate(

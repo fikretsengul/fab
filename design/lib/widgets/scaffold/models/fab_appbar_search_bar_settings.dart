@@ -1,14 +1,13 @@
+import 'package:deps/features/features.dart';
 import 'package:deps/packages/uicons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'fab_appbar_action_settings.dart';
 
 class FabAppBarSearchBarSettings {
   FabAppBarSearchBarSettings({
-    this.resultColor,
-    this.backgroundColor = CupertinoColors.tertiarySystemFill,
-    this.prefixIcon,
+    Color? backgroundColor,
+    Widget? prefixIcon,
     this.cancelButtonText = 'cancel',
     this.placeholderText = 'search',
     this.enabled = false,
@@ -33,17 +32,16 @@ class FabAppBarSearchBarSettings {
     this.onFocused,
     this.searchController,
     this.searchFocusNode,
-  }) {
-    prefixIcon = prefixIcon ??
-        Icon(
-          UIcons.boldRounded.search,
-          color: CupertinoColors.systemGrey,
-          size: 16,
-        );
-  }
+  })  : backgroundColor = backgroundColor ?? $.theme.backgroundColor,
+        prefixIcon = prefixIcon ??
+            Icon(
+              UIcons.boldRounded.search,
+              color: $.theme.onBackgroundColor,
+              size: 16,
+            );
 
   final BorderRadius borderRadius;
-  Widget? prefixIcon;
+  final Widget prefixIcon;
   final List<FabAppBarActionSettings> actions;
   final SearchBarAnimationBehavior animationBehavior;
   final Duration animationDuration;
@@ -58,7 +56,6 @@ class FabAppBarSearchBarSettings {
   final String placeholderText;
   final TextStyle? placeholderTextStyle;
   final SearchBarResultBehavior resultBehavior;
-  final Color? resultColor;
   final SearchBarScrollBehavior scrollBehavior;
   TextEditingController? searchController;
   FocusNode? searchFocusNode;

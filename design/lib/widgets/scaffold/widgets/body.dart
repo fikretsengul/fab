@@ -1,57 +1,51 @@
-// ignore_for_file: max_lines_for_file, avoid_returning_widgets
-
+// ignore_for_file: avoid_returning_widgets
 import 'dart:async';
 
 import 'package:deps/packages/easy_refresh.dart';
-import 'package:deps/packages/nested_scroll_view_plus.dart';
+import 'package:deps/packages/extended_tabs.dart' hide LinkScrollController;
 import 'package:flutter/material.dart';
 
-import '../../_core/overridens/overriden_cupertino_scrollbar.dart';
 import '../models/fab_appbar_search_bar_settings.dart';
 import '../utils/measures.dart';
 import '../utils/store.dart';
-import 'snapping.dart';
+import 'test.dart';
+import 'test3.dart';
 
 class Body extends StatelessWidget {
-  const Body({
-    required this.scrollController,
+  Body({
     required this.measures,
-    required this.animationBehavior,
-    required this.scrollBehavior,
     required this.refreshListenable,
-    required this.isScrollable,
-    required this.nestedScrollViewKey,
-    required this.isCustomScrollView,
     required this.searchBar,
-    required this.child,
-    this.otherScrollController,
-    this.onRefresh,
+    required this.children,
+    required this.scrollControllers,
+    required this.onRefreshes,
+    this.tabController,
     super.key,
   });
 
-  final FabAppBarSearchBarSettings searchBar;
-  final ScrollController? otherScrollController;
-  final FutureOr<dynamic> Function()? onRefresh;
-  final SearchBarAnimationBehavior animationBehavior;
-  final Widget child;
-  final bool isScrollable;
+  final List<FutureOr<dynamic> Function()?> onRefreshes;
+  final List<Widget> children;
   final Measures measures;
   final IndicatorStateListenable refreshListenable;
-  final SearchBarScrollBehavior scrollBehavior;
-  final ScrollController scrollController;
-  final GlobalKey<NestedScrollViewStatePlus> nestedScrollViewKey;
-  final bool isCustomScrollView;
+  final List<ScrollController> scrollControllers;
+  final FabAppBarSearchBarSettings searchBar;
+  final TabController? tabController;
 
   Store get _store => Store.instance();
 
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: _store.isInHero,
-      builder: (_, isInHero, __) {
-        return IgnorePointer(
-          ignoring: isInHero,
-          child: EasyRefresh.builder(
+  Widget _pullToRefreshBuilder({required int index}) {
+    final onRefresh = onRefreshes.elementAtOrNull(index);
+    final scrollController = scrollControllers.elementAt(index);
+    final child = children.elementAt(index);
+
+    Widget childWidget({ScrollPhysics? physics}) => _childBuilder(
+          scrollController: scrollController,
+          physics: physics,
+          child: child,
+        );
+
+    return onRefresh != null
+        ? EasyRefresh.builder(
             onRefresh: onRefresh,
             header: ListenerHeader(
               processedDuration: Duration.zero,
@@ -62,98 +56,77 @@ class Body extends StatelessWidget {
               hapticFeedback: true,
             ),
             childBuilder: (_, physics) {
-              return shouldWrapWithScrollbar(
-                context,
-                child: Snapping(
-                  scrollController: scrollController,
-                  //scrollBehavior: scrollBehavior,
-                  collapsedBarHeight: 50,
-                  expandedContentHeight: 100,
-                  child: NestedScrollViewPlus(
-                    key: nestedScrollViewKey,
-                    controller: scrollController,
-                    physics: isScrollable ? physics : const NeverScrollableScrollPhysics(),
-                    headerSliverBuilder: (context, _) {
-                      return [
-                        ValueListenableBuilder(
-                          valueListenable: _store.searchBarAnimationStatus,
-                          builder: (_, __, ___) {
-                            final topPadding = MediaQuery.paddingOf(context).top;
-                            final minHeight = topPadding + measures.primaryToolbarHeight + measures.bottomToolbarHeight;
-                            final maxHeight = _store.searchBarHasFocus.value
-                                ? (searchBar.animationBehavior == SearchBarAnimationBehavior.top
-                                    ? topPadding + measures.searchContainerHeight + measures.bottomToolbarHeight
-                                    : topPadding + measures.appbarHeight)
-                                : topPadding + measures.appbarHeight;
+              return childWidget(physics: physics);
+            },
+          )
+        : childWidget();
+  }
 
-                            return SliverPersistentHeader(
-                              pinned: true,
-                              delegate: MyDelegate(
-                                minHeight: isScrollable ? minHeight : maxHeight - 0.000001,
-                                maxHeight: maxHeight,
-                              ),
-                            );
-                          },
-                        ),
-                      ];
-                    },
-                    body: isCustomScrollView
-                        ? child
-                        : CustomScrollView(
-                            physics: isScrollable
-                                ? const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())
-                                : const NeverScrollableScrollPhysics(),
-                            slivers: [
-                              SliverToBoxAdapter(
-                                child: child,
-                              ),
-                            ],
-                          ),
-                  ),
-                ),
+  Widget _childBuilder({
+    required ScrollController scrollController,
+    required Widget child,
+    ScrollPhysics? physics,
+  }) {
+    final key = PageStorageKey<String>(scrollController.hashCode.toString());
+
+    return CustomScrollView(
+      key: key,
+      controller: scrollController,
+      physics: SnapScrollPhysics(
+        parent: physics,
+        snaps: [
+          if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
+            Snap.avoidZone(0, measures.getSearchBarHeight),
+          if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
+            Snap.avoidZone(measures.getSearchBarHeight, measures.largeTitleHeight + measures.getSearchBarHeight),
+          if (searchBar.scrollBehavior == SearchBarScrollBehavior.pinned) Snap.avoidZone(0, measures.largeTitleHeight),
+        ],
+      ),
+      slivers: [
+        SliverToBoxAdapter(
+          child: ValueListenableBuilder(
+            valueListenable: _store.searchBarAnimationStatus,
+            builder: (_, animationStatus, __) {
+              return AnimatedContainer(
+                duration: animationStatus == SearchBarAnimationStatus.paused
+                    ? Duration.zero
+                    : measures.getSearchBarFocusAnimDur,
+                height: _store.searchBarHasFocus.value
+                    ? (searchBar.animationBehavior == SearchBarAnimationBehavior.top
+                        ? measures.getAppBarFocusedHeightWSafeZone
+                        : measures.getAppBarHeightWSafeZone)
+                    : measures.getAppBarHeightWSafeZone,
               );
             },
           ),
-        );
-      },
+        ),
+        child,
+      ],
     );
   }
 
-  Widget shouldWrapWithScrollbar(BuildContext context, {required Widget child}) {
-    if (isCustomScrollView) {
-      return child;
-    } else {
-      return OverridenCupertinoScrollbar(
-        controller: scrollController,
-        padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + measures.appbarHeight),
-        thumbVisibility: true,
-        thicknessWhileDragging: 6,
-        child: child,
-      );
-    }
-  }
-}
-
-class MyDelegate extends SliverPersistentHeaderDelegate {
-  MyDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-  });
-
-  double maxHeight;
-  double minHeight;
-
   @override
-  double get maxExtent => maxHeight;
+  Widget build(BuildContext context) {
+    final child = tabController != null
+        ? ExtendedTabBarView(
+            controller: tabController,
+            cacheExtent: 2,
+            children: [
+              for (var i = 0; i < tabController!.length; i++) ...{
+                _pullToRefreshBuilder(index: i),
+              },
+            ],
+          )
+        : children.first;
 
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox(height: maxHeight);
+    return ValueListenableBuilder(
+      valueListenable: _store.isInHero,
+      builder: (_, isInHero, __) {
+        return IgnorePointer(
+          ignoring: isInHero,
+          child: child,
+        );
+      },
+    );
   }
 }

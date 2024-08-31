@@ -7,7 +7,7 @@ final class FabTypography {
     fontFamily: fontName,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
-    fontSize: 34,
+    fontSize: 32,
   );
   static const title1 = TextStyle(
     fontFamily: fontName,

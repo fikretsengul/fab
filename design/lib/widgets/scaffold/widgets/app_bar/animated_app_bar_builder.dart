@@ -1,6 +1,4 @@
-// ignore_for_file: max_lines_for_file, max_lines_for_function, invalid_use_of_protected_member, avoid_empty_blocks
-import 'dart:ui';
-
+// ignore_for_file: max_lines_for_file, max_lines_for_function, invalid_use_of_protected_member, avoid_empty_blocks, avoid_nested_if, avoid_print
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,71 +6,44 @@ import '../../../../_core/constants/fab_theme.dart';
 import '../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../models/fab_appbar_search_bar_settings.dart';
 import '../../models/fab_appbar_settings.dart';
+import '../../utils/helpers.dart';
 import '../../utils/measures.dart';
 import '../../utils/store.dart';
+import '../linked_scroll_controller.dart';
 import 'animated_app_bar.dart';
 
 class AnimatedAppBarBuilder extends StatefulWidget {
   const AnimatedAppBarBuilder({
+    required this.syncScrollController,
+    required this.appBarSettings,
     required this.measures,
-    required this.appBar,
-    required this.components,
-    required this.keys,
-    required this.shouldStretch,
     required this.shouldTransiteBetweenRoutes,
-    required this.scrollController,
-    required this.isScrollable,
     this.onCollapsed,
-    this.brightness,
     super.key,
   });
 
-  final FabAppBarSettings appBar;
-  final Brightness? brightness;
-  final NavigationBarStaticComponents components;
-  final bool isScrollable;
-  final NavigationBarStaticComponentsKeys keys;
+  final FabAppBarSettings appBarSettings;
   final Measures measures;
   final ValueChanged<bool>? onCollapsed;
-  final ScrollController scrollController;
-  final bool shouldStretch;
   final bool shouldTransiteBetweenRoutes;
+  final LinkedScrollControllerGroup syncScrollController;
 
   @override
   State<AnimatedAppBarBuilder> createState() => _AnimatedAppBarBuilderState();
 }
 
 class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with TickerProviderStateMixin {
+  late final Animation _animation;
+  late final AnimationController _animationController;
+  late final NavigationBarStaticComponents _components;
   late final TextEditingController _editingController;
   late final FocusNode _focusNode;
   bool _isCollapsed = false;
-  double _scrollOffset = 0;
-
-  late AnimationController _animationController;
-  late Animation _animation;
-
-  Color _expandedColor(BuildContext context) => context.fabTheme.appBarExpandedColor;
-  Color _collapsedColor(BuildContext context) =>
-      context.fabTheme.appBarCollapsedColor.withOpacity(widget.appBar.hasBackgroundBlur ? 0.5 : 1);
-
-  @override
-  void dispose() {
-    widget.scrollController.removeListener(_scrollListener);
-    _editingController.dispose();
-    _focusNode.dispose();
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _editingController = widget.appBar.searchBar!.searchController ?? TextEditingController();
-    _focusNode = widget.appBar.searchBar!.searchFocusNode ?? FocusNode();
-  }
+  late final NavigationBarStaticComponentsKeys _keys;
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
     _animation = ColorTween(
       begin: _expandedColor(context),
@@ -81,36 +52,95 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
       ..addListener(() {
         setState(() {});
       });
-
-    super.didChangeDependencies();
+    _components = _configureComponents();
   }
 
-  void _scrollListener() {
-    _scrollOffset = widget.scrollController.offset;
-    _store.scrollOffset.value = widget.scrollController.offset;
-    _checkIfCollapsed();
+  @override
+  void dispose() {
+    _editingController.dispose();
+    _focusNode.dispose();
+    _animationController.dispose();
+    widget.syncScrollController.removeOffsetChangedListener(_scrollListener);
+
+    super.dispose();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _editingController = widget.appBarSettings.searchBar.searchController ?? TextEditingController();
+    _focusNode = widget.appBarSettings.searchBar.searchFocusNode ?? FocusNode();
+    _keys = NavigationBarStaticComponentsKeys();
+    widget.syncScrollController.addOffsetChangedListener(_scrollListener);
+  }
+
+  NavigationBarStaticComponents _configureComponents() {
+    final smallTitle = widget.appBarSettings.title is Text
+        ? Text(
+            '${(widget.appBarSettings.title! as Text).data}',
+            style: defaultTitleTextStyle(context, widget.appBarSettings),
+          )
+        : widget.appBarSettings.title;
+
+    return NavigationBarStaticComponents(
+      keys: _keys,
+      route: ModalRoute.of(context),
+      userLeading: widget.appBarSettings.leading,
+      automaticallyImplyLeading: widget.appBarSettings.automaticallyImplyLeading,
+      automaticallyImplyTitle: true,
+      previousPageTitle: widget.appBarSettings.previousPageTitle,
+      userMiddle: smallTitle,
+      userTrailing: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [...widget.appBarSettings.actions],
+        ),
+      ),
+      largeTitleActions: Row(
+        children: [
+          ...?widget.appBarSettings.largeTitle.actions,
+        ],
+      ),
+      userLargeTitle: Text(
+        widget.appBarSettings.largeTitle.text,
+        style: context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
+        overflow: TextOverflow.ellipsis,
+      ),
+      appbarBottom: widget.appBarSettings.toolbar.child,
+      padding: null,
+      large: true,
+    );
+  }
+
+  Color _expandedColor(BuildContext context) => context.fabTheme.appBarExpandedColor;
+
+  Color _collapsedColor(BuildContext context) =>
+      context.fabTheme.appBarCollapsedColor.withOpacity(widget.appBarSettings.hasBackgroundBlur ? 0.5 : 1);
 
   Store get _store => Store.instance();
 
-  void _checkIfCollapsed() {
-    final searchBar = widget.appBar.searchBar!;
+  void _scrollListener() {
+    final scrollOffset = widget.syncScrollController.offset;
+    print(scrollOffset);
+    _checkIfCollapsed(scrollOffset);
+    _store.calculate(scrollOffset, measures: widget.measures, settings: widget.appBarSettings);
+    setState(() {});
+  }
+
+  void _checkIfCollapsed(double scrollOffset) {
+    final searchBar = widget.appBarSettings.searchBar;
     final scrollBehavior = searchBar.scrollBehavior;
 
     var isCollapsed = false;
 
     if (scrollBehavior == SearchBarScrollBehavior.floated) {
-      isCollapsed =
-          _scrollOffset >= widget.measures.largeTitleContainerHeight + widget.measures.searchContainerHeight - 20;
+      isCollapsed = scrollOffset >= widget.measures.largeTitleHeight + widget.measures.getSearchBarHeight - 20;
     } else {
-      isCollapsed = _scrollOffset >= widget.measures.largeTitleContainerHeight - 20;
+      isCollapsed = scrollOffset >= widget.measures.largeTitleHeight - 20;
     }
 
     if (_isCollapsed != isCollapsed) {
-      if (widget.onCollapsed != null) {
-        widget.onCollapsed?.call(isCollapsed);
-      }
-
       _isCollapsed = isCollapsed;
 
       if (_isCollapsed) {
@@ -123,108 +153,17 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isScrollable && !widget.scrollController.hasListeners) {
-      widget.scrollController.addListener(_scrollListener);
-    }
-
-    return ValueListenableBuilder(
-      valueListenable: _store.scrollOffset,
-      builder: (_, __, ___) {
-        final topPadding = MediaQuery.paddingOf(context).top;
-
-        var fullAppBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-            ? clampDouble(
-                topPadding + widget.measures.appbarHeight - _scrollOffset,
-                topPadding + widget.measures.primaryToolbarHeight + widget.appBar.bottom!.height,
-                widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
-              )
-            : clampDouble(
-                topPadding + widget.measures.appbarHeight - _scrollOffset,
-                topPadding + widget.measures.appbarHeight - widget.measures.largeTitleContainerHeight,
-                widget.shouldStretch ? 3000 : topPadding + widget.measures.appbarHeight,
-              );
-
-        var largeTitleHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-            ? (_scrollOffset > widget.measures.searchContainerHeight
-                ? clampDouble(
-                    widget.measures.largeTitleContainerHeight - (_scrollOffset - widget.measures.searchContainerHeight),
-                    0,
-                    widget.measures.largeTitleContainerHeight,
-                  )
-                : widget.measures.largeTitleContainerHeight)
-            : clampDouble(
-                widget.measures.largeTitleContainerHeight - _scrollOffset,
-                0,
-                widget.measures.largeTitleContainerHeight,
-              );
-
-        final searchBarHeight = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-            ? (_store.searchBarHasFocus.value
-                ? widget.measures.searchContainerHeight
-                : clampDouble(
-                    widget.measures.searchContainerHeight - _scrollOffset,
-                    0,
-                    widget.measures.searchContainerHeight,
-                  ))
-            : widget.measures.searchContainerHeight;
-
-        var opacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-            ? (_store.searchBarHasFocus.value ? 1.0 : clampDouble(1 - _scrollOffset / 10.0, 0, 1))
-            : 1.0;
-
-        var titleOpacity = widget.appBar.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
-            ? (_scrollOffset >= (widget.measures.appbarHeightExceptPrimaryToolbar - widget.appBar.bottom!.height - 20)
-                ? 1.0
-                : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0))
-            : (_scrollOffset >= (widget.measures.largeTitleContainerHeight - 20)
-                ? 1.0
-                : (widget.measures.largeTitleContainerHeight > 0.0 ? 0.0 : 1.0));
-
-        final focussedToolbar = topPadding + widget.measures.searchContainerHeight + widget.appBar.bottom!.height;
-
-        var scaleTitle = _scrollOffset < 0 ? clampDouble(1 - _scrollOffset / 1500, 1, 1.12) : 1.0;
-
-        if (widget.appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.steady &&
-            _store.searchBarHasFocus.value) {
-          fullAppBarHeight = topPadding + widget.measures.appbarHeight;
-          largeTitleHeight = widget.measures.appbarHeightExceptPrimaryToolbar;
-          largeTitleHeight = widget.measures.largeTitleContainerHeight;
-          scaleTitle = 1;
-          titleOpacity = 0;
-        }
-
-        if (!widget.shouldStretch) {
-          scaleTitle = 1;
-        }
-        if (widget.appBar.alwaysShowTitle) {
-          titleOpacity = 1;
-        }
-        if (!widget.appBar.searchBar!.enabled) {
-          opacity = 0;
-        }
-
-        return AnimatedAppBar(
-          animationController: _animationController,
-          measures: widget.measures,
-          appBar: widget.appBar,
-          largeTitleHeight: largeTitleHeight,
-          scaleTitle: scaleTitle,
-          components: widget.components,
-          searchBarHeight: searchBarHeight,
-          opacity: opacity,
-          titleOpacity: titleOpacity,
-          editingController: _editingController,
-          focusNode: _focusNode,
-          keys: widget.keys,
-          fullAppBarHeight: fullAppBarHeight,
-          focussedToolbar: focussedToolbar,
-          isCollapsed: _isCollapsed,
-          topPadding: topPadding,
-          shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
-          brightness: widget.brightness,
-          color: _animation.value,
-        );
-      },
+    return AnimatedAppBar(
+      measures: widget.measures,
+      animationController: _animationController,
+      appBarSettings: widget.appBarSettings,
+      components: _components,
+      editingController: _editingController,
+      focusNode: _focusNode,
+      keys: _keys,
+      isCollapsed: _isCollapsed,
+      shouldTransiteBetweenRoutes: widget.shouldTransiteBetweenRoutes,
+      color: _animation.value,
     );
   }
 }

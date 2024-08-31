@@ -13,21 +13,19 @@ import '../../../../utils/store.dart';
 
 class StaticSearchBarWidget extends StatelessWidget {
   const StaticSearchBarWidget({
+    required this.measures,
     required this.keys,
     required this.searchBar,
-    required this.measures,
-    required this.opacity,
     required this.focusNode,
     required this.editingController,
     required this.searchBarFocusThings,
     super.key,
   });
 
+  final Measures measures;
   final TextEditingController editingController;
   final FocusNode focusNode;
   final NavigationBarStaticComponentsKeys keys;
-  final Measures measures;
-  final double opacity;
   final FabAppBarSearchBarSettings searchBar;
   final ValueChanged<bool> searchBarFocusThings;
 
@@ -52,7 +50,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                   editingController.clear();
                 },
                 child: AnimatedOpacity(
-                  duration: measures.scrollAnimationDuration,
+                  duration: measures.getScrollAnimDur,
                   opacity: _store.searchBarHasFocus.value ? 1 : 0,
                   child: Text(
                     searchBar.cancelButtonText,
@@ -73,12 +71,12 @@ class StaticSearchBarWidget extends StatelessWidget {
                     suffixInsets: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                     borderRadius: searchBar.borderRadius,
                     prefixIcon: Opacity(
-                      opacity: _store.searchBarHasFocus.value ? 0 : opacity,
+                      opacity: _store.searchBarHasFocus.value ? 0 : _store.opacity.value,
                       child: searchBar.prefixIcon,
                     ),
                     placeholder: searchBar.placeholderText,
                     placeholderStyle: context.fabTheme.bodyStyle.copyWith(
-                      color: context.fabTheme.inactiveColor.withOpacity(opacity),
+                      color: context.fabTheme.inactiveColor.withOpacity(_store.opacity.value),
                     ),
                     style: context.fabTheme.bodyStyle,
                     backgroundColor: context.fabTheme.surfaceColor,
@@ -102,7 +100,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                       secondChild: const SizedBox(),
                       crossFadeState:
                           _store.searchBarHasFocus.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: measures.standartAnimationDuration,
+                      duration: measures.getStandartAnimDur,
                     ),
                     AnimatedCrossFade(
                       firstChild: Center(
@@ -115,10 +113,10 @@ class StaticSearchBarWidget extends StatelessWidget {
                       secondChild: const SizedBox(),
                       crossFadeState:
                           _store.searchBarHasFocus.value ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                      duration: measures.standartAnimationDuration,
+                      duration: measures.getStandartAnimDur,
                     ),
                     AnimatedContainer(
-                      duration: measures.standartAnimationDuration,
+                      duration: measures.getStandartAnimDur,
                       width: _store.searchBarHasFocus.value
                           ? defaultTextSize(
                               searchBar.cancelButtonText,

@@ -89,7 +89,7 @@ scripts:
     description: Generate codes for all packages.
     run:  |
       melos exec -c 1 --depends-on="build_runner" -- \
-        dart run build_runner build -d
+        fvm dart run build_runner build -d
 
   # Tests
   test:

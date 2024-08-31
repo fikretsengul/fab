@@ -1,99 +1,80 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
-import '../../models/fab_appbar_search_bar_settings.dart';
 import '../../models/fab_appbar_settings.dart';
 import '../../utils/measures.dart';
 import '../../utils/store.dart';
 import 'search_bar/search_bar_widget.dart';
 import 'widgets/bottom_toolbar_widget.dart';
 import 'widgets/large_title_widget.dart';
-import 'widgets/persistent_nav_bar.dart';
+import 'widgets/top_toolbar_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
-    required this.animationStatus,
     required this.measures,
-    required this.appBar,
-    required this.largeTitleHeight,
-    required this.scaleTitle,
+    required this.animationStatus,
+    required this.appBarSettings,
     required this.components,
-    required this.searchBarHeight,
-    required this.opacity,
-    required this.titleOpacity,
     required this.editingController,
     required this.focusNode,
     required this.keys,
     super.key,
   });
 
+  final Measures measures;
   final SearchBarAnimationStatus animationStatus;
-  final FabAppBarSettings appBar;
+  final FabAppBarSettings appBarSettings;
   final NavigationBarStaticComponents components;
   final TextEditingController editingController;
   final FocusNode focusNode;
   final NavigationBarStaticComponentsKeys keys;
-  final double largeTitleHeight;
-  final Measures measures;
-  final double opacity;
-  final double scaleTitle;
-  final double searchBarHeight;
-  final double titleOpacity;
 
   Store get _store => Store.instance();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+    return Stack(
       children: [
-        AnimatedContainer(
-          duration:
-              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.searchBarAnimationDuration,
-          height: _store.searchBarHasFocus.value
-              ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top
-                  ? MediaQuery.paddingOf(context).top
-                  : measures.primaryToolbarHeight + MediaQuery.paddingOf(context).top)
-              : measures.primaryToolbarHeight + MediaQuery.paddingOf(context).top,
-          child: AnimatedOpacity(
-            duration: animationStatus == SearchBarAnimationStatus.paused
-                ? Duration.zero
-                : measures.titleOpacityAnimationDuration,
-            opacity: _store.searchBarHasFocus.value
-                ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : 1)
-                : 1,
-            child: PersistentNavigationBar(
-              keys: keys,
-              components: components,
-              backIcon: appBar.backIcon,
-              middleVisible: appBar.alwaysShowTitle ? null : titleOpacity != 0,
-            ),
-          ),
-        ),
-        const Spacer(),
-        LargeTitleWidget(
-          animationStatus: animationStatus,
+        TopToolbarWidget(
           measures: measures,
-          appBar: appBar,
-          titleOpacity: titleOpacity,
-          largeTitleHeight: largeTitleHeight,
-          scaleTitle: scaleTitle,
-          components: components,
-        ),
-        SearchBarWidget(
-          searchBar: appBar.searchBar!,
-          measures: measures,
-          searchBarHeight: searchBarHeight,
-          opacity: opacity,
-          editingController: editingController,
-          focusNode: focusNode,
           keys: keys,
+          components: components,
+          backIcon: appBarSettings.backIcon,
+          animationStatus: animationStatus,
+          appBarSettings: appBarSettings,
+          middleVisible: appBarSettings.alwaysShowTitle ? null : _store.largeTitleOpacity.value != 0,
         ),
-        BottomToolbarWidget(
-          measures: measures,
-          appbarBottom: components.appbarBottom!,
-          color: appBar.bottom!.color,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ValueListenableBuilder(
+              valueListenable: _store.searchBarHasFocus,
+              builder: (_, searchBarHasFocus, __) {
+                return AnimatedContainer(
+                  duration: measures.getSearchBarFocusAnimDur,
+                  height: searchBarHasFocus ? 0 : measures.getTopToolbarHeightWSafeZone,
+                );
+              },
+            ),
+            LargeTitleWidget(
+              measures: measures,
+              animationStatus: animationStatus,
+              appBarSettings: appBarSettings,
+              components: components,
+            ),
+            SearchBarWidget(
+              measures: measures,
+              searchBar: appBarSettings.searchBar,
+              editingController: editingController,
+              focusNode: focusNode,
+              keys: keys,
+            ),
+            BottomToolbarWidget(
+              measures: measures,
+              toolbar: components.appbarBottom!,
+              color: appBarSettings.toolbar.color,
+            ),
+          ],
         ),
       ],
     );

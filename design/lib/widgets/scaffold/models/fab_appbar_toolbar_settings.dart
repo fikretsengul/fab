@@ -1,9 +1,10 @@
+import 'package:deps/features/features.dart';
 import 'package:flutter/material.dart';
 
-class FabAppBarBottomSettings {
-  FabAppBarBottomSettings({
-    this.child = const SizedBox(),
-    this.height = 38,
+class FabAppBarToolbarSettings {
+  FabAppBarToolbarSettings({
+    this.child = const Nil(),
+    this.height = 36,
     this.enabled = false,
     this.color = Colors.transparent,
   });

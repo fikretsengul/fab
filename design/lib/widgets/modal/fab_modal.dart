@@ -19,16 +19,16 @@ class FabModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: SheetContentScaffold(
         backgroundColor: context.fabTheme.backgroundColor,
         body: PaddingSymmetric.xs(
           vertical: true,
           child: FabScaffold(
-            appBar: FabAppBarSettings(
+            appBarSettings: FabAppBarSettings(
               title: const Text('cart.'),
             ),
-            child: child,
+            children: [child],
           ),
         ),
 /*         Column(

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class FabAppBarLargeTitleSettings {
   FabAppBarLargeTitleSettings({
-    this.largeTitle = 'Large Title',
+    this.text = 'Large Title',
     this.actions,
     this.textStyle,
-    this.height = 52.0,
-    this.padding = const EdgeInsets.only(left: 14, right: 16),
+    this.height = 50,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.enabled = false,
   });
 
   final List<Widget>? actions;
   final bool enabled;
   double height;
-  final String largeTitle;
+  final String text;
   final EdgeInsets padding;
   final TextStyle? textStyle;
 }

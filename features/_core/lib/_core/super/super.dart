@@ -4,6 +4,7 @@
 
 // ignore_for_file: file_names
 
+import 'package:deps/design/design.dart';
 import 'package:deps/infrastructure/infrastructure.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ final class $ {
   late final Permissions _permissions;
 
   /// Context
+  static BuildContext context = _instance._navigator.context!;
   static NavigatorContext navigator = _instance._navigator;
   static DialogContext dialog = _instance._dialog;
   static ToastContext toast = _instance._toast;
@@ -60,6 +62,7 @@ final class $ {
   static BlocContext bloc = _instance._bloc;
 
   /// Constants
+  static FabTheme get theme => _instance._navigator.context!.fabTheme;
   static Timings get timings => _instance._timings;
   static Radiuses get radiuses => _instance._radiuses;
   static Paddings get paddings => _instance._paddings;

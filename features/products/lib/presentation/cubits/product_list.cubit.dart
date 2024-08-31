@@ -24,7 +24,7 @@ class ProductListCubit extends Cubit<PaginatedListState<ProductModel>> implement
 
     response.fold(
       (failure) => emit(PaginatedListState.failed(failure)),
-      (products) {
+      (_) {
         final newProducts = <ProductModel>[];
 
         for (var i = 0; i < 30; i++) {

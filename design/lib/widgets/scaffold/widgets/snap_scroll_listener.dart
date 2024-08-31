@@ -60,7 +60,7 @@ class _SnappingScrollListenerState extends State<SnappingScrollListener> {
           }
         }
 
-        return false;
+        return true;
       },
       child: widget.child,
     );
@@ -75,7 +75,7 @@ class _SnappingScrollListenerState extends State<SnappingScrollListener> {
       widget.scrollController!
           .animateTo(
         position,
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 100),
         curve: Curves.easeIn,
       )
           .whenComplete(() {

@@ -6,7 +6,6 @@ import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/flutter_bloc.dart';
 import 'package:deps/packages/infinite_scroll_pagination.dart';
-import 'package:deps/packages/nested_scroll_view_plus/others/custom_scroll_provider.dart';
 import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
@@ -65,8 +64,6 @@ class _PaginatedGridListState<T, C extends PaginatedListCubit<T>> extends State<
 
   @override
   Widget build(BuildContext context) {
-    final scrollProvider = CustomScrollProviderData.of(context);
-
     return BlocListener<C, PaginatedListState<T>>(
       bloc: _bloc,
       listener: (_, state) {
@@ -88,7 +85,6 @@ class _PaginatedGridListState<T, C extends PaginatedListCubit<T>> extends State<
         );
       },
       child: CustomScrollView(
-        controller: scrollProvider.scrollControllers[widget.index],
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           SliverPadding(

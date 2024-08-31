@@ -1,5 +1,6 @@
 // ignore_for_file: max_lines_for_file,
 
+import 'package:deps/features/features.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,47 +15,29 @@ import 'app_bar_widget.dart';
 
 class AnimatedAppBar extends StatelessWidget {
   const AnimatedAppBar({
-    required this.animationController,
     required this.measures,
-    required this.appBar,
-    required this.largeTitleHeight,
-    required this.scaleTitle,
+    required this.animationController,
+    required this.appBarSettings,
     required this.components,
-    required this.searchBarHeight,
-    required this.opacity,
-    required this.titleOpacity,
     required this.editingController,
     required this.focusNode,
     required this.keys,
-    required this.topPadding,
-    required this.fullAppBarHeight,
-    required this.focussedToolbar,
     required this.isCollapsed,
     required this.shouldTransiteBetweenRoutes,
     required this.color,
-    this.brightness,
     super.key,
   });
 
+  final Measures measures;
   final AnimationController animationController;
   final Color color;
-  final FabAppBarSettings appBar;
-  final Brightness? brightness;
+  final FabAppBarSettings appBarSettings;
   final NavigationBarStaticComponents components;
   final TextEditingController editingController;
   final FocusNode focusNode;
-  final double focussedToolbar;
-  final double fullAppBarHeight;
   final bool isCollapsed;
   final NavigationBarStaticComponentsKeys keys;
-  final double largeTitleHeight;
-  final Measures measures;
-  final double opacity;
-  final double scaleTitle;
-  final double searchBarHeight;
   final bool shouldTransiteBetweenRoutes;
-  final double titleOpacity;
-  final double topPadding;
 
   Store get _store => Store.instance();
 
@@ -65,36 +48,31 @@ class AnimatedAppBar extends StatelessWidget {
       builder: (_, animationStatus, __) {
         return AnimatedPositioned(
           duration:
-              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.searchBarAnimationDuration,
+              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
           top: 0,
           left: 0,
           right: 0,
           height: _store.searchBarHasFocus.value
-              ? (appBar.searchBar!.animationBehavior == SearchBarAnimationBehavior.top
-                  ? focussedToolbar
-                  : fullAppBarHeight)
-              : fullAppBarHeight,
+              ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+                  ? measures.getAppBarFocusedHeightWSafeZone
+                  : _store.height.value)
+              : _store.height.value,
           child: AnimatedBuilder(
             animation: animationController,
             builder: (_, __) {
               return Container(
                 decoration: defaultBorder(context, animationController.value),
                 child: wrapWithBackground(
-                  brightness: brightness,
-                  hasBackgroundBlur: appBar.hasBackgroundBlur,
+                  brightness: context.platformBrightness,
+                  hasBackgroundBlur: appBarSettings.hasBackgroundBlur,
                   backgroundColor: color,
                   child: Builder(
                     builder: (context) {
                       final Widget appBarWidget = AppBarWidget(
-                        animationStatus: animationStatus,
                         measures: measures,
-                        appBar: appBar,
-                        largeTitleHeight: largeTitleHeight,
-                        scaleTitle: scaleTitle,
+                        animationStatus: animationStatus,
+                        appBarSettings: appBarSettings,
                         components: components,
-                        searchBarHeight: searchBarHeight,
-                        opacity: opacity,
-                        titleOpacity: titleOpacity,
                         editingController: editingController,
                         focusNode: focusNode,
                         keys: keys,
@@ -131,12 +109,12 @@ class AnimatedAppBar extends StatelessWidget {
                           componentsKeys: keys,
                           backgroundColor: color,
                           backButtonTextStyle: context.fabTheme.appBarActionsStyle.copyWith(inherit: false),
-                          titleTextStyle: defaultTitleTextStyle(context, appBar),
-                          largeTitleTextStyle: appBar.largeTitle!.textStyle ??
+                          titleTextStyle: defaultTitleTextStyle(context, appBarSettings),
+                          largeTitleTextStyle: appBarSettings.largeTitle.textStyle ??
                               context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
                           border: null,
                           hasUserMiddle: isCollapsed,
-                          largeExpanded: !isCollapsed && appBar.largeTitle!.enabled,
+                          largeExpanded: !isCollapsed && appBarSettings.largeTitle.enabled,
                           searchBarHasFocus: _store.searchBarHasFocus.value,
                           child: appBarWidget,
                         ),

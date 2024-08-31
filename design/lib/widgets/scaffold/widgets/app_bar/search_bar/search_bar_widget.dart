@@ -9,23 +9,19 @@ import 'widgets/static_search_bar_widget.dart';
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({
-    required this.searchBar,
     required this.measures,
-    required this.searchBarHeight,
-    required this.opacity,
+    required this.searchBar,
     required this.editingController,
     required this.focusNode,
     required this.keys,
     super.key,
   });
 
+  final Measures measures;
   final TextEditingController editingController;
   final FocusNode focusNode;
   final NavigationBarStaticComponentsKeys keys;
-  final Measures measures;
-  final double opacity;
   final FabAppBarSearchBarSettings searchBar;
-  final double searchBarHeight;
 
   void searchBarFocusThings(bool hasFocus) {
     _store.searchBarHasFocus.value = hasFocus;
@@ -40,7 +36,7 @@ class SearchBarWidget extends StatelessWidget {
       _store.searchBarResultVisible.value = false;
     }
     if (!hasFocus) {
-      Future.delayed(measures.searchBarAnimationDuration, () {
+      Future.delayed(measures.getSearchBarFocusAnimDur, () {
         _store.searchBarAnimationStatus.value = SearchBarAnimationStatus.paused;
       });
     }
@@ -54,30 +50,25 @@ class SearchBarWidget extends StatelessWidget {
     return Padding(
       padding: searchBar.padding,
       child: SizedBox(
-        height: searchBarHeight,
+        height: _store.getSearchBarHeight.value,
         child: Padding(
-          padding: EdgeInsets.only(
-            bottom: measures.searchBarBottomPadding,
-          ),
+          padding: EdgeInsets.only(bottom: measures.getSearchBarBottomPadding),
           child: Stack(
             children: [
               StaticSearchBarWidget(
+                measures: measures,
                 keys: keys,
                 searchBar: searchBar,
-                measures: measures,
-                opacity: opacity,
                 focusNode: focusNode,
                 editingController: editingController,
                 searchBarFocusThings: searchBarFocusThings,
               ),
               DynamicSearchBarWidget(
+                measures: measures,
                 searchBar: searchBar,
                 editingController: editingController,
                 focusNode: focusNode,
-                animationDuration: measures.standartAnimationDuration,
-                searchBarHasFocus: _store.searchBarHasFocus.value,
                 searchBarFocusThings: searchBarFocusThings,
-                opacity: opacity,
               ),
             ],
           ),

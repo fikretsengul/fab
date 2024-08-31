@@ -3,9 +3,13 @@ import 'package:flutter/cupertino.dart' hide CupertinoNavigationBarBackButton;
 
 import '../../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../utils/measures.dart';
+import '../../../utils/store.dart';
 
-class PersistentNavigationBar extends StatelessWidget {
-  const PersistentNavigationBar({
+class TopToolbarWidget extends StatelessWidget {
+  const TopToolbarWidget({
+    required this.measures,
+    required this.animationStatus,
+    required this.appBarSettings,
     required this.components,
     required this.keys,
     super.key,
@@ -14,11 +18,16 @@ class PersistentNavigationBar extends StatelessWidget {
     this.middleVisible,
   });
 
+  final Measures measures;
+  final SearchBarAnimationStatus animationStatus;
+  final FabAppBarSettings appBarSettings;
   final NavigationBarStaticComponentsKeys keys;
   final NavigationBarStaticComponents components;
   final bool? middleVisible;
   final Widget? backIcon;
-  final EdgeInsetsDirectional? padding;
+  final EdgeInsetsGeometry? padding;
+
+  Store get _store => Store.instance();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class PersistentNavigationBar extends StatelessWidget {
           ? middle
           : AnimatedOpacity(
               opacity: middleVisible! ? 1.0 : 0.0,
-              duration: Measures.instance().standartAnimationDuration,
+              duration: Measures.instance().getStandartAnimDur,
               child: middle,
             );
     }
@@ -65,17 +74,29 @@ class PersistentNavigationBar extends StatelessWidget {
 
     if (padding != null) {
       paddedToolbar = Padding(
-        padding: EdgeInsets.only(
-          top: padding!.top,
-          bottom: padding!.bottom,
-        ),
+        padding: padding!,
         child: paddedToolbar,
       );
     }
 
-    return SafeArea(
-      bottom: false,
-      child: paddedToolbar,
+    return AnimatedContainer(
+      duration: animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
+      height: _store.searchBarHasFocus.value
+          ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+              ? measures.getSafeZoneTopPadding
+              : measures.getTopToolbarHeightWSafeZone)
+          : measures.getTopToolbarHeightWSafeZone,
+      child: AnimatedOpacity(
+        duration:
+            animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getLargeTitleOpacityAnimDur,
+        opacity: _store.searchBarHasFocus.value
+            ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top ? 0 : 1)
+            : 1,
+        child: SafeArea(
+          bottom: false,
+          child: paddedToolbar,
+        ),
+      ),
     );
   }
 }
