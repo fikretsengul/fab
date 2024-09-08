@@ -12,7 +12,9 @@ import '../_core/super/super.dart';
 
 class AuthGuard extends AutoRouteGuard {
   AuthGuard() {
-    $.get<INetworkClient>().tokenStorage.authStatus.listen((_) {
+    $.get<INetworkClient>().tokenStorage.authStatus.listen((a) {
+      print('amk');
+      print(a);
       $.navigator.reevaluateGuards();
     });
   }
@@ -22,6 +24,8 @@ class AuthGuard extends AutoRouteGuard {
     final completer = Completer<AuthStatus>();
 
     $.get<INetworkClient>().tokenStorage.authStatus.listen((status) {
+      print('bmk');
+      print(status);
       if (!completer.isCompleted && status != AuthStatus.initial) {
         completer.complete(status);
       }

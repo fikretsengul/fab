@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:deps/design/design.dart';
+import 'package:deps/features/features.dart';
 import 'package:deps/locator/locator.dart';
 import 'package:deps/packages/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import '../cubits/product_list.cubit.dart';
 import 'widgets/product_appbar_actions.dart';
+import 'widgets/product_listing_card.dart';
 
 @RoutePage()
 class ProductsPage extends StatefulWidget {
@@ -50,24 +52,25 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
         actions: [const ProductAppBarActions()],
         searchBar: FabAppBarSearchBarSettings(
           enabled: true,
+          toolbar: FabAppBarToolbarSettings(),
           searchResult: Container(
-            color: Colors.yellow,
+            color: Colors.white,
           ),
         ),
         largeTitle: FabAppBarLargeTitleSettings(
           enabled: true,
           text: 'Kişiler',
           actions: [
-            const CircleAvatar(
+/*             const CircleAvatar(
               backgroundColor: Colors.blue,
               radius: 15,
-            ),
-/*             FabImage(
+            ), */
+            FabImage(
               width: 30,
               height: 30,
               uri: $.get<UserCubit>().state.avatar,
               onPressed: $.get<UserCubit>().logout,
-            ), */
+            ),
           ],
         ),
         toolbar: FabAppBarToolbarSettings(
@@ -81,23 +84,17 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
       ),
       onRefreshes: [_cubit.refresh, null],
       children: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final number = index + 1;
-
-              return Container(
-                height: 50,
-                color: index.isEven ? CupertinoColors.lightBackgroundGray : CupertinoColors.extraLightBackgroundGray,
-                alignment: Alignment.center,
-                child: Text(
-                  '$number',
-                  style: CupertinoTheme.of(context).textTheme.textStyle,
-                ),
-              );
-            },
-            childCount: 20,
-          ),
+        PaginatedGridList<ProductModel, ProductListCubit>(
+          index: 0,
+          bloc: _cubit,
+          localFilter: (product) => product.images.isEmpty || product.images.first.startsWith('['),
+          itemHeight: 275,
+          skeletonBuilder: (_) {
+            return ProductListingCard(product: ProductModel.empty());
+          },
+          itemBuilder: (_, product, __) {
+            return ProductListingCard(product: product);
+          },
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(

@@ -17,12 +17,14 @@ mixin TokenStorageMixin<T> {
 
   /// Setter for the [IStorage] instance.
   set tokenStorage(IStorage<T> tokenStorage) {
+    print('1');
     // ignore: prefer_async_await
     _tokenStorage = tokenStorage..read().then(_updateStatus);
   }
 
   /// Returns the current token.
   Future<T?> get token async {
+    print('2');
     if (_authStatus != AuthStatus.initial) {
       return _token;
     }

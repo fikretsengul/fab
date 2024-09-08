@@ -24,7 +24,7 @@ class Store {
     required Measures measures,
     required FabAppBarSettings settings,
   }) {
-    height.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
+    height.value = settings.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
         ? clampDouble(
             measures.getAppBarHeightWSafeZone - offset,
             measures.getTopToolbarHeightWSafeZone + measures.bottomToolbarHeight,
@@ -36,7 +36,7 @@ class Store {
             3000,
           );
 
-    largeTitleHeight.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
+    largeTitleHeight.value = settings.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
         ? (offset > measures.getSearchBarHeight
             ? clampDouble(
                 measures.largeTitleHeight - (offset - measures.getSearchBarHeight),
@@ -46,17 +46,17 @@ class Store {
             : measures.largeTitleHeight)
         : clampDouble(measures.largeTitleHeight - offset, 0, measures.largeTitleHeight);
 
-    getSearchBarHeight.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
+    getSearchBarHeight.value = settings.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
         ? (searchBarHasFocus.value
             ? measures.getSearchBarHeight
             : clampDouble(measures.getSearchBarHeight - offset, 0, measures.getSearchBarHeight))
         : measures.getSearchBarHeight;
 
-    opacity.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
+    opacity.value = settings.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
         ? (searchBarHasFocus.value ? 1.0 : clampDouble(1 - offset / 10.0, 0, 1))
         : 1.0;
 
-    largeTitleOpacity.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
+    largeTitleOpacity.value = settings.searchBar!.scrollBehavior == SearchBarScrollBehavior.floated
         ? (offset >=
                 (measures.getAppBarHeightWoTopToolbar - measures.bottomToolbarHeight - measures.getTitleFadeOutPadding)
             ? 1.0
@@ -67,7 +67,7 @@ class Store {
 
     largeTitleScale.value = offset < 0 ? clampDouble(1 - offset / 1500, 1, 1.12) : 1.0;
 
-    if (settings.searchBar.animationBehavior == SearchBarAnimationBehavior.steady && searchBarHasFocus.value) {
+    if (settings.searchBar!.animationBehavior == SearchBarAnimationBehavior.steady && searchBarHasFocus.value) {
       height.value = measures.getAppBarHeightWSafeZone;
       largeTitleHeight.value = measures.largeTitleHeight;
       largeTitleScale.value = 1;
@@ -78,11 +78,12 @@ class Store {
       largeTitleOpacity.value = 1;
     }
 
-    if (!settings.searchBar.enabled) {
+    if (!settings.searchBar!.enabled) {
       opacity.value = 0;
     }
   }
 
+  final ValueNotifier<double> offset = ValueNotifier<double>(0);
   final ValueNotifier<double> height = ValueNotifier<double>(0);
   final ValueNotifier<double> opacity = ValueNotifier<double>(0);
   final ValueNotifier<double> largeTitleHeight = ValueNotifier<double>(0);

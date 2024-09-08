@@ -1,3 +1,4 @@
+// ignore_for_file: max_lines_for_file, max_lines_for_function
 import 'package:deps/design/design.dart';
 import 'package:deps/features/features.dart';
 import 'package:deps/packages/flutter_bloc.dart';

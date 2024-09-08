@@ -50,7 +50,7 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
               widget.editingController.clear();
             },
             child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
+              duration: widget.measures.getSlowAnimationDuration,
               opacity: _store.searchBarHasFocus.value ? 1 : 0,
               child: Align(
                 alignment: Alignment.centerRight,
@@ -117,11 +117,11 @@ class _DynamicSearchBarWidgetState extends State<DynamicSearchBarWidget> {
             ),
             SearchActionsWidget(
               actions: widget.searchBar.actions,
-              animationDuration: widget.measures.getStandartAnimDur,
+              animationDuration: widget.measures.getSlowAnimationDuration,
               searchBarHasFocus: _store.searchBarHasFocus.value,
             ),
             AnimatedContainer(
-              duration: widget.measures.getStandartAnimDur,
+              duration: widget.measures.getSlowAnimationDuration,
               width: _store.searchBarHasFocus.value
                   ? defaultTextSize(
                       widget.searchBar.cancelButtonText,

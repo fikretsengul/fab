@@ -48,12 +48,12 @@ class AnimatedAppBar extends StatelessWidget {
       builder: (_, animationStatus, __) {
         return AnimatedPositioned(
           duration:
-              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
+              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSlowAnimationDuration,
           top: 0,
           left: 0,
           right: 0,
           height: _store.searchBarHasFocus.value
-              ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+              ? (appBarSettings.searchBar!.animationBehavior == SearchBarAnimationBehavior.top
                   ? measures.getAppBarFocusedHeightWSafeZone
                   : _store.height.value)
               : _store.height.value,
@@ -110,11 +110,11 @@ class AnimatedAppBar extends StatelessWidget {
                           backgroundColor: color,
                           backButtonTextStyle: context.fabTheme.appBarActionsStyle.copyWith(inherit: false),
                           titleTextStyle: defaultTitleTextStyle(context, appBarSettings),
-                          largeTitleTextStyle: appBarSettings.largeTitle.textStyle ??
+                          largeTitleTextStyle: appBarSettings.largeTitle!.textStyle ??
                               context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
                           border: null,
                           hasUserMiddle: isCollapsed,
-                          largeExpanded: !isCollapsed && appBarSettings.largeTitle.enabled,
+                          largeExpanded: !isCollapsed && appBarSettings.largeTitle!.enabled,
                           searchBarHasFocus: _store.searchBarHasFocus.value,
                           child: appBarWidget,
                         ),

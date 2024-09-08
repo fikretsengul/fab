@@ -25,7 +25,7 @@ class SearchBarResult extends StatelessWidget {
         return IgnorePointer(
           ignoring: !searchBarResultVisible,
           child: AnimatedOpacity(
-            duration: measures.getSearchBarFocusAnimDur,
+            duration: measures.getSlowAnimationDuration,
             opacity: searchBarResultVisible ? 1 : 0,
             child: Container(
               width: $.context.mqSize.width,

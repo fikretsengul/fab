@@ -50,7 +50,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                   editingController.clear();
                 },
                 child: AnimatedOpacity(
-                  duration: measures.getScrollAnimDur,
+                  duration: const Duration(milliseconds: 10000),
                   opacity: _store.searchBarHasFocus.value ? 1 : 0,
                   child: Text(
                     searchBar.cancelButtonText,
@@ -100,7 +100,7 @@ class StaticSearchBarWidget extends StatelessWidget {
                       secondChild: const SizedBox(),
                       crossFadeState:
                           _store.searchBarHasFocus.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: measures.getStandartAnimDur,
+                      duration: measures.getSlowAnimationDuration,
                     ),
                     AnimatedCrossFade(
                       firstChild: Center(
@@ -113,10 +113,10 @@ class StaticSearchBarWidget extends StatelessWidget {
                       secondChild: const SizedBox(),
                       crossFadeState:
                           _store.searchBarHasFocus.value ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                      duration: measures.getStandartAnimDur,
+                      duration: measures.getSlowAnimationDuration,
                     ),
                     AnimatedContainer(
-                      duration: measures.getStandartAnimDur,
+                      duration: measures.getSlowAnimationDuration,
                       width: _store.searchBarHasFocus.value
                           ? defaultTextSize(
                               searchBar.cancelButtonText,

@@ -1,3 +1,4 @@
+import 'package:deps/features/features.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
@@ -27,20 +28,22 @@ class LargeTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: appBarSettings.largeTitle.padding,
+      padding: appBarSettings.largeTitle!.padding,
       child: AnimatedOpacity(
-        duration: measures.getLargeTitleOpacityAnimDur,
+        duration: measures.getSlowAnimationDuration,
         opacity: _store.searchBarHasFocus.value
-            ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top ? 0 : _largeTitleOpacity)
+            ? (appBarSettings.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : _largeTitleOpacity)
             : _largeTitleOpacity,
         child: AnimatedContainer(
+          clipBehavior: Clip.hardEdge,
+          color: $.theme.backgroundColor,
           height: _store.searchBarHasFocus.value
-              ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+              ? (appBarSettings.searchBar!.animationBehavior == SearchBarAnimationBehavior.top
                   ? 0
                   : _store.largeTitleHeight.value)
               : _store.largeTitleHeight.value,
           duration:
-              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
+              animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSlowAnimationDuration,
           child: Padding(
             padding: EdgeInsets.only(bottom: measures.largeTitleHeight > 0 ? 4.0 : 0),
             child: Stack(

@@ -60,6 +60,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           title: const Text(
             'details.',
           ),
+          searchBar: FabAppBarSearchBarSettings(
+            enabled: true,
+          ),
           actions: [
             CupertinoButton(
               minSize: 0,
@@ -73,6 +76,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ],
           largeTitle: FabAppBarLargeTitleSettings(
+            enabled: true,
             text: 'details.',
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:deps/packages/easy_refresh.dart';
 import 'package:deps/packages/extended_tabs.dart' hide LinkScrollController;
 import 'package:flutter/material.dart';
 
+import '../../_core/overridens/overriden_cupertino_scrollbar.dart';
 import '../models/fab_appbar_search_bar_settings.dart';
 import '../utils/measures.dart';
 import '../utils/store.dart';
@@ -69,39 +70,46 @@ class Body extends StatelessWidget {
   }) {
     final key = PageStorageKey<String>(scrollController.hashCode.toString());
 
-    return CustomScrollView(
-      key: key,
+    return OverridenCupertinoScrollbar(
       controller: scrollController,
-      physics: SnapScrollPhysics(
-        parent: physics,
-        snaps: [
-          if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
-            Snap.avoidZone(0, measures.getSearchBarHeight),
-          if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
-            Snap.avoidZone(measures.getSearchBarHeight, measures.largeTitleHeight + measures.getSearchBarHeight),
-          if (searchBar.scrollBehavior == SearchBarScrollBehavior.pinned) Snap.avoidZone(0, measures.largeTitleHeight),
+      padding: EdgeInsets.only(top: measures.getAppBarHeightWSafeZone),
+      thumbVisibility: true,
+      thicknessWhileDragging: 6,
+      child: CustomScrollView(
+        key: key,
+        controller: scrollController,
+        physics: SnapScrollPhysics(
+          parent: physics,
+          snaps: [
+            if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
+              Snap.avoidZone(0, measures.getSearchBarHeight),
+            if (searchBar.scrollBehavior == SearchBarScrollBehavior.floated)
+              Snap.avoidZone(measures.getSearchBarHeight, measures.largeTitleHeight + measures.getSearchBarHeight),
+            if (searchBar.scrollBehavior == SearchBarScrollBehavior.pinned)
+              Snap.avoidZone(0, measures.largeTitleHeight),
+          ],
+        ),
+        slivers: [
+          SliverToBoxAdapter(
+            child: ValueListenableBuilder(
+              valueListenable: _store.searchBarAnimationStatus,
+              builder: (_, animationStatus, __) {
+                return AnimatedContainer(
+                  duration: animationStatus == SearchBarAnimationStatus.paused
+                      ? Duration.zero
+                      : measures.getSlowAnimationDuration,
+                  height: _store.searchBarHasFocus.value
+                      ? (searchBar.animationBehavior == SearchBarAnimationBehavior.top
+                          ? measures.getAppBarFocusedHeightWSafeZone
+                          : measures.getAppBarHeightWSafeZone)
+                      : measures.getAppBarHeightWSafeZone,
+                );
+              },
+            ),
+          ),
+          child,
         ],
       ),
-      slivers: [
-        SliverToBoxAdapter(
-          child: ValueListenableBuilder(
-            valueListenable: _store.searchBarAnimationStatus,
-            builder: (_, animationStatus, __) {
-              return AnimatedContainer(
-                duration: animationStatus == SearchBarAnimationStatus.paused
-                    ? Duration.zero
-                    : measures.getSearchBarFocusAnimDur,
-                height: _store.searchBarHasFocus.value
-                    ? (searchBar.animationBehavior == SearchBarAnimationBehavior.top
-                        ? measures.getAppBarFocusedHeightWSafeZone
-                        : measures.getAppBarHeightWSafeZone)
-                    : measures.getAppBarHeightWSafeZone,
-              );
-            },
-          ),
-        ),
-        child,
-      ],
     );
   }
 
@@ -117,7 +125,10 @@ class Body extends StatelessWidget {
               },
             ],
           )
-        : children.first;
+        : _childBuilder(
+            scrollController: ScrollController(),
+            child: SliverToBoxAdapter(child: children.first),
+          );
 
     return ValueListenableBuilder(
       valueListenable: _store.isInHero,

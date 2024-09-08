@@ -2,12 +2,13 @@
 
 import 'dart:async';
 
-import 'package:deps/features/features.dart';
 import 'package:deps/packages/easy_refresh.dart';
 import 'package:flutter/material.dart';
 
 import '../../_core/constants/fab_theme.dart';
+import '../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import 'models/fab_appbar_settings.dart';
+import 'utils/helpers.dart';
 import 'utils/measures.dart';
 import 'utils/store.dart';
 import 'widgets/app_bar/animated_app_bar_builder.dart';
@@ -25,11 +26,11 @@ class FabScaffold extends StatefulWidget {
     this.onRefreshes = const [],
     this.shouldTransiteBetweenRoutes = true,
   }) : measures = Measures(
-          searchBarHeight: appBarSettings.searchBar.height,
-          largeTitleHeight: appBarSettings.largeTitle.height,
+          searchBarHeight: appBarSettings.searchBar!.height,
+          largeTitleHeight: appBarSettings.largeTitle!.height,
           topToolbarHeight: appBarSettings.height,
-          bottomToolbarHeight: appBarSettings.toolbar?.height,
-          searchToolbarHeight: appBarSettings.searchBar.toolbar?.height,
+          bottomToolbarHeight: appBarSettings.toolbar!.height,
+          searchToolbarHeight: appBarSettings.searchBar!.toolbar!.height,
         );
 
   final List<FutureOr<dynamic> Function()?> onRefreshes;
@@ -44,16 +45,11 @@ class FabScaffold extends StatefulWidget {
 }
 
 class _SuperScaffoldState extends State<FabScaffold> {
+  late final NavigationBarStaticComponentsKeys _keys;
   late final ValueNotifier<int> _activeIndex;
   late final IndicatorStateListenable _refreshListenable;
   late final List<ScrollController> _scrollControllers;
   late final LinkedScrollControllerGroup _syncScrollController;
-
-  @override
-  void didChangeDependencies() {
-    _store.calculate(0, measures: widget.measures, settings: widget.appBarSettings);
-    super.didChangeDependencies();
-  }
 
   @override
   void dispose() {
@@ -67,6 +63,7 @@ class _SuperScaffoldState extends State<FabScaffold> {
   @override
   void initState() {
     super.initState();
+    _keys = NavigationBarStaticComponentsKeys();
     _refreshListenable = IndicatorStateListenable();
     _syncScrollController = LinkedScrollControllerGroup();
     _activeIndex = ValueNotifier(0);
@@ -80,18 +77,63 @@ class _SuperScaffoldState extends State<FabScaffold> {
 
       if (_activeIndex.value != newIndex) {
         _activeIndex.value = widget.tabController?.animation?.value.round() ?? 0;
-
-/*         _store.isSearchBarEnabled.value = newIndex == 0;s
-        final offset = newIndex == 1 ? _syncScrollController.offset + 50 : _syncScrollController.offset - 50;
-        _syncScrollController.animateTo(offset, curve: Curves.linear, duration: const Duration(milliseconds: 250)); */
       }
     });
   }
 
+/*   @override
+  void didChangeDependencies() {
+    _store.calculate(_syncScrollController.offset, measures: widget.measures, settings: widget.appBarSettings);
+    super.didChangeDependencies();
+  } */
+
   Store get _store => Store.instance();
+
+  NavigationBarStaticComponents _configureComponents() {
+    final smallTitle = widget.appBarSettings.title is Text
+        ? Text(
+            '${(widget.appBarSettings.title! as Text).data}',
+            style: defaultTitleTextStyle(context, widget.appBarSettings),
+          )
+        : widget.appBarSettings.title;
+
+    return NavigationBarStaticComponents(
+      keys: _keys,
+      route: ModalRoute.of(context),
+      userLeading: widget.appBarSettings.leading,
+      automaticallyImplyLeading: widget.appBarSettings.automaticallyImplyLeading,
+      automaticallyImplyTitle: true,
+      previousPageTitle: widget.appBarSettings.previousPageTitle,
+      userMiddle: smallTitle,
+      userTrailing: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [...widget.appBarSettings.actions],
+        ),
+      ),
+      largeTitleActions: Row(
+        children: [
+          ...?widget.appBarSettings.largeTitle!.actions,
+        ],
+      ),
+      userLargeTitle: Text(
+        widget.appBarSettings.largeTitle!.text,
+        style: context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
+        overflow: TextOverflow.ellipsis,
+      ),
+      appbarBottom: widget.appBarSettings.toolbar!.child,
+      padding: null,
+      large: true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final components = _configureComponents();
+
+    print('AMK');
+
     return PopScope(
       // TODO: bakılacak
       canPop: !_store.searchBarHasFocus.value,
@@ -103,7 +145,7 @@ class _SuperScaffoldState extends State<FabScaffold> {
             Body(
               measures: widget.measures,
               scrollControllers: _scrollControllers,
-              searchBar: widget.appBarSettings.searchBar,
+              searchBar: widget.appBarSettings.searchBar!,
               refreshListenable: _refreshListenable,
               tabController: widget.tabController,
               onRefreshes: widget.onRefreshes,
@@ -111,9 +153,11 @@ class _SuperScaffoldState extends State<FabScaffold> {
             ),
             SearchBarResult(
               measures: widget.measures,
-              searchBar: widget.appBarSettings.searchBar,
+              searchBar: widget.appBarSettings.searchBar!,
             ),
             AnimatedAppBarBuilder(
+              keys: _keys,
+              components: components,
               syncScrollController: _syncScrollController,
               appBarSettings: widget.appBarSettings,
               measures: widget.measures,
@@ -128,7 +172,7 @@ class _SuperScaffoldState extends State<FabScaffold> {
                   return Refresher(refreshListenable: _refreshListenable);
                 }
 
-                return const Nil();
+                return const SizedBox();
               },
             ),
           ],

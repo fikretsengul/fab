@@ -26,27 +26,33 @@ class BottomToolbarWidget extends StatelessWidget {
         return Align(
           alignment: Alignment.bottomLeft,
           child: AnimatedSwitcher(
-            duration: measures.getLargeTitleOpacityAnimDur,
+            duration: measures.getSlowAnimationDuration,
             transitionBuilder: (child, animation) {
               return FadeTransition(
                 opacity: animation,
                 child: SizeTransition(
-                  sizeFactor: animation,
+                  sizeFactor: CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.linear,
+                  ),
+                  axisAlignment: -1,
                   child: child,
                 ),
               );
             },
             child: searchBarHasFocus
-                ? appBarSettings.searchBar.toolbar!.enabled
+                ? appBarSettings.searchBar!.toolbar!.enabled
                     ? Container(
                         key: const ValueKey<int>(0),
-                        height: appBarSettings.searchBar.toolbar!.height,
-                        padding: appBarSettings.searchBar.toolbar!.padding,
-                        child: appBarSettings.searchBar.toolbar!.child,
+                        width: double.infinity,
+                        height: appBarSettings.searchBar!.toolbar!.height,
+                        padding: appBarSettings.searchBar!.toolbar!.padding,
+                        child: appBarSettings.searchBar!.toolbar!.child,
                       )
                     : const SizedBox(key: ValueKey<int>(1))
                 : Container(
                     key: const ValueKey<int>(2),
+                    width: double.infinity,
                     height: appBarSettings.toolbar!.height,
                     padding: appBarSettings.toolbar!.padding,
                     child: appBarSettings.toolbar!.child,

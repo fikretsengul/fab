@@ -34,6 +34,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.antiAlias,
       children: [
         TopToolbarWidget(
           measures: measures,
@@ -47,15 +48,6 @@ class AppBarWidget extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ValueListenableBuilder(
-              valueListenable: _store.searchBarHasFocus,
-              builder: (_, searchBarHasFocus, __) {
-                return AnimatedContainer(
-                  duration: measures.getSearchBarFocusAnimDur,
-                  height: searchBarHasFocus ? 0 : measures.getTopToolbarHeightWSafeZone,
-                );
-              },
-            ),
             LargeTitleWidget(
               measures: measures,
               animationStatus: animationStatus,
@@ -64,7 +56,7 @@ class AppBarWidget extends StatelessWidget {
             ),
             SearchBarWidget(
               measures: measures,
-              searchBar: appBarSettings.searchBar,
+              searchBar: appBarSettings.searchBar!,
               editingController: editingController,
               focusNode: focusNode,
               keys: keys,

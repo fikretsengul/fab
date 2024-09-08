@@ -84,56 +84,51 @@ class _PaginatedGridListState<T, C extends PaginatedListCubit<T>> extends State<
           failed: (failure) => _pagingController.error = failure.message,
         );
       },
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        slivers: [
-          SliverPadding(
-            padding: $.paddings.sm.all,
-            sliver: PagedSliverGrid<int, T>(
-              pagingController: _pagingController,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
-                crossAxisSpacing: $.paddings.sm,
-                mainAxisSpacing: $.paddings.sm,
-                crossAxisCount: 2,
-              ),
-              builderDelegate: PagedChildBuilderDelegate<T>(
-                animateTransitions: true,
-                itemBuilder: (context, item, index) {
-                  return widget.itemBuilder(context, item, index);
-                },
-                noItemsFoundIndicatorBuilder: (_) {
-                  return FabEmptyList(
-                    icon: UIcons.solidRounded.bags_shopping,
-                    title: 'no product found.',
-                    subtitle: 'the product list is currently empty.',
-                  );
-                },
-                firstPageProgressIndicatorBuilder: (_) {
-                  return SizedBox(
-                    height: context.height,
-                    child: GridView.builder(
-                      itemCount: 8,
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: $.paddings.sm,
-                        crossAxisSpacing: $.paddings.sm,
-                        childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
-                      ),
-                      itemBuilder: (context, index) {
-                        return widget.skeletonBuilder(context);
-                      },
-                    ),
-                  );
-                },
-                newPageProgressIndicatorBuilder: (_) {
-                  return widget.skeletonBuilder(context);
-                },
-              ),
-            ),
+      child: SliverPadding(
+        padding: $.paddings.sm.horizontal,
+        sliver: PagedSliverGrid<int, T>(
+          pagingController: _pagingController,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
+            crossAxisSpacing: $.paddings.sm,
+            mainAxisSpacing: $.paddings.sm,
+            crossAxisCount: 2,
           ),
-        ],
+          builderDelegate: PagedChildBuilderDelegate<T>(
+            animateTransitions: true,
+            itemBuilder: (context, item, index) {
+              return widget.itemBuilder(context, item, index);
+            },
+            noItemsFoundIndicatorBuilder: (_) {
+              return FabEmptyList(
+                icon: UIcons.solidRounded.bags_shopping,
+                title: 'no product found.',
+                subtitle: 'the product list is currently empty.',
+              );
+            },
+            firstPageProgressIndicatorBuilder: (_) {
+              return SizedBox(
+                height: context.height,
+                child: GridView.builder(
+                  itemCount: 8,
+                  padding: EdgeInsets.zero,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: $.paddings.sm,
+                    crossAxisSpacing: $.paddings.sm,
+                    childAspectRatio: ((context.width - ($.paddings.sm * 3)) / 2) / widget.itemHeight,
+                  ),
+                  itemBuilder: (context, index) {
+                    return widget.skeletonBuilder(context);
+                  },
+                ),
+              );
+            },
+            newPageProgressIndicatorBuilder: (_) {
+              return widget.skeletonBuilder(context);
+            },
+          ),
+        ),
       ),
     );
   }

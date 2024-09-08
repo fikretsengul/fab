@@ -36,7 +36,7 @@ class SearchBarWidget extends StatelessWidget {
       _store.searchBarResultVisible.value = false;
     }
     if (!hasFocus) {
-      Future.delayed(measures.getSearchBarFocusAnimDur, () {
+      Future.delayed(measures.getSlowAnimationDuration, () {
         _store.searchBarAnimationStatus.value = SearchBarAnimationStatus.paused;
       });
     }

@@ -21,39 +21,40 @@ class FabAppBarSettings {
     this.backgroundColor,
     this.border,
     this.shadowColor,
-    FabAppBarSearchBarSettings? searchBar,
-    FabAppBarLargeTitleSettings? largeTitle,
+    this.searchBar,
+    this.largeTitle,
     this.toolbar,
-    Widget? backIcon,
-  })  : searchBar = searchBar ?? FabAppBarSearchBarSettings(),
-        largeTitle = largeTitle ?? FabAppBarLargeTitleSettings(),
-        backIcon = Padding(
-          padding: const EdgeInsets.only(bottom: 3.5),
-          child: backIcon ??
-              Icon(
-                UIcons.boldRounded.angle_small_left,
-                color: Colors.black,
-                size: 24,
-              ),
-        ) {
+    this.backIcon,
+  }) {
+    searchBar = searchBar ?? FabAppBarSearchBarSettings();
+    largeTitle = largeTitle ?? FabAppBarLargeTitleSettings();
     toolbar = toolbar ?? FabAppBarToolbarSettings();
+    backIcon = Padding(
+      padding: const EdgeInsets.only(bottom: 3.5),
+      child: backIcon ??
+          Icon(
+            UIcons.boldRounded.angle_small_left,
+            color: Colors.black,
+            size: 24,
+          ),
+    );
 
     if (!searchBar!.enabled) {
-      searchBar.height = 0;
+      searchBar!.height = 0;
     }
 
     if (!largeTitle!.enabled) {
-      largeTitle.height = 0;
+      largeTitle!.height = 0;
     }
 
     if (!toolbar!.enabled) {
       toolbar!.height = 0;
     }
 
-    title ??= Text(largeTitle.text);
+    title ??= Text(largeTitle!.text);
   }
 
-  final Widget backIcon;
+  Widget? backIcon;
   final List<Widget> actions;
   final bool alwaysShowTitle;
   final bool automaticallyImplyLeading;
@@ -62,11 +63,11 @@ class FabAppBarSettings {
   FabAppBarToolbarSettings? toolbar;
   final bool hasBackgroundBlur;
   final double height;
-  FabAppBarLargeTitleSettings largeTitle;
+  FabAppBarLargeTitleSettings? largeTitle;
   final Widget? leading;
   final double? leadingWidth;
   final String previousPageTitle;
-  FabAppBarSearchBarSettings searchBar;
+  FabAppBarSearchBarSettings? searchBar;
   final Color? shadowColor;
   Widget? title;
   final double titleSpacing;

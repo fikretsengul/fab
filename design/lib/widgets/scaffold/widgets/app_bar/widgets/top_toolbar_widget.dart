@@ -1,5 +1,6 @@
 import 'package:deps/design/design.dart';
-import 'package:flutter/cupertino.dart' hide CupertinoNavigationBarBackButton;
+import 'package:deps/features/features.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../_core/overridens/overriden_transitionable_navigation_bar.dart';
 import '../../../utils/measures.dart';
@@ -43,7 +44,7 @@ class TopToolbarWidget extends StatelessWidget {
           ? middle
           : AnimatedOpacity(
               opacity: middleVisible! ? 1.0 : 0.0,
-              duration: measures.getStandartAnimDur,
+              duration: measures.getSlowAnimationDuration,
               child: middle,
             );
     }
@@ -80,17 +81,19 @@ class TopToolbarWidget extends StatelessWidget {
     }
 
     return AnimatedContainer(
-      duration: animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSearchBarFocusAnimDur,
+      clipBehavior: Clip.hardEdge,
+      color: $.theme.backgroundColor,
+      duration: animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSlowAnimationDuration,
       height: _store.searchBarHasFocus.value
-          ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top
+          ? (appBarSettings.searchBar!.animationBehavior == SearchBarAnimationBehavior.top
               ? measures.getSafeZoneTopPadding
               : measures.getTopToolbarHeightWSafeZone)
           : measures.getTopToolbarHeightWSafeZone,
       child: AnimatedOpacity(
         duration:
-            animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getLargeTitleOpacityAnimDur,
+            animationStatus == SearchBarAnimationStatus.paused ? Duration.zero : measures.getSlowAnimationDuration,
         opacity: _store.searchBarHasFocus.value
-            ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top ? 0 : 1)
+            ? (appBarSettings.searchBar!.animationBehavior == SearchBarAnimationBehavior.top ? 0 : 1)
             : 1,
         child: SafeArea(
           bottom: false,
