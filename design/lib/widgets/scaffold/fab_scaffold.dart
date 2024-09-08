@@ -28,7 +28,8 @@ class FabScaffold extends StatefulWidget {
           searchBarHeight: appBarSettings.searchBar.height,
           largeTitleHeight: appBarSettings.largeTitle.height,
           topToolbarHeight: appBarSettings.height,
-          bottomToolbarHeight: appBarSettings.toolbar.height,
+          bottomToolbarHeight: appBarSettings.toolbar?.height,
+          searchToolbarHeight: appBarSettings.searchBar.toolbar?.height,
         );
 
   final List<FutureOr<dynamic> Function()?> onRefreshes;

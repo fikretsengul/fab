@@ -71,8 +71,8 @@ class AppBarWidget extends StatelessWidget {
             ),
             BottomToolbarWidget(
               measures: measures,
+              appBarSettings: appBarSettings,
               toolbar: components.appbarBottom!,
-              color: appBarSettings.toolbar.color,
             ),
           ],
         ),

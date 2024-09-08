@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class FabAppBarToolbarSettings {
   FabAppBarToolbarSettings({
     this.child = const Nil(),
-    this.height = 36,
+    this.height = 40,
     this.enabled = false,
+    this.padding = const EdgeInsets.only(bottom: 8),
     this.color = Colors.transparent,
   });
 
-  Widget child;
+  final Widget child;
   final Color color;
   final bool enabled;
+  final EdgeInsets padding;
   double height;
 }

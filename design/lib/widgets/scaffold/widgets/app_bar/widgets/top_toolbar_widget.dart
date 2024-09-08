@@ -43,7 +43,7 @@ class TopToolbarWidget extends StatelessWidget {
           ? middle
           : AnimatedOpacity(
               opacity: middleVisible! ? 1.0 : 0.0,
-              duration: Measures.instance().getStandartAnimDur,
+              duration: measures.getStandartAnimDur,
               child: middle,
             );
     }

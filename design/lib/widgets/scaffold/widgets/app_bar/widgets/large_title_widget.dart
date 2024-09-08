@@ -29,9 +29,7 @@ class LargeTitleWidget extends StatelessWidget {
     return Padding(
       padding: appBarSettings.largeTitle.padding,
       child: AnimatedOpacity(
-        duration: animationStatus == SearchBarAnimationStatus.paused
-            ? const Duration(milliseconds: 250)
-            : measures.getLargeTitleOpacityAnimDur,
+        duration: measures.getLargeTitleOpacityAnimDur,
         opacity: _store.searchBarHasFocus.value
             ? (appBarSettings.searchBar.animationBehavior == SearchBarAnimationBehavior.top ? 0 : _largeTitleOpacity)
             : _largeTitleOpacity,

@@ -3,6 +3,7 @@ import 'package:deps/packages/extended_tabs.dart';
 import 'package:flutter/material.dart';
 
 import '../../design.dart';
+import 'widgets/test.dart';
 
 class FabTabBar extends StatelessWidget {
   const FabTabBar({
@@ -25,7 +26,6 @@ class FabTabBar extends StatelessWidget {
       child: ExtendedTabBar(
         tabs: tabs,
         controller: controller,
-        indicatorPadding: const EdgeInsets.only(bottom: 2),
         labelStyle: context.fabTheme.bodyStyle.bold,
         unselectedLabelStyle: context.fabTheme.bodyStyle.bold,
         labelPadding: $.paddings.md.right,
@@ -34,9 +34,12 @@ class FabTabBar extends StatelessWidget {
         isScrollable: true,
         indicatorSize: TabBarIndicatorSize.label,
         mainAxisAlignment: MainAxisAlignment.start,
-        indicator: CircleTabIndicator(
+        indicator: TabIndicator(
+          height: 5,
+          width: 5,
           color: context.fabTheme.primaryColor,
-          radius: 2.9,
+          padding: const EdgeInsets.only(bottom: 4),
+          radius: 2.5,
         ),
       ),
     );

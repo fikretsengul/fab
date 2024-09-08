@@ -23,11 +23,10 @@ class FabAppBarSettings {
     this.shadowColor,
     FabAppBarSearchBarSettings? searchBar,
     FabAppBarLargeTitleSettings? largeTitle,
-    FabAppBarToolbarSettings? toolbar,
+    this.toolbar,
     Widget? backIcon,
   })  : searchBar = searchBar ?? FabAppBarSearchBarSettings(),
         largeTitle = largeTitle ?? FabAppBarLargeTitleSettings(),
-        toolbar = toolbar ?? FabAppBarToolbarSettings(),
         backIcon = Padding(
           padding: const EdgeInsets.only(bottom: 3.5),
           child: backIcon ??
@@ -37,6 +36,8 @@ class FabAppBarSettings {
                 size: 24,
               ),
         ) {
+    toolbar = toolbar ?? FabAppBarToolbarSettings();
+
     if (!searchBar!.enabled) {
       searchBar.height = 0;
     }
@@ -46,19 +47,19 @@ class FabAppBarSettings {
     }
 
     if (!toolbar!.enabled) {
-      toolbar.height = 0;
+      toolbar!.height = 0;
     }
 
     title ??= Text(largeTitle.text);
   }
 
-  Widget backIcon;
+  final Widget backIcon;
   final List<Widget> actions;
   final bool alwaysShowTitle;
   final bool automaticallyImplyLeading;
   final Color? backgroundColor;
   Border? border;
-  FabAppBarToolbarSettings toolbar;
+  FabAppBarToolbarSettings? toolbar;
   final bool hasBackgroundBlur;
   final double height;
   FabAppBarLargeTitleSettings largeTitle;

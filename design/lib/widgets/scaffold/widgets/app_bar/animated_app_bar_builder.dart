@@ -107,7 +107,7 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
         style: context.fabTheme.appBarLargeTitleStyle.copyWith(inherit: false),
         overflow: TextOverflow.ellipsis,
       ),
-      appbarBottom: widget.appBarSettings.toolbar.child,
+      appbarBottom: widget.appBarSettings.toolbar!.child,
       padding: null,
       large: true,
     );
@@ -131,13 +131,15 @@ class _AnimatedAppBarBuilderState extends State<AnimatedAppBarBuilder> with Tick
   void _checkIfCollapsed(double scrollOffset) {
     final searchBar = widget.appBarSettings.searchBar;
     final scrollBehavior = searchBar.scrollBehavior;
+    final titleFadeOutPadding = widget.measures.getTitleFadeOutPadding;
 
     var isCollapsed = false;
 
     if (scrollBehavior == SearchBarScrollBehavior.floated) {
-      isCollapsed = scrollOffset >= widget.measures.largeTitleHeight + widget.measures.getSearchBarHeight - 20;
+      isCollapsed =
+          scrollOffset >= widget.measures.largeTitleHeight + widget.measures.getSearchBarHeight - titleFadeOutPadding;
     } else {
-      isCollapsed = scrollOffset >= widget.measures.largeTitleHeight - 20;
+      isCollapsed = scrollOffset >= widget.measures.largeTitleHeight - titleFadeOutPadding;
     }
 
     if (_isCollapsed != isCollapsed) {

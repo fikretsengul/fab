@@ -27,7 +27,7 @@ class Store {
     height.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
         ? clampDouble(
             measures.getAppBarHeightWSafeZone - offset,
-            measures.getTopToolbarHeightWSafeZone + settings.toolbar.height,
+            measures.getTopToolbarHeightWSafeZone + measures.bottomToolbarHeight,
             3000,
           )
         : clampDouble(
@@ -57,10 +57,13 @@ class Store {
         : 1.0;
 
     largeTitleOpacity.value = settings.searchBar.scrollBehavior == SearchBarScrollBehavior.floated
-        ? (offset >= (measures.getAppBarHeightWoTopToolbar - settings.toolbar.height - 20)
+        ? (offset >=
+                (measures.getAppBarHeightWoTopToolbar - measures.bottomToolbarHeight - measures.getTitleFadeOutPadding)
             ? 1.0
             : (measures.largeTitleHeight > 0.0 ? 0.0 : 1.0))
-        : (offset >= (measures.largeTitleHeight - 20) ? 1.0 : (measures.largeTitleHeight > 0.0 ? 0.0 : 1.0));
+        : (offset >= (measures.largeTitleHeight - measures.getTitleFadeOutPadding)
+            ? 1.0
+            : (measures.largeTitleHeight > 0.0 ? 0.0 : 1.0));
 
     largeTitleScale.value = offset < 0 ? clampDouble(1 - offset / 1500, 1, 1.12) : 1.0;
 

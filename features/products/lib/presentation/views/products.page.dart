@@ -50,6 +50,9 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
         actions: [const ProductAppBarActions()],
         searchBar: FabAppBarSearchBarSettings(
           enabled: true,
+          searchResult: Container(
+            color: Colors.yellow,
+          ),
         ),
         largeTitle: FabAppBarLargeTitleSettings(
           enabled: true,
@@ -69,6 +72,7 @@ class _ProductsPageState extends State<ProductsPage> with SingleTickerProviderSt
         ),
         toolbar: FabAppBarToolbarSettings(
           enabled: true,
+          padding: EdgeInsets.zero,
           child: FabTabBar(
             tabs: _tabs,
             controller: _tabController,

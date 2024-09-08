@@ -1,38 +1,59 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/fab_appbar_settings.dart';
 import '../../../utils/measures.dart';
+import '../../../utils/store.dart';
 
 class BottomToolbarWidget extends StatelessWidget {
   const BottomToolbarWidget({
+    required this.appBarSettings,
     required this.measures,
     required this.toolbar,
-    required this.color,
     super.key,
   });
 
+  final FabAppBarSettings appBarSettings;
   final Measures measures;
   final KeyedSubtree toolbar;
-  final Color color;
+
+  Store get _store => Store.instance();
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: measures.getSearchBarFocusAnimDur,
-      height: measures.bottomToolbarHeight,
-      color: color,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            height: measures.bottomToolbarHeight,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: toolbar,
+    return ValueListenableBuilder(
+      valueListenable: _store.searchBarHasFocus,
+      builder: (_, searchBarHasFocus, __) {
+        return Align(
+          alignment: Alignment.bottomLeft,
+          child: AnimatedSwitcher(
+            duration: measures.getLargeTitleOpacityAnimDur,
+            transitionBuilder: (child, animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: SizeTransition(
+                  sizeFactor: animation,
+                  child: child,
+                ),
+              );
+            },
+            child: searchBarHasFocus
+                ? appBarSettings.searchBar.toolbar!.enabled
+                    ? Container(
+                        key: const ValueKey<int>(0),
+                        height: appBarSettings.searchBar.toolbar!.height,
+                        padding: appBarSettings.searchBar.toolbar!.padding,
+                        child: appBarSettings.searchBar.toolbar!.child,
+                      )
+                    : const SizedBox(key: ValueKey<int>(1))
+                : Container(
+                    key: const ValueKey<int>(2),
+                    height: appBarSettings.toolbar!.height,
+                    padding: appBarSettings.toolbar!.padding,
+                    child: appBarSettings.toolbar!.child,
+                  ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

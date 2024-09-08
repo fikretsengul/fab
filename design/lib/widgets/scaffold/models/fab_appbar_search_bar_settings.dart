@@ -3,6 +3,7 @@ import 'package:deps/packages/uicons.dart';
 import 'package:flutter/material.dart';
 
 import 'fab_appbar_action_settings.dart';
+import 'fab_appbar_toolbar_settings.dart';
 
 class FabAppBarSearchBarSettings {
   FabAppBarSearchBarSettings({
@@ -10,6 +11,7 @@ class FabAppBarSearchBarSettings {
     Widget? prefixIcon,
     this.cancelButtonText = 'cancel',
     this.placeholderText = 'search',
+    this.toolbar,
     this.enabled = false,
     this.scrollBehavior = SearchBarScrollBehavior.floated,
     this.animationBehavior = SearchBarAnimationBehavior.top,
@@ -38,8 +40,15 @@ class FabAppBarSearchBarSettings {
               UIcons.boldRounded.search,
               color: $.theme.onBackgroundColor,
               size: 16,
-            );
+            ) {
+    toolbar = toolbar ?? FabAppBarToolbarSettings();
 
+    if (!toolbar!.enabled) {
+      toolbar!.height = 0;
+    }
+  }
+
+  FabAppBarToolbarSettings? toolbar;
   final BorderRadius borderRadius;
   final Widget prefixIcon;
   final List<FabAppBarActionSettings> actions;
