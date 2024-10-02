@@ -6,7 +6,6 @@ import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-@RoutePage()
 class AppNavigator extends StatefulWidget {
   const AppNavigator({super.key});
 
