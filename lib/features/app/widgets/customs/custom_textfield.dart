@@ -1,5 +1,4 @@
-import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:flutter_advanced_boilerplate/theme/app_theme.dart';
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart'; 
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:flutter/material.dart';

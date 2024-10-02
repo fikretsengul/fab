@@ -235,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50),
-                      child: CustomImageView(image: Images.logoMain),
+                      child: CustomImageView(image: Images.logo),
                     ),
                   )
                 ],
