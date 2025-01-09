@@ -15,28 +15,25 @@ class AppNavigator extends StatefulWidget {
 
 class _AppNavigatorState extends State<AppNavigator>
     with TickerProviderStateMixin {
-  late TabController controller;
+  late PageController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(
-      length: $constants.navigation.bottomNavigationScreens().length,
-      vsync: this,
-    );
+    controller = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
-        controller.animateTo(state.pageIndex);
+        controller.jumpToPage(state.pageIndex);
       },
       builder: (context, state) {
         return Scaffold(
           appBar:
               $constants.navigation.appbars(context).elementAt(state.pageIndex),
-          body: TabBarView(
+          body: PageView(
             controller: controller,
             key: const ValueKey('acam'),
             physics: const NeverScrollableScrollPhysics(),

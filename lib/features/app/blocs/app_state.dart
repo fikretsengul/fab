@@ -8,9 +8,9 @@ class AppState with _$AppState {
     required String themePath,
   }) = _AppState;
 
-  factory AppState.initial() => const _AppState(
+  factory AppState.initial() => _AppState(
         pageIndex: 0,
         introViewed: false,
-        themePath: Assets.defaultTheme,
+        themePath: Assets.themes.defaultTheme, //Assets.defaultTheme,
       );
 }

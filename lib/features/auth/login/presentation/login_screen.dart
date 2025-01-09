@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:async_button_builder/async_button_builder.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_boilerplate/utils/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_advanced_boilerplate/assets.dart';
+// import 'package:flutter_advanced_boilerplate/assets.dart';
 import 'package:flutter_advanced_boilerplate/features/app/blocs/app_cubit.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/customs/custom_button.dart';
@@ -21,10 +23,10 @@ import 'package:flutter_advanced_boilerplate/utils/helpers/permission_helper.dar
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:universal_platform/universal_platform.dart';
+// import 'package:rounded_loading_button/rounded_loading_button.dart';
+// import 'package:universal_platform/universal_platform.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -44,12 +46,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final ImagePicker picker = ImagePicker();
 
-  late RoundedLoadingButtonController _btnController;
+  // late RoundedLoadingButtonController _btnController;
   late FormGroup _form;
 
   @override
   void initState() {
-    _btnController = RoundedLoadingButtonController();
+    // _btnController = RoundedLoadingButtonController();
     _form = widget.form ?? loginForm;
     super.initState();
   }
@@ -123,12 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
             _form
               ..unfocus()
               ..markAsDisabled();
-            _btnController.start();
           },
           failed: (alert) {
             _form.markAsEnabled();
-            _btnController.reset();
-
             BarHelper.showAlert(
               context,
               alert: alert,
@@ -139,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
             _form
               ..reset()
               ..markAsEnabled();
-            _btnController.reset();
 
             if (widget.cubit != null) {
               BarHelper.showAlert(
@@ -154,7 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           orElse: () {
             _form.markAsEnabled();
-            _btnController.reset();
           },
         );
       },
@@ -216,26 +213,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   TextButton(
-                      onPressed: () {}, child: Text('نسيت كلمة المرور؟')),
+                      onPressed: () {}, child: const Text('نسيت كلمة المرور؟')),
                   SizedBox(height: $constants.insets.sm),
                   ReactiveFormConsumer(
-                    builder: (context, formGroup, child) => CustomButton(
-                      controller: _btnController,
-                      width: getSize(context).width,
-                      text: context.t.login.login_button,
+                    builder: (context, formGroup, child) => AsyncButtonBuilder(
+                      builder: (context, child, callback, buttonState) =>
+                          ElevatedButton(
+                        onPressed: callback,
+                        child: child,
+                      ),
                       onPressed: _form.valid
-                          ? () => BlocProvider.of<AuthCubit>(context).login(
+                          ? () async =>
+                              BlocProvider.of<AuthCubit>(context).login(
                                 username: username,
                                 password: password,
                               )
                           : null,
+                      child: Text(context.t.login.login_button),
                     ),
                   ),
                   Spacer(),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50),
-                      child: CustomImageView(image: Images.logo),
+                      child: CustomImageView(image: Assets.images.logo.provider()),
                     ),
                   )
                 ],

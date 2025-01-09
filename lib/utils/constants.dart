@@ -3,7 +3,6 @@ import 'package:flutter_advanced_boilerplate/features/auth/login/blocs/auth_cubi
 import 'package:flutter_advanced_boilerplate/features/informations/informations_screen.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 final $constants = Constants();
 
@@ -137,7 +136,7 @@ class _Navigation {
         AppBar(
           leading: IconButton(
             onPressed: () => getIt<AuthCubit>().logOut(),
-            icon: Icon(MdiIcons.logout),
+            icon: const Icon(Icons.logout),
           ),
           title: Text(
             context.t.core.navigation.bottom.features,
@@ -158,15 +157,15 @@ class _Navigation {
 
   List<NavigationDestination> bottomNavigationItems(BuildContext context) => [
         NavigationDestination(
-          icon: Icon(
-            MdiIcons.fire,
+          icon: const Icon(
+            Icons.star,
             size: 24,
           ),
           label: context.t.core.navigation.bottom.features,
         ),
         NavigationDestination(
-          icon: Icon(
-            MdiIcons.information,
+          icon: const Icon(
+            Icons.info,
             size: 24,
           ),
           label: context.t.core.navigation.bottom.informations,

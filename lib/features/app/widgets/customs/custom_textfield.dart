@@ -1,11 +1,10 @@
-import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart'; 
+import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
 import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:styled_text/styled_text.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -139,20 +138,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
-            child: StyledText(
-              text: '<bold>$currentLength</bold>/$maxLength',
+            child: Text(
+              '$currentLength/$maxLength',
               style: getTextTheme(context).bodySmall,
-              tags: {
-                'bold': StyledTextTag(
-                  style: getTextTheme(context).bodySmall!.apply(
-                        fontWeightDelta: 1,
-                        color: widget.minLength != null &&
-                                currentLength < widget.minLength!
-                            ? $constants.palette.red.withOpacity(0.5)
-                            : getTheme(context).primary,
-                      ),
-                ),
-              },
             ),
           );
   }
@@ -160,10 +148,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
   IconData getIcon(FormGroup form) {
     if (form.status != ControlStatus.disabled &&
         !form.control(widget.formControlName).valid) {
-      return MdiIcons.asterisk;
+      return Icons.star;
     }
 
-    return MdiIcons.check;
+    return Icons.check;
   }
 
   @override
@@ -232,8 +220,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      MdiIcons.information,
+                    const Icon(
+                      Icons.info,
                       size: 16,
                     ),
                     Expanded(

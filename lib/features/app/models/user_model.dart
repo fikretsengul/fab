@@ -1,5 +1,6 @@
-import 'package:flutter_advanced_boilerplate/assets.dart';
-import 'package:freezed_annotation/freezed_annotation.dart'; 
+// import 'package:flutter_advanced_boilerplate/assets.dart';
+import 'package:flutter_advanced_boilerplate/utils/gen/assets.gen.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -17,9 +18,10 @@ class UserModel with _$UserModel {
       _$UserModelFromJson(json);
 
   factory UserModel.initial() => UserModel(
-        id: '123456789',
-        username: 'محمد',
-        email: 'testo@email.com',
-        profileImageUrl: Images.defaultProfilePicture.assetName,
+      id: '123456789',
+      username: 'محمد',
+      email: 'testo@email.com',
+      profileImageUrl: Assets.images.defaultProfilePicture
+          .path //Images.defaultProfilePicture.assetName,
       );
 }

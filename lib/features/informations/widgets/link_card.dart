@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class LinkCard extends StatelessWidget {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
-        trailing: Icon(MdiIcons.link),
+        trailing: const Icon(Icons.link),
         title: Row(
           children: [
             Icon(icon),

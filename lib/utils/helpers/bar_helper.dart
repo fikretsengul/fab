@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/bar/bar.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 @immutable
 abstract class BarHelper {
@@ -21,8 +20,8 @@ abstract class BarHelper {
     if (alert.type == AlertType.constructive) {
       bar = _createAlertModal(
         message: message,
-        iconWidget: Icon(
-          MdiIcons.checkCircle,
+        iconWidget: const Icon(
+          Icons.check_circle_outline_rounded,
           color: Colors.white,
         ),
         color: const Color(0xFF40DBA3),
@@ -31,8 +30,8 @@ abstract class BarHelper {
     } else if (alert.type == AlertType.destructive) {
       bar = _createAlertModal(
         message: message,
-        iconWidget: Icon(
-          MdiIcons.alertCircle,
+        iconWidget: const Icon(
+          Icons.warning,
           color: Colors.white,
         ),
         color: const Color(0xFFE4756D),

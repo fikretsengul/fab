@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_advanced_boilerplate/assets.dart';
+// import 'package:flutter_advanced_boilerplate/assets.dart';
 import 'package:flutter_advanced_boilerplate/modules/dependency_injection/di.dart';
+import 'package:flutter_advanced_boilerplate/utils/gen/assets.gen.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';

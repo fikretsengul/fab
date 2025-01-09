@@ -1,5 +1,3 @@
-
-
 <h1 align="center">
   Flutter Advanced Boilerplate
 </h1>
@@ -30,73 +28,80 @@
 </p>
 
 ## :memo: The Motivation
+
 There are several reasons why this boilerplate exists, these are in short to create `clear`, `readable`, `reusable`, `scalable`, `testable`, `performant` and `maintainable` projects but in long:
- 1. to allow people to deploy `production-grade MVP products`,
- 2. to make sure that I `keep everything stupid simple` (*controversial but I tried my best*),
- 3. to ensure that project can `easily scale horizontally` as application grows,
- 4. to `save developers time` by `reducing boilerplate code` by writing less and generating more,
- 5. to `maintain code quality and platform standards` in team projects with strictly linting rules,
- 6. to have `bloc and golden tests` to verify everything working as intended to be,
- 7. to ship the application quickly and efficiently by using `CI & CD` to automate the development process.
+
+1.  to allow people to deploy `production-grade MVP products`,
+2.  to make sure that I `keep everything stupid simple` (_controversial but I tried my best_),
+3.  to ensure that project can `easily scale horizontally` as application grows,
+4.  to `save developers time` by `reducing boilerplate code` by writing less and generating more,
+5.  to `maintain code quality and platform standards` in team projects with strictly linting rules,
+6.  to have `bloc and golden tests` to verify everything working as intended to be,
+7.  to ship the application quickly and efficiently by using `CI & CD` to automate the development process.
 
 ## :fire: Key Features
 
-* `API System & Authentication`<br>
-Rest and graphql api support with token renewal and socket support using Dio, GraphQL, and Fresh.
-* `Performance`<br>
-Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via keframe.
-* `State Management & Architecture`<br>
-BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
-* `Advanced Linting`<br>
-Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
-* `Type Safety`<br>
-The boilerplate uses type-safety first approach (languages, assets, etc.) to help you avoid problems by catching null errors during development rather than at runtime.
-* `Forms`<br>
-Creating and managing forms has never been so easy and fun. Reactive forms is a model-driven approach to handling forms inputs and validations.
-* `Testing`<br>
-The more features the app has, the harder it is to test manually. Automated tests help ensure that the app performs correctly before you publish it with Bloc Test, Golden Tookit, and Mocktail.
-* `Dependency Injection & Service Locator`<br>
-Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
-* `Code Generation`<br>
-Maximize productivity and improve code quality by generating data classes with Freezed, Artemis, and Build Runner.
-* `CI & CD Integration`<br>
-CI/CD is used to continuously deliver code into production, and ensure an ongoing flow of new features and bug fixes via the most efficient delivery method by using Codemagic.
-* `Easy & Clean Routing`<br>
-AutoRouter allows for strongly-typed arguments passing, effortless deep-linking, and code generation to simplify routes  reduce code boilerplate.
-* `Desing Pattern`<br>
-Repository design pattern reduces the complexity of the data layer, isolates unstructured data from the rest of the app, and organizes project structure.
-* `Exception Handling`<br>
-It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
-* `Encrypted Storage`<br>
-Encrypted storage allows you to keep token and user informations in platforms keychain securely using Secure Storage.
-* `Dynamic Theme`<br>
-With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
-* `Localization`<br>
-Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
-* `Permission`<br>
-The boilerplate also provides a cross-platform (iOS, Android) API to request permissions and check their status with permission_handler.
-* `Env Variables`<br>
-Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such.
-* `Logging & Tracking`<br>
-A detailed logging and error tracking mechanism to monitor every action taking place in the application in real-time with Logging and Sentry.
-* `Native Splash`<br>
-Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
-* `Refresh Rate`<br>
-Support for high refresh rate displays with the flutter_displaymode package.
+- `API System & Authentication`<br>
+  Rest and graphql api support with token renewal and socket support using Dio, GraphQL, and Fresh.
+- `Performance`<br>
+  Performance optimized for lag caused by builds, such as page switches or rapid scrolling of complex lists, through frame-splitting rendering via keframe.
+- `State Management & Architecture`<br>
+  BLoC & Hydrated Bloc helps to separate Business Logic from UI by creating persistent and powerful state management.
+- `Advanced Linting`<br>
+  Linting rules with detailed settings to keep the health of the code good and up to the dart standards.
+- `Type Safety`<br>
+  The boilerplate uses type-safety first approach (languages, assets, etc.) to help you avoid problems by catching null errors during development rather than at runtime.
+- `Forms`<br>
+  Creating and managing forms has never been so easy and fun. Reactive forms is a model-driven approach to handling forms inputs and validations.
+- `Testing`<br>
+  The more features the app has, the harder it is to test manually. Automated tests help ensure that the app performs correctly before you publish it with Bloc Test, Golden Tookit, and Mocktail.
+- `Dependency Injection & Service Locator`<br>
+  Reduce tight coupling between classes thus achieving greater reusability of your code with Injectable and GetIt.
+- `Code Generation`<br>
+  Maximize productivity and improve code quality by generating data classes with Freezed, Artemis, and Build Runner.
+- `CI & CD Integration`<br>
+  CI/CD is used to continuously deliver code into production, and ensure an ongoing flow of new features and bug fixes via the most efficient delivery method by using Codemagic.
+- `Easy & Clean Routing`<br>
+  AutoRouter allows for strongly-typed arguments passing, effortless deep-linking, and code generation to simplify routes reduce code boilerplate.
+- `Desing Pattern`<br>
+  Repository design pattern reduces the complexity of the data layer, isolates unstructured data from the rest of the app, and organizes project structure.
+- `Exception Handling`<br>
+  It is not a very ideal solution to handle exceptions using try and catch at every function, Data Channel provides utility for handling exceptions and data routing.
+- `Encrypted Storage`<br>
+  Encrypted storage allows you to keep token and user informations in platforms keychain securely using Secure Storage.
+- `Dynamic Theme`<br>
+  With Android 12 and Material You, wallpaper colors can be extracted to create a ColorScheme that can be used to color the app.
+- `Localization`<br>
+  Easily localize the app into other languages with the support of type-safe structured 'slang' language generator.
+- `Permission`<br>
+  The boilerplate also provides a cross-platform (iOS, Android) API to request permissions and check their status with permission_handler.
+- `Env Variables`<br>
+  Environmental variables allows to define global constants shared in the app, for things like API keys, base URLs, and such.
+- `Logging & Tracking`<br>
+  A detailed logging and error tracking mechanism to monitor every action taking place in the application in real-time with Logging and Sentry.
+- `Native Splash`<br>
+  Flutter Native Splash automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
+- `Refresh Rate`<br>
+  Support for high refresh rate displays with the flutter_displaymode package.
 
 ## :camera: Screenshots
+
 #### Dynamic Theme on Mobile
-| iOS Light TR | Android System Dark EN |
-| ------ | ------ |
+
+| iOS Light TR                                                    | Android System Dark EN                                             |
+| --------------------------------------------------------------- | ------------------------------------------------------------------ |
 | <img src="./assets/images/github/ios_light_tr.png" width="400"> | <img src="./assets/images/github/android_dark_en.png" width="400"> |
+
 #### Dynamic Theme on Web
-| Web System Light TR | Web Dark EN |
-| ------ | ------ |
+
+| Web System Light TR                                                    | Web Dark EN                                                    |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------- |
 | <img src="./assets/images/github/web_system_light_tr.png" width="400"> | <img src="./assets/images/github/web_dark_en.png" width="400"> |
 
 ## :books: How To Use
 
 ### :hammer: Build
+
 To clone and run this boilerplate, you'll need [Git](https://git-scm.com) and [Flutter](https://docs.flutter.dev/get-started/install) installed on your computer. From your command line:
 
 ```bash
@@ -130,8 +135,13 @@ $ fvm flutter run -d chrome --web-renderer canvaskit (high performance, high dow
 
 # If you update your splash screen configuration you can regenerate it via
 $ fvm flutter pub run flutter_native_splash:create
+# A Dart Build Plugin that uploads debug symbols for Android, iOS/macOS and source maps for Web to Sentry via sentry-cli.
+# The flutter build apk, flutter build ios (or macos) or flutter build web is required before executing the sentry_dart_plugin plugin
+$ fvm dart run sentry_dart_plugin
 ```
+
 ### Hide Generated Files
+
 In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `'Settings'` and search for `'Files: Exclude'` and add the following patterns by pressing the `'Add Pattern'` button:
 
 ```
@@ -142,14 +152,19 @@ In order to hide generated files, navigate to `'VSCode'` -> `'Preferences'` -> `
 **/*.g.dart
 **/*.gr.dart
 ```
+
 In Android Studio, navigate to `'Android Studio'` -> `'Preferences'` -> `'Editor'` -> `'File Types'` and paste the below lines under ignore files and folders section:
+
 ```
 *.config.dart;*.freezed.dart;*.inject.summary;*.inject.dart;*.g.dart;*.gr.dart;
 ```
+
 ## :file_folder: Folder Structure
 
 ### Assets Folder
+
 `assets` folder is located above the lib folder. The assets that is used in the application, environmental settings, fonts, images, translations and more are found here.
+
 ```
 .
 └── assets
@@ -166,7 +181,9 @@ In Android Studio, navigate to `'Android Studio'` -> `'Preferences'` -> `'Editor
 ```
 
 ### Features Folder
-The `features` folder, which is the backbone of the application, was designed using the ***feature-first structure*** instead of layer-first because it doesn't scale very well as the app grows and ***repository design pattern***. The feature-first approach demands that we create a new folder for every new feature that we add to our app. And inside that folder, we can add the repository pattern layers themselves as sub-folders.
+
+The `features` folder, which is the backbone of the application, was designed using the **_feature-first structure_** instead of layer-first because it doesn't scale very well as the app grows and **_repository design pattern_**. The feature-first approach demands that we create a new folder for every new feature that we add to our app. And inside that folder, we can add the repository pattern layers themselves as sub-folders.
+
 ```
 .
 └── lib
@@ -186,7 +203,9 @@ The `features` folder, which is the backbone of the application, was designed us
 ```
 
 ### Modules Folder
+
 In the `modules` folder, there are dependency injection registration and initialization processes of third-party modules to ensure that they can be easily accessed and used from within the application.
+
 ```
 .
 └── lib
@@ -197,8 +216,11 @@ In the `modules` folder, there are dependency injection registration and initial
         └── x_module                           -> create folder for your modules
             └── init_x.dart                       -> create initialization files here
 ```
+
 ### Theme Folder
+
 The `theme` folder contains the necessary theme configuration and settings.
+
 ```
 .
 └── lib
@@ -209,8 +231,11 @@ The `theme` folder contains the necessary theme configuration and settings.
         │   └── app_typography.dart
         └── app_theme_creator.dart             -> theme creation configuration here
 ```
+
 ### Utils Folder
+
 Apart from the above, constants, helper classes, and methods, shortcuts and many more used throughout the application are located in the `utils` folder.
+
 ```
 .
 └── lib
@@ -227,39 +252,44 @@ Apart from the above, constants, helper classes, and methods, shortcuts and many
         ├── r.dart                             -> generated type-safe asset classes here (don't modify)
         └── router.dart                        -> add new screens here
 ```
+
 ## :star2: Good To Know
+
 ### Resources I Highly Recommend you to Read & Watch
- 1. Code with Andrea Tutorials • [Blog](https://codewithandrea.com/tutorials/) • [YouTube](https://www.youtube.com/c/CodeWithAndrea/videos)
- 2. Reso Coder Tutorials • [Blog](https://resocoder.com/blog/) • [YouTube](https://www.youtube.com/c/ResoCoder/videos)
- 3. Flutter • [YouTube](https://www.youtube.com/c/flutterdev/videos)
- 4. Marcus Ng • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
- 5. Flutter Mapp • [YouTube](https://www.youtube.com/c/FlutterMapp/videos)
- 6. Max on Flutter • [YouTube](https://www.youtube.com/c/MaxonFlutter/videos)
+
+1.  Code with Andrea Tutorials • [Blog](https://codewithandrea.com/tutorials/) • [YouTube](https://www.youtube.com/c/CodeWithAndrea/videos)
+2.  Reso Coder Tutorials • [Blog](https://resocoder.com/blog/) • [YouTube](https://www.youtube.com/c/ResoCoder/videos)
+3.  Flutter • [YouTube](https://www.youtube.com/c/flutterdev/videos)
+4.  Marcus Ng • [YouTube](https://www.youtube.com/c/MarcusNg/videos)
+5.  Flutter Mapp • [YouTube](https://www.youtube.com/c/FlutterMapp/videos)
+6.  Max on Flutter • [YouTube](https://www.youtube.com/c/MaxonFlutter/videos)
 
 ### VSCode Extensions
-| Extension | Usage |
-| ------ | ------ |
-| Awesome Flutter Snippets | Awesome Flutter Snippets is a collection of commonly used Flutter classes and methods. It increases your speed of development by eliminating most of the boilerplate code associated with creating a widget.
-| Better Comments | The Better Comments extension will help you create more human-friendly comments in your code.
-| bloc | VSCode support for the Bloc Library and provides tools for effectively creating Blocs and Cubits for both Flutter and AngularDart apps.
-| Build Runner | Run build_runner commands conveniently using VSCode.
-| Dart | Dart Code extends VSCode with support for the Dart programming language, and provides tools for effectively editing, refactoring, running, and reloading Flutter mobile apps.
-| Error Lens | ErrorLens turbo-charges language diagnostic features by making diagnostics stand out more prominently, highlighting the entire line wherever a diagnostic is generated by the language and also prints the message inline.
-| Fluent Icons | Product icons themes allow theme authors to customize the icons used in VS Code's built-in views: all icons except file icons (covered by file icon themes) and icons contributed by extensions.
-| Flutter | This VS Code extension adds support for effectively editing, refactoring, running, and reloading Flutter mobile apps. It depends on (and will automatically install) the Dart extension for support for the Dart programming language.
-| flutter-stylizer | Flutter Stylizer is a VSCode extension that organizes your Flutter classes in an opinionated and consistent manner.
-| GitLens — Git supercharged | GitLens supercharges Git inside VS Code and unlocks untapped knowledge within each repository. It helps you to visualize code authorship at a glance via Git blame annotations and CodeLens, seamlessly navigate and explore Git repositories, gain valuable insights via rich visualizations and powerful comparison commands, and so much more.
-| Min Theme | A minimal theme for VS Code that comes in dark and light.
-| Output Colorizer | Language extension for VSCode/Bluemix Code that adds syntax colorization for both the output/debug/extensions panel and *.log files.
-| Pubspec Assist | Pubspec Assist is a Visual Studio Code extension that allows you to easily add dependencies to your Dart and Flutter project's pubspec.yaml, all without leaving your editor.
-| Rainbow Brackets | Provide rainbow colors for the round brackets, the square brackets and the squiggly brackets. This is particularly useful for Lisp or Clojure programmers, and of course, JavaScript, and other programmers.
-| Settings Sync | Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions Across Multiple Machines Using GitHub Gist.
-| Sort lines | Sort lines of text in Visual Studio Code.
-| Terminal | Run terminal command directly in Text Editor
-| Thunder Client | Thunder Client is a lightweight Rest API Client Extension for Visual Studio Code, hand-crafted by Ranga Vadhineni with simple and clean design.
-| Version Lens | This extension shows version information when opening a package or project.
+
+| Extension                  | Usage                                                                                                                                                                                                                                                                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Awesome Flutter Snippets   | Awesome Flutter Snippets is a collection of commonly used Flutter classes and methods. It increases your speed of development by eliminating most of the boilerplate code associated with creating a widget.                                                                                                                                      |
+| Better Comments            | The Better Comments extension will help you create more human-friendly comments in your code.                                                                                                                                                                                                                                                     |
+| bloc                       | VSCode support for the Bloc Library and provides tools for effectively creating Blocs and Cubits for both Flutter and AngularDart apps.                                                                                                                                                                                                           |
+| Build Runner               | Run build_runner commands conveniently using VSCode.                                                                                                                                                                                                                                                                                              |
+| Dart                       | Dart Code extends VSCode with support for the Dart programming language, and provides tools for effectively editing, refactoring, running, and reloading Flutter mobile apps.                                                                                                                                                                     |
+| Error Lens                 | ErrorLens turbo-charges language diagnostic features by making diagnostics stand out more prominently, highlighting the entire line wherever a diagnostic is generated by the language and also prints the message inline.                                                                                                                        |
+| Fluent Icons               | Product icons themes allow theme authors to customize the icons used in VS Code's built-in views: all icons except file icons (covered by file icon themes) and icons contributed by extensions.                                                                                                                                                  |
+| Flutter                    | This VS Code extension adds support for effectively editing, refactoring, running, and reloading Flutter mobile apps. It depends on (and will automatically install) the Dart extension for support for the Dart programming language.                                                                                                            |
+| flutter-stylizer           | Flutter Stylizer is a VSCode extension that organizes your Flutter classes in an opinionated and consistent manner.                                                                                                                                                                                                                               |
+| GitLens — Git supercharged | GitLens supercharges Git inside VS Code and unlocks untapped knowledge within each repository. It helps you to visualize code authorship at a glance via Git blame annotations and CodeLens, seamlessly navigate and explore Git repositories, gain valuable insights via rich visualizations and powerful comparison commands, and so much more. |
+| Min Theme                  | A minimal theme for VS Code that comes in dark and light.                                                                                                                                                                                                                                                                                         |
+| Output Colorizer           | Language extension for VSCode/Bluemix Code that adds syntax colorization for both the output/debug/extensions panel and \*.log files.                                                                                                                                                                                                             |
+| Pubspec Assist             | Pubspec Assist is a Visual Studio Code extension that allows you to easily add dependencies to your Dart and Flutter project's pubspec.yaml, all without leaving your editor.                                                                                                                                                                     |
+| Rainbow Brackets           | Provide rainbow colors for the round brackets, the square brackets and the squiggly brackets. This is particularly useful for Lisp or Clojure programmers, and of course, JavaScript, and other programmers.                                                                                                                                      |
+| Settings Sync              | Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions Across Multiple Machines Using GitHub Gist.                                                                                                                                                                                                    |
+| Sort lines                 | Sort lines of text in Visual Studio Code.                                                                                                                                                                                                                                                                                                         |
+| Terminal                   | Run terminal command directly in Text Editor                                                                                                                                                                                                                                                                                                      |
+| Thunder Client             | Thunder Client is a lightweight Rest API Client Extension for Visual Studio Code, hand-crafted by Ranga Vadhineni with simple and clean design.                                                                                                                                                                                                   |
+| Version Lens               | This extension shows version information when opening a package or project.                                                                                                                                                                                                                                                                       |
 
 ## :package: Packages
+
 This repository makes use of the following pub packages:
 | Package | Version | Usage |
 | ------ | ------ | ------ |
@@ -320,7 +350,7 @@ This repository makes use of the following pub packages:
 | [url_strategy](https://pub.dev/packages/url_strategy/versions/0.2.0) | ^0.2.0 | Others
 | [image_picker](https://pub.dev/packages/image_picker/versions/0.8.6) | ^0.8.6 | Others
 
-> *Recommended to keep regardless of your project.
+> \*Recommended to keep regardless of your project.
 
 ## :question: FAQ
 
@@ -339,39 +369,41 @@ This repository makes use of the following pub packages:
 </details>
 
 ## :cherry_blossom: Community
+
 ### :fire: Contribution
+
 If you want to say **thank you** you can;
--   add a  [GitHub Star]([https://github.com/create-go-app/cli](https://github.com/fikretsengul/flutter_advanced_boilerplate))  to the project,
--   tweet about project  [on your Twitter](https://twitter.com/),
--   [buy me a coffee](https://www.buymeacoffee.com/iamfikretB)
+
+- add a [GitHub Star](<[https://github.com/create-go-app/cli](https://github.com/fikretsengul/flutter_advanced_boilerplate)>) to the project,
+- tweet about project [on your Twitter](https://twitter.com/),
+- [buy me a coffee](https://www.buymeacoffee.com/iamfikretB)
 
 Also code contributions are always welcome and appreciated.
 
- 1. **Report a bug**<br>
-If you think you have encountered a bug, and I should know about it, feel free to report it and I will take care of it.
- 2. **Request a feature**<br>
-You can also request for a feature, and if it will viable, it will be picked for development.
- 3. **Create a pull request**<br>
-It can't get better then this, your pull request will be appreciated by the community. You can get started by
+1.  **Report a bug**<br>
+    If you think you have encountered a bug, and I should know about it, feel free to report it and I will take care of it.
+2.  **Request a feature**<br>
+    You can also request for a feature, and if it will viable, it will be picked for development.
+3.  **Create a pull request**<br>
+    It can't get better then this, your pull request will be appreciated by the community. You can get started by
     picking up any open issues and make a pull request.
 
- > If you are new to open-source, make sure to check read more about it [here](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) and learn more about creating a pull request [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
+> If you are new to open-source, make sure to check read more about it [here](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) and learn more about creating a pull request [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
 
 ### :cactus: Branches
-1.  **`stage`**  is the development branch.
-2.  **`master`**  is the production branch.
-    
+
+1.  **`stage`** is the development branch.
+2.  **`master`** is the production branch.
 3.  No other permanent branches should be created in the main repository, you can create feature branches but they should get merged with the master.
-    
 
 **Steps to work with feature branch**
 
-1.  To start working on a new feature, create a new branch prefixed with  `feat`  and followed by feature name. (ie.  `feat-FEATURE-NAME`)
+1.  To start working on a new feature, create a new branch prefixed with `feat` and followed by feature name. (ie. `feat-FEATURE-NAME`)
 2.  Once you are done with your changes, you can raise PR.
 
 **Steps to create a pull request**
 
-1.  Make a PR to  `stage`  branch.
+1.  Make a PR to `stage` branch.
 2.  Comply with the best practices and guidelines e.g. where the PR concerns visual elements it should have an image showing the effect.
 3.  It must pass all continuous integration checks and get positive reviews.
 
@@ -380,4 +412,5 @@ After this, changes will be merged.
 Together, we can make this project **better** every day! 😘
 
 ## :lock: License
+
 MIT © [Fikret Şengül](https://github.com/fikretsengul)
