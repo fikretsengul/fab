@@ -3,7 +3,6 @@ import 'package:flutter_advanced_boilerplate/features/informations/widgets/grid_
 import 'package:flutter_advanced_boilerplate/features/informations/widgets/link_card.dart';
 import 'package:flutter_advanced_boilerplate/features/informations/widgets/text_divider.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class InformationsScreen extends StatelessWidget {
   const InformationsScreen({super.key});
@@ -18,7 +17,7 @@ class InformationsScreen extends StatelessWidget {
         children: [
           LinkCard(
             title: context.t.informations.github_repository_title,
-            icon: MdiIcons.github,
+            icon: Icons.code,
             url: Uri.parse(
               'https://github.com/fikretsengul/flutter_advanced_boilerplate',
             ),
@@ -35,14 +34,14 @@ class InformationsScreen extends StatelessWidget {
             children: [
               GridItem(
                 title: context.t.informations.donate_card_title,
-                icon: MdiIcons.coffee,
+                icon: Icons.coffee,
                 url: Uri.parse(
                   'https://www.buymeacoffee.com/iamfikretB',
                 ),
               ),
               GridItem(
                 title: context.t.informations.website_card_title,
-                icon: MdiIcons.web,
+                icon: Icons.web,
                 url: Uri.parse('https://fikretsengul.com'),
               ),
             ],

@@ -1,9 +1,9 @@
-import 'dart:async';
+// import 'dart:async';
 
-import 'utils/test_utils.dart';
+// import 'utils/test_utils.dart';
 
-Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  await prepareRequirements();
+// Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+//   await prepareRequirements();
 
-  return prepareGoldenTests(testMain);
-}
+//   return prepareGoldenTests(testMain);
+// }

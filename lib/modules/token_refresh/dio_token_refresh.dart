@@ -17,8 +17,8 @@ class DioTokenRefresh {
     );
   }
 
-  final TokenStorage<AuthModel> _secureStorage;
   late final Fresh<AuthModel> _fresh;
+  final TokenStorage<AuthModel> _secureStorage;
 
   Fresh<AuthModel> get fresh => _fresh;
 
@@ -28,7 +28,7 @@ class DioTokenRefresh {
     }
 
     try {
-      // TODO -> Implement dio token refresh algorithm.
+      // TODO(fikretsengul): Implement dio token refresh algorithm.
 
       return token;
     } catch (e) {

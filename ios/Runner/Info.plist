@@ -63,5 +63,9 @@
 		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>This app needs photo library access to select a photo.</string>
+		<key>UIStatusBarHidden</key>
+		<true/>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
 	</dict>
 </plist>

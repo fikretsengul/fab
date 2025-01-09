@@ -6,7 +6,7 @@ import 'package:flutter_advanced_boilerplate/features/auth/login/networking/auth
 import 'package:flutter_advanced_boilerplate/modules/token_refresh/dio_token_refresh.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fresh_graphql/fresh_graphql.dart';
+import 'package:fresh_dio/fresh_dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -15,7 +15,8 @@ part 'auth_state.dart';
 
 @lazySingleton
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepository, this._dioTokenRefresh) : super(const AuthState.loading()) {
+  AuthCubit(this._authRepository, this._dioTokenRefresh)
+      : super(const AuthState.loading()) {
     _dioTokenRefresh.fresh.authenticationStatus.listen((event) async {
       if (event == AuthenticationStatus.authenticated) {
         final auth = await _dioTokenRefresh.fresh.token;

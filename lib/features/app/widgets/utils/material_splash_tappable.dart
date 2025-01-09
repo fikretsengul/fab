@@ -3,11 +3,16 @@ import 'package:flutter_advanced_boilerplate/utils/constants.dart';
 import 'package:flutter_advanced_boilerplate/utils/methods/shortcuts.dart';
 
 class MaterialSplashTappable extends StatelessWidget {
-  const MaterialSplashTappable({super.key, this.radius, this.onTap, required this.child});
+  const MaterialSplashTappable({
+    required this.child,
+    super.key,
+    this.radius,
+    this.onTap,
+  });
 
-  final double? radius;
   final void Function()? onTap;
   final Widget child;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,9 @@ class MaterialSplashTappable extends StatelessWidget {
             radius ?? $constants.theme.defaultBorderRadius,
           ),
         ),
-        overlayColor: MaterialStateProperty.all(getCustomOnPrimaryColor(context).withOpacity(0.1)),
+        overlayColor: MaterialStateProperty.all(
+          getCustomOnPrimaryColor(context).withOpacity(0.1),
+        ),
         onTap: onTap,
         child: child,
       ),

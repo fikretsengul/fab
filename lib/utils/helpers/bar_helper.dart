@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_boilerplate/features/app/models/alert_model.dart';
 import 'package:flutter_advanced_boilerplate/features/app/widgets/bar/bar.dart';
 import 'package:flutter_advanced_boilerplate/i18n/strings.g.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 @immutable
 abstract class BarHelper {
@@ -14,13 +13,15 @@ abstract class BarHelper {
     bool isTest = false,
   }) {
     Bar<void> bar;
-    final message = alert.translatable ? (context.t[alert.message] as String) : alert.message;
+    final message = alert.translatable
+        ? (context.t[alert.message] as String)
+        : alert.message;
 
     if (alert.type == AlertType.constructive) {
       bar = _createAlertModal(
         message: message,
         iconWidget: const Icon(
-          MdiIcons.checkCircle,
+          Icons.check_circle_outline_rounded,
           color: Colors.white,
         ),
         color: const Color(0xFF40DBA3),
@@ -30,7 +31,7 @@ abstract class BarHelper {
       bar = _createAlertModal(
         message: message,
         iconWidget: const Icon(
-          MdiIcons.alertCircle,
+          Icons.warning,
           color: Colors.white,
         ),
         color: const Color(0xFFE4756D),
@@ -51,7 +52,9 @@ abstract class BarHelper {
           decoration: const BoxDecoration(
             color: Colors.red,
             shape: BoxShape.circle,
-            border: Border.fromBorderSide(BorderSide(color: Colors.white, width: 2)),
+            border: Border.fromBorderSide(
+              BorderSide(color: Colors.white, width: 2),
+            ),
           ),
           margin: const EdgeInsets.all(4),
         ),
@@ -102,7 +105,9 @@ abstract class BarHelper {
       shouldIconPulse: false,
       isDismissible: false,
       duration: isTest ? const Duration(seconds: 1) : duration,
-      animationDuration: isTest ? const Duration(milliseconds: 250) : const Duration(seconds: 1),
+      animationDuration: isTest
+          ? const Duration(milliseconds: 250)
+          : const Duration(seconds: 1),
     );
   }
 }

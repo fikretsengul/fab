@@ -53,7 +53,9 @@ void main() {
     blocTest<AuthCubit, AuthState>(
       'Authenticated',
       build: () {
-        when(() => repository.login(username: any(named: 'username'), password: any(named: 'password'))).thenAnswer(
+        when(() => repository.login(
+            username: any(named: 'username'),
+            password: any(named: 'password'))).thenAnswer(
           (_) async => DC.data(auth),
         );
 

@@ -7,6 +7,7 @@ import 'package:flutter_advanced_boilerplate/utils/router.gr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+@RoutePage()
 class AppWrapper extends StatefulWidget {
   const AppWrapper({super.key});
 
@@ -18,21 +19,15 @@ class _AppWrapperState extends State<AppWrapper> with WidgetsBindingObserver {
   final GlobalKey _key = GlobalKey();
 
   @override
-  void initState() {
-    WidgetsBinding.instance.addObserver(this);
-    super.initState();
-  }
-
-  @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
-  Future<void> didChangePlatformBrightness() async {
-    getIt<AppCubit>().updateSystemOverlay();
-    super.didChangePlatformBrightness();
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
   }
 
   @override
@@ -46,10 +41,10 @@ class _AppWrapperState extends State<AppWrapper> with WidgetsBindingObserver {
 
           state.whenOrNull(
             authenticated: (_) {
-              context.router.replaceAll([const AppNavigatorRoute()]);
+              context.router.replaceAll([const AppNavigator()]);
             },
             unauthenticated: () {
-              context.router.replaceAll([LoginScreenRoute()]);
+              context.router.replaceAll([LoginRoute()]);
             },
           );
         },

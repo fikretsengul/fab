@@ -4,17 +4,21 @@ import 'package:url_launcher/url_launcher.dart';
 
 class GridItem extends StatelessWidget {
   const GridItem({
-    super.key,
     required this.title,
     required this.icon,
     required this.url,
+    super.key,
     this.category = '',
   });
 
-  final String title;
-  final IconData icon;
-  final Uri url;
   final String category;
+  final IconData icon;
+  final String title;
+  final Uri url;
+
+  Future<bool> _launchUrl() async => await canLaunchUrl(url)
+      ? await launchUrl(url)
+      : throw Exception('Could not launch $url');
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +36,17 @@ class GridItem extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: getTextTheme(context).titleSmall!.apply(fontWeightDelta: 2, fontSizeDelta: -2),
+              style: getTextTheme(context)
+                  .titleSmall!
+                  .apply(fontWeightDelta: 2, fontSizeDelta: -2),
             ),
             if (category.isNotEmpty) ...{
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
                   category,
-                  style: getTextTheme(context).bodySmall!.apply(fontSizeDelta: -1),
+                  style:
+                      getTextTheme(context).bodySmall!.apply(fontSizeDelta: -1),
                 ),
               ),
             },
@@ -48,7 +55,4 @@ class GridItem extends StatelessWidget {
       ),
     );
   }
-
-  Future<bool> _launchUrl() async =>
-      await canLaunchUrl(url) ? await launchUrl(url) : throw Exception('Could not launch $url');
 }
