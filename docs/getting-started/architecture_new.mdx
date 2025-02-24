@@ -1,0 +1,101 @@
+---
+title: App Architecture
+description: An overview of the monorepo structure, core configuration files, and environment setup.
+---
+
+## Introduction
+
+This section outlines the **monorepo architecture** of the Flutter Advanced Boilerplate (FAB). Key points include:
+
+(UPDATE HERE WITH THE CONTENT)
+- How multiple packages (e.g., `app`, `deps`, `design`, `features`, `infrastructure`) are organized.
+- How [Melos](https://github.com/invertase/melos) is utilized to bootstrap and manage dependencies.
+- How environment files, lint rules, and various scripts integrate into the overall structure.
+
+By keeping related packages within a single repository, the monorepo approach simplifies version management, dependency administration, and provides a clear separation of concerns.
+
+## The Architecture
+
+Flutter applications can be built in various ways, with no single mandatory approach.
+This flexibility can pose a challenge for developers, as there are no strict guidelines or a universally accepted structure to follow during the development process.
+Consequently, developers must carefully choose their own architectural patterns and best practices to ensure maintainability and scalability.
+
+### Overview of Existing App Architectures
+
+In a traditional **Layered Architecture**, code is organized by function (e.g., presentation, domain, and data layers). While this approach can be adequate for smaller projects, it often becomes cumbersome in larger ones due to complex interdependencies between layers.
+
+With **Modularization Architecture**, all the logic and resources for a specific feature—UI, business rules, data sources, and state management—reside in one module. This reduces cross-layer dependencies and encourages a cleaner, more maintainable structure.
+
+THE TABLE TO COMPARE THEM.
+
+### Advantages of Modularization Architecture
+
+Modularization is an architectural strategy where a project's code is split into self-sufficient, feature-based modules. Each module groups together all necessary elements (e.g., UI, data, state management) for that feature or domain, instead of separating them by function. This leads to:
+
+1. **Enhanced Scalability**: Each feature's code resides in an independent module, facilitating controlled and maintainable growth.
+2. **Simplified Maintenance**: With modules acting as isolated units, bug fixes or updates remain localized and less likely to impact other packages.
+3. **Parallel Development**: Larger teams can work on different modules simultaneously, reducing conflicts and streamlining the development process.
+4. **Improved Reusability**: Modules containing everything needed for a feature can be repurposed within the same project or ported to new projects.
+5. **Focused Testing and Debugging**: Since each module is tested in isolation, issues can be traced more easily, and the broader application remains unaffected during local testing.
+
+## The Structure
+
+A monorepo stores multiple applications and shared packages within a single repository. This structure proves especially beneficial when several apps or features share common dependencies or resources.
+
+In a Flutter monorepo:
+
+- Each app can be independently managed while sharing the same repository.
+- Shared packages (e.g., design system or infrastructure) are maintained in one location, avoiding code duplication.
+
+> Melos is a specialized CLI tool built to manage Dart and Flutter monorepos. It streamlines package linking, dependency management, versioning, and provides commands to efficiently handle multiple projects.
+
+### Benefits of Using Melos
+
+- Simplified handling of interdependencies among packages.
+- Automated versioning and changelog creation.
+- Ability to run tests and commands across multiple packages simultaneously.
+
+Each app and package maintains its own `pubspec.yaml` file, making it straightforward for Melos to manage dependencies across the entire monorepo.
+
+### About The Modularized Monorepo Structure
+
+MONOREPO STRUCTURE DRAWING
+
+By leveraging Melos, our modularized monorepo structure remains organized, scalable, and efficient. Shared packages are easily accessible, and commands for linking, dependency management, and other workflows maintain consistency across all projects.
+
+#### Our App Folder Structure
+
+Below is a high-level overview of the repository’s file and folder structure:
+
+```bash
+fab/
+├─ app/                  # Main application module
+├─ deps/                 # Dependency manager module
+├─ design/               # Design system module
+├─ features/             # A folder containing separate feature modules
+│  ├─ feature_auth/      # Example: Auth feature module
+│  └─ feature_xyz/       # Example: Another feature module
+├─ infrastructure/       # Infrastructure module
+├─ tools/
+│  └─ scripts/           # Custom scripts for automated tasks
+├─ .env.development      # Environment variables for development
+├─ .env.production       # Environment variables for production
+├─ .env.staging          # Environment variables for staging
+├─ .fvmrc                # Defines the Flutter SDK version to use via FVM
+├─ .gitignore
+├─ all_lint_rules.yaml
+├─ analysis_options.yaml
+├─ melos.yaml            # Melos configuration file
+├─ pubspec.yaml          # Main pubspec for the entire monorepo
+└─ README.md             # Project README (optional/for reference)
+```
+
+##### Highlights
+
+- **`app/`**: The main Flutter application.
+- **`deps/`**: Collects and re-exports frequently used dependencies, serving as a single source of truth.
+- **`design/`**: Houses shared UI components, themes, and design logic.
+- **`features/`**: Contains individual feature modules, promoting isolation and scalability.
+- **`infrastructure/`**: Responsible for cross-cutting concerns, such as network requests, database interactions, and authentication.
+- **`tools/scripts/`**: Custom Dart scripts for tasks like cleaning iOS/macOS pods and generating translations.
+- **Environment Files** (`.env.development`, `.env.production`, `.env.staging`): Store environment-specific configurations.

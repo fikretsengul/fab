@@ -1,0 +1,327 @@
+---
+title: Architecture
+description: An overview of the monorepo structure, core configuration files, and environment setup.
+---
+
+![Represantation of the architecture](/assets/architecture.svg)
+
+## Introduction
+
+This section describes the **monorepo architecture** of the Flutter Advanced Boilerplate (FAB). It explains:
+
+ - How multiple packages (e.g., `app`, `deps`, `design`, `features`, `infrastructure`) are organized.
+ - How [Melos](https://github.com/invertase/melos) is used to bootstrap and manage dependencies.
+ - How environment files, lint rules, and various scripts fit into the overall structure.
+
+The monorepo approach keeps related packages in a single repository, ensuring consistent versions, straightforward dependency management, and a clear separation of responsibilities.
+
+## Folder Structure
+
+Below is a high-level overview of the repository’s file and folder structure:
+
+```bash
+fab/
+├─ app/                  # Main application package
+├─ deps/                 # Dependency manager package
+├─ design/               # Design system package
+├─ features/             # A folder containing separate feature packages
+│  ├─ feature_auth/      # Example: Auth feature (each feature is a separate package)
+│  └─ feature_xyz/       # Example: Another feature
+├─ infrastructure/       # Infrastructure-related code
+├─ tools/
+│  └─ scripts/           # Custom scripts for automated tasks
+├─ .env.development      # Environment variables for development
+├─ .env.production       # Environment variables for production
+├─ .env.staging          # Environment variables for staging
+├─ .fvmrc                # Defines the Flutter SDK version to use via FVM
+├─ .gitignore
+├─ all_lint_rules.yaml
+├─ analysis_options.yaml
+├─ melos.yaml            # Melos configuration
+├─ pubspec.yaml          # Main pubspec for the entire monorepo
+└─ README.md             # Project README (optional/for reference)
+```
+
+### Highlights
+
+ - **`app/`**: The main Flutter application.
+ - **`deps/`**: Gathers and re-exports commonly used dependencies, ensuring a single source of truth.
+ - **`design/`**: Houses UI-related design components, themes, and other shared design logic.
+ - **`features/`**: Each subfolder is an individual feature package, promoting modularity and scalability.
+ - **`infrastructure/`**: Contains cross-cutting concerns like networking, database, authentication, etc.
+ - **`tools/scripts/`**: Custom Dart scripts (e.g., cleaning iOS/macOS pods, generating translations).
+ - **Environment Files** (`.env.development`, `.env.production`, `.env.staging`): Store environment-specific variables.
+
+## Core Configuration Files
+
+### Root `pubspec.yaml`
+
+Defines the project name, description, SDK constraints, and dev dependencies for the monorepo. For example:
+
+```yaml
+name: fab
+description: An advanced project built with Flutter Advanced Boilerplate.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.1 <4.0.0"
+
+dev_dependencies:
+  melos: ^6.2.0
+  very_good_analysis:
+    git:
+      url: https://github.com/VeryGoodOpenSource/very_good_analysis.git
+```
+
+> **Note**: `melos` is a key dependency that makes this monorepo approach smooth and efficient.
+
+### `melos.yaml`
+
+Controls how packages are structured and how commands/scripts are executed across the repository:
+
+```yaml
+name: fab
+sdkPath: .fvm/flutter_sdk
+
+packages:
+  - app
+  - deps
+  - design
+  - features/**
+  - infrastructure
+
+command:
+  bootstrap:
+    environment:
+      sdk: ">=3.6.0 <4.0.0"
+      flutter: ">=3.27.1 <4.0.0"
+    dependencies:
+      auto_route: ^9.2.2
+      # ...other dependencies
+    dev_dependencies:
+      build_runner: ^2.4.14
+      # ...other dev dependencies
+    runPubGetInParallel: true
+
+    hooks:
+      pre: melos clean
+      post: melos generate && melos generate:translations && melos reset:ios
+
+  clean:
+    hooks:
+      pre: melos reset
+
+# Scripts section ...
+scripts:
+  reset:
+    description: Clean things very deeply by removing untracked files.
+    run: |
+      melos exec --flutter -c 1 -- "flutter clean"
+
+  reset:ios:
+    description: Clean iOS pods to fix any pods-related issues on macOS.
+    run: |
+      dart ./tools/scripts/reset_ios.dart
+
+  # ...more scripts (reset:macos, dart:check, generate, test, release, etc.)
+```
+
+Key points:
+
+ - **`packages`** defines which folders are recognized as Melos-managed packages.
+ - **`command.bootstrap`** merges and installs dependencies for all packages.
+ - **Scripts** are defined for common tasks like cleaning, generating code, testing, building, and releasing.
+
+### `analysis_options.yaml`
+
+Specifies lint rules, error levels, and file exclusions. This enforces consistent code quality across all packages:
+
+```yaml
+include: all_lint_rules.yaml
+
+analyzer:
+  errors:
+    included_file_warning: ignore
+    invalid_annotation_target: ignore
+
+  exclude:
+    - "**.g.dart"
+    - "**.freezed.dart"
+    # ...other generated files
+
+linter:
+  rules:
+    lines_longer_than_80_chars: false
+    prefer_expression_function_bodies: false
+    # ...other rules
+```
+
+### Environment Files
+
+There are separate `.env.development`, `.env.staging`, and `.env.production` files, each containing relevant keys and endpoints. For example:
+
+```bash
+# .env.staging
+API_URL=staging/api/v1
+ANALYTICS_URL=staging.analytics.com
+```
+
+> **Tip**: These files are typically not committed to version control (or partially committed with dummy values). Sensitive keys should remain private.
+
+## Tools and Scripts
+
+Inside `tools/scripts/`, there are custom Dart scripts for various tasks:
+
+### `reset_ios.dart` and `reset_macos.dart`
+
+Used to clean and reinstall CocoaPods on iOS and macOS projects. They:
+
+1. Delete `Pods` folder and `Podfile.lock`.
+2. Run `fvm flutter precache --ios` or `--macos`.
+3. Execute `pod install --repo-update`.
+
+<details>
+<summary>Example: <code>reset_ios.dart</code></summary>
+
+```dart
+// ignore_for_file: avoid_print
+
+import 'dart:io';
+
+void main() {
+  if (!Platform.isMacOS) {
+    print('iOS pod installation is only supported on macOS. Exiting.');
+    exit(0);
+  }
+
+  final Directory iosDirectory = Directory('app/ios');
+
+  if (iosDirectory.existsSync()) {
+    print('Cleaning iOS pods...');
+
+    final Directory podsDir = Directory('${iosDirectory.path}/Pods');
+    if (podsDir.existsSync()) {
+      podsDir.deleteSync(recursive: true);
+      print('Removed Pods directory.');
+    }
+
+    final File podfileLock = File('${iosDirectory.path}/Podfile.lock');
+    if (podfileLock.existsSync()) {
+      podfileLock.deleteSync();
+      print('Removed Podfile.lock.');
+    }
+
+    final ProcessResult flutterPrecache = Process.runSync(
+      'fvm',
+      <String>['flutter', 'precache', '--ios'],
+    );
+    if (flutterPrecache.exitCode != 0) {
+      print('Failed to run flutter precache: ${flutterPrecache.stderr}');
+      exit(flutterPrecache.exitCode);
+    }
+
+    final ProcessResult podInstall = Process.runSync(
+      'pod',
+      <String>['install', '--repo-update'],
+      workingDirectory: iosDirectory.path,
+    );
+
+    if (podInstall.exitCode != 0) {
+      print('Failed to run pod install: ${podInstall.stderr}');
+      exit(podInstall.exitCode);
+    }
+
+    print('iOS pods cleaned and installed successfully.');
+  } else {
+    print('iOS directory not found. No action taken.');
+  }
+}
+```
+</details>
+
+### `translations_providers.generator.dart`
+
+Generates translation providers by scanning feature packages for `translations.g.dart` files, then aggregates them into `deps/lib/providers.dart`. This ensures each feature’s translations are automatically wired into the global translation system.
+
+<details>
+<summary>Code Snippet</summary>
+
+```dart
+import 'dart:io';
+
+void main() {
+  final StringBuffer buffer = StringBuffer()
+    ..writeln('// Generated file. Do not edit.')
+    ..writeln("import 'package:flutter/widgets.dart';");
+
+  final List<String> translationProviders = <String>[];
+
+  buffer
+    ..writeln("import 'package:design/_core/_i18n/translations.g.dart' as design;")
+    ..writeln("import 'package:infrastructure/_core/_i18n/translations.g.dart' as infrastructure;");
+  translationProviders
+    ..add('(Widget child) => design.TranslationProvider(child: child)')
+    ..add('(Widget child) => infrastructure.TranslationProvider(child: child)');
+
+  final Directory dir = Directory('features');
+
+  for (final FileSystemEntity entity in dir.listSync(recursive: true)) {
+    if (entity is File && entity.path.endsWith('translations.g.dart')) {
+      // ...
+      // Each feature’s translation gets imported and added to `translationProviders`.
+    }
+  }
+
+  // ...
+  buffer.writeln('\nfinal List<Widget Function(Widget)> translationProviders = <Widget Function(Widget p1)>[');
+  for (final String provider in translationProviders) {
+    buffer.writeln('  $provider,');
+  }
+  buffer.writeln('];');
+
+  final File outputFile = File('deps/lib/providers.dart');
+  outputFile.parent.createSync(recursive: true);
+  outputFile.writeAsStringSync(buffer.toString());
+}
+```
+</details>
+
+## Usage Examples
+
+Below are some common Melos commands used in this monorepo:
+
+1. **Install and bootstrap all packages**:
+   ```bash
+   melos bootstrap
+   ```
+
+2. **Run the clean script**:
+   ```bash
+   melos run clean
+   ```
+   - Internally calls `melos reset` → runs `reset_ios.dart` or `reset_macos.dart` as needed.
+
+3. **Generate code (e.g., build_runner tasks, translation providers, etc.)**:
+   ```bash
+   melos run generate
+   melos run generate:translations
+   ```
+
+4. **Run tests**:
+   ```bash
+   melos run test
+   ```
+   - Collects and executes tests across packages that contain a `test` directory.
+
+## Conclusion
+
+By organizing code into logical packages and centralizing configuration, the **Flutter Advanced Boilerplate**:
+
+ - Promotes **scalability** and **maintainability**.
+ - Enforces **best practices** through consistent lint rules.
+ - Simplifies **workflow** via Melos scripts and environment files.
+ - Encourages **modular** feature development and reusability.
+
+In the next section, we will delve into the **`app/` folder** details to explore the structure and specific workflows for the main application package.

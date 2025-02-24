@@ -1,0 +1,114 @@
+---
+title: Feature Architecture
+description: CHATGPT WRITE THE DESCRIPTION
+---
+<Image caption="The diagram above shows just one of many possible ways of architecting the app. Things will look different if you follow a different architecture such as MVC, MVVM, or Clean Architecture, but the same concepts apply." src="/assets/feature-architecture-layers.svg" />
+
+## About The Feature Architecture
+
+A typical Flutter app feature consists of various components, including having widgets and managing states, creating models, handling HTTP requests, navigation routes etc. As Flutter apps grow in size, it's important to define an architecture that allows the app to scale, increases the app's robustness, and makes the app maintainable and scalable. Thats why we define the boundaries between parts of the app and the responsibilities each part "."should have.
+
+We adopt a **layered architecture**, introducing a clear separation of concerns between different parts of the system. And this makes our code easier to read, maintain and test. A Flutter application feature should have at least three layers:
+
+- The **view layer (presentation)** that holds views which display UI elements usign application data and states which manage and update widget state.
+- The **model layer (domain)** that define application-specific model classes that represent the data that comes from the service layer.
+- The **service layer (data)** that contains the business logic of your app and exposes application data.
+
+Each of these layers has its own responsibility, has unidirectional data flow between them and there's a clear contract for how communication happens across boundaries.
+
+### The Presentation Layer
+
+The presentation (view) layer is responsible for displaying data and capturing user interactions, bridging the user’s actions with the underlying business logic. Whenever data changes—either due to user interaction (like a button press) or external input (like a network response)—the UI updates accordingly. Effectively, the presentation layer is a visual representation of the application state, as retrieved from the data layer.
+
+In our architecture, the presentation layer typically contains two main types of components:
+
+1. **UI Elements**, which render data on the screen (e.g., Text, Image, Input, or any Stateless/Stateful widget).
+2. **State Holders**, such as BLoCs or Providers, that hold data, expose it to the UI elements, and handle UI events.
+
+### The Domain Layer
+
+The domain (model) layer defines the core data structures and logic that represent the essential information of your application, independent of external services or frameworks. This includes:
+
+- Data classes or “entities” that model your application’s information.
+- The fundamental business rules or transformations applied to that data.
+
+By isolating your data and domain-specific operations in this layer, you ensure that your application’s core logic remains loosely coupled, easier to maintain, and more testable.
+
+### The Data Layer
+
+#### The Service Pattern
+
+As Flutter applications grow in complexity, managing data efficiently becomes crucial. The service (repository) pattern is a strategic solution for effective data management. It acts as a bridge between the business logic and data sources (like databases or network requests), ensuring your business logic doesn’t need to know where or how data is stored or retrieved. In our context, services exist in the **service layer (data)**, and their job is to:
+
+- Isolate **domain models (entities)** from the implementation details of the service sources in the **services layer**,
+- Convert **data transfer objects (e.g. JSON objects)** to validated models that are understood by the **models layer**,
+- (Optionally) perform operations such as **data caching**.
+
+<Warning>Also note how widgets belong to the view (presentation) layer, which should not involve business logic or networking code. Mixing these concerns makes your code much harder to test, debug, and reason about.</Warning>
+
+Introducing the service layer brings numerous benefits:
+
+- **Separation of Concerns:** Keeps UI and core logic separate from data sources, resulting in a cleaner codebase.
+- **Simplification of Data Handling:** With a centralized service, data management becomes more consistent.
+- **Enhanced Testability:** You can mock services instead of real data sources in tests.
+
+<Success>The great benefit of this approach is that if there are breaking changes in any 3rd-party APIs, we only need to update our service code.</Success>
+
+In conclusion, we use the service (repository) pattern to hide away all the implementation details (e.g., JSON serialization) of the data layer. As a result, the rest of the app—models (domain) and views (presentation) layers—deal directly with type-safe model classes/entities. This abstraction also makes the codebase more resilient to breaking changes in external packages or APIs.
+
+## The Relationship Between Architecture and State Management
+
+Architectural patterns and state management solutions in Flutter are closely connected. The architecture you adopt (Clean Architecture, MVC, MVVM, etc.) influences how you organize and separate concerns, while state management tools (BLoC, Provider, Riverpod, etc.) define how data flows and is updated across the application. Many of these solutions provide both structure and a way to manage state, which ensures a consistent, maintainable approach throughout your development process.
+
+| Pattern                  | Overview                                                                            | Layers                                                                                                                                   |
+|--------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **Clean Architecture**   | Architectural style emphasizing clear layer boundaries (Presentation, Domain, Data).| - **Entities (Domain):** Core business models <br/> - **Use Cases (Domain):** Application logic <br/> - **Repositories (Data):** Data access interfaces <br/> - **Controllers/Presenters (Presentation):** Interface with UI |
+| **MVC** <br/>(Model-View-Controller) | An older yet foundational pattern separating UI from data and logic.         | - **Model (Domain):** Manages data and business logic <br/> - **View (Presentation):** Renders UI <br/> - **Controller (Presentation Logic):** Handles user input/events, updates Model and View                           |
+| **MVP** <br/>(Model-View-Presenter) | A variant of MVC focusing on a “Presenter” as the middleman for UI logic.     | - **Model (Domain):** Data and business logic <br/> - **View (Presentation):** Displays data <br/> - **Presenter (Presentation Logic):** Handles user events, updates View and Model                                   |
+| **MVVM** <br/>(Model-View-ViewModel)| Popular in Flutter due to reactive programming; ViewModel exposes data.     | - **Model (Domain):** Business logic/data <br/> - **View (Presentation):** Flutter widgets observing ViewModel <br/> - **ViewModel (Presentation Logic):** Holds state, notifies View of changes                          |
+| **BLoC** <br/>(Business Logic Component) | Uses Streams to manage events and states, separating UI from business logic. | - **Model (Domain):** Data structures <br/> - **View (Presentation):** Widgets that send events and listen to states <br/> - **BLoC (Presentation Logic):** Transforms events into states, interacts with Model           |
+| **Provider**             | Simplifies InheritedWidget for easier state passing and listening.                  | - **Provider (Data/Domain):** Supplies state <br/> - **Consumer (Presentation):** Listens to changes and rebuilds <br/> - Can wrap the entire widget tree or specific parts                                           |
+| **Redux**                | Predictable state container adapted from JavaScript with unidirectional data flow.  | - **Store (Data):** Holds entire application state <br/> - **Actions (Events):** Describe changes <br/> - **Reducers (Logic):** Pure functions to update Store                                                       |
+| **Riverpod** <br/>(Basic Usage) | A Provider-like library with improvements for testability and modularity.    | - **Providers (Data/Domain):** Define and expose state <br/> - **Consumers (Presentation):** Depend on these providers <br/> - Removes the need for BuildContext in certain cases                                     |
+| **Riverpod** <br/>(Advanced Usage) | Expands on basic Riverpod with specialized providers for async, streams, etc.| - **StateNotifierProvider / FutureProvider / StreamProvider (Data/Domain):** Manage more complex states <br/> - **View (Presentation):** Subscribes to these providers                                              |
+| **GetX**                 | All-in-one solution for state management, dependency injection, and routing.         | - **Controller (Presentation Logic):** Extends GetxController <br/> - **GetBuilder / Obx (Presentation):** Rebuilds on state changes <br/> - **Model (Domain):** Data behind the scenes                                |
+| **MobX**                 | Reactive state management based on Observables, Actions, and Reactions.             | - **Observable (Data/Domain):** Reactive state <br/> - **Action (Logic):** Methods that modify Observables <br/> - **Observer (Presentation):** Widgets that rebuild on changes                                        |
+
+> MVC, MVP, MVVM, and Clean Architecture are longstanding approaches that solved similar issues long before Flutter. While their principles remain relevant, they weren’t initially tailored for Flutter’s paradigms. Nevertheless, many Flutter developers successfully adapt these patterns.
+
+In summary, understanding different architectural patterns can help us to organize the app more effectively. Each pattern aims to separate concerns and maintain clear boundaries, making your code more testable, maintainable, and scalable.
+
+<Image caption="" src="/assets/feature-state-management.svg" />
+
+## About The State Management
+
+State management is crucial in Flutter because it determines how your app handles changes—from user interactions to asynchronous updates—and how those changes propagate throughout the UI. A robust state management solution ensures consistency, clarity, and maintainability. Below is a comparison table focusing on the state management aspect:
+
+| State Management | Summary                                                                   | Rebuild Triggers              | Complexity | Typical Use Case                                           |
+|------------------|---------------------------------------------------------------------------|-------------------------------|-----------|------------------------------------------------------------|
+| **setState()**   | Built-in mechanism for managing local widget state.                        | Manual calls to `setState()`  | Low       | Simple, small widgets, local state only                    |
+| **InheritedWidget / Provider** | Leverages Flutter’s inherited widgets to propagate state down the tree.| Changes to provided data           | Low/Medium| Medium-sized apps, straightforward dependency injection    |
+| **BLoC**         | Relies on streams to pass events and states, decoupling business logic.     | Stream events and state updates| Medium    | Scalable apps needing clear separation of UI & logic       |
+| **Redux**        | Single state tree with actions and reducers for predictable updates.       | Dispatching actions           | Medium/High| Larger apps needing global state, time-travel debugging    |
+| **Riverpod**     | A Provider-like library offering more granular and testable state solutions.| Provider notifications        | Medium    | Complex apps needing robust testability and modular design |
+| **MobX**         | Observables, actions, and reactions for reactive updates.                  | Changes to observables        | Medium    | Apps desiring a reactive approach, minimal boilerplate     |
+| **GetX**         | All-in-one solution for state, DI, and routing with minimal boilerplate.    | Automatic reactive variables  | Low/Medium| Quick development, less ceremony, but more coupling        |
+
+### Advantages of BLoC
+
+Selecting the right state management approach depends on the complexity of the application and a team’s familiarity with different patterns. **BLoC** is an excellent choice for many scenarios. As developers we want to:
+
+- Know what state the application is in at any point in time,
+- Easily test every case to make sure the application is responding appropriately,
+- Record every single user interaction in the application so that we can make data-driven decisions,
+- Work as efficiently as possible and reuse components both within the application and across other applications,
+- Have many developers seamlessly working within a single code base following the same patterns and conventions,
+- Develop fast and reactive apps.
+
+**BLoC** was designed to meet all of these needs and many more. There are many state management solutions and deciding which one to use can be a daunting task. There is no one perfect state management solution! What’s important is that to pick the one that works best for a team and the project. **BLoC** was designed with three core values in mind:
+
+1. **Simple:** Easy to understand & can be used by developers with varying skill levels.
+2. **Powerful:** Help make amazing, complex applications by composing them of smaller components.
+3. **Testable:** Easily test every aspect of an application so that we can iterate with confidence.
+
+Overall, **BLoC** attempts to make state changes predictable by regulating when a state change can occur and enforcing a single way to change state throughout an entire application.

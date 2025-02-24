@@ -1,0 +1,328 @@
+{
+  "tabs": [
+    {
+      "href": "https://flutterboilerplate.dev",
+      "id": "home",
+      "title": "Home"
+    },
+    {
+      "href": "/",
+      "id": "basic",
+      "title": "Basic"
+    },
+    {
+      "href": "/advanced",
+      "id": "advanced",
+      "title": "Advanced"
+    },
+    {
+      "href": "https://playground.flutterboilerplate.dev",
+      "id": "playground",
+      "title": "Playground"
+    }
+  ],
+  "anchors": [
+    {
+      "href": "#",
+      "icon": "hand-holding-dollar",
+      "title": "Do you need more?"
+    },
+    {
+      "href": "#",
+      "icon": "figma",
+      "title": "Take a look at our UI kit."
+    },
+    {
+      "href": "#",
+      "icon": "discord",
+      "title": "Join our Discord!"
+    }
+  ],
+  "description": "",
+  "logo": {
+    "href": "/",
+    "light": "/assets/logo.svg",
+    "dark": "/assets/logo.svg"
+  },
+  "name": "Documentation",
+  "sidebar": [
+    {
+      "group": "Getting Started",
+      "tab": "basic",
+      "pages": [
+        {
+          "href": "/",
+          "icon": "readme",
+          "title": "The Motivation"
+        },
+        {
+          "href": "/getting-started/key-features",
+          "icon": "fire",
+          "title": "Key Features"
+        },
+        {
+          "href": "/getting-started/dependencies",
+          "icon": "circle-nodes",
+          "title": "Dependencies"
+        },
+        {
+          "href": "/getting-started/app-architecture",
+          "icon": "folder-tree",
+          "title": "App Architecture"
+        },
+        {
+          "href": "/getting-started/feature-architecture",
+          "icon": "layer-group",
+          "title": "Feature Architecture"
+        },
+        {
+          "href": "/getting-started/changelog",
+          "icon": "arrow-up-9-1",
+          "title": "Changelog"
+        },
+        {
+          "href": "/getting-started/license",
+          "icon": "scale-balanced",
+          "title": "License"
+        }
+      ]
+    },
+    {
+      "group": "Basic Examples",
+      "tab": "basic",
+      "pages": [
+        {
+          "href": "/example/feature-todo",
+          "icon": "list-ul",
+          "title": "Todo Feature"
+        }
+      ]
+    },
+    {
+      "group": "Guides",
+      "tab": "basic",
+      "pages": [
+        {
+          "group": "Preparation",
+          "icon": "screwdriver-wrench",
+          "pages": [
+            {
+              "href": "/guides/preparation/set-the-environment",
+              "icon": "download",
+              "title": "Set The Environment"
+            },
+            {
+              "href": "/guides/preparation/install-extensions",
+              "icon": "puzzle-piece",
+              "title": "Install Extensions"
+            },
+            {
+              "href": "/guides/preparation/configure-snippets",
+              "icon": "code",
+              "title": "Configure Snippets"
+            }
+          ]
+        },
+        {
+          "group": "Setup",
+          "icon": "hammer",
+          "pages": [
+            {
+              "href": "/guides/setup/fetch-and-int",
+              "icon": "download",
+              "title": "Fetch and Init"
+            },
+            {
+              "href": "/guides/setup/understand-melos",
+              "icon": "m",
+              "title": "Understand Melos"
+            },
+            {
+              "href": "/guides/setup/generate-code",
+              "icon": "code",
+              "title": "Generate Code"
+            }
+          ]
+        },
+        {
+          "href": "/guides/startup",
+          "icon": "terminal",
+          "title": "Startup"
+        },
+        {
+          "group": "Deployment",
+          "icon": "rocket",
+          "pages": [
+            {
+              "group": "Pre-deployment",
+              "icon": "toolbox",
+              "pages": [
+                {
+                  "href": "/guides/deployment/pre-deployment/change-app-icon",
+                  "icon": "shapes",
+                  "title": "Change App Icon"
+                },
+                {
+                  "href": "/guides/deployment/pre-deployment/generate-splash-screen",
+                  "icon": "mobile-screen",
+                  "title": "Generate Splash Screen"
+                }
+              ]
+            },
+            {
+              "href": "/guides/deployment/versioning",
+              "icon": "arrows-split-up-and-left",
+              "title": "Versioning"
+            },
+            {
+              "href": "/guides/deployment/publish-google-play-store",
+              "icon": "google-play",
+              "title": "Publish Google Play Store"
+            },
+            {
+              "href": "/guides/deployment/publish-apple-store",
+              "icon": "app-store",
+              "title": "Publish Apple App Store"
+            }
+          ]
+        },
+        {
+          "href": "/guides/automation-ci-cd",
+          "icon": "robot",
+          "title": "Automation (CI/CD)"
+        }
+      ]
+    },
+    {
+      "group": "Modules",
+      "tab": "basic",
+      "pages": [
+        {
+          "href": "/modules/app",
+          "icon": "hashtag",
+          "title": "app"
+        },
+        {
+          "group": "features",
+          "icon": "icons",
+          "pages": [
+            {
+              "href": "/modules/features/_core",
+              "icon": "asterisk",
+              "title": "_core"
+            },
+            {
+              "href": "/modules/features/feature-x",
+              "icon": "florin-sign",
+              "title": "feature_x"
+            }
+          ]
+        },
+        {
+          "href": "/modules/deps",
+          "icon": "bezier-curve",
+          "title": "deps"
+        },
+        {
+          "group": "design",
+          "icon": "palette",
+          "pages": [
+            {
+              "href": "/modules/design/_core",
+              "icon": "asterisk",
+              "title": "_core"
+            },
+            {
+              "href": "/modules/design/atoms",
+              "icon": "border-top-left",
+              "title": "atoms"
+            },
+            {
+              "href": "/modules/design/widgets",
+              "icon": "border-top-left",
+              "title": "widgets"
+            }
+          ]
+        },
+
+
+        {
+          "group": "infrastructure",
+          "icon": "layer-group",
+          "pages": [
+            {
+              "href": "/modules/infrastructure/_core",
+              "icon": "asterisk",
+              "title": "_core"
+            },
+            {
+              "href": "/modules/infrastructure/analytics",
+              "icon": "bug",
+              "title": "analytics"
+            },
+            {
+              "href": "/modules/infrastructure/flavors",
+              "icon": "at",
+              "title": "flavors"
+            },
+            {
+              "href": "/modules/infrastructure/networking",
+              "icon": "earth-asia",
+              "title": "networking"
+            },
+            {
+              "href": "/modules/infrastructure/permissions",
+              "icon": "unlock",
+              "title": "permissions"
+            },
+            {
+              "href": "/modules/infrastructure/presentation",
+              "icon": "cubes",
+              "title": "presentation"
+            },
+            {
+              "href": "/modules/infrastructure/storage",
+              "icon": "database",
+              "title": "storage"
+            },
+            {
+              "href": "/modules/infrastructure/translations",
+              "icon": "language",
+              "title": "translations"
+            }
+          ]
+        },
+        {
+          "href": "/modules/widgetbook",
+          "icon": "border-top-left",
+          "title": "widgetbook"
+        }
+      ]
+    },
+    {
+      "group": "Misc.",
+      "tab": "basic",
+      "pages": [
+        {
+          "href": "/misc/faqs",
+          "icon": "circle-question",
+          "title": "FAQs"
+        }
+      ]
+    },
+    {
+      "group": "Test",
+      "tab": "advanced",
+      "pages": [
+        {
+          "href": "/advanced",
+          "icon": "readme",
+          "title": "Test"
+        }
+      ]
+    }
+  ],
+  "theme": {
+    "primary": "#027DFD"
+  }
+}

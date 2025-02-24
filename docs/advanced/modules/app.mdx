@@ -1,0 +1,347 @@
+---
+title: "app"
+description: "Detailed overview of the main app package, including environment-based main entrypoints, icons, and splash configurations."
+---
+
+## Introduction
+
+This section provides an in-depth look at the **`app`** package. It is the central place for launching the Flutter application across different environments (development, staging, production) and includes configurations for icons, splash screens, platform-specific files, and more.
+
+## Folder Structure
+
+When we expand the **`app`** folder in our monorepo, we see:
+
+```bash
+fab/
+├─ app/
+│  ├─ android/                     # Android project
+│  ├─ ios/                         # iOS project
+│  ├─ lib/
+│  │  ├─ main_development.dart     # Entry point for development environment
+│  │  ├─ main_production.dart      # Entry point for production environment
+│  │  └─ main_staging.dart         # Entry point for staging environment
+│  ├─ linux/                       # Linux project
+│  ├─ macos/                       # macOS project
+│  ├─ web/                         # Web project
+│  ├─ windows/                     # Windows project
+│  ├─ .metadata                    # Flutter metadata tracking
+│  ├─ flutter_launcher_icons-development.yaml
+│  ├─ flutter_launcher_icons-staging.yaml
+│  ├─ flutter_launcher_icons.yaml
+│  ├─ flutter_native_splash-development.yaml
+│  ├─ flutter_native_splash-staging.yaml
+│  ├─ flutter_native_splash.yaml
+│  └─ pubspec.yaml
+```
+
+### Highlights
+
+- **Multiple Platform Folders**: The `app` package includes standard Flutter project structures for Android, iOS, Linux, macOS, web, and Windows, allowing you to build across platforms seamlessly.
+- **Multiple Entry Points** (`lib/main_xxx.dart`): Each environment (development, staging, production) has its own main file to initialize environment-specific services.
+- **Icon and Splash Configurations** (`flutter_launcher_icons*.yaml`, `flutter_native_splash*.yaml`): These YAML files define how launcher icons and splash screens should be generated for each environment.
+- **`pubspec.yaml`**: Holds dependencies, fonts, and asset references, linking to shared resources from other packages.
+
+## Environment-based Entry Points
+
+Below are the contents of the three main entry points. Each file uses a **`MainBinding`** approach to initialize dependencies and wrap the app with features like localization.
+
+### `lib/main_development.dart`
+
+```dart
+// Copyright (c) 2025 Fikret Şengül
+// This source code is licensed under the
+// MIT License found in the LICENSE file.
+// https://fab.fikretsengul.com
+
+import 'package:deps/_di.dart';
+import 'package:deps/infrastructure.dart';
+import 'package:deps/providers.dart';
+import 'package:flutter/widgets.dart';
+
+void main() => MainBinding(
+      initLocator: () => initLocator(EnvEnum.development),
+      wrapperBuilder: (Widget app) {
+        // Wraps the app with the translation providers.
+        return translationProviders.fold(app, (Widget child, Widget Function(Widget) builder) {
+          return builder(child);
+        });
+      },
+      cacheBuilder: (BuildContext context) {
+        // ? Uncomment the following code to cache image assets.
+        // for (final AssetGenImage image in context.images.values) {
+        //   precacheImage(AssetImage(image.path, package: 'design'), context);
+        // }
+
+        // ? Uncomment the following code to cache svg assets.
+        // for (final SvgGenImage icon in context.icons.values) {
+        //   final SvgAssetLoader logo = SvgAssetLoader(icon.path, packageName: 'design');
+        //   svg.cache.putIfAbsent(logo.cacheKey(null), () => logo.loadBytes(null));
+        // }
+      },
+      mainBuilder: (WidgetsBinding binding) async {
+        // Initialize other services here if needed.
+      },
+      childBuilder: (BuildContext context, Widget child) {
+        // Additional logic for material app builder.
+        return MediaQuery.withNoTextScaling(child: child);
+      },
+    );
+```
+
+### `lib/main_production.dart`
+
+```dart
+// Copyright (c) 2025 Fikret Şengül
+// This source code is licensed under the
+// MIT License found in the LICENSE file.
+// https://fab.fikretsengul.com
+
+import 'package:deps/_di.dart';
+import 'package:deps/infrastructure.dart';
+import 'package:deps/providers.dart';
+import 'package:flutter/widgets.dart';
+
+void main() => MainBinding(
+      initLocator: () => initLocator(EnvEnum.production),
+      wrapperBuilder: (Widget app) {
+        // Wraps the app with the translation providers.
+        return translationProviders.fold(app, (Widget child, Widget Function(Widget) builder) {
+          return builder(child);
+        });
+      },
+      cacheBuilder: (BuildContext context) {
+        // ? Uncomment the following code to cache image assets.
+        // for (final AssetGenImage image in context.images.values) {
+        //   precacheImage(AssetImage(image.path, package: 'design'), context);
+        // }
+
+        // ? Uncomment the following code to cache svg assets.
+        // for (final SvgGenImage icon in context.icons.values) {
+        //   final SvgAssetLoader logo = SvgAssetLoader(icon.path, packageName: 'design');
+        //   svg.cache.putIfAbsent(logo.cacheKey(null), () => logo.loadBytes(null));
+        // }
+      },
+      mainBuilder: (WidgetsBinding binding) async {
+        // Initialize other services here if needed.
+      },
+      childBuilder: (BuildContext context, Widget child) {
+        // Additional logic for material app builder.
+        return MediaQuery.withNoTextScaling(child: child);
+      },
+    );
+```
+
+### `lib/main_staging.dart`
+
+```dart
+// Copyright (c) 2025 Fikret Şengül
+// This source code is licensed under the
+// MIT License found in the LICENSE file.
+// https://fab.fikretsengul.com
+
+import 'package:deps/_di.dart';
+import 'package:deps/infrastructure.dart';
+import 'package:deps/providers.dart';
+import 'package:flutter/widgets.dart';
+
+void main() => MainBinding(
+      initLocator: () => initLocator(EnvEnum.staging),
+      wrapperBuilder: (Widget app) {
+        // Wraps the app with the translation providers.
+        return translationProviders.fold(app, (Widget child, Widget Function(Widget) builder) {
+          return builder(child);
+        });
+      },
+      cacheBuilder: (BuildContext context) {
+        // ? Uncomment the following code to cache image assets.
+        // for (final AssetGenImage image in context.images.values) {
+        //   precacheImage(AssetImage(image.path, package: 'design'), context);
+        // }
+
+        // ? Uncomment the following code to cache svg assets.
+        // for (final SvgGenImage icon in context.icons.values) {
+        //   final SvgAssetLoader logo = SvgAssetLoader(icon.path, packageName: 'design');
+        //   svg.cache.putIfAbsent(logo.cacheKey(null), () => logo.loadBytes(null));
+        // }
+      },
+      mainBuilder: (WidgetsBinding binding) async {
+        // Initialize other services here if needed.
+      },
+      childBuilder: (BuildContext context, Widget child) {
+        // Additional logic for material app builder.
+        return MediaQuery.withNoTextScaling(child: child);
+      },
+    );
+```
+
+## Supporting Files
+
+### `.metadata`
+
+```yaml
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities and perform upgrades etc.
+# This file should be version controlled and should not be manually edited.
+
+version:
+  revision: "dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668"
+  channel: "stable"
+
+project_type: app
+
+migration:
+  platforms:
+    - platform: root
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: android
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: ios
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: linux
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: macos
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: web
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+    - platform: windows
+      create_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+      base_revision: dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+
+  unmanaged_files:
+    - 'lib/main.dart'
+    - 'ios/Runner.xcodeproj/project.pbxproj'
+```
+
+### Icons Configuration (Example: `flutter_launcher_icons-development.yaml`)
+
+```yaml
+# flutter pub run flutter_launcher_icons
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png"
+
+  android: "launcher_icon"
+  image_path_android: "assets/logos/logo_development.png"
+  min_sdk_android: 26
+  adaptive_icon_background: "assets/logos/logo_background.png"
+  adaptive_icon_foreground: "assets/logos/logo_clear_white_development.png"
+  adaptive_icon_monochrome: "assets/logos/logo_clear_black_development.png"
+
+  ios: true
+  image_path_ios: "assets/logos/logo_development.png"
+  remove_alpha_channel_ios: true
+  image_path_ios_dark_transparent: "assets/logos/logo_clear_blue_development.png"
+  image_path_ios_tinted_grayscale: "assets/logos/logo_clear_white_development.png"
+  desaturate_tinted_to_grayscale_ios: true
+
+  web:
+    generate: true
+    image_path: "assets/logos/logo_development.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+
+  windows:
+    generate: true
+    image_path: "assets/logos/logo_development.png"
+    icon_size: 48
+
+  macos:
+    generate: true
+    image_path: "assets/logos/logo_development.png"
+```
+
+### Splash Configuration (Example: `flutter_native_splash-development.yaml`)
+
+```yaml
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/logos/splash_clear_blue_development.png
+  color_dark: "#000000"
+  image_dark: assets/logos/splash_clear_white_development.png
+
+  android_12:
+    image: assets/logos/splash_clear_blue_development.png
+    color: "#ffffff"
+    icon_background_color: "#ffffff"
+    image_dark: assets/logos/splash_clear_white_development.png
+    color_dark: "#000000"
+    icon_background_color_dark: "#000000"
+```
+
+### `pubspec.yaml` (in `app` folder)
+
+```yaml
+name: app
+description: The main app of the Testing.
+publish_to: none
+version: 2.0.0-beta
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.1 <4.0.0"
+
+dependencies:
+  deps:
+    path: ../deps
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - ../design/assets/images/
+    - ../design/assets/animations/
+    - ../design/assets/icons/
+    - ../design/assets/fonts/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: ../design/assets/fonts/Inter-Black.ttf
+          weight: 900
+        - asset: ../design/assets/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: ../design/assets/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: ../design/assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: ../design/assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: ../design/assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: ../design/assets/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: ../design/assets/fonts/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: ../design/assets/fonts/Inter-Thin.ttf
+          weight: 100
+```
+
+## Usage & Tips
+
+1. **Switching Environments**: Run the desired environment’s main file to start the app:
+   ```bash
+   flutter run -t lib/main_development.dart
+   flutter run -t lib/main_staging.dart
+   flutter run -t lib/main_production.dart
+   ```
+2. **Customizing Icons & Splash**: Edit the YAML files for each environment, then run:
+   ```bash
+   flutter pub run flutter_launcher_icons:main
+   dart run flutter_native_splash:create
+   ```
+3. **Linking Shared Assets**: Notice the `pubspec.yaml` includes shared assets (e.g., images, icons, fonts) from the `design` package. This fosters consistency across features.
+
+## Conclusion
+
+The **`app`** package serves as the central Flutter project, orchestrating different environments, managing platform-specific files, and configuring icons and splash screens. By structuring the project this way, you maintain a clear separation of concerns while leveraging shared dependencies and assets from the rest of the monorepo.

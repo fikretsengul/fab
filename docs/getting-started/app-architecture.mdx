@@ -1,0 +1,96 @@
+---
+title: App Architecture
+description: An overview of the monorepo structure, core configuration files, and environment setup.
+---
+
+![Represantation of the app architecture](/assets/app-architecture.svg)
+
+## About The App Architecture
+
+Flutter applications offer considerable flexibility in their construction, as there is no single mandated approach. However, this freedom can pose challenges for developers, given that no strict guidelines or universally accepted structure exist. Consequently, developers need to carefully select architectural patterns and best practices to ensure their apps are both maintainable and scalable.
+
+### Overview of Existing App Architectures
+
+In a traditional **Layered Architecture**, code is typically organized by function (e.g., design, infrastructure and features layers). While this method may suffice for smaller projects, it often becomes unwieldy in larger applications due to more intricate interdependencies between layers.
+
+By contrast, **Modularization Architecture** places all logic and resources for a specific feature (e.g., design, infrastructure and other features) into a self-contained module. This approach mitigates cross-layer dependencies, leading to cleaner, more maintainable code.
+
+| Feature | Layered Architecture | Modularization Architecture |
+| --- | --- | --- |
+| Structure | Organized by functional layers. | Organized by feature modules. |
+| Code Coupling | Often leads to tight coupling, as layers depend on each other. | Modules are loosely coupled and can function independently. |
+| Scalability | Less scalable due to inter-layer dependencies that grow over time. | High scalability; modules can be scaled independently without affecting the rest of the app. |
+| Reusability | Reusability is limited due to reliance on specific layers. | Modules are self-contained and can be reused across different projects or parts of the same project. |
+| Testing and Isolation | Layered dependencies make isolated testing challenging. | Each module is isolated, simplifying unit testing and debugging. |
+
+### Advantages of Modularization
+
+Modularization is an architectural strategy that segments a project’s code into self-sufficient, feature-focused modules. Each module contains the essential elements needed for that feature or domain. Key benefits include:
+
+1. **Enhanced Scalability**: Independent modules allow projects to grow in a manageable and structured way.
+2. **Simplified Maintenance**: Localized modules make debugging and updates more contained, minimizing the ripple effect on other components.
+3. **Parallel Development**: Larger teams can work on distinct modules concurrently, reducing merge conflicts and improving delivery speed.
+4. **Improved Reusability**: Modules can be reused across the same project or adapted for other projects, boosting efficiency.
+5. **Focused Testing and Debugging**: Isolated modules can be independently tested, containing issues within a specific feature and preventing broader application disruptions.
+
+## About The App Structure
+
+### Overview of Monorepo Structure
+
+A monorepo consolidates multiple applications and shared packages within a single repository. This is especially advantageous when different apps or features rely on the same dependencies or resources.
+
+In a Flutter monorepo:
+
+- Each app is managed independently while remaining part of a unified repository.
+- Shared packages (e.g., design system or infrastructure) are stored in one location, preventing code duplication.
+
+> Melos is a CLI tool purpose-built for managing Dart and Flutter monorepos, streamlining package linking, dependency management, versioning, and offering robust commands to efficiently handle numerous projects.
+
+### Advantages of Using Melos
+
+- Simplified interdependency management across packages.
+- Automated versioning and changelog generation.
+- Capability to run commands and tests for multiple packages simultaneously.
+
+Each app and package maintains its own `pubspec.yaml` file, allowing Melos to effortlessly manage dependencies throughout the entire monorepo.
+
+## Combining Both Architecture and Structure
+
+By leveraging Modularization and Melos, our monorepo remains organized, scalable, and effective. Shared packages are readily accessible, and commands for linking, dependency resolution, and other workflows keep all projects aligned.
+
+### The Folder Structure
+
+Below is a high-level overview of the repository’s file and folder organization:
+
+```bash
+fab/
+├─ app/                  # Main application module
+├─ deps/                 # Dependency manager module
+├─ design/               # Design system module
+├─ features/             # A folder containing separate feature modules
+│  ├─ feature_auth/      # Example: Auth feature module
+│  └─ feature_xyz/       # Example: Another feature module
+├─ infrastructure/       # Infrastructure module
+├─ tools/
+│  └─ scripts/           # Custom scripts for automated tasks
+├─ .env.development      # Environment variables for development
+├─ .env.production       # Environment variables for production
+├─ .env.staging          # Environment variables for staging
+├─ .fvmrc                # Defines the Flutter SDK version to use via FVM
+├─ .gitignore
+├─ all_lint_rules.yaml
+├─ analysis_options.yaml
+├─ melos.yaml            # Melos configuration file
+├─ pubspec.yaml          # Main pubspec for the entire monorepo
+└─ README.md             # Project README (optional/for reference)
+```
+
+#### Highlights
+
+- **`app/`**: The main Flutter application.
+- **`deps/`**: Collects and re-exports frequently used dependencies, serving as a single source of truth.
+- **`design/`**: Contains shared UI components, themes, and design logic.
+- **`features/`**: Houses separate feature modules, enabling isolation and scalability.
+- **`infrastructure/`**: Manages cross-cutting aspects such as network requests, database interactions, and authentication.
+- **`tools/scripts/`**: Holds custom Dart scripts for tasks like cleaning iOS/macOS pods or generating translations.
+- **Environment Files** (`.env.development`, `.env.production`, `.env.staging`): Store environment-specific settings for streamlined configuration.
